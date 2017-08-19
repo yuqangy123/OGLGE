@@ -1,0 +1,66 @@
+﻿生成启动时间为 2017/7/15 11:12:09。
+     1>项目“D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\Win32Project1.vcxproj”在节点 2 上(Build 个目标)。
+     1>Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\x64\Debug\Win32Project1.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\libjpeg /LIBPATH:D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\..\..\..\Common\Lib /LIBPATH:D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\..\..\..\Lib libjpeg.lib libEGL.lib libGLESv2.lib esUtil_d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\x64\Debug\Win32Project1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\x64\Debug\Win32Project1.lib" /MACHINE:X64 x64\Debug\Singleton.obj
+         x64\Debug\OGLGE.obj
+         x64\Debug\Camera.obj
+         x64\Debug\Mat4.obj
+         x64\Debug\Node.obj
+         x64\Debug\Quaternion.obj
+         x64\Debug\Rect.obj
+         x64\Debug\Texture2D.obj
+         x64\Debug\Vector3.obj
+         x64\Debug\helloTriangle.obj
+         x64\Debug\programUniforms.obj
+         x64\Debug\shaders.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\textureJpegManager.obj
+         x64\Debug\Win32Project1.obj
+         D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\Common\lib\esUtil_d.lib
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glAttachShader，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glBindAttribLocation，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glClear，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glClearColor，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glCreateProgram，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glDeleteProgram，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glDrawArrays，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glEnableVertexAttribArray，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glGetProgramiv，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>programUniforms.obj : error LNK2001: 无法解析的外部符号 __imp_glGetProgramiv
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glGetProgramInfoLog，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glLinkProgram，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glUseProgram，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glVertexAttribPointer，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_glViewport，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 __imp_eglSwapBuffers，该符号在函数 "void __cdecl Draw(struct ESContext *)" (?Draw@@YAXPEAUESContext@@@Z) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 esCreateWindow，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 esMainLoop，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 esRegisterDrawFunc，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>helloTriangle.obj : error LNK2019: 无法解析的外部符号 esLogMessage，该符号在函数 "public: int __cdecl helloTriangle::init(void)" (?init@helloTriangle@@QEAAHXZ) 中被引用
+     1>shaders.obj : error LNK2001: 无法解析的外部符号 esLogMessage
+     1>programUniforms.obj : error LNK2019: 无法解析的外部符号 __imp_glGetActiveUniform，该符号在函数 "void __cdecl getProgramUniforms(unsigned int,class std::vector<struct uniformInfo,class std::allocator<struct uniformInfo> > &)" (?getProgramUniforms@@YAXIAEAV?$vector@UuniformInfo@@V?$allocator@UuniformInfo@@@std@@@std@@@Z) 中被引用
+     1>programUniforms.obj : error LNK2019: 无法解析的外部符号 __imp_glGetUniformLocation，该符号在函数 "void __cdecl getProgramUniforms(unsigned int,class std::vector<struct uniformInfo,class std::allocator<struct uniformInfo> > &)" (?getProgramUniforms@@YAXIAEAV?$vector@UuniformInfo@@V?$allocator@UuniformInfo@@@std@@@std@@@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glCompileShader，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glCreateShader，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glDeleteShader，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glGetShaderiv，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glGetShaderInfoLog，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>shaders.obj : error LNK2019: 无法解析的外部符号 __imp_glShaderSource，该符号在函数 "unsigned int __cdecl loadShader(unsigned int,char const *)" (?loadShader@@YAIIPEBD@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_std_error，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_CreateDecompress，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_destroy_decompress，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_mem_src，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_read_header，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_start_decompress，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>textureJpegManager.obj : error LNK2019: 无法解析的外部符号 jpeg_read_scanlines，该符号在函数 "protected: bool __cdecl textureJpegManager::initWithJpgData(unsigned char const *,long,struct jpg_data &)" (?initWithJpgData@textureJpegManager@@IEAA_NPEBEJAEAUjpg_data@@@Z) 中被引用
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\libjpeg\libjpeg.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\..\..\..\Lib\libEGL.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\..\..\..\Lib\libGLESv2.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\..\..\..\Common\Lib\esUtil_d.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\Common\lib\esUtil_d.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+     1>D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\x64\Debug\Win32Project1.exe : fatal error LNK1120: 34 个无法解析的外部命令
+     1>已完成生成项目“D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\Win32Project1\Win32Project1\Win32Project1.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.14

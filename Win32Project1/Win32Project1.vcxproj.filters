@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="getProgramUniforms">
+      <UniqueIdentifier>{02f7d683-53bd-4d26-abe2-f2263509c773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="texture">
+      <UniqueIdentifier>{aaa47309-d5e8-4a86-818c-3037ccee66ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="basic">
+      <UniqueIdentifier>{8dafefc1-249c-40d1-b1c1-9be7d742ac49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libjpeg">
+      <UniqueIdentifier>{03ae991a-2c9e-400e-bb82-5bd71d7c3168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLPorj">
+      <UniqueIdentifier>{bded26f7-804c-4a6e-9407-f1d21da4bc16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GE">
+      <UniqueIdentifier>{c9edec92-6042-4459-ac2e-4962c2f63367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GLPorj\tech">
+      <UniqueIdentifier>{ad4f9bc5-7a64-44df-a750-0a7a5684d8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GE\math">
+      <UniqueIdentifier>{e9cc24f4-c1ba-4908-9145-a37122039761}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="programUniforms\programUniforms.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\Singleton.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jerror.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jmorecfg.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jpeglib.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jconfig.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jconfig_linux.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="libjpeg\jconfig_win.h">
+      <Filter>libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="texture\textureJpegManager.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Node.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Texture2D.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\OGLGE.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Texture2DRender.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\FileUnits.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\JikeTest.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Pipeline.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\common.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\normalTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\lightTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Mat3.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Mat4.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Quaternion.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Rect.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Vector2.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Vector3.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Scene.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\technique.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\shaders.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Director.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Camera2D.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Camera3D.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Camera.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\texture2dTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\techDefine.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Project1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="programUniforms\programUniforms.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="basic\Singleton.cpp">
+      <Filter>basic</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Node.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Texture2D.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\OGLGE.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\textureJpegManager.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Texture2DRender.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\FileUnits.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\JikeTest.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Pipeline.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\normalTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\lightTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Mat3.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Mat4.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Quaternion.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Rect.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Vector2.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Vector3.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Scene.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\technique.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\shaders.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Director.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Camera2D.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Camera3D.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Camera.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
