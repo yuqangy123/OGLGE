@@ -345,8 +345,11 @@ void Matrix4f::createOrthographicOffCenter(float left, float right, float top, f
 	mt.m[1][1] = 2.0 / (top - bottom);
 	mt.m[2][2] = 2.0 / (nearZ - farZ);
 
-	mt.m[3][0] = -(right + left) / (right - left);
-	mt.m[3][1] = -(top + bottom) / (top - bottom);
+	//mt.m[3][0] = -(right + left) / (right - left);
+	//mt.m[3][1] = -(top + bottom) / (top - bottom);
+	mt.m[3][0] = 0;
+	mt.m[3][1] = 0;
 	mt.m[3][2] = (nearZ + farZ) / (nearZ - farZ);
 	mt.m[3][3] = 1.0f;
+
 }

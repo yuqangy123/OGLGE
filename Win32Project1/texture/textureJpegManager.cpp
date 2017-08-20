@@ -133,7 +133,7 @@ bool textureJpegManager::initWithJpgData(const unsigned char * data, long dataLe
 
 		/* Start decompression jpeg here */
 		jpeg_start_decompress(&cinfo);
-		cinfo.output_height = 416;
+		cinfo.output_height = 160;
 		/* init image info */
 		jpgData._width = cinfo.output_width;
 		jpgData._height = cinfo.output_height;
@@ -146,10 +146,13 @@ bool textureJpegManager::initWithJpgData(const unsigned char * data, long dataLe
 
 		/* now actually read the jpeg into the raw buffer */
 		/* read one scan line at a time */
+		int cnt = 0;
 		while (cinfo.output_scanline < cinfo.output_height)
 		{
 			row_pointer[0] = _data + location;
 			location += cinfo.output_width*cinfo.output_components;
+			cnt = cnt + 1;
+			printf("cnt:%d\r\n", cnt);
 			jpeg_read_scanlines(&cinfo, row_pointer, 1);
 		}
 
@@ -175,6 +178,8 @@ bool textureJpegManager::initWithJpgData(const unsigned char * data, long dataLe
 			*tdata++ = *(_data + n + 2);
 			*tdata++ = 0xFF;
 		}
+
+		delete _data;
 		
 	} while (0);
 	

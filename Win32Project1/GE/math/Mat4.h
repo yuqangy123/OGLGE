@@ -79,6 +79,20 @@ public:
 		m[3][3] = 1.0;
 	}
 
+	inline void transpose()
+	{
+		float tmp = 0.0f;
+		for (int a = 0; a < 3; ++a)
+		{
+			for (int b = a + 1; b < 4; ++b)
+			{
+				tmp = m[a][b];
+				m[a][b] = m[b][a];
+				m[b][a] = tmp;
+			}
+		}
+	}
+
 	bool decompose(Vector3* scale, Quaternion* rotation, Vector3* translation) const;
 	float determinant() const;
 

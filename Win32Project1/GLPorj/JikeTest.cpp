@@ -185,14 +185,9 @@ void JikeTest::mouseInput(int button, int state, int x, int y)
 
 void JikeTest::RenderSceneCB()
 {
-
-
 	//test code
 	CreateVertexBuffer();
 	CreateIndexBuffer();
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 	
 	glUniformMatrix4fv(m_tech->getUniformLocation("gWorld"), 1, GL_TRUE, (const float*)m_worldMt4.m);
@@ -210,7 +205,8 @@ void JikeTest::RenderSceneCB()
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
-
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	//glutSwapBuffers();
 }
 
@@ -241,5 +237,5 @@ void JikeTest::draw() {
 
 
 
-	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(m_tech->positionLoc);
 }

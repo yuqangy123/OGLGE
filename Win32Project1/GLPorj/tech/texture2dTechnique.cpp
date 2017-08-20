@@ -21,10 +21,8 @@ void texture2dTechnique::init()
 	
 	positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
 	texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
-	textureLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXTURE_NAME);
 
-	//glBindAttribLocation(m_shaderProg, positionLoc, ATTRI_A_POSITION_NAME);
-	//glBindAttribLocation(m_shaderProg, texCoordLoc, ATTRI_A_TEXCOORD_NAME);
-	//glBindAttribLocation(m_shaderProg, textureLoc, ATTRI_A_TEXTURE_NAME);
+	glBindAttribLocation(m_shaderProg, positionLoc, ATTRI_A_POSITION_NAME);
+	glBindAttribLocation(m_shaderProg, texCoordLoc, ATTRI_A_TEXCOORD_NAME);
 }
 

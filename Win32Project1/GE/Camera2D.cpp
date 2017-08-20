@@ -24,6 +24,7 @@ void Camera2D::init()
 	Matrix4f::createOrthographicOffCenter(m_viewOriginalPostion.x, m_viewOriginalPostion.x+m_viewWidth,
 								m_viewOriginalPostion.y+m_viewHeight, m_viewOriginalPostion.y, 
 									-1024.0, 1024.0, m_transition);
+	//m_transition.transpose();
 }
 
 Matrix4f Camera2D::getCameraTranlation()

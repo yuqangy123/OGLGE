@@ -107,7 +107,7 @@ void technique::initUniforms()
 	{
 		char ErrorLog[1024];
 		glGetProgramInfoLog(m_shaderProg, sizeof(ErrorLog), nullptr, ErrorLog);
-		ERROR("Error linking shader program: '%s'\n", ErrorLog);
+		printf("Error linking shader program: '%s'\n", ErrorLog);
 	}
 }
 
@@ -131,6 +131,6 @@ GLint technique::getUniformLocation(const char* name)
 	auto unif = getUniforms(name);
 	if (nullptr != unif)
 		return unif->location;
-	return 0;
+	return -1;
 }
 

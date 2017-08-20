@@ -9,6 +9,9 @@ class Texture2D : public Node
 public:
 	Texture2D(const std::string& resPath);
 	~Texture2D();
+	
+	void setPosition(float x, float y);
+
 	void update(float ft);
 	void draw();
 

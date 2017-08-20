@@ -17,6 +17,5 @@ public:
 public:
 	int positionLoc = 0;
 	int texCoordLoc = 0;
-	int textureLoc = 0;
 };
 

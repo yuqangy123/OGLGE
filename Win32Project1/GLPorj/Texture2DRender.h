@@ -29,9 +29,10 @@ public:
 
 	void begin();
 	void render(GLuint texturesID, V3F_T2F* vts, unsigned int size, const Matrix4f& viewTrans);
-	void render1(GLuint texturesID, V3F_T2F* vts, unsigned int size, Mat4& viewTransform);
+	void render1(GLuint texturesID, V3F_T2F* vts, unsigned int size, const Matrix4f& viewTrans);
 	void render2(GLuint texturesID, V3F_T2F* vts, unsigned int size, Mat4& viewTransform);
 	void render3(GLuint texturesID, V3F_T2F* vts, unsigned int size, Mat4& viewTransform);
+	void render4(GLuint texturesID, V3F_T2F* vts, unsigned int size, const Matrix4f& viewTrans);
 	void end();
 
 	Pipeline& getPipeline() { m_pipe; };

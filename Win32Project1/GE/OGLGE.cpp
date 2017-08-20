@@ -61,12 +61,16 @@ void OGLGE::initGLContext(int argc, char** argv)
 		return ;
 	}
 
+	//set viewport
+	glViewport(0, 0, m_winRt.width, m_winRt.height);
+
 	glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 
+	
 	//优化方法，减少运算量，正常的应该是使用深度测试
-	glFrontFace(GL_CW);
-	glCullFace(GL_BACK);
-	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CCW);//指定三角形正面方向，决定是否被剔除，画UI的时候小心
+	glCullFace(GL_BACK);//决定正面or反面被剔除
+	glEnable(GL_CULL_FACE);//是否执行剔除
 	//glDisable(GL_CULL_FACE);
 
 	//开启深度测试，需要初始化一个深度缓冲区
@@ -87,9 +91,13 @@ void OGLGE::test()
 {
 	auto scene = getRunScene();
 
-	Texture2D* texture = new Texture2D("res/def.jpg"); scene->addNode(texture);
+	Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2);
+	texture2->setPosition(m_winRt.width/2.0, 50);
 
-	//JikeTest * jk = new JikeTest(); scene->addNode(jk);
+	Texture2D* texture1 = new Texture2D("res/def.jpg"); scene->addNode(texture1);
+	
+	JikeTest * jk = new JikeTest(); scene->addNode(jk);
+	
 }
 
 void OGLGE::start()
