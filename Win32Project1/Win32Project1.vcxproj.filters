@@ -13,17 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="getProgramUniforms">
-      <UniqueIdentifier>{02f7d683-53bd-4d26-abe2-f2263509c773}</UniqueIdentifier>
-    </Filter>
     <Filter Include="texture">
       <UniqueIdentifier>{aaa47309-d5e8-4a86-818c-3037ccee66ba}</UniqueIdentifier>
     </Filter>
     <Filter Include="basic">
       <UniqueIdentifier>{8dafefc1-249c-40d1-b1c1-9be7d742ac49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libjpeg">
-      <UniqueIdentifier>{03ae991a-2c9e-400e-bb82-5bd71d7c3168}</UniqueIdentifier>
     </Filter>
     <Filter Include="GLPorj">
       <UniqueIdentifier>{bded26f7-804c-4a6e-9407-f1d21da4bc16}</UniqueIdentifier>
@@ -36,6 +30,12 @@
     </Filter>
     <Filter Include="GE\math">
       <UniqueIdentifier>{e9cc24f4-c1ba-4908-9145-a37122039761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CImg">
+      <UniqueIdentifier>{2134ced5-b477-46a9-bfb0-4601740ed0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CImg\libjpeg">
+      <UniqueIdentifier>{3c464f59-cc86-48cf-9225-d5d65890b6ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,27 +53,6 @@
     </ClInclude>
     <ClInclude Include="basic\Singleton.h">
       <Filter>basic</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jerror.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jmorecfg.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jpeglib.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jconfig.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jconfig_linux.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="libjpeg\jconfig_win.h">
-      <Filter>libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="texture\textureJpegManager.h">
-      <Filter>texture</Filter>
     </ClInclude>
     <ClInclude Include="GLPorj\Node.h">
       <Filter>GLPorj</Filter>
@@ -150,6 +129,24 @@
     <ClInclude Include="GLPorj\tech\techDefine.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="texture\textureManager.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CImg\jpeg_buffer.h">
+      <Filter>CImg</Filter>
+    </ClInclude>
+    <ClInclude Include="CImg\CImg.h">
+      <Filter>CImg</Filter>
+    </ClInclude>
+    <ClInclude Include="CImg\libjpeg\jmorecfg.h">
+      <Filter>CImg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CImg\libjpeg\jpeglib.h">
+      <Filter>CImg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="CImg\libjpeg\jconfig.h">
+      <Filter>CImg\libjpeg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -172,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="GE\OGLGE.cpp">
       <Filter>GE</Filter>
-    </ClCompile>
-    <ClCompile Include="texture\textureJpegManager.cpp">
-      <Filter>texture</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\Texture2DRender.cpp">
       <Filter>GLPorj</Filter>
@@ -235,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\textureManager.cpp">
+      <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

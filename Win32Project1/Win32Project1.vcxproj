@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,14 +90,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)libjpeg;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)texture;$(ProjectDir)Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)cimg;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)texture;$(ProjectDir)Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)libjpeg;$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;libjpeg.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;libjpeg-2015.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -107,12 +108,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)GE;$(ProjectDir)GLPorj;$(ProjectDir)HelloTriangle;$(ProjectDir)libjpeg;$(ProjectDir)programUniforms;$(ProjectDir)shaderModule;$(ProjectDir)texture;$(ProjectDir)..\..\..\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)GE;$(ProjectDir)GLPorj;$(ProjectDir)HelloTriangle;$(ProjectDir)cimg;$(ProjectDir)cimg\libjpeg;$(ProjectDir)shaderModule;$(ProjectDir)texture;$(ProjectDir)..\..\..\Common\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)libjpeg;$(ProjectDir)..\..\..\Common\Lib;$(ProjectDir)..\..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\..\Common\Lib;$(ProjectDir)..\..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libjpeg.lib;libEGL.lib;libGLESv2.lib;esUtil_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -155,6 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic\Singleton.h" />
+    <ClInclude Include="CImg\CImg.h" />
+    <ClInclude Include="CImg\jpeg_buffer.h" />
+    <ClInclude Include="CImg\libjpeg\jconfig.h" />
+    <ClInclude Include="CImg\libjpeg\jmorecfg.h" />
+    <ClInclude Include="CImg\libjpeg\jpeglib.h" />
     <ClInclude Include="GE\Camera.h" />
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
@@ -180,16 +186,10 @@
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2D.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
-    <ClInclude Include="libjpeg\jconfig.h" />
-    <ClInclude Include="libjpeg\jconfig_linux.h" />
-    <ClInclude Include="libjpeg\jconfig_win.h" />
-    <ClInclude Include="libjpeg\jerror.h" />
-    <ClInclude Include="libjpeg\jmorecfg.h" />
-    <ClInclude Include="libjpeg\jpeglib.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="texture\textureJpegManager.h" />
+    <ClInclude Include="texture\textureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basic\Singleton.cpp" />
@@ -223,7 +223,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="texture\textureJpegManager.cpp" />
+    <ClCompile Include="texture\textureManager.cpp" />
     <ClCompile Include="Win32Project1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

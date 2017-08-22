@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Texture2D.h"
-#include "textureJpegManager.h"
+#include "textureManager.h"
 #include "FileUnits.h"
 #include "OGLGE.h"
 
@@ -28,6 +28,11 @@ void Texture2D::setPosition(float x, float y)
 	m_pipe.WorldPos(x, y, 0);
 }
 
+void Texture2D::setScale(float s)
+{
+	m_pipe.Scale(s, s, s);
+}
+
 void Texture2D::update(float ft)
 {
 }
@@ -48,7 +53,7 @@ void Texture2D::init()
 	glBindTexture(GL_TEXTURE_2D, m_texturesID);
 
 	jpg_data jpgData;
-	if (!textureJpegManager::Instance()->getJpgData(m_resourceFile.c_str(), jpgData))
+	if (!textureJpegManager::Instance()->getJpgDataEx1(m_resourceFile.c_str(), jpgData))
 	{
 		printf("load jpg resource failed:\r\n%s\r\n", m_resourceFile.c_str());
 		assert(0);
