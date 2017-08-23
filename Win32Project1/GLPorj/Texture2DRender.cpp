@@ -4,7 +4,7 @@
 #include "FileUnits.h"
 #include <stddef.h> //used offsetof
 #include <OGLGE.h>
-
+#include "TextureManager.h"
 
 
 DECLARE_SINGLETON_MEMBER(Texture2DRender)
@@ -182,7 +182,7 @@ void Texture2DRender::render(GLuint texturesID, V3F_T2F* vts, unsigned int size,
 	if (m_lastTexturesID != texturesID)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texturesID);
+		TextureMgr->bindTexture(texturesID);
 		glEnable(GL_TEXTURE_2D);
 
 		m_lastTexturesID = texturesID;

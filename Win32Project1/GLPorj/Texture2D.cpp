@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Texture2D.h"
-#include "textureManager.h"
-#include "FileUnits.h"
+#include "TextureManager.h"
 #include "OGLGE.h"
+#include "FileUnits.h"
+
+
 
 Texture2D::Texture2D(const std::string& resPath)
 {
@@ -15,7 +17,7 @@ Texture2D::Texture2D(const std::string& resPath)
 
 Texture2D::~Texture2D()
 {
-	glDeleteTextures(1, &m_texturesID);
+	TextureMgr->unloadTexture(m_texturesID);
 	m_texturesID = 0;
 
 	if (nullptr != m_renderdata)
@@ -47,21 +49,15 @@ void Texture2D::init()
 {
 	m_pipe.setCamera(DefaultCamera2D);
 
-	m_texturesID = 0;
+	m_texturesID = TextureMgr->loadTextureJpeg(m_resourceFile.c_str(), GL_RGBA, GL_RGBA, 0, 0);
 
-	glGenTextures(1, &m_texturesID);
-	glBindTexture(GL_TEXTURE_2D, m_texturesID);
-
-	jpg_data jpgData;
-	if (!textureJpegManager::Instance()->getJpgDataEx1(m_resourceFile.c_str(), jpgData))
+	const TextureData& texData = TextureMgr->getTexture(m_texturesID);
+	if (texData.id == 0)
 	{
 		printf("load jpg resource failed:\r\n%s\r\n", m_resourceFile.c_str());
 		assert(0);
 	}
-
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, jpgData._width, jpgData._height, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, jpgData._data);
+	
 
 	// Set the filtering mode
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -72,13 +68,13 @@ void Texture2D::init()
 	auto winRt = OGLGE::Instance()->getWindowsRect();
 	m_position.x = -winRt.width / 2.0;
 	m_position.y = -winRt.height / 2.0;
-	m_renderdata[0].vertices = Vector3(m_position.x, m_position.y + jpgData._height, 0);
+	m_renderdata[0].vertices = Vector3(m_position.x, m_position.y + texData.height, 0);
 	m_renderdata[0].texCoords = Vector2(0, 0);
 	m_renderdata[1].vertices = Vector3(m_position.x, m_position.y, 0);
 	m_renderdata[1].texCoords = Vector2(0, 1);
-	m_renderdata[2].vertices = Vector3(m_position.x + jpgData._width, m_position.y, 0);
+	m_renderdata[2].vertices = Vector3(m_position.x + texData.width, m_position.y, 0);
 	m_renderdata[2].texCoords = Vector2(1, 1);
-	m_renderdata[3].vertices = Vector3(m_position.x + jpgData._width, m_position.y + jpgData._height, 0);
+	m_renderdata[3].vertices = Vector3(m_position.x + texData.width, m_position.y + texData.height, 0);
 	m_renderdata[3].texCoords = Vector2(1, 0);
 
 	

@@ -186,10 +186,11 @@
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2D.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
+    <ClInclude Include="GLPorj\TextureManager.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="texture\textureManager.h" />
+    <ClInclude Include="texture\TextureJpegLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="basic\Singleton.cpp" />
@@ -216,6 +217,7 @@
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp" />
     <ClCompile Include="GLPorj\Texture2D.cpp" />
     <ClCompile Include="GLPorj\Texture2DRender.cpp" />
+    <ClCompile Include="GLPorj\TextureManager.cpp" />
     <ClCompile Include="programUniforms\programUniforms.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -223,7 +225,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="texture\textureManager.cpp" />
+    <ClCompile Include="texture\TextureJpegLoader.cpp" />
     <ClCompile Include="Win32Project1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

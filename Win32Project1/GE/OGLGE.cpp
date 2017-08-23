@@ -90,13 +90,13 @@ void OGLGE::init(int argc, char** argv)
 void OGLGE::test()
 {
 	auto scene = getRunScene();
-
+	
 	Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2);
 	texture2->setPosition(m_winRt.width/2.0, 50);
 
 	Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1);
 	texture1->setScale(0.5);
-
+	
 	JikeTest * jk = new JikeTest(); scene->addNode(jk);
 	
 }

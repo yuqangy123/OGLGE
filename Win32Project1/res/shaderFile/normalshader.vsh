@@ -1,9 +1,8 @@
 
 uniform  mat4  gWorld;
-uniform float offsetx;
 attribute vec3 	a_position;
-attribute vec3 	Color;
-varying vec4 OutColor;  
+attribute vec3 	texCoord;
+varying vec2 texCoord0;  
 
 float clamp(float v)
 {
@@ -17,7 +16,7 @@ void main()
 	
 	gl_Position = gWorld * vec4(a_position, 1.0);
 	
-	OutColor = vec4(Color, 1.0);
+	texCoord0 = texCoord.xy;
 
 
 }  

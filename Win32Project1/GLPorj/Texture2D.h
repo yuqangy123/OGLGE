@@ -23,7 +23,7 @@ protected:
 	Pipeline m_pipe;
 
 	std::string m_resourceFile;
-	GLuint m_texturesID;
+	unsigned int m_texturesID;
 	V3F_T2F* m_renderdata = nullptr;
 };
 

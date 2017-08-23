@@ -39,16 +39,16 @@ static void CreateVertexBuffer()
 {
 	Vector3 Vertices[8];
 	Vertices[0] = Vector3(-1.0f, -1.0f, 0.0f);
-	Vertices[1] = Vector3(1.0f, 0.0f, 0.0f);
+	Vertices[1] = Vector3(0.0f, 0.0f, 0.0f);
 
 	Vertices[2] = Vector3(0.0f, -1.0f, modelZ);
-	Vertices[3] = Vector3(0.0f, 1.0f, 0.0f);
+	Vertices[3] = Vector3(0.5f, 0.0f, 0.0f);
 
 	Vertices[4] = Vector3(1.0f, -1.0f, 0.0f);
-	Vertices[5] = Vector3(0.0f, 0.0f, 1.0f);
+	Vertices[5] = Vector3(1.0f, 0.0f, 1.0f);
 
 	Vertices[6] = Vector3(0.0f, 1.0f, 0.0f);
-	Vertices[7] = Vector3(1.0f, 1.0f, 1.0f);
+	Vertices[7] = Vector3(0.5f, 1.0f, 1.0f);
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -200,6 +200,8 @@ void JikeTest::RenderSceneCB()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (GLvoid*)12);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+
+
 
 	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 

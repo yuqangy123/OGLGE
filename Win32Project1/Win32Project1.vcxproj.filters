@@ -129,9 +129,6 @@
     <ClInclude Include="GLPorj\tech\techDefine.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
-    <ClInclude Include="texture\textureManager.h">
-      <Filter>texture</Filter>
-    </ClInclude>
     <ClInclude Include="CImg\jpeg_buffer.h">
       <Filter>CImg</Filter>
     </ClInclude>
@@ -146,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="CImg\libjpeg\jconfig.h">
       <Filter>CImg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\TextureManager.h">
+      <Filter>GLPorj</Filter>
+    </ClInclude>
+    <ClInclude Include="texture\TextureJpegLoader.h">
+      <Filter>texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,7 +233,10 @@
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
-    <ClCompile Include="texture\textureManager.cpp">
+    <ClCompile Include="GLPorj\TextureManager.cpp">
+      <Filter>GLPorj</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\TextureJpegLoader.cpp">
       <Filter>texture</Filter>
     </ClCompile>
   </ItemGroup>
