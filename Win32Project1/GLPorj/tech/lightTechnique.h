@@ -1,12 +1,17 @@
 #pragma once
 #include "technique.h"
+#include "techDefine.h"
 
-#define ATTRI_A_POSITION_INDEX	0
-#define ATTRI_A_POSITION_NAME		"a_position"
-#define ATTRI_A_COLOR_INDEX	1
-#define ATTRI_A_COLOR_NAME		"Color"
-#define ATTRI_A_TEXCOORD_INDEX	2
-#define ATTRI_A_TEXCOORD_NAME		"a_texCoord"
+
+#define ATTRI_UNIFORM_DIRLIGHT_color "gDirectionLight.color"
+#define ATTRI_UNIFORM_DIRLIGHT_ambientIntensity "gDirectionLight.ambientIntensity"
+#define ATTRI_UNIFORM_DIRLIGHT_direction "gDirectionLight.direction"
+#define ATTRI_UNIFORM_DIRLIGHT_diffuseIntensity "gDirectionLight.diffuseIntensity"
+
+typedef enum{ 
+	ambientLight = 1,
+	diffuseLight = 2,
+}lightType;
 
 class lightTechnique : public technique
 {
@@ -14,11 +19,14 @@ public:
 	lightTechnique();
 	~lightTechnique();
 
-	void init();
+	void init(lightType tp);
 
 public:
 	int positionLoc = 0;
 	int texCoordLoc = 0;
-	int colorLoc = 0;
+	int lightColorLoc = 0;
+	int lightAmbientIntensityLoc = 0;
+	int lightDirectionLoc = 0;
+	int lightDiffuseIntensityLoc = 0;
 };
 

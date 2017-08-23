@@ -11,16 +11,41 @@ lightTechnique::~lightTechnique()
 {
 }
 
-void lightTechnique::init()
+void lightTechnique::init(lightType tp)
 {
 	technique::init();
 
-	const char* vshSrcFile = "res/shaderFile/lightshader.vsh";
-	const char* fshSrcFile = "res/shaderFile/lightshader.fsh";
-	addShader(vshSrcFile, fshSrcFile);
+	switch (tp)
+	{
+		case lightType::ambientLight:
+		{
+			const char* vshSrcFile = "res/shaderFile/ambientLight.vsh";
+			const char* fshSrcFile = "res/shaderFile/ambientLight.fsh";
+			addShader(vshSrcFile, fshSrcFile);
+
+			positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
+			texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
+			lightColorLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_color);
+			lightAmbientIntensityLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_ambientIntensity);
+
+		}break;
+
+		case lightType::diffuseLight:
+		{
+				const char* vshSrcFile = "res/shaderFile/diffuseLight.vsh";
+				const char* fshSrcFile = "res/shaderFile/diffuseLight.fsh";
+				addShader(vshSrcFile, fshSrcFile);
+
+				positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
+				texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
+				lightColorLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_color);
+				lightAmbientIntensityLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_ambientIntensity);
+				lightDirectionLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_direction);
+				lightDiffuseIntensityLoc = glGetAttribLocation(m_shaderProg, ATTRI_UNIFORM_DIRLIGHT_diffuseIntensity);
+
+		}break;
+	};
+
 	
-	positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
-	colorLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_COLOR_NAME);
-	texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
 }
 

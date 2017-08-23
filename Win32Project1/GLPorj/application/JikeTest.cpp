@@ -73,8 +73,8 @@ static void CreateIndexBuffer()
 void JikeTest::init()
 {
 	
-	m_tech = new normalTechnique();
-	m_tech->init();
+	//m_tech = new normalTechnique();
+	//m_tech->init();
 	
 
 	auto winsz = OGLGE::Instance()->getWindowsRect();

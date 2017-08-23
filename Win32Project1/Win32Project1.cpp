@@ -6,7 +6,17 @@
 #include "OGLGE.h"
 using namespace std;
 
-
+//extern "C" { FILE __iob_func[3] = { *stdin, *stdout, *stderr }; }
+#if _MSC_VER>=1900
+#include "stdio.h" 
+_ACRTIMP_ALT FILE* __cdecl __acrt_iob_func(unsigned);
+#ifdef __cplusplus 
+extern "C"
+#endif 
+FILE* __cdecl __iob_func(unsigned i) {
+	return __acrt_iob_func(i);
+}
+#endif /* _MSC_VER>=1900 */
 int main(int argc, char** argv)
 {
 	OGLGE::Instance()->init(argc, argv);

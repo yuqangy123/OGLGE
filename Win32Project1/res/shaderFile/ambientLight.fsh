@@ -4,8 +4,8 @@ uniform sampler2D s_texture;
 
 struct directionLight
 {
-	vec3 Color;
-    float AmbientIntensity;
+	vec3 color;
+    float ambientIntensity;
 };
 uniform directionLight gDirectionLight;
 

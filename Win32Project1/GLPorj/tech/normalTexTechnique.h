@@ -4,17 +4,16 @@
 
 
 
-class normalTechnique : public technique
+class normalTexTechnique : public technique
 {
 public:
-	normalTechnique();
-	~normalTechnique();
+	normalTexTechnique();
+	~normalTexTechnique();
 
 	void init();
 
 public:
 	int positionLoc = 0;
 	int texCoordLoc = 0;
-	int colorLoc = 0;
 };
 
