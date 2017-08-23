@@ -28,6 +28,7 @@ protected:
 
 protected:
 	lightTechnique* m_tech = nullptr;
+	lightType	m_lightType;
 
 	GLuint m_vbo[2];
 	

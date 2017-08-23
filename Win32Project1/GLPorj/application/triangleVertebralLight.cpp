@@ -72,9 +72,9 @@ static void CreateIndexBuffer()
 
 void triangleVertebralLight::init()
 {
-	
+	m_lightType = lightType::ambientLight;
 	m_tech = new lightTechnique();
-	m_tech->init(lightType::ambientLight);
+	m_tech->init(m_lightType);
 	
 
 
