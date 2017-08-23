@@ -1,6 +1,6 @@
 
 uniform  mat4  gWorld;
-attribute vec3 	a_position;
+attribute vec3	a_position;
 attribute vec3 	texCoord;
 varying vec2 texCoord0;  
 

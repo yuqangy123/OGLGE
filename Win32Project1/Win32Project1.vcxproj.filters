@@ -37,6 +37,9 @@
     <Filter Include="CImg\libjpeg">
       <UniqueIdentifier>{3c464f59-cc86-48cf-9225-d5d65890b6ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLPorj\application">
+      <UniqueIdentifier>{bb884565-8782-40f2-9d2e-a9c70bf5755c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,9 +60,6 @@
     <ClInclude Include="GLPorj\Node.h">
       <Filter>GLPorj</Filter>
     </ClInclude>
-    <ClInclude Include="GLPorj\Texture2D.h">
-      <Filter>GLPorj</Filter>
-    </ClInclude>
     <ClInclude Include="GE\OGLGE.h">
       <Filter>GE</Filter>
     </ClInclude>
@@ -68,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="GE\FileUnits.h">
       <Filter>GE</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\JikeTest.h">
-      <Filter>GLPorj</Filter>
     </ClInclude>
     <ClInclude Include="GE\Pipeline.h">
       <Filter>GE</Filter>
@@ -144,11 +141,23 @@
     <ClInclude Include="CImg\libjpeg\jconfig.h">
       <Filter>CImg\libjpeg</Filter>
     </ClInclude>
-    <ClInclude Include="GLPorj\TextureManager.h">
-      <Filter>GLPorj</Filter>
-    </ClInclude>
     <ClInclude Include="texture\TextureJpegLoader.h">
       <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\application\JikeTest.h">
+      <Filter>GLPorj\application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\application\JikeTest - 副本.h">
+      <Filter>GLPorj\application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\Texture2D.h">
+      <Filter>GLPorj\application</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\TextureManager.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\application\triangleVertebralTexture.h">
+      <Filter>GLPorj\application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +176,6 @@
     <ClCompile Include="GLPorj\Node.cpp">
       <Filter>GLPorj</Filter>
     </ClCompile>
-    <ClCompile Include="GLPorj\Texture2D.cpp">
-      <Filter>GLPorj</Filter>
-    </ClCompile>
     <ClCompile Include="GE\OGLGE.cpp">
       <Filter>GE</Filter>
     </ClCompile>
@@ -178,9 +184,6 @@
     </ClCompile>
     <ClCompile Include="GE\FileUnits.cpp">
       <Filter>GE</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\JikeTest.cpp">
-      <Filter>GLPorj</Filter>
     </ClCompile>
     <ClCompile Include="GE\Pipeline.cpp">
       <Filter>GE</Filter>
@@ -233,11 +236,23 @@
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
-    <ClCompile Include="GLPorj\TextureManager.cpp">
-      <Filter>GLPorj</Filter>
-    </ClCompile>
     <ClCompile Include="texture\TextureJpegLoader.cpp">
       <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\application\JikeTest.cpp">
+      <Filter>GLPorj\application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\application\JikeTest - 副本.cpp">
+      <Filter>GLPorj\application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\Texture2D.cpp">
+      <Filter>GLPorj\application</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\TextureManager.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\application\triangleVertebralTexture.cpp">
+      <Filter>GLPorj\application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
