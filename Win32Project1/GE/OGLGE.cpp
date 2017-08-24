@@ -2,7 +2,9 @@
 #include "OGLGE.h"
 
 #include "Texture2D.h"
-#include "JikeTest.h"
+#include "triangleVertebralTexture.h"
+#include "triangleVertebralLight.h"
+
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -64,7 +66,7 @@ void OGLGE::initGLContext(int argc, char** argv)
 	//set viewport
 	glViewport(0, 0, m_winRt.width, m_winRt.height);
 
-	glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	
 	//优化方法，减少运算量，正常的应该是使用深度测试
@@ -91,13 +93,18 @@ void OGLGE::test()
 {
 	auto scene = getRunScene();
 	
-	Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2);
-	texture2->setPosition(m_winRt.width/2.0, 50);
+	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2);
+	//texture2->setPosition(m_winRt.width/2.0, 50);
 
-	Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1);
-	texture1->setScale(0.5);
+	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1);
+	//texture1->setScale(0.5);
 	
-	JikeTest * jk = new JikeTest(); scene->addNode(jk);
+	//JikeTest * jk = new JikeTest(); scene->addNode(jk);
+	
+	//triangleVertebralTexture * jk = new triangleVertebralTexture(); scene->addNode(jk);
+
+	triangleVertebralLight * jk = new triangleVertebralLight(); scene->addNode(jk);
+	
 	
 }
 

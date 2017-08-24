@@ -58,7 +58,8 @@ bool technique::linkShader()
 		{
 			char* infoLog = new char[sizeof(char) * infoLen];
 			glGetProgramInfoLog(m_shaderProg, infoLen, NULL, infoLog);
-			ERROR("cocos2d: ERROR: Failed to link program:\r\n%s", infoLog);
+			printf("cocos2d: ERROR: Failed to link program:\r\n%s", infoLog);
+			assert(0);
 			delete infoLog;
 		}
 		glDeleteProgram(m_shaderProg);

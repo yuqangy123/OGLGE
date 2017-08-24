@@ -69,7 +69,10 @@ struct Vector3
 		y += v.y;
 		z += v.z;
 	}
-
+	inline void set(float fx, float fy, float fz)
+	{
+		x = fx; y = fy; z = fz;
+	}
 
 	void normalize();
 	float mag();

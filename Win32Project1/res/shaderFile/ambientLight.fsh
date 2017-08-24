@@ -1,5 +1,5 @@
 precision mediump float;
-varying vec2 v_texCoord;
+varying vec2 texCoord0;
 uniform sampler2D s_texture;
 
 struct directionLight
@@ -11,7 +11,7 @@ uniform directionLight gDirectionLight;
 
 void main()
 {
-	vec4 texColor = texture2D( s_texture, v_texCoord );
+	vec4 texColor = texture2D( s_texture, texCoord0 );
 	
-	gl_FragColor = (texColor * vec4(gDirectionLight.Color, 1.0f)) * gDirectionLight.AmbientIntensity;	
+	gl_FragColor = texColor * vec4(gDirectionLight.color, 1.0f) * gDirectionLight.ambientIntensity;	
 }

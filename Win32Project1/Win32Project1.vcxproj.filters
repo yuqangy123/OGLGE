@@ -37,8 +37,8 @@
     <Filter Include="CImg\libjpeg">
       <UniqueIdentifier>{3c464f59-cc86-48cf-9225-d5d65890b6ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GLPorj\application">
-      <UniqueIdentifier>{bb884565-8782-40f2-9d2e-a9c70bf5755c}</UniqueIdentifier>
+    <Filter Include="application">
+      <UniqueIdentifier>{62729c0f-83a3-4fff-a8bd-40a5d0529088}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="GE\common.h">
       <Filter>GE</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\tech\normalTechnique.h">
-      <Filter>GLPorj\tech</Filter>
     </ClInclude>
     <ClInclude Include="GLPorj\tech\lightTechnique.h">
       <Filter>GLPorj\tech</Filter>
@@ -144,20 +141,23 @@
     <ClInclude Include="texture\TextureJpegLoader.h">
       <Filter>texture</Filter>
     </ClInclude>
-    <ClInclude Include="GLPorj\application\JikeTest.h">
-      <Filter>GLPorj\application</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\application\JikeTest - 副本.h">
-      <Filter>GLPorj\application</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\Texture2D.h">
-      <Filter>GLPorj\application</Filter>
-    </ClInclude>
     <ClInclude Include="GE\TextureManager.h">
       <Filter>GE</Filter>
     </ClInclude>
-    <ClInclude Include="GLPorj\application\triangleVertebralTexture.h">
-      <Filter>GLPorj\application</Filter>
+    <ClInclude Include="application\JikeTest.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="application\triangleVertebralLight.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="application\triangleVertebralTexture.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\normalTexTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="application\Texture2D.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +187,6 @@
     </ClCompile>
     <ClCompile Include="GE\Pipeline.cpp">
       <Filter>GE</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\tech\normalTechnique.cpp">
-      <Filter>GLPorj\tech</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
@@ -239,20 +236,23 @@
     <ClCompile Include="texture\TextureJpegLoader.cpp">
       <Filter>texture</Filter>
     </ClCompile>
-    <ClCompile Include="GLPorj\application\JikeTest.cpp">
-      <Filter>GLPorj\application</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\application\JikeTest - 副本.cpp">
-      <Filter>GLPorj\application</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\Texture2D.cpp">
-      <Filter>GLPorj\application</Filter>
-    </ClCompile>
     <ClCompile Include="GE\TextureManager.cpp">
       <Filter>GE</Filter>
     </ClCompile>
-    <ClCompile Include="GLPorj\application\triangleVertebralTexture.cpp">
-      <Filter>GLPorj\application</Filter>
+    <ClCompile Include="application\JikeTest.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="application\triangleVertebralLight.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="application\triangleVertebralTexture.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\Texture2D.cpp">
+      <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

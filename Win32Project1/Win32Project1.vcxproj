@@ -155,6 +155,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="application\JikeTest.h" />
+    <ClInclude Include="application\Texture2D.h" />
+    <ClInclude Include="application\triangleVertebralLight.h" />
+    <ClInclude Include="application\triangleVertebralTexture.h" />
     <ClInclude Include="basic\Singleton.h" />
     <ClInclude Include="CImg\CImg.h" />
     <ClInclude Include="CImg\jpeg_buffer.h" />
@@ -177,17 +181,13 @@
     <ClInclude Include="GE\shaders.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
-    <ClInclude Include="GLPorj\application\JikeTest - 副本.h" />
-    <ClInclude Include="GLPorj\application\JikeTest.h" />
-    <ClInclude Include="GLPorj\application\triangleVertebralTexture.h" />
     <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\Scene.h" />
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
-    <ClInclude Include="GLPorj\tech\normalTechnique.h" />
+    <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
     <ClInclude Include="GLPorj\tech\techDefine.h" />
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
-    <ClInclude Include="GLPorj\Texture2D.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
     <ClInclude Include="stdafx.h" />
@@ -195,6 +195,10 @@
     <ClInclude Include="texture\TextureJpegLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="application\JikeTest.cpp" />
+    <ClCompile Include="application\Texture2D.cpp" />
+    <ClCompile Include="application\triangleVertebralLight.cpp" />
+    <ClCompile Include="application\triangleVertebralTexture.cpp" />
     <ClCompile Include="basic\Singleton.cpp" />
     <ClCompile Include="GE\Camera.cpp" />
     <ClCompile Include="GE\Camera3D.cpp" />
@@ -211,16 +215,12 @@
     <ClCompile Include="GE\shaders.cpp" />
     <ClCompile Include="GE\technique.cpp" />
     <ClCompile Include="GE\TextureManager.cpp" />
-    <ClCompile Include="GLPorj\application\JikeTest - 副本.cpp" />
-    <ClCompile Include="GLPorj\application\JikeTest.cpp" />
-    <ClCompile Include="GLPorj\application\triangleVertebralTexture.cpp" />
     <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\Scene.cpp" />
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
-    <ClCompile Include="GLPorj\tech\normalTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp" />
-    <ClCompile Include="GLPorj\Texture2D.cpp" />
     <ClCompile Include="GLPorj\Texture2DRender.cpp" />
     <ClCompile Include="programUniforms\programUniforms.cpp" />
     <ClCompile Include="stdafx.cpp">

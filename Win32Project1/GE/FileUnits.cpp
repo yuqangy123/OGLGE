@@ -43,7 +43,8 @@ void FileUnits::getFileData(const char* file, std::string& res)
 		fp = fopen(file, "r");
 		if (nullptr == fp)
 		{
-			ERROR("file %s cant find", file);
+			printf("file %s cant find", file);
+			assert(0);
 			return;
 		}
 
@@ -57,10 +58,12 @@ void FileUnits::getFileData(const char* file, std::string& res)
 	unsigned char* buf = new unsigned char[length + 1];
 	memset(buf, 0x0, length + 1);
 
-	if (0 != fread(buf, length, 1, fp))
+	auto readres = fread(buf, length, 1, fp);
+	if (0 != readres && 1 != readres)
 	{
-		ERROR("file %s cant read", file);
+		printf("file %s cant read", file);
 		fclose(fp);
+		assert(0);
 		return;
 	}
 	
