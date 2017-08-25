@@ -35,6 +35,7 @@ public:
 
 
 	const Matrix4f* GetTrans();
+	const Matrix4f* GetWorldTrans();
 
 private:
 	void InitScaleTrans(Matrix4f& mat);
@@ -50,4 +51,6 @@ private:
 	Camera* m_camera=nullptr;
 	bool		m_dirty = true;
 	Matrix4f m_transformation;
+	Matrix4f m_worldtrans;
+
 };

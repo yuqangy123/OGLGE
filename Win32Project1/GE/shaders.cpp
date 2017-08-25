@@ -28,6 +28,7 @@ GLuint loadShader(GLenum type, const char* shaderSrc)
 		{
 			char* infoLog = new char[sizeof(char)*infoLen];
 			glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
+			printf("%s\r\n", infoLog);
 			//esLogMessage("error compile shader: %s\r\n", infoLog);
 			delete infoLog;
 		}

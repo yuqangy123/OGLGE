@@ -10,5 +10,7 @@
 #define ATTRI_A_COLOR_INDEX	2
 #define ATTRI_A_COLOR_NAME		"Color"
 
+#define ATTRI_A_NORMAL_NAME "normal"
+
 
 

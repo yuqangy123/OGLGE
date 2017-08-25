@@ -80,7 +80,7 @@ void triangleVertebralTexture::init()
 
 
 
-	m_worldMt4.identity();
+	m_MVPMt4.identity();
 		
 	m_pipe.setCamera(DefaultCamera);
 
@@ -99,7 +99,7 @@ void triangleVertebralTexture::init()
 
 void triangleVertebralTexture::update(float ft) {
 	
-	m_worldMt4 = *m_pipe.GetTrans();
+	m_MVPMt4 = *m_pipe.GetTrans();
 }
 
 void triangleVertebralTexture::keyInput(unsigned char param, int x, int y)
@@ -190,7 +190,7 @@ void triangleVertebralTexture::RenderSceneCB()
 	
 
 	//第三个参数是 GL_TRUE 是因为我们以行优先的方式提供矩阵的。我们也可以将第三个参数为 GL_FALSE，但是这样的话我们需要转置矩阵的值，因为 C/C++ 中内存的排列仍然是行优先，但是 OpenGL 将认为我们提供的前四个值实际上是一个矩阵的列，并做相应处理
-	glUniformMatrix4fv(m_tech->getUniformLocation("gWorld"), 1, GL_TRUE, (const float*)m_worldMt4.m);
+	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
 
 	glEnableVertexAttribArray(m_tech->positionLoc);
 	glEnableVertexAttribArray(m_tech->texCoordLoc);
@@ -232,7 +232,7 @@ void triangleVertebralTexture::draw() {
 	glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 	
-	glUniformMatrix4fv(m_tech->getUniformLocation("gWorld"), 1, GL_FALSE, (const GLfloat*)&m_worldMt4);
+	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_FALSE, (const GLfloat*)&m_worldMt4);
 	
 
 	//glDrawArrays(GL_TRIANGLES, 0, 3);

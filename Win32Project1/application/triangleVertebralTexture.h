@@ -39,7 +39,7 @@ protected:
 	
 
 
-	Matrix4f m_worldMt4;
+	Matrix4f m_MVPMt4;
 	Pipeline m_pipe;
 
 	int m_lastMouseX;

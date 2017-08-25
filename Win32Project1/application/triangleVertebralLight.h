@@ -25,8 +25,10 @@ public:
 
 protected:
 	void init();
-	void CreateVertexBuffer();
-	void CreateIndexBuffer();
+
+	void createVBOIBO_diffuseLight();
+	void createVBOIBO_ambientLight();
+
 	void updateLightUniform();
 
 protected:
@@ -36,11 +38,14 @@ protected:
 	GLuint VBO;
 	GLuint IBO;
 
+	Vector3 *m_Vertices = nullptr;
+	unsigned int *m_Indices = nullptr;
+
 	GLuint m_exturesID;
 
 
 
-	Matrix4f m_worldMt4;
+	Matrix4f m_MVPMt4;
 	Pipeline m_pipe;
 
 	int m_lastMouseX;
@@ -48,5 +53,7 @@ protected:
 
 	Vector3 m_ambientLightColor;
 	float m_ambientLightIntensity;
+	Vector3 m_diffuseDirection;
+	float m_diffuseIntensity;
 };
 

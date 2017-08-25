@@ -78,7 +78,12 @@ const Matrix4f* Pipeline::GetTrans()
 	InitTranslationTrans(TranslationTrans);
 	
 	cameraTrans = m_camera->getCameraTranlation();
-
-	m_transformation = cameraTrans*TranslationTrans* RotateTrans* ScaleTrans;
+	m_worldtrans = TranslationTrans* RotateTrans* ScaleTrans;
+	m_transformation = cameraTrans*m_worldtrans;
 	return &m_transformation;
+}
+
+const Matrix4f* Pipeline::GetWorldTrans()
+{
+	return &m_worldtrans;
 }

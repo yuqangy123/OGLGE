@@ -30,9 +30,83 @@ triangleVertebralLight::~triangleVertebralLight()
 	if (m_tech) delete m_tech;
 }
 
-
-void triangleVertebralLight::CreateVertexBuffer()
+void triangleVertebralLight::createVBOIBO_diffuseLight()
 {
+	m_ambientLightColor.set(0.5f, 0.5f, 0.5f);
+	m_ambientLightIntensity = 0.5f;
+	m_diffuseDirection.set(0.0f, -1.0f, 0.0f);
+	m_diffuseIntensity = 3.0f;
+
+	//init vbo
+	Vector3 Vertices[12];
+	Vertices[0] = Vector3(-1.0f, -1.0f, 0.0f);
+	Vertices[1] = Vector3(0.0f, 0.0f, 0.0f);
+	Vertices[2] = Vector3(0.0f, 0.0f, 0.0f);
+
+	Vertices[3] = Vector3(0.0f, -1.0f, modelZ);
+	Vertices[4] = Vector3(0.5f, 0.0f, 0.0f);
+	Vertices[5] = Vector3(0.0f, 0.0f, 0.0f);
+
+	Vertices[6] = Vector3(1.0f, -1.0f, 0.0f);
+	Vertices[7] = Vector3(1.0f, 0.0f, 1.0f);
+	Vertices[8] = Vector3(0.0f, 0.0f, 0.0f);
+
+	Vertices[9] = Vector3(0.0f, 1.0f, 0.0f);
+	Vertices[10] = Vector3(0.5f, 1.0f, 1.0f);
+	Vertices[11] = Vector3(0.0f, 0.0f, 0.0f);
+
+	unsigned int Indices[] = {
+		0, 3, 1,
+		1, 3, 2,
+		2, 3, 0,
+		0, 1, 2
+	};
+
+	//create normal
+	for (int n = 0; n < sizeof(Indices) / sizeof(Indices[0]); n += 3)
+	{
+		unsigned int i0 = Indices[n + 0]*3;
+		unsigned int i1 = Indices[n + 1]*3;
+		unsigned int i2 = Indices[n + 2]*3;
+		Vector3& v0 = Vertices[i0];
+		Vector3& v1 = Vertices[i1];
+		Vector3& v2 = Vertices[i2];
+
+		Vector3 a1 = v1 - v0;
+		Vector3 a2 = v2 - v0;
+
+		Vector3 normal;
+		Vector3::cross(a1, a2, normal);
+		normal.normalize();
+
+		Vertices[i0 + 2] += normal;
+		Vertices[i1 + 2] += normal;
+		Vertices[i2 + 2] += normal;
+	}
+
+	for (int n = 0; n < 12; n += 3)
+	{
+		Vertices[n + 2].normalize();
+	}
+
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+
+
+	//init ibo	
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+}
+
+void triangleVertebralLight::createVBOIBO_ambientLight()
+{
+	m_ambientLightColor.set(0.5f, 0.5f, 0.5f);
+	m_ambientLightIntensity = 1.0f;
+
+	//init vbo
 	Vector3 Vertices[8];
 	Vertices[0] = Vector3(-1.0f, -1.0f, 0.0f);
 	Vertices[1] = Vector3(0.0f, 0.0f, 0.0f);
@@ -49,10 +123,9 @@ void triangleVertebralLight::CreateVertexBuffer()
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
-}
 
-void triangleVertebralLight::CreateIndexBuffer()
-{
+
+	//init ibo
 	unsigned int Indices[] = {
 		0, 3, 1,
 		1, 3, 2,
@@ -63,18 +136,18 @@ void triangleVertebralLight::CreateIndexBuffer()
 	glGenBuffers(1, &IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+
 }
-
-
 
 void triangleVertebralLight::init()
 {
-	m_lightType = lightType::ambientLight;
+	m_lightType = lightType::diffuseLight;
 	m_tech = new lightTechnique();
 	m_tech->init(m_lightType);
 
-	m_ambientLightColor.set(0.0, 0.5, 0.5);
-	m_ambientLightIntensity = 1.0;
+	
+
+
 
 	auto winsz = OGLGE::Instance()->getWindowsRect();
 	m_lastMouseX = winsz.width / 2.0;
@@ -83,7 +156,7 @@ void triangleVertebralLight::init()
 
 
 
-	m_worldMt4.identity();
+	m_MVPMt4.identity();
 
 	m_pipe.setCamera(DefaultCamera);
 
@@ -96,13 +169,24 @@ void triangleVertebralLight::init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		
-	CreateVertexBuffer();
-	CreateIndexBuffer();
+	switch (m_lightType)
+	{
+		case lightType::ambientLight:
+		{
+			createVBOIBO_ambientLight();
+		}break;
+
+		case lightType::diffuseLight:
+		{
+			createVBOIBO_diffuseLight();
+		}break;
+	}
+	
 }
 
 void triangleVertebralLight::update(float ft) {
 
-	m_worldMt4 = *m_pipe.GetTrans();
+	m_MVPMt4 = *m_pipe.GetTrans();
 }
 
 void triangleVertebralLight::keyInput(unsigned char param, int x, int y)
@@ -130,13 +214,13 @@ void triangleVertebralLight::keyInput(unsigned char param, int x, int y)
 	else if (param == 'z')
 	{
 		modelZ -= 0.1f;
-		CreateVertexBuffer();
+		//CreateVertexBuffer();
 		printf("modelZ=%f\r\n", modelZ);
 	}
 	else if (param == 'x')
 	{
 		modelZ += 0.1f;
-		CreateVertexBuffer();
+		//CreateVertexBuffer();
 		printf("modelZ=%f\r\n", modelZ);
 	}
 	else if (param == 'r')
@@ -211,26 +295,59 @@ void triangleVertebralLight::updateLightUniform()
 	{
 		case lightType::ambientLight:
 		{
+			glEnableVertexAttribArray(m_tech->positionLoc);
+			glEnableVertexAttribArray(m_tech->texCoordLoc);
+
+			glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, 24, 0);
+			glVertexAttribPointer(m_tech->texCoordLoc, 3, GL_FLOAT, GL_FALSE, 24, (GLvoid*)12);
+			
+			glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
+			glDisableVertexAttribArray(m_tech->positionLoc);
+			glDisableVertexAttribArray(m_tech->texCoordLoc);
+
 			glUniform3f(m_tech->getUniformLocation("gDirectionLight.color"), m_ambientLightColor.x, m_ambientLightColor.y, m_ambientLightColor.z);
 			glUniform1f(m_tech->getUniformLocation("gDirectionLight.ambientIntensity"), m_ambientLightIntensity);
+
+		}break;
+
+		case lightType::diffuseLight:
+		{
+			glEnableVertexAttribArray(m_tech->positionLoc);
+			glEnableVertexAttribArray(m_tech->texCoordLoc);
+			glEnableVertexAttribArray(m_tech->normalLoc);
+
+			glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, 12 * 3, (GLvoid*)(12 * 0));
+			glVertexAttribPointer(m_tech->texCoordLoc, 3, GL_FLOAT, GL_FALSE, 12 * 3, (GLvoid*)(12 * 1));
+			glVertexAttribPointer(m_tech->normalLoc, 3, GL_FLOAT, GL_FALSE, 12 * 3, (GLvoid*)(12 * 2));
+
+			glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
+			glDisableVertexAttribArray(m_tech->positionLoc);
+			glDisableVertexAttribArray(m_tech->texCoordLoc);
+			glDisableVertexAttribArray(m_tech->normalLoc);
+
+			const Matrix4f* worldMt4 = m_pipe.GetWorldTrans();
+			glUniformMatrix4fv(m_tech->getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)worldMt4->m);
+			glUniform3f(m_tech->getUniformLocation("gDiffuseLight.color"), m_ambientLightColor.x, m_ambientLightColor.y, m_ambientLightColor.z);
+			glUniform1f(m_tech->getUniformLocation("gDiffuseLight.ambientIntensity"), m_ambientLightIntensity);
+			glUniform3f(m_tech->getUniformLocation("gDiffuseLight.direction"), m_diffuseDirection.x, m_diffuseDirection.y, m_diffuseDirection.z);
+			glUniform1f(m_tech->getUniformLocation("gDiffuseLight.diffuseIntensity"), m_diffuseIntensity);
+
 		}break;
 	}
 }
 
 void triangleVertebralLight::RenderSceneCB()
 {
-
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	
 
 	//第三个参数是 GL_TRUE 是因为我们以行优先的方式提供矩阵的。我们也可以将第三个参数为 GL_FALSE，但是这样的话我们需要转置矩阵的值，因为 C/C++ 中内存的排列仍然是行优先，但是 OpenGL 将认为我们提供的前四个值实际上是一个矩阵的列，并做相应处理
-	glUniformMatrix4fv(m_tech->getUniformLocation("gWorld"), 1, GL_TRUE, (const float*)m_worldMt4.m);
+	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
 
-	glEnableVertexAttribArray(m_tech->positionLoc);
-	glEnableVertexAttribArray(m_tech->texCoordLoc);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, 0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (GLvoid*)12);
-
+	
 	//bind texture
 	glActiveTexture(GL_TEXTURE0);
 	TextureMgr->bindTexture(m_exturesID);
@@ -238,13 +355,7 @@ void triangleVertebralLight::RenderSceneCB()
 	glUniform1i(m_tech->getUniformLocation("s_texture"), 0);// Set the sampler texture unit to 0
 
 	updateLightUniform();
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-
-	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
-
-	glDisableVertexAttribArray(m_tech->positionLoc);
-	glDisableVertexAttribArray(m_tech->texCoordLoc);
+	
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -266,7 +377,7 @@ void triangleVertebralLight::draw() {
 	glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
 
-	glUniformMatrix4fv(m_tech->getUniformLocation("gWorld"), 1, GL_FALSE, (const GLfloat*)&m_worldMt4);
+	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_FALSE, (const GLfloat*)&m_worldMt4);
 
 
 	//glDrawArrays(GL_TRIANGLES, 0, 3);

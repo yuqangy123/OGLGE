@@ -18,16 +18,16 @@ void main()
 {
 	vec4 texColor = texture2D( s_texture, v_texCoord );
 	
-	vec3 diffuseColor = vec4(0, 0, 0, 0);
+	vec3 diffuseColor = vec3(0.0, 0.0, 0.0);
 	float lightAng = dot(gDiffuseLight.direction, w_normal);
 	if(lightAng > 0)
 	{
-		diffuseColor = gDiffuseLight.Color * gDiffuseLight.diffuseIntensity * lightAng;
+		diffuseColor = gDiffuseLight.color * gDiffuseLight.diffuseIntensity * lightAng;
 	}
 	
-	vec3 ambientColor = gDiffuseLight.Color * gDiffuseLight.AmbientIntensity;
+	vec3 ambientColor = gDiffuseLight.color * gDiffuseLight.ambientIntensity;
 	ambientColor = ambientColor + diffuseColor;
 	
-	gl_FragColor = (texColor * vec4(ambientColor, 1.0f));
+	gl_FragColor = texColor * vec4(ambientColor, 1.0);
 	
 }
