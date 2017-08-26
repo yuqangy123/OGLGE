@@ -30,6 +30,8 @@ public:
 	void setTargetPosition(const Vector3& ps);
 	void setUpPosition(const Vector3& ps);
 
+	Vector3 getPosition(){ return m_eye; };
+
 
 	Matrix4f getCameraTranlation();
 

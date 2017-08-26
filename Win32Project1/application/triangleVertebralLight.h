@@ -26,6 +26,7 @@ public:
 protected:
 	void init();
 
+	void createVBOIBO_specularLight();
 	void createVBOIBO_diffuseLight();
 	void createVBOIBO_ambientLight();
 
@@ -55,5 +56,8 @@ protected:
 	float m_ambientLightIntensity;
 	Vector3 m_diffuseDirection;
 	float m_diffuseIntensity;
+	Vector3 m_specularEye;
+	float m_specularFactor;
+	float m_specularIntensity;
 };
 

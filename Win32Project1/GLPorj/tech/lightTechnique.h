@@ -6,6 +6,7 @@
 typedef enum{ 
 	ambientLight = 1,
 	diffuseLight = 2,
+	specularLight = 3,
 }lightType;
 
 class lightTechnique : public technique

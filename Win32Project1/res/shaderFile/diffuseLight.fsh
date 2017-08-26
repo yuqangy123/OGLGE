@@ -19,7 +19,8 @@ void main()
 	vec4 texColor = texture2D( s_texture, v_texCoord );
 	
 	vec3 diffuseColor = vec3(0.0, 0.0, 0.0);
-	float lightAng = dot(gDiffuseLight.direction, w_normal);
+	vec3 normal = normalize(w_normal);
+	float lightAng = dot(normal, -gDiffuseLight.direction);
 	if(lightAng > 0)
 	{
 		diffuseColor = gDiffuseLight.color * gDiffuseLight.diffuseIntensity * lightAng;
