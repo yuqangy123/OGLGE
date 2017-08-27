@@ -20,10 +20,10 @@ void main()
 	
 	vec3 diffuseColor = vec3(0.0, 0.0, 0.0);
 	vec3 normal = normalize(w_normal);
-	float lightAng = dot(normal, -gDiffuseLight.direction);
-	if(lightAng > 0)
+	float diffuseFactor = dot(normal, -gDiffuseLight.direction);
+	if(diffuseFactor > 0)
 	{
-		diffuseColor = gDiffuseLight.color * gDiffuseLight.diffuseIntensity * lightAng;
+		diffuseColor = gDiffuseLight.color * gDiffuseLight.diffuseIntensity * diffuseFactor;
 	}
 	
 	vec3 ambientColor = gDiffuseLight.color * gDiffuseLight.ambientIntensity;

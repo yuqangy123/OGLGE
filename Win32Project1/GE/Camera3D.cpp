@@ -8,9 +8,7 @@
 Camera3D::Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up)
 {
 	m_eye = pos;
-	m_eye.x += 1;
 	m_target = target;
-	m_target.x += 1;
 	m_up = up;
 
 	InitCameraTrans();

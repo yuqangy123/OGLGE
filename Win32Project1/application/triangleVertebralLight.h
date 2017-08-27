@@ -26,6 +26,7 @@ public:
 protected:
 	void init();
 
+	void createVBOIBO_dotDiffuseLight();
 	void createVBOIBO_specularLight();
 	void createVBOIBO_diffuseLight();
 	void createVBOIBO_ambientLight();
@@ -54,10 +55,16 @@ protected:
 
 	Vector3 m_ambientLightColor;
 	float m_ambientLightIntensity;
+	
 	Vector3 m_diffuseDirection;
 	float m_diffuseIntensity;
+
 	Vector3 m_specularEye;
-	float m_specularFactor;
+	float m_specularPower;
 	float m_specularIntensity;
+
+	Vector3 m_dotDiffuseLightPos;
+	float m_weakContant;
+	float m_weakLine;
 };
 

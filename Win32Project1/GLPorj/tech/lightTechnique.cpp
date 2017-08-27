@@ -51,6 +51,18 @@ void lightTechnique::init(lightType tp)
 			normalLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_NORMAL_NAME);
 
 		}break;
+
+		case lightType::dotDiffuseLight:
+		{
+			const char* vshSrcFile = "res/shaderFile/dotDiffuseLight.vsh";
+			const char* fshSrcFile = "res/shaderFile/dotDiffuseLight.fsh";
+			addShader(vshSrcFile, fshSrcFile);
+
+			positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
+			texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
+			normalLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_NORMAL_NAME);
+
+		}break;
 	};
 
 	

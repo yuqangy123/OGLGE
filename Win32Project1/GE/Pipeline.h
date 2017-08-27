@@ -23,6 +23,7 @@ public:
 		m_worldPos.x = x;
 		m_worldPos.y = y;
 		m_worldPos.z = z;
+		m_dirty = false;
 	}
 
 	void Rotate(float RotateX, float RotateY, float RotateZ)
@@ -30,13 +31,16 @@ public:
 		m_rotation.x = RotateX;
 		m_rotation.y = RotateY;
 		m_rotation.z = RotateZ;
+		m_dirty = false;
 	}
 
 
 
 	const Matrix4f* GetTrans();
 	const Matrix4f* GetWorldTrans();
-
+	Vector3 getWorldPos() {
+		return m_worldPos;
+	}
 private:
 	void InitScaleTrans(Matrix4f& mat);
 	void InitRotateTrans(Matrix4f& mat);
