@@ -68,9 +68,10 @@ void OGLGE::initGLContext(int argc, char** argv)
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-	
+	//三角形方向（正向，反向），通过指定定点的顺序来规定（顺，逆时针），
+	//如果三角新法线方向跟视点方向是同向，则是背面，反之则是正面
 	//优化方法，减少运算量，正常的应该是使用深度测试
-	glFrontFace(GL_CCW);//指定三角形正面方向，决定是否被剔除，画UI的时候小心
+	glFrontFace(GL_CCW);//指定三角形正面方向，决定是否被剔除，画UI的时候小心，GL_CCW为逆时针
 	glCullFace(GL_BACK);//决定正面or反面被剔除
 	glEnable(GL_CULL_FACE);//是否执行剔除
 	//glDisable(GL_CULL_FACE);
