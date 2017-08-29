@@ -31,14 +31,29 @@
     <Filter Include="GE\math">
       <UniqueIdentifier>{e9cc24f4-c1ba-4908-9145-a37122039761}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CImg">
-      <UniqueIdentifier>{2134ced5-b477-46a9-bfb0-4601740ed0a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CImg\libjpeg">
-      <UniqueIdentifier>{3c464f59-cc86-48cf-9225-d5d65890b6ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="application">
       <UniqueIdentifier>{62729c0f-83a3-4fff-a8bd-40a5d0529088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{8616abaa-8590-4c75-89a5-233030e8eef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\GL">
+      <UniqueIdentifier>{74ff636e-abdd-4513-b9fb-33a1922ad5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries">
+      <UniqueIdentifier>{2817eb8a-330a-4ae2-bb35-7745c8dbefcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries\cimg">
+      <UniqueIdentifier>{94d74500-bfd3-4136-aa4f-fbb61623d975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries\cimg\libjpeg">
+      <UniqueIdentifier>{9da51309-0ec0-4277-a61f-dafabf10a4bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries\assimp">
+      <UniqueIdentifier>{434cbf5c-09e7-4154-98ba-be61591a9a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries\assimp\Compiler">
+      <UniqueIdentifier>{35a912af-4889-40f6-a7ce-1284c22d2ee7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,21 +138,6 @@
     <ClInclude Include="GLPorj\tech\techDefine.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
-    <ClInclude Include="CImg\jpeg_buffer.h">
-      <Filter>CImg</Filter>
-    </ClInclude>
-    <ClInclude Include="CImg\CImg.h">
-      <Filter>CImg</Filter>
-    </ClInclude>
-    <ClInclude Include="CImg\libjpeg\jmorecfg.h">
-      <Filter>CImg\libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="CImg\libjpeg\jpeglib.h">
-      <Filter>CImg\libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="CImg\libjpeg\jconfig.h">
-      <Filter>CImg\libjpeg</Filter>
-    </ClInclude>
     <ClInclude Include="texture\TextureJpegLoader.h">
       <Filter>texture</Filter>
     </ClInclude>
@@ -158,6 +158,147 @@
     </ClInclude>
     <ClInclude Include="application\Texture2D.h">
       <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\glew.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\glxew.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\wglew.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\freeglut.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\freeglut_ext.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GL\freeglut_std.h">
+      <Filter>Include\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h">
+      <Filter>Include\libraries\cimg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h">
+      <Filter>Include\libraries\cimg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jconfig.h">
+      <Filter>Include\libraries\cimg\libjpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\jpeg_buffer.h">
+      <Filter>Include\libraries\cimg</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\CImg.h">
+      <Filter>Include\libraries\cimg</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\camera.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\cexport.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\cfileio.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\cimport.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\color4.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\config.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\DefaultLogger.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\defs.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Exporter.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Importer.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\importerdesc.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\IOStream.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\IOSystem.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\light.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Logger.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\LogStream.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\material.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\matrix3x3.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\matrix4x4.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\mesh.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\metadata.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\NullLogger.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\postprocess.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\ProgressHandler.hpp">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\scene.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\texture.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\types.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\version.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\ai_assert.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\anim.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Compiler\pstdint.h">
+      <Filter>Include\libraries\assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Compiler\pushpack1.h">
+      <Filter>Include\libraries\assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\Compiler\poppack1.h">
+      <Filter>Include\libraries\assimp\Compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\aiquaternion.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\aivector3.h">
+      <Filter>Include\libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\assimp\aivector2.h">
+      <Filter>Include\libraries\assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -254,5 +395,28 @@
     <ClCompile Include="application\Texture2D.cpp">
       <Filter>application</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\libraries\assimp\color4.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\material.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\matrix3x3.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\matrix4x4.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\aiquaternion.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\aivector3.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
+    <None Include="Include\libraries\assimp\aivector2.inl">
+      <Filter>Include\libraries\assimp</Filter>
+    </None>
   </ItemGroup>
 </Project>

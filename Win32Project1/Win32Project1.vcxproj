@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)cimg;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -98,7 +98,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,11 +160,6 @@
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
     <ClInclude Include="basic\Singleton.h" />
-    <ClInclude Include="CImg\CImg.h" />
-    <ClInclude Include="CImg\jpeg_buffer.h" />
-    <ClInclude Include="CImg\libjpeg\jconfig.h" />
-    <ClInclude Include="CImg\libjpeg\jmorecfg.h" />
-    <ClInclude Include="CImg\libjpeg\jpeglib.h" />
     <ClInclude Include="GE\Camera.h" />
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
@@ -189,6 +184,53 @@
     <ClInclude Include="GLPorj\tech\techDefine.h" />
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
+    <ClInclude Include="Include\GL\freeglut.h" />
+    <ClInclude Include="Include\GL\freeglut_ext.h" />
+    <ClInclude Include="Include\GL\freeglut_std.h" />
+    <ClInclude Include="Include\GL\glew.h" />
+    <ClInclude Include="Include\GL\glxew.h" />
+    <ClInclude Include="Include\GL\wglew.h" />
+    <ClInclude Include="Include\libraries\assimp\aiquaternion.h" />
+    <ClInclude Include="Include\libraries\assimp\ai_assert.h" />
+    <ClInclude Include="Include\libraries\assimp\anim.h" />
+    <ClInclude Include="Include\libraries\assimp\camera.h" />
+    <ClInclude Include="Include\libraries\assimp\cexport.h" />
+    <ClInclude Include="Include\libraries\assimp\cfileio.h" />
+    <ClInclude Include="Include\libraries\assimp\cimport.h" />
+    <ClInclude Include="Include\libraries\assimp\color4.h" />
+    <ClInclude Include="Include\libraries\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="Include\libraries\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="Include\libraries\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="Include\libraries\assimp\config.h" />
+    <ClInclude Include="Include\libraries\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="Include\libraries\assimp\defs.h" />
+    <ClInclude Include="Include\libraries\assimp\Exporter.hpp" />
+    <ClInclude Include="Include\libraries\assimp\Importer.hpp" />
+    <ClInclude Include="Include\libraries\assimp\importerdesc.h" />
+    <ClInclude Include="Include\libraries\assimp\IOStream.hpp" />
+    <ClInclude Include="Include\libraries\assimp\IOSystem.hpp" />
+    <ClInclude Include="Include\libraries\assimp\light.h" />
+    <ClInclude Include="Include\libraries\assimp\Logger.hpp" />
+    <ClInclude Include="Include\libraries\assimp\LogStream.hpp" />
+    <ClInclude Include="Include\libraries\assimp\material.h" />
+    <ClInclude Include="Include\libraries\assimp\matrix3x3.h" />
+    <ClInclude Include="Include\libraries\assimp\matrix4x4.h" />
+    <ClInclude Include="Include\libraries\assimp\mesh.h" />
+    <ClInclude Include="Include\libraries\assimp\metadata.h" />
+    <ClInclude Include="Include\libraries\assimp\NullLogger.hpp" />
+    <ClInclude Include="Include\libraries\assimp\postprocess.h" />
+    <ClInclude Include="Include\libraries\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="Include\libraries\assimp\scene.h" />
+    <ClInclude Include="Include\libraries\assimp\texture.h" />
+    <ClInclude Include="Include\libraries\assimp\types.h" />
+    <ClInclude Include="Include\libraries\assimp\aivector2.h" />
+    <ClInclude Include="Include\libraries\assimp\aivector3.h" />
+    <ClInclude Include="Include\libraries\assimp\version.h" />
+    <ClInclude Include="Include\libraries\cimg\CImg.h" />
+    <ClInclude Include="Include\libraries\cimg\jpeg_buffer.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jconfig.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -231,6 +273,15 @@
     </ClCompile>
     <ClCompile Include="texture\TextureJpegLoader.cpp" />
     <ClCompile Include="Win32Project1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\libraries\assimp\aiquaternion.inl" />
+    <None Include="Include\libraries\assimp\color4.inl" />
+    <None Include="Include\libraries\assimp\material.inl" />
+    <None Include="Include\libraries\assimp\matrix3x3.inl" />
+    <None Include="Include\libraries\assimp\matrix4x4.inl" />
+    <None Include="Include\libraries\assimp\aivector2.inl" />
+    <None Include="Include\libraries\assimp\aivector3.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
