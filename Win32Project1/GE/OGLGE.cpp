@@ -4,7 +4,7 @@
 #include "Texture2D.h"
 #include "triangleVertebralTexture.h"
 #include "triangleVertebralLight.h"
-
+#include "Mesh.h"
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -104,9 +104,9 @@ void OGLGE::test()
 	
 	//triangleVertebralTexture * jk = new triangleVertebralTexture(); scene->addNode(jk);
 
-	triangleVertebralLight * jk = new triangleVertebralLight(); scene->addNode(jk);
+	//triangleVertebralLight * jk = new triangleVertebralLight(); scene->addNode(jk);
 	
-	
+	Mesh* m = new Mesh(); m->loadMesh("content/box.obj"); scene->addNode(m);
 }
 
 void OGLGE::start()

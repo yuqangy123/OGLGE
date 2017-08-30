@@ -3,18 +3,22 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
+#include "tech\lightTechnique.h"
+#include "Node.h"
+#include "Pipeline.h"
 
-
-
-class Mesh
+class Mesh :public Node
 {
 public:
 	Mesh();
 	~Mesh();
 
 	bool loadMesh(const char* filename);
-
+	
 	void clear();
+
+	void update(float ft);
+	void draw();
 
 protected:
 	bool initFromScene(const aiScene* scene, const char* filename);
@@ -24,7 +28,7 @@ protected:
 public:
 	struct Texture
 	{
-		Texture(aiTextureType tp, const char* path_);
+		Texture(aiTextureType tp, const std::string& path_);
 		void load();
 		void bind(int bid);
 
@@ -48,7 +52,7 @@ public:
 	struct MeshEntry {
 		MeshEntry();
 		~MeshEntry();
-		bool Init(std::vector<Vertex>& Vertices, std::vector<float>& Indices);
+		void Init(std::vector<Vertex>& Vertices, std::vector<float>& Indices);
 		GLuint VB;
 		GLuint IB;
 		unsigned int NumIndices;
@@ -56,8 +60,14 @@ public:
 	};
 
 protected:
-	
-
 	std::vector<MeshEntry> m_Entries;
 	std::vector<Texture*> m_Textures;
+
+	lightTechnique* m_tech;
+	Matrix4f m_MVPMt4;
+	Pipeline m_pipe;
+	Vector3 m_ambientLightColor;
+	float m_ambientLightIntensity;
+	Vector3 m_diffuseDirection;
+	float m_diffuseIntensity;
 };
