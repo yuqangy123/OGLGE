@@ -32,7 +32,7 @@ public:
 	unsigned int loadTextureJpeg(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
 	const TextureData& getTexture(unsigned int texID);
 	void unloadTexture(unsigned int texID);
-	bool bindTexture(unsigned int texID);
+	bool bindTexture(unsigned int texID, int bid = GL_TEXTURE_2D);
 
 protected:
 	std::map<unsigned int, TextureData>	m_texList;

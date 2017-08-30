@@ -1,4 +1,5 @@
 #pragma once
+#define Vector2f Vector2
 struct Vector2
 {
 	float x;

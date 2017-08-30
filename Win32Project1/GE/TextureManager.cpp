@@ -62,11 +62,11 @@ void TextureManager::unloadTexture(unsigned int texID)
 	}
 }
 
-bool TextureManager::bindTexture(unsigned int texID)
+bool TextureManager::bindTexture(unsigned int texID, int bid)
 {
 	if (m_texList.find(texID) != m_texList.end())
 	{
-		glBindTexture(GL_TEXTURE_2D, m_texList[texID].id);
+		glBindTexture(bid, m_texList[texID].id);
 		return true;
 	}
 	return false;

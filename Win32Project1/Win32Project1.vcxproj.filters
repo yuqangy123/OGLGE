@@ -300,6 +300,9 @@
     <ClInclude Include="Include\libraries\assimp\aivector2.h">
       <Filter>Include\libraries\assimp</Filter>
     </ClInclude>
+    <ClInclude Include="GE\Mesh.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -394,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="application\Texture2D.cpp">
       <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Mesh.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

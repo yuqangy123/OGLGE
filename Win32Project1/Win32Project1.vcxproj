@@ -165,6 +165,7 @@
     <ClInclude Include="GE\Camera2D.h" />
     <ClInclude Include="GE\common.h" />
     <ClInclude Include="GE\FileUnits.h" />
+    <ClInclude Include="GE\Mesh.h" />
     <ClInclude Include="GE\math\Mat3.h" />
     <ClInclude Include="GE\math\Mat4.h" />
     <ClInclude Include="GE\math\Quaternion.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="GE\Camera3D.cpp" />
     <ClCompile Include="GE\Camera2D.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
+    <ClCompile Include="GE\Mesh.cpp" />
     <ClCompile Include="GE\math\Mat3.cpp" />
     <ClCompile Include="GE\math\Mat4.cpp" />
     <ClCompile Include="GE\math\Quaternion.cpp" />
