@@ -38,7 +38,7 @@ public:
 	};
 	struct Vertex
 	{
-		Vertex(const Vector3f& pos_, const Vector2f& uv_, const Vector3f& normal_)
+		Vertex(const Vector3f& pos_, const Vector3f& uv_, const Vector3f& normal_)
 		{
 			pos = pos_;
 			uv = uv_;
@@ -46,13 +46,13 @@ public:
 		}
 		
 		Vector3f pos;
-		Vector2f uv;
+		Vector3f uv;
 		Vector3f normal;
 	};
 	struct MeshEntry {
 		MeshEntry();
 		~MeshEntry();
-		void Init(std::vector<Vertex>& Vertices, std::vector<float>& Indices);
+		void Init(std::vector<Vertex>& Vertices, std::vector<unsigned int>& Indices);
 		GLuint VB;
 		GLuint IB;
 		unsigned int NumIndices;
@@ -70,4 +70,5 @@ protected:
 	float m_ambientLightIntensity;
 	Vector3 m_diffuseDirection;
 	float m_diffuseIntensity;
+
 };

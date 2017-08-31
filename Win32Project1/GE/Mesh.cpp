@@ -19,7 +19,6 @@ Mesh::~Mesh()
 void Mesh::draw()
 {
 	m_tech->enable();
-
 	
 
 	glEnableVertexAttribArray(m_tech->positionLoc);
@@ -29,16 +28,15 @@ void Mesh::draw()
 	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
 		
-		glEnable(GL_TEXTURE_2D);
+		
+		
 		m_Textures[itr->MaterialIndex]->bind(GL_TEXTURE_2D);
-		
+		glEnable(GL_TEXTURE_2D);
+		glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
 		glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
-		glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 		const Matrix4f* worldMt4 = m_pipe.GetWorldTrans();
-
 		glUniformMatrix4fv(m_tech->getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)worldMt4->m);
 		glUniform3f(m_tech->getUniformLocation("gDiffuseLight.color"), m_ambientLightColor.x, m_ambientLightColor.y, m_ambientLightColor.z);
 		glUniform1f(m_tech->getUniformLocation("gDiffuseLight.ambientIntensity"), m_ambientLightIntensity);
@@ -47,9 +45,10 @@ void Mesh::draw()
 		
 		const unsigned int VertexSize = sizeof(Vertex);
 		glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, pos));
-		glVertexAttribPointer(m_tech->texCoordLoc, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
+		glVertexAttribPointer(m_tech->texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
 		glVertexAttribPointer(m_tech->normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
 
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
 		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);
 
 		
@@ -60,6 +59,8 @@ void Mesh::draw()
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
+	
 }
 
 void Mesh::update(float ft)
@@ -74,6 +75,8 @@ bool Mesh::loadMesh(const char* filename)
 	m_tech = new lightTechnique();
 	m_tech->init(lightType::diffuseLight);
 
+	m_MVPMt4.identity();
+
 	m_pipe.setCamera(DefaultCamera);
 	m_pipe.WorldPos(0, 0, -5.0);
 
@@ -83,7 +86,7 @@ bool Mesh::loadMesh(const char* filename)
 	m_diffuseDirection.normalize();
 	m_diffuseIntensity = 3.0f;
 
-
+	
 	bool ret = false;
 
 	Assimp::Importer importer;
@@ -98,6 +101,7 @@ bool Mesh::loadMesh(const char* filename)
 	}
 
 	return InitMaterials(pScene, filename);
+	
 }
 
 void Mesh::clear()
@@ -119,18 +123,18 @@ bool Mesh::initFromScene(const aiScene* scene, const char* filename)
 
 void Mesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
-	m_Entries[Index].MaterialIndex = paiMesh->mMaterialIndex;
+	
 	std::vector<Vertex> vertices;
-	std::vector<float> indices;
+	std::vector<unsigned int> indices;
 
 	const aiVector3D zero(0.0f, 0.0f, 0.0f);
 	for (int n = 0; n < paiMesh->mNumVertices; ++n)
 	{
 		const aiVector3D& pos = paiMesh->mVertices[n];
 		const aiVector3D& normal = paiMesh->HasNormals() ? paiMesh->mNormals[n] : zero;
-		const aiVector3D& texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
+		aiVector3D texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
 
-		vertices.push_back(Vertex(Vector3f(pos.x, pos.y, pos.z), Vector2f(texCoords.x, texCoords.y), Vector3f(normal.x, normal.y, normal.z)));
+		vertices.push_back(Vertex(Vector3f(pos.x, pos.y, pos.z), Vector3f(texCoords.x, texCoords.y, texCoords.z), Vector3f(normal.x, normal.y, normal.z)));
 	}
 
 	for (int n = 0; n < paiMesh->mNumFaces; ++n)
@@ -142,7 +146,12 @@ void Mesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		indices.push_back(face.mIndices[2]);
 	}
 	
+
+
+	m_Entries[Index].MaterialIndex = paiMesh->mMaterialIndex;
 	m_Entries[Index].Init(vertices, indices);
+
+	
 }
 
 bool Mesh::InitMaterials(const aiScene* pScene, const char* filename)
@@ -182,15 +191,17 @@ void Mesh::Texture::load()
 
 void Mesh::Texture::bind(int bid)
 {
-	glActiveTexture(GL_TEXTURE0);
-	TextureMgr->bindTexture(id);
-
 	// Set the filtering mode
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+
+	glActiveTexture(GL_TEXTURE0);
+	TextureMgr->bindTexture(id);
 }
 
 Mesh::MeshEntry::MeshEntry()
@@ -216,20 +227,24 @@ Mesh::MeshEntry::~MeshEntry()
 }
 
 
-void Mesh::MeshEntry::Init(std::vector<Mesh::Vertex>& Vertices, std::vector<float>& Indices)
+void Mesh::MeshEntry::Init(std::vector<Mesh::Vertex>& Vertices, std::vector<unsigned int>& Indices)
 {
-	Vertices.at(0);
 	glGenBuffers(1, &VB);
 	glBindBuffer(GL_ARRAY_BUFFER, VB);
 	std::vector<Mesh::Vertex>::iterator verItr = Vertices.begin();
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Mesh::Vertex)*Vertices.size(), &(*verItr), GL_STATIC_DRAW);
+	size_t verSize = sizeof(Mesh::Vertex)*Vertices.size();
+	void* verPtr = &(*verItr);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(Verticess), Verticess, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, verSize, verPtr, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
 	glGenBuffers(1, &IB);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-	std::vector<float>::iterator indItr = Indices.begin();
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float)*Indices.size(), &(*indItr), GL_STATIC_DRAW);
+	std::vector<unsigned int>::iterator indItr = Indices.begin();
+	size_t indSize = sizeof(unsigned int)*Indices.size();
+	void* indPtr = &(*indItr);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indSize, indPtr, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	NumIndices = Indices.size();

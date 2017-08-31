@@ -1,7 +1,7 @@
 precision mediump float;
 
 attribute vec3 	a_position;  
-attribute vec2 	a_texCoord;
+attribute vec3 	a_texCoord;
 uniform mat4 	MVPMatrix;
 
 attribute vec3	normal;
@@ -12,7 +12,7 @@ varying vec3	w_normal;
 void main()  
 {  
 	gl_Position = MVPMatrix * vec4(a_position, 1.0);
-	v_texCoord = a_texCoord; 
+	v_texCoord = a_texCoord.xy; 
 
 	w_normal = (WorldMatrix * vec4(normal, 0.0)).xyz;
 }

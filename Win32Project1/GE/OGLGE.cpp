@@ -45,7 +45,7 @@ void OGLGE::mouseMove(int x, int y)
 void OGLGE::initGLContext(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(m_winRt.width, m_winRt.height);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("OGLGE");
