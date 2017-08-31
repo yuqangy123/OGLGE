@@ -106,7 +106,7 @@ void OGLGE::test()
 
 	//triangleVertebralLight * jk = new triangleVertebralLight(); scene->addNode(jk);
 	
-	Mesh* m = new Mesh(); m->loadMesh("content/box.obj"); scene->addNode(m);
+	Mesh* m = new Mesh(); m->loadMesh("content/jeep.obj"); scene->addNode(m);
 }
 
 void OGLGE::start()

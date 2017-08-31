@@ -219,15 +219,52 @@ static unsigned jpeg_mem_size(j_compress_ptr cinfo) {
 //
 /////////////////////////////////////////////////////////////////
 
+
+struct MyErrorMgr
+{
+	struct jpeg_error_mgr pub;  /* "public" fields */
+	jmp_buf setjmp_buffer;  /* for return to caller */
+};
+
+typedef struct MyErrorMgr * MyErrorPtr;
+METHODDEF(void)
+myErrorExit(j_common_ptr cinfo)
+{
+	/* cinfo->err really points to a MyErrorMgr struct, so coerce pointer */
+	MyErrorPtr myerr = (MyErrorPtr)cinfo->err;
+
+	/* Always display the message. */
+	/* We could postpone this until after returning, if we chose. */
+	/* internal message function can't show error message in some platforms, so we rewrite it here.
+	* edit it if has version conflict.
+	*/
+	//(*cinfo->err->output_message) (cinfo);
+	char buffer[JMSG_LENGTH_MAX];
+	(*cinfo->err->format_message) (cinfo, buffer);
+	printf("jpeg error: %s", buffer);
+
+	/* Return control to the setjmp point */
+	longjmp(myerr->setjmp_buffer, 1);
+}
+
 //! Load image from a jpeg-coded memory buffer.
 /**
-   \param buffer Memory buffer containing the jpeg-coded image data.
-   \param buffer_size Size of the memory buffer, in bytes.
+\param buffer Memory buffer containing the jpeg-coded image data.
+\param buffer_size Size of the memory buffer, in bytes.
 **/
 static CImg get_load_jpeg_buffer(const JOCTET *const buffer, const unsigned buffer_size) {
   struct jpeg_decompress_struct cinfo;
-  struct jpeg_error_mgr jerr;
-  cinfo.err = jpeg_std_error(&jerr);
+  struct MyErrorMgr jerr;
+  cinfo.err = jpeg_std_error(&jerr.pub);
+  jerr.pub.error_exit = myErrorExit;
+  if (setjmp(jerr.setjmp_buffer))
+  {
+	  /* If we get here, the JPEG code has signaled an error.
+	  * We need to clean up the JPEG object, close the input file, and return.
+	  */
+	  jpeg_destroy_decompress(&cinfo);
+	  printf("setjmp jpeg_destroy_decompress");
+  }
   jpeg_create_decompress(&cinfo);
   jpeg_mem_src(&cinfo,const_cast<JOCTET*>(buffer),buffer_size);
   jpeg_read_header(&cinfo,TRUE);
@@ -237,10 +274,12 @@ static CImg get_load_jpeg_buffer(const JOCTET *const buffer, const unsigned buff
   JOCTET *buf = new JOCTET[cinfo.output_width*cinfo.output_height*cinfo.output_components];
   const JOCTET *buf2 = buf;
   JSAMPROW row_pointer[1];
-  while (cinfo.output_scanline < cinfo.output_height) {
-    row_pointer[0] = buf + cinfo.output_scanline*row_stride;
-    jpeg_read_scanlines(&cinfo,row_pointer,1);
-  }
+	row_pointer[0] = buf ;
+  jpeg_read_scanlines(&cinfo, row_pointer, cinfo.output_height);
+  //while (cinfo.output_scanline < cinfo.output_height) {
+  //  row_pointer[0] = buf + cinfo.output_scanline*row_stride;
+  //  jpeg_read_scanlines(&cinfo,row_pointer,1);
+  //}
   //jpeg_finish_decompress(&cinfo);
   jpeg_destroy_decompress(&cinfo);
  

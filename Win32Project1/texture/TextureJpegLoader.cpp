@@ -237,7 +237,7 @@ bool TextureJpegLoader::getJpgDataEx(const char* filename, jpg_data& jpgData)
 	if (!file_input) { std::fprintf(stderr, "Input JPEG file not found !"); std::exit(0); }
 
 	std::fprintf(stderr, " - Construct input JPEG-coded buffer\n");
-	unsigned long buf_size = 1024*10*10; // Put the file size here !
+	unsigned long buf_size = 1024*1024*10; // Put the file size here !
 	JOCTET *buffer_input = new JOCTET[buf_size];
 	if (std::fread(buffer_input, sizeof(JOCTET), buf_size, file_input)) std::fclose(file_input);
 	// -> 'buffer_input' is now a valid jpeg-coded memory buffer.

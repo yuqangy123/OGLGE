@@ -78,7 +78,8 @@ bool Mesh::loadMesh(const char* filename)
 	m_MVPMt4.identity();
 
 	m_pipe.setCamera(DefaultCamera);
-	m_pipe.WorldPos(0, 0, -5.0);
+	m_pipe.WorldPos(0, 0, -100.0);
+	m_pipe.Scale(0.1f, 0.1f, 0.1f);
 
 	m_ambientLightColor.set(0.5f, 0.5f, 0.5f);
 	m_ambientLightIntensity = 0.5f;
