@@ -2,7 +2,7 @@
 #include "Camera3D.h"
 #include "common.h"
 #include <math.h>
-
+#include "OGLGE.h"
 
 
 Camera3D::Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up)
@@ -14,11 +14,15 @@ Camera3D::Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up)
 	InitCameraTrans();
 
 	m_dirty = true;
+
+	m_freeCamera = false;
 }
 
 Camera3D::Camera3D()
 {
 	m_dirty = true;
+
+	m_freeCamera = false;
 }
 
 Camera3D::~Camera3D()
@@ -282,6 +286,64 @@ void Camera3D::InitPerspectiveProj()
 	mat.m[2][0] = 0.0f;                   mat.m[2][1] = 0.0f;            mat.m[2][2] = (-zNear - zFar) / zRange; mat.m[2][3] = 2.0f * zFar*zNear / zRange;
 	mat.m[3][0] = 0.0f;                   mat.m[3][1] = 0.0f;            mat.m[3][2] = -1.0f;                   mat.m[3][3] = 0.0;
 
+}
+
+void Camera3D::setFreeCamera(bool b)
+{
+	if (b)
+	{
+		auto winsz = OGLGE::Instance()->getWindowsRect();
+		m_mouseMovelastX = winsz.width / 2.0;
+		m_mouseMovelastY = winsz.height / 2.0;
+		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+	}	
+}
+
+void Camera3D::keyInput(unsigned char param, int x, int y) 
+{
+	if (!m_freeCamera)
+		return;
+
+	if (param == 'w')
+	{
+		float factor = 0.5f;
+		m_eye.x += m_uvn.m[2][0] * factor;
+		m_eye.y += m_uvn.m[2][1] * factor;
+		m_eye.z += m_uvn.m[2][2] * factor;
+		m_dirty = true;
+	}
+	else if (param == 's')
+	{
+	}
+	else if (param == 'a')
+	{
+	}
+	else if (param == 'd')
+	{
+	}
+};
+void Camera3D::mouseInput(int button, int state, int x, int y)
+{
+	if (!m_freeCamera)
+		return;
+	
+	float rx = 0.0, ry = 0.0;
+
+	float sp = 20.0;
+	if (abs(y - m_mouseMovelastY) > 2)
+	{
+		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		ry = (m_mouseMovelastY - y) / sp;
+	}
+	if (abs(x - m_mouseMovelastX) > 2)
+	{
+		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		rx = (m_mouseMovelastX - x) / sp;
+	};
+
+	rotate(rx, ry);
+	auto winsz = OGLGE::Instance()->getWindowsRect();
+	glutWarpPointer(winsz.width / 2.0, winsz.height / 2.0);
 }
 
 /*

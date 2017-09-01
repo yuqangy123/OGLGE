@@ -1,8 +1,8 @@
 #pragma once
 #include "Mat4.h"
+#include "Node.h"
 
-
-class Camera
+class Camera : public Node
 {
 public:
 	virtual Matrix4f getCameraTranlation() {return Matrix4f();};

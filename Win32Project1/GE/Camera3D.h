@@ -32,8 +32,9 @@ public:
 
 	Vector3 getPosition(){ return m_eye; };
 
-
 	Matrix4f getCameraTranlation();
+
+	void setFreeCamera(bool b);
 
 protected:
 	void InitCameraTrans();
@@ -45,6 +46,9 @@ protected:
 	void rotate(const Quaternion& q);
 	void rotate(const Vector3& axis, const float angle);
 	void rotate(const Vector3& axis, const float angle, Quaternion& quat);
+
+	void keyInput(unsigned char param, int x, int y);
+	void mouseInput(int button, int state, int x, int y);
 
 protected:
 	Vector3 	m_eye;
@@ -69,8 +73,9 @@ protected:
 	
 	Matrix4f	m_cameraMat;
 
-	
-
+	bool		m_freeCamera;
+	float m_mouseMovelastX;
+	float m_mouseMovelastY;
 	
 	
 	//Quaternion m_rotation;
