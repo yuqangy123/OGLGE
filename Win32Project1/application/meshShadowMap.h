@@ -3,7 +3,7 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
-#include "tech\shadowMapTechnique.h"
+#include "tech\shadowMapMeshTechnique.h"
 #include "Node.h"
 #include "Pipeline.h"
 #include "MeshNode.h"
@@ -15,11 +15,14 @@ public:
 	meshShadowMap();
 	~meshShadowMap();
 
-	bool loadMesh(const char* filename);
+	bool loadMesh(const char* filename, const Vector3& pos, const Vector3& sal);
 
-	void setPosition(float x, float y, float z);
+	void setTargetPosition(float x, float y, float z);
+	void setLightPosition(float x, float y, float z);
 
 	void setScale(float s);
+
+	void setPosition(float x, float y, float z);
 
 	void update(float ft);
 	void draw();
@@ -28,25 +31,13 @@ public:
 
 protected:
 	void init();
-	void initFBO();
 
-	void drawMesh();
-	void drawShadowMap();
 
 protected:
-	shadowMapTechnique* m_tech;
-	
+	shadowMapMeshTechnique* m_tech;
+	std::vector<MeshNode*> m_meshs;
 	Pipeline m_pipe;
 	Matrix4f m_MVPMt4;
 	GLuint VBO;
 	GLuint IBO;
-
-	MeshNode*	m_mesh;
-
-	Pipeline m_lightPipe;
-	Camera3D* m_pLightSpot;
-	Matrix4f m_lightMVPMt4;
-
-	GLuint m_fbo;
-	GLuint m_shadowMap;
 };

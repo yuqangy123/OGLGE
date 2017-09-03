@@ -184,7 +184,7 @@
     <ClInclude Include="GLPorj\Scene.h" />
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
     <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
-    <ClInclude Include="GLPorj\tech\shadowMapTechnique.h" />
+    <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h" />
     <ClInclude Include="GLPorj\tech\techDefine.h" />
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
@@ -269,7 +269,7 @@
     <ClCompile Include="GLPorj\Scene.cpp" />
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
-    <ClCompile Include="GLPorj\tech\shadowMapTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp" />
     <ClCompile Include="GLPorj\Texture2DRender.cpp" />
     <ClCompile Include="programUniforms\programUniforms.cpp" />

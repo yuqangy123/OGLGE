@@ -20,8 +20,8 @@ meshObject::~meshObject()
 void meshObject::init()
 {
 	DefaultCamera->setFreeCamera(true);
-	//DefaultCamera->setEyePosition(-50, 40, -50);
-	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
+	DefaultCamera->setEyePosition(-50, 50, -50);
+	DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 
 	m_tech = new lightTechnique();
 	m_tech->init(lightType::diffuseLight);
@@ -48,11 +48,7 @@ void meshObject::draw()
 {
 	m_tech->enable();
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	
 
 	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
 	const Matrix4f* worldMt4 = m_pipe.GetWorldTrans();

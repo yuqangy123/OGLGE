@@ -59,6 +59,10 @@ public:
 		unsigned int MaterialIndex;
 	};
 
+public:
+	Vector3 position;
+	Vector3 scale;
+
 protected:
 	std::vector<MeshEntry> m_Entries;
 	std::vector<Texture*> m_Textures;

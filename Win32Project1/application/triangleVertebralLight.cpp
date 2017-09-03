@@ -501,7 +501,7 @@ void triangleVertebralLight::mouseInput(int button, int state, int x, int y)
 		//printf("x:%d,%d\r\n", x, m_lastMouseX);
 		//DefaultCamera->pitch((m_lastMouseX - x) / 10.0);
 	};
-	DefaultCamera->rotate(rx, ry);
+	//DefaultCamera->rotate(rx, ry);
 }
 
 void triangleVertebralLight::updateLightUniform()

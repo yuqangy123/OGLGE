@@ -306,11 +306,11 @@
     <ClInclude Include="GE\MeshNode.h">
       <Filter>GE</Filter>
     </ClInclude>
-    <ClInclude Include="GLPorj\tech\shadowMapTechnique.h">
-      <Filter>GLPorj\tech</Filter>
-    </ClInclude>
     <ClInclude Include="application\meshShadowMap.h">
       <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h">
+      <Filter>GLPorj\tech</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -413,11 +413,11 @@
     <ClCompile Include="GE\MeshNode.cpp">
       <Filter>GE</Filter>
     </ClCompile>
-    <ClCompile Include="GLPorj\tech\shadowMapTechnique.cpp">
-      <Filter>GLPorj\tech</Filter>
-    </ClCompile>
     <ClCompile Include="application\meshShadowMap.cpp">
       <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

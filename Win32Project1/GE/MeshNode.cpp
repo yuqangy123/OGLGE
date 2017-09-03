@@ -17,6 +17,11 @@ MeshNode::~MeshNode()
 
 void MeshNode::draw()
 {
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	glEnableVertexAttribArray(positionLoc);
 	glEnableVertexAttribArray(texCoordLoc);
 	glEnableVertexAttribArray(normalLoc);
@@ -35,9 +40,7 @@ void MeshNode::draw()
 		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
-		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);
-
-		
+		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);				
 	}
 	glDisableVertexAttribArray(positionLoc);
 	glDisableVertexAttribArray(texCoordLoc);
