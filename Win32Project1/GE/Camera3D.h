@@ -27,10 +27,11 @@ public:
 	*/
 
 	void setEyePosition(const Vector3& ps);
+	void setEyePosition(const float& x, const float& y, const float& z);
 	void setTargetPosition(const Vector3& ps);
 	void setUpPosition(const Vector3& ps);
 
-	Vector3 getPosition(){ return m_eye; };
+	Vector3 getEyePosition(){ return m_eye; };
 
 	Matrix4f getCameraTranlation();
 
@@ -55,6 +56,7 @@ protected:
 	Vector3 	m_target;
 	Vector3 	m_up;
 	Mat3 		m_uvn;
+	Mat3 		m_stand_uvn;
 	Quaternion	m_quat;
 	float		m_angleH = 0;
 	float		m_angleV = 0;

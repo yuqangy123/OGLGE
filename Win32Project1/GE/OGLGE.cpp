@@ -4,7 +4,8 @@
 #include "Texture2D.h"
 #include "triangleVertebralTexture.h"
 #include "triangleVertebralLight.h"
-#include "Mesh.h"
+#include "meshObject.h"
+#include "meshShadowMap.h"
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -66,7 +67,7 @@ void OGLGE::initGLContext(int argc, char** argv)
 	//set viewport
 	glViewport(0, 0, m_winRt.width, m_winRt.height);
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	
 
 	//三角形方向（正向，反向），通过指定定点的顺序来规定（顺，逆时针），
 	//如果三角新法线方向跟视点方向是同向，则是背面，反之则是正面
@@ -75,6 +76,10 @@ void OGLGE::initGLContext(int argc, char** argv)
 	glCullFace(GL_BACK);//决定正面or反面被剔除
 	glEnable(GL_CULL_FACE);//是否执行剔除
 	//glDisable(GL_CULL_FACE);
+
+	//设置深度测试对比类型，本实例
+	glClearDepth(-1.0f);
+	glDepthFunc(GL_GREATER);
 
 	//开启深度测试，需要初始化一个深度缓冲区
 	glEnable(GL_DEPTH_TEST);
@@ -106,7 +111,11 @@ void OGLGE::test()
 
 	//triangleVertebralLight * jk = new triangleVertebralLight(); scene->addNode(jk);
 	
-	Mesh* m = new Mesh(); m->loadMesh("content/jeep.obj"); scene->addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); scene->addNode(m);
+
+	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); scene->addNode(m2);
+
+	meshShadowMap* shadowA = new meshShadowMap(); shadowA->loadMesh("content/jeep.obj"); shadowA->setPosition(0, 0, -50); shadowA->setScale(0.05); scene->addNode(shadowA);
 }
 
 void OGLGE::start()

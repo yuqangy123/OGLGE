@@ -101,7 +101,7 @@ unsigned char * get_CImgRgbPixBuf(CImg<unsigned char> & image, unsigned int& buf
 
 
 }
-bool TextureJpegLoader::getJpgData(const char* filename, jpg_data& jpgData)
+bool TextureJpegLoader::getJpgData(const char* filename, img_data& jpgData)
 {
 	FILE* fp = nullptr;
 	fopen_s(&fp, filename, "r");
@@ -127,7 +127,7 @@ bool TextureJpegLoader::getJpgData(const char* filename, jpg_data& jpgData)
 
 	return initWithJpgData(buf, length, jpgData);
 }
-bool TextureJpegLoader::initWithJpgData(const unsigned char * data, long dataLen, jpg_data& jpgData)
+bool TextureJpegLoader::initWithJpgData(const unsigned char * data, long dataLen, img_data& jpgData)
 {
 	/* these are standard libjpeg structures for reading(decompression) */
 	struct jpeg_decompress_struct cinfo;
@@ -231,7 +231,7 @@ bool TextureJpegLoader::initWithJpgData(const unsigned char * data, long dataLen
 	return ret;
 
 }
-bool TextureJpegLoader::getJpgDataEx(const char* filename, jpg_data& jpgData)
+bool TextureJpegLoader::getJpgDataEx(const char* filename, img_data& jpgData)
 {
 	std::FILE *file_input = std::fopen(filename, "rb");
 	if (!file_input) { std::fprintf(stderr, "Input JPEG file not found !"); std::exit(0); }
@@ -312,5 +312,30 @@ bool TextureJpegLoader::getJpgDataEx(const char* filename, jpg_data& jpgData)
 	}
 	delete pixels;
 	*/
+	return true;
+}
+
+bool TextureJpegLoader::getBmpData(const char* filename, img_data& jpgData)
+{
+	CImg<unsigned char> img(filename);
+	unsigned int _dataLen = 0;
+	unsigned char * pixels = get_CImgRgbPixBuf(img, _dataLen);
+
+	int _dataLen_new = _dataLen + ceil(_dataLen / 3);
+	jpgData._data = new unsigned char[_dataLen_new * sizeof(unsigned char)];
+	jpgData._width = img._width;
+	jpgData._height = img._height;
+
+	//convert to RGBA8888
+	unsigned char* tdata = jpgData._data;
+	for (int n = 0; n < _dataLen - 2; n += 3)
+	{
+		*tdata++ = *(pixels + n + 0);
+		*tdata++ = *(pixels + n + 1);
+		*tdata++ = *(pixels + n + 2);
+		*tdata++ = 0xFF;
+	}
+	delete pixels;
+
 	return true;
 }

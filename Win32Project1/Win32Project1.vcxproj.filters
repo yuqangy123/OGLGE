@@ -300,8 +300,17 @@
     <ClInclude Include="Include\libraries\assimp\aivector2.h">
       <Filter>Include\libraries\assimp</Filter>
     </ClInclude>
-    <ClInclude Include="GE\Mesh.h">
+    <ClInclude Include="application\meshObject.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\MeshNode.h">
       <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\shadowMapTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="application\meshShadowMap.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -398,8 +407,17 @@
     <ClCompile Include="application\Texture2D.cpp">
       <Filter>application</Filter>
     </ClCompile>
-    <ClCompile Include="GE\Mesh.cpp">
+    <ClCompile Include="application\meshObject.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\MeshNode.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\shadowMapTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\meshShadowMap.cpp">
+      <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

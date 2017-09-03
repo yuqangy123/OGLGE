@@ -33,11 +33,36 @@ Camera3D::~Camera3D()
 void Camera3D::setEyePosition(const Vector3& ps)
 {
 	m_eye = ps;
+
+	m_transWorldposMat.identity();
+	m_transWorldposMat.m[0][3] = -m_eye.x;
+	m_transWorldposMat.m[1][3] = -m_eye.y;
+	m_transWorldposMat.m[2][3] = -m_eye.z;
+
+	m_dirty = true;
+}
+
+void Camera3D::setEyePosition(const float& x, const float& y, const float& z)
+{
+	m_eye.x = x;
+	m_eye.y = y;
+	m_eye.z = z;
+
+	m_transWorldposMat.identity();
+	m_transWorldposMat.m[0][3] = -m_eye.x;
+	m_transWorldposMat.m[1][3] = -m_eye.y;
+	m_transWorldposMat.m[2][3] = -m_eye.z;
+
+
+	m_dirty = true;
 }
 
 void Camera3D::setTargetPosition(const Vector3& ps)
 {
 	m_target = ps;
+
+	InitCameraTrans();
+	m_dirty = true;
 }
 
 void Camera3D::setUpPosition(const Vector3& ps)
@@ -102,7 +127,7 @@ void Camera3D::InitCameraTrans()
 	m_quat = m_quat.zero();
 	Quaternion::createFromRotationMatrix(m_translateMat, &m_quat);
 
-	
+	m_stand_uvn = m_uvn;
 
 	m_dirty = true;
 }
@@ -218,9 +243,9 @@ void Camera3D::rotate(float angleH, float angleV)
 	m_angleH += angleH;
 	m_angleV += angleV;
 
-	Vector3 xAxis(1, 0, 0);
-	Vector3 yAxis(0, 1, 0);
-	Vector3 zAxis(0, 0, 1);
+	Vector3 xAxis(m_stand_uvn.m[0][0], m_stand_uvn.m[0][1], m_stand_uvn.m[0][2]);
+	Vector3 yAxis(m_stand_uvn.m[1][0], m_stand_uvn.m[1][1], m_stand_uvn.m[1][2]);
+	Vector3 zAxis(m_stand_uvn.m[2][0], m_stand_uvn.m[2][1], m_stand_uvn.m[2][2]);
 	
 	Quaternion HQuat, VQuat, addQuat;
 	rotate(yAxis, m_angleH, HQuat);
@@ -297,29 +322,29 @@ void Camera3D::setFreeCamera(bool b)
 		m_mouseMovelastY = winsz.height / 2.0;
 		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 	}	
+	m_freeCamera = b;
 }
 
 void Camera3D::keyInput(unsigned char param, int x, int y) 
 {
 	if (!m_freeCamera)
 		return;
-
+	float factor = 0.5f;
+	if (param == 's')
+	{
+		setEyePosition(m_eye.x + m_uvn.m[2][0] * factor, m_eye.y + m_uvn.m[2][1] * factor, m_eye.z + m_uvn.m[2][2] * factor);
+	}
 	if (param == 'w')
 	{
-		float factor = 0.5f;
-		m_eye.x += m_uvn.m[2][0] * factor;
-		m_eye.y += m_uvn.m[2][1] * factor;
-		m_eye.z += m_uvn.m[2][2] * factor;
-		m_dirty = true;
+		setEyePosition(m_eye.x - m_uvn.m[2][0] * factor, m_eye.y - m_uvn.m[2][1] * factor, m_eye.z - m_uvn.m[2][2] * factor);
 	}
-	else if (param == 's')
+	if (param == 'a')
 	{
+		setEyePosition(m_eye.x - m_uvn.m[0][0] * factor, m_eye.y - m_uvn.m[0][1] * factor, m_eye.z - m_uvn.m[0][2] * factor);
 	}
-	else if (param == 'a')
-	{
-	}
-	else if (param == 'd')
-	{
+	if (param == 'd')
+	{		
+		setEyePosition(m_eye.x + m_uvn.m[0][0] * factor, m_eye.y + m_uvn.m[0][1] * factor, m_eye.z + m_uvn.m[0][2] * factor);
 	}
 };
 void Camera3D::mouseInput(int button, int state, int x, int y)
@@ -328,22 +353,27 @@ void Camera3D::mouseInput(int button, int state, int x, int y)
 		return;
 	
 	float rx = 0.0, ry = 0.0;
-
+	bool bchange = false;
 	float sp = 20.0;
 	if (abs(y - m_mouseMovelastY) > 2)
 	{
 		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 		ry = (m_mouseMovelastY - y) / sp;
+		bchange = true;
 	}
 	if (abs(x - m_mouseMovelastX) > 2)
 	{
 		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 		rx = (m_mouseMovelastX - x) / sp;
+		bchange = true;
 	};
-
-	rotate(rx, ry);
-	auto winsz = OGLGE::Instance()->getWindowsRect();
-	glutWarpPointer(winsz.width / 2.0, winsz.height / 2.0);
+	if (bchange)
+	{
+		rotate(rx, ry);
+		auto winsz = OGLGE::Instance()->getWindowsRect();
+		glutWarpPointer(winsz.width / 2.0, winsz.height / 2.0);
+	}
+	
 }
 
 /*

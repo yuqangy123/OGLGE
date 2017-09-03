@@ -113,7 +113,7 @@ void triangleVertebralLight::createVBOIBO_specularLight()
 	m_diffuseDirection.set(0.0f, 0.0f, -1.0f);
 	m_diffuseDirection.normalize();
 	m_diffuseIntensity = 1.0f;
-	m_specularEye = DefaultCamera->getPosition();
+	m_specularEye = DefaultCamera->getEyePosition();
 	
 	m_specularPower = 64.f;
 	m_specularIntensity = 4.0f;

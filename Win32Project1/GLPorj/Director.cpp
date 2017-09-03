@@ -20,13 +20,16 @@ void CDirector::init()
 	//init camera
 	m_Camera3D = new Camera3D(Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, -1.0), Vector3(0.0, 1.0, 0.0));	
 	m_Camera3D->SetPerspectivePro(60, winrt.width, winrt.height, 2.0f, 100.0f);
-
+	
 	m_Camera2D = new Camera2D(Vector2(0.0, 0.0), winrt.width, winrt.height);
 
 	
 	//init default scene	
 	auto scene = new CScene();
 	m_scenes.push_back(scene);
+
+	getRunScene()->addNode(m_Camera3D);
+	getRunScene()->addNode(m_Camera2D);
 }
 
 void CDirector::update(float ft)
@@ -43,8 +46,9 @@ void CDirector::draw()
 
 	
 	// Clear the color buffer
+	glClearColor(0.0f, 0.2f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	
 
 	//m_defCamera->draw();

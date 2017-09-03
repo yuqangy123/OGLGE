@@ -27,7 +27,7 @@ unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image
 		return 0;
 	}
 
-	jpg_data jpgData;
+	img_data jpgData;
 	if (!TextureJpegLoader::Instance()->getJpgDataEx(filename, jpgData))
 	{
 		printf("load jpeg texture failed:\r\n%s\r\n", filename);
@@ -43,6 +43,41 @@ unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image
 	m_texList[texID] = TextureData(textureId, jpgData._width, jpgData._height, image_format, imageExt::JPEG);
 	return texID;
 }
+
+
+unsigned int  TextureManager::getBmpData(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
+{
+	unsigned int texID = st_texIdSerial;
+
+	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
+	++st_texIdSerial;
+
+	if (m_texList.find(texID) != m_texList.end())
+	{
+		printf("texture %d already exist\r\n", texID);
+		return 0;
+	}
+
+	img_data jpgData;
+	if (!TextureJpegLoader::Instance()->getBmpData(filename, jpgData))
+	{
+		printf("load jpeg texture failed:\r\n%s\r\n", filename);
+		return 0;
+	}
+	GLuint textureId = 0;
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	glTexImage2D(GL_TEXTURE_2D, level, inernal_format, jpgData._width, jpgData._height, border,
+		image_format, GL_UNSIGNED_BYTE, jpgData._data);
+
+	m_texList[texID] = TextureData(textureId, jpgData._width, jpgData._height, image_format, imageExt::JPEG);
+	return texID;
+}
+
+
+
+
 
 const TextureData& TextureManager::getTexture(unsigned int texID)
 {
