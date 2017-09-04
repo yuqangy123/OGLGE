@@ -19,10 +19,7 @@ meshObject::~meshObject()
 
 void meshObject::init()
 {
-	DefaultCamera->setFreeCamera(true);
-	DefaultCamera->setEyePosition(-50, 50, -50);
-	DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
-
+	
 	m_tech = new lightTechnique();
 	m_tech->init(lightType::diffuseLight);
 	m_tech->enable();

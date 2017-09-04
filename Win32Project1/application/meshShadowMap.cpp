@@ -19,6 +19,7 @@ meshShadowMap::~meshShadowMap()
 
 void meshShadowMap::init()
 {
+
 	DefaultCamera->setFreeCamera(true);
 	//DefaultCamera->setEyePosition(-50, 40, -50);
 	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));

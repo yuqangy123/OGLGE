@@ -22,6 +22,7 @@ public:
 
 	void update(float ft);
 	void draw();
+
 	
 protected:
 	void init();

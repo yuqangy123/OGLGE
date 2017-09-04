@@ -71,7 +71,7 @@ void shadowMapMeshTechnique::initFBO()
 		assert(0);
 	}
 
-	glBindTexture(GL_TEXTURE0, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
