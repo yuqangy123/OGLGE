@@ -99,8 +99,7 @@ void OGLGE::test()
 {
 	auto scene = getRunScene();
 
-	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2);
-	//texture2->setPosition(m_winRt.width/2.0, 50);
+	Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2); texture2->setPosition(m_winRt.width/2.0, 50);
 
 	Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1); texture1->setScale(0.5);
 
@@ -115,7 +114,7 @@ void OGLGE::test()
 	meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); scene->addNode(m2);
 	meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
-	/*
+	
 	meshShadowMap* shadowMapA = new meshShadowMap();
 	shadowMapA->loadMesh("content/jeep.obj", Vector3(0, 0, -30), Vector3(0.05, 0.05, 0.05));
 	shadowMapA->loadMesh("content/hheli.obj", Vector3(0, 0, -70), Vector3(0.2, 0.2, 0.2));
@@ -126,7 +125,7 @@ void OGLGE::test()
 	shadowMapA->setPosition(0, 0, -5);
 	shadowMapA->setScale(5);
 	scene->addNode(shadowMapA);
-	*/
+	
 }
 
 void OGLGE::start()

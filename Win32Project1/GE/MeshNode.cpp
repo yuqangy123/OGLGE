@@ -17,10 +17,6 @@ MeshNode::~MeshNode()
 
 void MeshNode::draw()
 {
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glEnableVertexAttribArray(positionLoc);
 	glEnableVertexAttribArray(texCoordLoc);
@@ -30,7 +26,7 @@ void MeshNode::draw()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		m_Textures[itr->MaterialIndex]->bind(GL_TEXTURE_2D);
+		m_Textures[itr->MaterialIndex-1]->bind();
 		glEnable(GL_TEXTURE_2D);
 		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
@@ -45,10 +41,9 @@ void MeshNode::draw()
 	glDisableVertexAttribArray(positionLoc);
 	glDisableVertexAttribArray(texCoordLoc);
 	glDisableVertexAttribArray(normalLoc);
-
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	
 	
 }
 
@@ -71,7 +66,7 @@ bool MeshNode::loadMesh(const char* filename)
 		assert(0);
 	}
 
-	return InitMaterials(pScene, filename);
+	return ret;
 	
 }
 
@@ -155,6 +150,8 @@ MeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
 
 void MeshNode::Texture::load()
 {
+
+	
 	if (std::string::npos != path.rfind(".bmp"))
 	{
 		id = TextureMgr->getBmpData(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
@@ -168,9 +165,16 @@ void MeshNode::Texture::load()
 		printf("cant find support texture load lib\r\n");
 		assert(0);
 	}
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 }
 
-void MeshNode::Texture::bind(int bid)
+void MeshNode::Texture::bind()
 {
 	// Set the filtering mode
 	glActiveTexture(GL_TEXTURE0);

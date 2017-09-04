@@ -30,7 +30,7 @@ public:
 	{
 		Texture(aiTextureType tp, const std::string& path_);
 		void load();
-		void bind(int bid);
+		void bind();
 
 		int id;
 		aiTextureType type;

@@ -47,6 +47,8 @@ void Texture2D::draw()
 
 void Texture2D::init()
 {
+	//Texture2DRender::Instance();
+
 	m_pipe.setCamera(DefaultCamera2D);
 
 	m_texturesID = TextureMgr->loadTextureJpeg(m_resourceFile.c_str(), GL_RGBA, GL_RGBA, 0, 0);
@@ -62,6 +64,8 @@ void Texture2D::init()
 	// Set the filtering mode
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	m_renderdata = new V3F_T2F[4];
 

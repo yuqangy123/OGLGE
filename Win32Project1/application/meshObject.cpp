@@ -48,7 +48,10 @@ void meshObject::draw()
 {
 	m_tech->enable();
 
+
+
 	
+
 
 	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
 	const Matrix4f* worldMt4 = m_pipe.GetWorldTrans();
@@ -57,7 +60,6 @@ void meshObject::draw()
 	glUniform1f(m_tech->getUniformLocation("gDiffuseLight.ambientIntensity"), m_ambientLightIntensity);
 	glUniform3f(m_tech->getUniformLocation("gDiffuseLight.direction"), m_diffuseDirection.x, m_diffuseDirection.y, m_diffuseDirection.z);
 	glUniform1f(m_tech->getUniformLocation("gDiffuseLight.diffuseIntensity"), m_diffuseIntensity);
-
 
 	m_mesh->draw();
 
