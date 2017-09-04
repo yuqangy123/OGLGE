@@ -312,6 +312,12 @@
     <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="application\meshShadow.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\shadowMeshTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -417,6 +423,12 @@
       <Filter>application</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\meshShadow.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\shadowMeshTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>

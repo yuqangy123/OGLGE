@@ -75,7 +75,7 @@ void shadowMapMeshTechnique::initFBO()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void shadowMapMeshTechnique::renderShadowMap(std::vector<MeshNode*>& meshs)
+void shadowMapMeshTechnique::renderFrameBuffer(std::vector<MeshNode*>& meshs)
 {
 	enable();
 

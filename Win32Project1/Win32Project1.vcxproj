@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="application\JikeTest.h" />
     <ClInclude Include="application\meshObject.h" />
+    <ClInclude Include="application\meshShadow.h" />
     <ClInclude Include="application\meshShadowMap.h" />
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
     <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
     <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h" />
+    <ClInclude Include="GLPorj\tech\shadowMeshTechnique.h" />
     <ClInclude Include="GLPorj\tech\techDefine.h" />
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
@@ -243,6 +245,7 @@
   <ItemGroup>
     <ClCompile Include="application\JikeTest.cpp" />
     <ClCompile Include="application\meshObject.cpp" />
+    <ClCompile Include="application\meshShadow.cpp" />
     <ClCompile Include="application\meshShadowMap.cpp" />
     <ClCompile Include="application\Texture2D.cpp" />
     <ClCompile Include="application\triangleVertebralLight.cpp" />
@@ -270,6 +273,7 @@
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\shadowMeshTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp" />
     <ClCompile Include="GLPorj\Texture2DRender.cpp" />
     <ClCompile Include="programUniforms\programUniforms.cpp" />

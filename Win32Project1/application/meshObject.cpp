@@ -46,10 +46,6 @@ void meshObject::draw()
 	m_tech->enable();
 
 
-
-	
-
-
 	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
 	const Matrix4f* worldMt4 = m_pipe.GetWorldTrans();
 	glUniformMatrix4fv(m_tech->getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)worldMt4->m);

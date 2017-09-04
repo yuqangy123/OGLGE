@@ -16,11 +16,12 @@ public:
 
 	void setTargetPosition(float x, float y, float z);
 	void setLightPosition(float x, float y, float z);
-	Vector3 getLightPosition() { return m_pLightSpot->getEyePosition(); };
-	
 
+	const Vector3& getLightPosition() { return m_pLightSpot->getEyePosition(); };
+	const Vector3& getTargetPosition() { return m_pLightSpot->getTargetPosition(); };
+	const Matrix4f* getLightWorldTrans() { return m_pipe.GetWorldTrans(); }
 
-	void renderShadowMap(std::vector<MeshNode*>&);
+	void renderFrameBuffer(std::vector<MeshNode*>&);
 
 
 protected:

@@ -31,7 +31,8 @@ public:
 	void setTargetPosition(const Vector3& ps);
 	void setUpPosition(const Vector3& ps);
 
-	Vector3 getEyePosition(){ return m_eye; };
+	const Vector3& getTargetPosition() { return m_target; }
+	const Vector3& getEyePosition() { return m_eye; }
 
 	Matrix4f getCameraTranlation();
 

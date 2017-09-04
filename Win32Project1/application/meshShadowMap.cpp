@@ -66,7 +66,7 @@ void meshShadowMap::init()
 void meshShadowMap::draw()
 {
 	m_tech->enable();
-	m_tech->renderShadowMap(m_meshs);
+	m_tech->renderFrameBuffer(m_meshs);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -97,7 +97,7 @@ void meshShadowMap::update(float ft)
 {
 	m_MVPMt4 = *m_pipe.GetTrans();
 }
-void meshShadowMap::setTargetPosition(float x, float y, float z)
+void meshShadowMap::setLightTargetPosition(float x, float y, float z)
 {
 	m_tech->setTargetPosition(x, y, z);
 }

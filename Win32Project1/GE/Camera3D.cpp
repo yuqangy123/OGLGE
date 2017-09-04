@@ -315,7 +315,7 @@ void Camera3D::InitPerspectiveProj()
 
 void Camera3D::setFreeCamera(bool b)
 {
-	if (b)
+	if (m_freeCamera != b && b)
 	{
 		auto winsz = OGLGE::Instance()->getWindowsRect();
 		m_mouseMovelastX = winsz.width / 2.0;

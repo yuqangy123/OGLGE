@@ -199,7 +199,7 @@ void Texture2DRender::render(GLuint texturesID, V3F_T2F* vts, unsigned int size,
 	glDisableVertexAttribArray(m_tech->positionLoc);
 	glDisableVertexAttribArray(m_tech->texCoordLoc);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0	);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 }
