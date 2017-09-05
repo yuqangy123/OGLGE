@@ -23,7 +23,7 @@ public:
 		m_worldPos.x = x;
 		m_worldPos.y = y;
 		m_worldPos.z = z;
-		m_dirty = false;
+		m_dirty = true;
 	}
 
 	void Rotate(float RotateX, float RotateY, float RotateZ)
@@ -31,7 +31,7 @@ public:
 		m_rotation.x = RotateX;
 		m_rotation.y = RotateY;
 		m_rotation.z = RotateZ;
-		m_dirty = false;
+		m_dirty = true;
 	}
 
 
@@ -53,7 +53,7 @@ private:
 	Vector3 m_worldPos;
 
 	Camera* m_camera=nullptr;
-	bool		m_dirty = true;
+	bool		m_dirty = false;
 	Matrix4f m_transformation;
 	Matrix4f m_worldtrans;
 

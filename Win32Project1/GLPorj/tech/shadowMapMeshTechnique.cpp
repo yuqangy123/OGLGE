@@ -97,5 +97,5 @@ void shadowMapMeshTechnique::renderFrameBuffer(std::vector<MeshNode*>& meshs)
 		m->draw();
 	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }

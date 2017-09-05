@@ -25,7 +25,7 @@ float calcShadowFactor()
 	vec2 lightCoordUV = pos.xy;
 	
 	float depth = texture2D( s_showmapTexture, lightCoordUV ).x;
-	if(depth >= (pos.z - 0.000001))
+	if(depth >= (pos.z + 0.00008))
 		return 0.5;
 	return 1.0;
 }

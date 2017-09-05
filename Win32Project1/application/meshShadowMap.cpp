@@ -115,6 +115,11 @@ void meshShadowMap::setScale(float s)
 	m_pipe.Scale(s, s, s);
 }
 
+void meshShadowMap::Rotate(float x, float y, float z)
+{
+	m_pipe.Rotate(x, y, z);
+}
+
 bool meshShadowMap::loadMesh(const char* filename, const Vector3& pos, const Vector3& sal)
 {
 	auto m = new MeshNode();
