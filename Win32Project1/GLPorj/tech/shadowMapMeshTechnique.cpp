@@ -82,6 +82,8 @@ void shadowMapMeshTechnique::renderFrameBuffer(std::vector<MeshNode*>& meshs)
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, shadowMap);
 	for (auto itr = meshs.begin(); itr != meshs.end(); ++itr)
 	{
 		MeshNode* m = (*itr);

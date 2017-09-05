@@ -12,6 +12,8 @@ public:
 
 	bool loadMesh(const char* filename);
 
+	bool isLoaded(){ return m_loaded; }
+
 	void clear();
 
 	void draw();
@@ -70,4 +72,6 @@ protected:
 	int positionLoc;
 	int texCoordLoc;
 	int normalLoc;
+
+	bool m_loaded = false;
 };

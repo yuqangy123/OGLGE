@@ -28,7 +28,7 @@ public:
 
 protected:
 	void init();
-
+	void updateLightDirection();
 
 protected:
 	MeshNode* m_mesh = nullptr;
@@ -39,7 +39,6 @@ protected:
 	std::vector<MeshNode*> m_meshs;
 
 	Pipeline m_pipe;
-	Matrix4f m_MVPMt4;
 
 	Vector3 m_ambientLightColor;
 	float m_ambientLightIntensity;
