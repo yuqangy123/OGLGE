@@ -110,32 +110,33 @@ void OGLGE::test()
 
 	//triangleVertebralLight * jk2 = new triangleVertebralLight(); scene->addNode(jk2);
 	
-	/*
+	
 	meshShadowMap* shadowMapA = new meshShadowMap();
 	shadowMapA->loadMesh("content/jeep.obj", Vector3(0, 0, -30), Vector3(0.05, 0.05, 0.05));
 	//shadowMapA->loadMesh("content/hheli.obj", Vector3(0, 0, -70), Vector3(0.2, 0.2, 0.2));
 	shadowMapA->setLightPosition(-50, 40, -50);
 	shadowMapA->setLightTargetPosition(0, 0, -50);
-	shadowMapA->setPosition(-30, 50, -60);
-	shadowMapA->setScale(10);
+	shadowMapA->setPosition(0, 0, -70);
+	shadowMapA->setScale(15);
 	scene->addNode(shadowMapA);
-	*/
+	
 
 	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); scene->addNode(m);
 	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); scene->addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
-
+	
 	meshShadow* shadowm = new meshShadow();
-	shadowm->loadMesh("content/jeep.obj", Vector3(0, 0, -40), Vector3(0.05, 0.05, 0.05));
+	shadowm->loadMesh("content/jeep.obj", Vector3(0, 0, -30), Vector3(0.05, 0.05, 0.05));
 	shadowm->setLightPosition(-50, 40, -50);
 	shadowm->setTargetPosition(0, 0, -50);
 	scene->addNode(shadowm);
-
-	DefaultCamera->setFreeCamera(true);
-	DefaultCamera->setEyePosition(-50, 50, -50);
-	DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 	
+	
+	//DefaultCamera->setEyePosition(0, 0, 0);
+	DefaultCamera->setEyePosition(-50, 40, -30); shadowMapA->Rotate(-45, 90, 0);
+	DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
+	DefaultCamera->setFreeCamera(true);
 }
 
 void OGLGE::start()

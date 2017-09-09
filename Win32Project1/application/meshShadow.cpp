@@ -52,7 +52,7 @@ void meshShadow::draw()
 	m_shadowMapTech->enable();
 	m_shadowMapTech->renderFrameBuffer(m_meshs);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear( GL_DEPTH_BUFFER_BIT);
 
 	m_tech->enable();
 	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_pipe.GetTrans()->m);
@@ -65,10 +65,18 @@ void meshShadow::draw()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_shadowMapTech->shadowMap);
 	glUniform1i(m_tech->getUniformLocation("s_showmapTexture"), 1);
-	glUniformMatrix4fv(m_tech->getUniformLocation("lightWorldMatrix"), 1, GL_TRUE, (const float*)m_shadowMapTech->getLightWorldTrans()->m);
+	glUniformMatrix4fv(m_tech->getUniformLocation("lightMVPMatrix"), 1, GL_TRUE, (const float*)m_shadowMapTech->getLightTrans()->m);
+	
+	if (nullptr != m_mesh)
+	{
+		m_mesh->setAttriPositionLoc(m_tech->positionLoc);
+		m_mesh->setAttriTexCoordLoc(m_tech->texCoordLoc);
+		m_mesh->setAttriNormalLoc(m_tech->normalLoc);
+		m_mesh->draw();
+	}
 
+	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_pipe.GetTrans()->m);
 	m_terrainQuadMesh->draw();
-	if(nullptr != m_mesh)m_mesh->draw();
 }
 
 void meshShadow::update(float ft)

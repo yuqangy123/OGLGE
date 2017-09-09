@@ -19,7 +19,7 @@ public:
 
 	const Vector3& getLightPosition() { return m_pLightSpot->getEyePosition(); };
 	const Vector3& getTargetPosition() { return m_pLightSpot->getTargetPosition(); };
-	const Matrix4f* getLightWorldTrans() { return m_pipe.GetWorldTrans(); }
+	const Matrix4f* getLightTrans() { return m_pipe.GetTrans(); }
 
 	void renderFrameBuffer(std::vector<MeshNode*>&);
 
