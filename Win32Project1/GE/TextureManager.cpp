@@ -14,6 +14,8 @@ TextureManager::~TextureManager()
 {
 }
 
+
+
 unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
 {
 	unsigned int texID = st_texIdSerial;
@@ -45,7 +47,7 @@ unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image
 }
 
 
-unsigned int  TextureManager::getBmpData(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
+unsigned int  TextureManager::loadTextureBmp(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
 {
 	unsigned int texID = st_texIdSerial;
 
@@ -76,7 +78,50 @@ unsigned int  TextureManager::getBmpData(const char* filename, GLenum image_form
 }
 
 
+unsigned int TextureManager::loadTextureCube(std::vector<std::string>& imgs, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
+{
+	unsigned int texID = st_texIdSerial;
 
+	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
+	++st_texIdSerial;
+
+	GLuint type[6];
+	type[0] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+	type[1] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+	type[2] = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+	type[3] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+	type[4] = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+	type[5] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+
+	GLuint textureID = 0;
+	glGenTextures(1, &textureID);
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	img_data jpgData;
+	for (int n = 0; n < 6; ++n)
+	{
+		if (!TextureJpegLoader::Instance()->getJpgDataEx(imgs[n].c_str(), jpgData))
+		{
+			printf("load jpeg texture failed:\r\n%s\r\n", imgs[n].c_str());
+			return 0;
+		}
+
+		glTexImage2D(type[n], 0, GL_RGB, jpgData._width, jpgData._height, 0,
+			GL_RGB, GL_UNSIGNED_BYTE, jpgData._data);
+	}
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	m_texList[texID] = TextureData(textureID, jpgData._width, jpgData._height, image_format, imageExt::JPEG);
+	return texID;
+}
 
 
 const TextureData& TextureManager::getTexture(unsigned int texID)
@@ -97,11 +142,11 @@ void TextureManager::unloadTexture(unsigned int texID)
 	}
 }
 
-bool TextureManager::bindTexture(unsigned int texID, int bid)
+bool TextureManager::bindTexture(unsigned int texID, int target)
 {
 	if (m_texList.find(texID) != m_texList.end())
 	{
-		glBindTexture(bid, m_texList[texID].id);
+		glBindTexture(target, m_texList[texID].id);
 		return true;
 	}
 	return false;

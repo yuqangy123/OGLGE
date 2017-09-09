@@ -1,39 +1,45 @@
 #include "stdafx.h"
-#include "MeshNode.h"
+#include "dumpedNormalMeshNode.h"
 #include "anim.h"
 #include "Importer.hpp"
 #include "postprocess.h"
 #include "TextureManager.h"
 
-MeshNode::MeshNode()
+dumpedNormalMeshNode::dumpedNormalMeshNode()
 {
 }
 
 
-MeshNode::~MeshNode()
+dumpedNormalMeshNode::~dumpedNormalMeshNode()
 {
-
+	if (m_pNormalMapTex != nullptr)
+		delete m_pNormalMapTex;
 }
 
-void MeshNode::draw()
+void dumpedNormalMeshNode::draw()
 {
 
 	glEnableVertexAttribArray(positionLoc);
 	glEnableVertexAttribArray(texCoordLoc);
 	glEnableVertexAttribArray(normalLoc);
+	glEnableVertexAttribArray(tangentLoc);
 	glEnable(GL_TEXTURE_2D);
+
+	
 
 	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		m_Textures[itr->MaterialIndex-1]->bind();		
+		m_Textures[itr->MaterialIndex-1]->bind();
+		m_pNormalMapTex->bind();
 		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
 		const unsigned int VertexSize = sizeof(Vertex);
 		glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, pos));
-		glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
+		glVertexAttribPointer(texCoordLoc, 2, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
 		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
+		glVertexAttribPointer(tangentLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, tangent));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
 		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);				
@@ -41,14 +47,15 @@ void MeshNode::draw()
 	glDisableVertexAttribArray(positionLoc);
 	glDisableVertexAttribArray(texCoordLoc);
 	glDisableVertexAttribArray(normalLoc);
+	glDisableVertexAttribArray(tangentLoc);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	
 }
 
-
-bool MeshNode::loadMesh(const char* filename)
+bool dumpedNormalMeshNode::loadMesh(const char* filename, const char* normalMapFile)
 {
 	if (m_loaded)
 		return false;
@@ -70,16 +77,19 @@ bool MeshNode::loadMesh(const char* filename)
 		assert(0);
 	}
 
+	m_pNormalMapTex = new Texture(aiTextureType_NORMALS, normalMapFile);
+	m_pNormalMapTex->load();
+
 	return ret;
 	
 }
 
-void MeshNode::clear()
+void dumpedNormalMeshNode::clear()
 {
 
 }
 
-bool MeshNode::initFromScene(const aiScene* scene, const char* filename)
+bool dumpedNormalMeshNode::initFromScene(const aiScene* scene, const char* filename)
 {
 	m_Entries.resize(scene->mNumMeshes);
 	for (int n = 0; n < m_Entries.size(); ++n)
@@ -91,7 +101,7 @@ bool MeshNode::initFromScene(const aiScene* scene, const char* filename)
 	return InitMaterials(scene, filename);
 }
 
-void MeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
+void dumpedNormalMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
 	
 	std::vector<Vertex> vertices;
@@ -104,7 +114,7 @@ void MeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		const aiVector3D& normal = paiMesh->HasNormals() ? paiMesh->mNormals[n] : zero;
 		aiVector3D texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
 
-		vertices.push_back(Vertex(Vector3f(pos.x, pos.y, pos.z), Vector3f(texCoords.x, texCoords.y, texCoords.z), Vector3f(normal.x, normal.y, normal.z)));
+		vertices.push_back(Vertex(Vector3(pos.x, pos.y, pos.z), Vector2(texCoords.x, texCoords.y), Vector3(normal.x, normal.y, normal.z), Vector3()));
 	}
 
 	for (int n = 0; n < paiMesh->mNumFaces; ++n)
@@ -124,7 +134,7 @@ void MeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 	
 }
 
-bool MeshNode::InitMaterials(const aiScene* pScene, const char* filename)
+bool dumpedNormalMeshNode::InitMaterials(const aiScene* pScene, const char* filename)
 {
 	if (!pScene->HasMaterials())
 		return true;
@@ -146,13 +156,13 @@ bool MeshNode::InitMaterials(const aiScene* pScene, const char* filename)
 	return true;
 }
 
-MeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
+dumpedNormalMeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
 {
 	type = tp;
 	path = path_;	
 }
 
-void MeshNode::Texture::load()
+void dumpedNormalMeshNode::Texture::load()
 {
 
 	
@@ -178,14 +188,14 @@ void MeshNode::Texture::load()
 
 }
 
-void MeshNode::Texture::bind()
+void dumpedNormalMeshNode::Texture::bind(GLuint texId)
 {
 	// Set the filtering mode
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(texId);
 	TextureMgr->bindTexture(id);
 }
 
-MeshNode::MeshEntry::MeshEntry()
+dumpedNormalMeshNode::MeshEntry::MeshEntry()
 {
 	VB = 0;
 	IB = 0;
@@ -193,7 +203,7 @@ MeshNode::MeshEntry::MeshEntry()
 	MaterialIndex = 0;
 }
 
-MeshNode::MeshEntry::~MeshEntry()
+dumpedNormalMeshNode::MeshEntry::~MeshEntry()
 {
 	/*
 	if (VB != 0)
@@ -208,12 +218,39 @@ MeshNode::MeshEntry::~MeshEntry()
 }
 
 
-void MeshNode::MeshEntry::Init(std::vector<MeshNode::Vertex>& Vertices, std::vector<unsigned int>& Indices)
+void dumpedNormalMeshNode::MeshEntry::Init(std::vector<dumpedNormalMeshNode::Vertex>& Vertices, std::vector<unsigned int>& Indices)
 {
+	Vector2 uv1, uv2;
+	Vector3 edge1, edge2, tangent;
+	float f;
+	for (unsigned int i = 0; i < Indices.size(); i+=3)
+	{
+		uv1 = Vertices[i + 1].uv - Vertices[i].uv;
+		uv2 = Vertices[i + 2].uv - Vertices[i].uv;
+		edge1 = Vertices[i + 1].pos - Vertices[i].pos;
+		edge2 = Vertices[i + 2].pos - Vertices[i].pos;
+
+		f = 1.0f / (uv1.x*uv2.y - uv2.x*uv1.y);
+		tangent.x = f*(uv2.y*edge1.x - uv1.x*edge2.x);
+		tangent.y = f*(uv2.y*edge1.y - uv1.x*edge2.y);
+		tangent.z = f*(uv2.y*edge1.z - uv1.x*edge2.z);
+
+		Vertices[i + 0].tangent += tangent;
+		Vertices[i + 1].tangent += tangent;
+		Vertices[i + 2].tangent += tangent;
+	}
+
+	for (unsigned int i = 0; i < Indices.size(); ++i)
+	{
+		Vertices[i].tangent.normalize();
+	}
+
+
+
 	glGenBuffers(1, &VB);
 	glBindBuffer(GL_ARRAY_BUFFER, VB);
-	std::vector<MeshNode::Vertex>::iterator verItr = Vertices.begin();
-	size_t verSize = sizeof(MeshNode::Vertex)*Vertices.size();
+	std::vector<dumpedNormalMeshNode::Vertex>::iterator verItr = Vertices.begin();
+	size_t verSize = sizeof(dumpedNormalMeshNode::Vertex)*Vertices.size();
 	void* verPtr = &(*verItr);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(Verticess), Verticess, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, verSize, verPtr, GL_STATIC_DRAW);

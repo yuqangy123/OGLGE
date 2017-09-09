@@ -318,6 +318,12 @@
     <ClInclude Include="GLPorj\tech\shadowMeshTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="application\SkyBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\dumpedNormalMeshNode.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -430,6 +436,12 @@
     </ClCompile>
     <ClCompile Include="GLPorj\tech\shadowMeshTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\SkyBox.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\dumpedNormalMeshNode.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

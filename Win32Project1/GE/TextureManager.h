@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#include <vector>
 #include "Singleton.h"
 #include "GL/glew.h"
 #include "GL/freeglut.h"
@@ -30,11 +31,12 @@ public:
 	~TextureManager();
 	
 	unsigned int loadTextureJpeg(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
-	unsigned int getBmpData(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
+	unsigned int loadTextureBmp(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
+	unsigned int loadTextureCube(std::vector<std::string>& imgs, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
 	
 	const TextureData& getTexture(unsigned int texID);
 	void unloadTexture(unsigned int texID);
-	bool bindTexture(unsigned int texID, int bid = GL_TEXTURE_2D);
+	bool bindTexture(unsigned int texID, int target = GL_TEXTURE_2D);
 
 protected:
 	std::map<unsigned int, TextureData>	m_texList;
