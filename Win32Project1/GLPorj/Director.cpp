@@ -19,7 +19,7 @@ void CDirector::init()
 
 	//init camera
 	m_Camera3D = new Camera3D(Vector3(0.0, 0.0, 0.0), Vector3(0.0, 0.0, -1.0), Vector3(0.0, 1.0, 0.0));	
-	m_Camera3D->SetPerspectivePro(60, winrt.width, winrt.height, 2.0f, 100.0f);
+	m_Camera3D->SetPerspectivePro(60, winrt.width, winrt.height, 0.1f, 100.0f);
 	
 	m_Camera2D = new Camera2D(Vector2(0.0, 0.0), winrt.width, winrt.height);
 

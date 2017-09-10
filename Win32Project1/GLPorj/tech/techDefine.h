@@ -12,5 +12,8 @@
 
 #define ATTRI_A_NORMAL_NAME "normal"
 
+#define ATTRI_A_TANGENT_NAME "tangent"
+#define ATTRI_A_BITANGENT_NAME "bitangent"
+
 
 

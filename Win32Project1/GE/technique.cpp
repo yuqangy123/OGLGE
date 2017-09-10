@@ -97,7 +97,7 @@ void technique::initUniforms()
 				if (__gl_error_code != GL_NO_ERROR)
 					printf("error: 0x%x  uniformName: %s", (int)__gl_error_code, uniformName);
 
-				assert(__gl_error_code == GL_NO_ERROR);
+				//assert(__gl_error_code == GL_NO_ERROR);
 
 				m_userUniforms[u.name] = u;
 			}

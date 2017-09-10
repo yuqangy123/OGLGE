@@ -8,6 +8,7 @@ varying vec2 v_texCoord;
 void main()  
 {  
 	gl_Position = viewMatrix * vec4(a_position, 1.0);
+	gl_Position.z = gl_Position.w;
 	v_texCoord = a_texCoord; 
 
 }  

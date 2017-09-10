@@ -29,11 +29,11 @@ void meshObject::init()
 	m_pipe.setCamera(DefaultCamera);
 
 
-	m_ambientLightColor.set(0.5f, 0.5f, 0.5f);
+	m_ambientLightColor.set(0.7f, 0.7f, 0.7f);
 	m_ambientLightIntensity = 0.5f;
-	m_diffuseDirection.set(0.0f, -1.0f, 0.0f);
+	m_diffuseDirection.set(1.0f, 1.0f, -1.9f);
 	m_diffuseDirection.normalize();
-	m_diffuseIntensity = 3.0f;
+	m_diffuseIntensity = 1.0f;
 
 	m_mesh = new MeshNode();
 	m_mesh->setAttriPositionLoc(m_tech->positionLoc);

@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include "dumpedNormalMeshNode.h"
+#include "bumpNormalMeshNode.h"
 #include "anim.h"
 #include "Importer.hpp"
 #include "postprocess.h"
 #include "TextureManager.h"
 
-dumpedNormalMeshNode::dumpedNormalMeshNode()
+bumpNormalMeshNode::bumpNormalMeshNode()
 {
 }
 
 
-dumpedNormalMeshNode::~dumpedNormalMeshNode()
+bumpNormalMeshNode::~bumpNormalMeshNode()
 {
 	if (m_pNormalMapTex != nullptr)
 		delete m_pNormalMapTex;
 }
 
-void dumpedNormalMeshNode::draw()
+void bumpNormalMeshNode::draw()
 {
 
 	glEnableVertexAttribArray(positionLoc);
@@ -31,9 +31,11 @@ void dumpedNormalMeshNode::draw()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		m_Textures[itr->MaterialIndex-1]->bind();
-		m_pNormalMapTex->bind();
-		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
+		m_Textures[itr->MaterialIndex-1]->bind(GL_TEXTURE0);
+		glUniform1i(s_textureLoc, 0);
+
+		m_pNormalMapTex->bind(GL_TEXTURE1);
+		glUniform1i(s_normalTextureLoc, 1);
 
 		const unsigned int VertexSize = sizeof(Vertex);
 		glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, pos));
@@ -55,7 +57,7 @@ void dumpedNormalMeshNode::draw()
 	
 }
 
-bool dumpedNormalMeshNode::loadMesh(const char* filename, const char* normalMapFile)
+bool bumpNormalMeshNode::loadMesh(const char* filename, const char* normalMapFile)
 {
 	if (m_loaded)
 		return false;
@@ -66,7 +68,7 @@ bool dumpedNormalMeshNode::loadMesh(const char* filename, const char* normalMapF
 	bool ret = false;
 
 	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	if (pScene)
 	{
 		ret = initFromScene(pScene, filename);
@@ -84,12 +86,12 @@ bool dumpedNormalMeshNode::loadMesh(const char* filename, const char* normalMapF
 	
 }
 
-void dumpedNormalMeshNode::clear()
+void bumpNormalMeshNode::clear()
 {
 
 }
 
-bool dumpedNormalMeshNode::initFromScene(const aiScene* scene, const char* filename)
+bool bumpNormalMeshNode::initFromScene(const aiScene* scene, const char* filename)
 {
 	m_Entries.resize(scene->mNumMeshes);
 	for (int n = 0; n < m_Entries.size(); ++n)
@@ -101,7 +103,7 @@ bool dumpedNormalMeshNode::initFromScene(const aiScene* scene, const char* filen
 	return InitMaterials(scene, filename);
 }
 
-void dumpedNormalMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
+void bumpNormalMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
 	
 	std::vector<Vertex> vertices;
@@ -113,8 +115,9 @@ void dumpedNormalMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		const aiVector3D& pos = paiMesh->mVertices[n];
 		const aiVector3D& normal = paiMesh->HasNormals() ? paiMesh->mNormals[n] : zero;
 		aiVector3D texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
+		const aiVector3D& pTangent = zero;
 
-		vertices.push_back(Vertex(Vector3(pos.x, pos.y, pos.z), Vector2(texCoords.x, texCoords.y), Vector3(normal.x, normal.y, normal.z), Vector3()));
+		vertices.push_back(Vertex(Vector3(pos.x, pos.y, pos.z), Vector2(texCoords.x, texCoords.y), Vector3(normal.x, normal.y, normal.z), Vector3(pTangent.x, pTangent.y, pTangent.z)));
 	}
 
 	for (int n = 0; n < paiMesh->mNumFaces; ++n)
@@ -134,7 +137,7 @@ void dumpedNormalMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 	
 }
 
-bool dumpedNormalMeshNode::InitMaterials(const aiScene* pScene, const char* filename)
+bool bumpNormalMeshNode::InitMaterials(const aiScene* pScene, const char* filename)
 {
 	if (!pScene->HasMaterials())
 		return true;
@@ -156,16 +159,14 @@ bool dumpedNormalMeshNode::InitMaterials(const aiScene* pScene, const char* file
 	return true;
 }
 
-dumpedNormalMeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
+bumpNormalMeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
 {
 	type = tp;
 	path = path_;	
 }
 
-void dumpedNormalMeshNode::Texture::load()
+void bumpNormalMeshNode::Texture::load()
 {
-
-	
 	if (std::string::npos != path.rfind(".bmp"))
 	{
 		id = TextureMgr->loadTextureBmp(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
@@ -188,14 +189,14 @@ void dumpedNormalMeshNode::Texture::load()
 
 }
 
-void dumpedNormalMeshNode::Texture::bind(GLuint texId)
+void bumpNormalMeshNode::Texture::bind(GLuint texId)
 {
 	// Set the filtering mode
 	glActiveTexture(texId);
 	TextureMgr->bindTexture(id);
 }
 
-dumpedNormalMeshNode::MeshEntry::MeshEntry()
+bumpNormalMeshNode::MeshEntry::MeshEntry()
 {
 	VB = 0;
 	IB = 0;
@@ -203,7 +204,7 @@ dumpedNormalMeshNode::MeshEntry::MeshEntry()
 	MaterialIndex = 0;
 }
 
-dumpedNormalMeshNode::MeshEntry::~MeshEntry()
+bumpNormalMeshNode::MeshEntry::~MeshEntry()
 {
 	/*
 	if (VB != 0)
@@ -218,41 +219,49 @@ dumpedNormalMeshNode::MeshEntry::~MeshEntry()
 }
 
 
-void dumpedNormalMeshNode::MeshEntry::Init(std::vector<dumpedNormalMeshNode::Vertex>& Vertices, std::vector<unsigned int>& Indices)
+void bumpNormalMeshNode::MeshEntry::Init(std::vector<bumpNormalMeshNode::Vertex>& Vertices, std::vector<unsigned int>& Indices)
 {
+	
 	Vector2 uv1, uv2;
-	Vector3 edge1, edge2, tangent;
+	Vector3 edge1, edge2, tangent, bitangent;
 	float f;
 	for (unsigned int i = 0; i < Indices.size(); i+=3)
 	{
-		uv1 = Vertices[i + 1].uv - Vertices[i].uv;
-		uv2 = Vertices[i + 2].uv - Vertices[i].uv;
-		edge1 = Vertices[i + 1].pos - Vertices[i].pos;
-		edge2 = Vertices[i + 2].pos - Vertices[i].pos;
+		uv1 = Vertices[Indices[i+1]].uv - Vertices[Indices[i]].uv;
+		uv2 = Vertices[Indices[i+2]].uv - Vertices[Indices[i]].uv;
+		edge1 = Vertices[Indices[i + 1]].pos - Vertices[Indices[i]].pos;
+		edge2 = Vertices[Indices[i + 2]].pos - Vertices[Indices[i]].pos;
 
 		f = 1.0f / (uv1.x*uv2.y - uv2.x*uv1.y);
-		tangent.x = f*(uv2.y*edge1.x - uv1.x*edge2.x);
-		tangent.y = f*(uv2.y*edge1.y - uv1.x*edge2.y);
-		tangent.z = f*(uv2.y*edge1.z - uv1.x*edge2.z);
+		tangent.x = f*(uv2.y*edge1.x - uv1.y*edge2.x);
+		tangent.y = f*(uv2.y*edge1.y - uv1.y*edge2.y);
+		tangent.z = f*(uv2.y*edge1.z - uv1.y*edge2.z);
+		bitangent.x = f*(-uv2.x*edge1.x + uv1.x*edge2.x);
+		bitangent.y = f*(-uv2.x*edge1.y + uv1.x*edge2.y);
+		bitangent.z = f*(-uv2.x*edge1.z + uv1.x*edge2.z);
+		
+		tangent.normalize();
 
-		Vertices[i + 0].tangent += tangent;
-		Vertices[i + 1].tangent += tangent;
-		Vertices[i + 2].tangent += tangent;
+		Vertices[Indices[i]].tangent += tangent;
+		Vertices[Indices[i+1]].tangent += tangent;
+		Vertices[Indices[i+2]].tangent += tangent;
+		//Vertices[Indices[i]].bitangent += bitangent;
+		//Vertices[Indices[i+1]].bitangent += bitangent;
+		//Vertices[Indices[i+2]].bitangent += bitangent;
 	}
 
 	for (unsigned int i = 0; i < Indices.size(); ++i)
 	{
 		Vertices[i].tangent.normalize();
 	}
-
+	
 
 
 	glGenBuffers(1, &VB);
 	glBindBuffer(GL_ARRAY_BUFFER, VB);
-	std::vector<dumpedNormalMeshNode::Vertex>::iterator verItr = Vertices.begin();
-	size_t verSize = sizeof(dumpedNormalMeshNode::Vertex)*Vertices.size();
+	std::vector<bumpNormalMeshNode::Vertex>::iterator verItr = Vertices.begin();
+	size_t verSize = sizeof(bumpNormalMeshNode::Vertex)*Vertices.size();
 	void* verPtr = &(*verItr);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(Verticess), Verticess, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, verSize, verPtr, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 

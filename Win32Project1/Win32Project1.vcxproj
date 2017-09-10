@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -98,7 +98,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -156,10 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\JikeTest.h" />
+    <ClInclude Include="application\meshbumpNormal.h" />
     <ClInclude Include="application\meshObject.h" />
     <ClInclude Include="application\meshShadow.h" />
     <ClInclude Include="application\meshShadowMap.h" />
-    <ClInclude Include="application\SkyBox.h" />
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
@@ -168,7 +168,7 @@
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
     <ClInclude Include="GE\common.h" />
-    <ClInclude Include="GE\dumpedNormalMeshNode.h" />
+    <ClInclude Include="GE\bumpNormalMeshNode.h" />
     <ClInclude Include="GE\FileUnits.h" />
     <ClInclude Include="GE\MeshNode.h" />
     <ClInclude Include="GE\math\Mat3.h" />
@@ -185,6 +185,7 @@
     <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\Scene.h" />
+    <ClInclude Include="GLPorj\tech\bumpNormalLightTechnique.h" />
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
     <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
     <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h" />
@@ -246,10 +247,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\JikeTest.cpp" />
+    <ClCompile Include="application\meshbumpNormal.cpp" />
     <ClCompile Include="application\meshObject.cpp" />
     <ClCompile Include="application\meshShadow.cpp" />
     <ClCompile Include="application\meshShadowMap.cpp" />
-    <ClCompile Include="application\SkyBox.cpp" />
     <ClCompile Include="application\Texture2D.cpp" />
     <ClCompile Include="application\triangleVertebralLight.cpp" />
     <ClCompile Include="application\triangleVertebralTexture.cpp" />
@@ -257,7 +258,7 @@
     <ClCompile Include="GE\Camera.cpp" />
     <ClCompile Include="GE\Camera3D.cpp" />
     <ClCompile Include="GE\Camera2D.cpp" />
-    <ClCompile Include="GE\dumpedNormalMeshNode.cpp" />
+    <ClCompile Include="GE\bumpNormalMeshNode.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
     <ClCompile Include="GE\MeshNode.cpp" />
     <ClCompile Include="GE\math\Mat3.cpp" />
@@ -274,6 +275,7 @@
     <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\Scene.cpp" />
+    <ClCompile Include="GLPorj\tech\bumpNormalLightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp" />

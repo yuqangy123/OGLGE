@@ -4,11 +4,11 @@
 #include "GL\glew.h"
 #include "Vector2.h"
 
-class dumpedNormalMeshNode
+class bumpNormalMeshNode
 {
 public:
-	dumpedNormalMeshNode();
-	~dumpedNormalMeshNode();
+	bumpNormalMeshNode();
+	~bumpNormalMeshNode();
 
 	bool loadMesh(const char* filename, const char* normalMapFile);
 
@@ -21,7 +21,11 @@ public:
 	void setAttriPositionLoc(int loc) { positionLoc = loc; };
 	void setAttriTexCoordLoc(int loc) { texCoordLoc = loc; };
 	void setAttriNormalLoc(int loc) { normalLoc = loc; };
-
+	void setAttriTangentLoc(int loc) { tangentLoc = loc; };
+	void setUniformTextureLoc(int loc) { s_textureLoc = loc; };
+	void setUniformNormalTextureLoc(int loc) { s_normalTextureLoc = loc; };
+	
+	
 protected:
 	bool initFromScene(const aiScene* scene, const char* filename);
 	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
@@ -75,6 +79,10 @@ protected:
 	int texCoordLoc;
 	int normalLoc;
 	int tangentLoc;
+
+	int s_textureLoc;
+	int s_normalTextureLoc;
+
 	Texture* m_pNormalMapTex = nullptr;
 
 	bool m_loaded = false;

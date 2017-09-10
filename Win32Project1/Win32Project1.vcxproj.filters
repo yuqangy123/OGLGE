@@ -318,11 +318,14 @@
     <ClInclude Include="GLPorj\tech\shadowMeshTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
-    <ClInclude Include="application\SkyBox.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GE\dumpedNormalMeshNode.h">
+    <ClInclude Include="GE\bumpNormalMeshNode.h">
       <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\bumpNormalLightTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="application\meshbumpNormal.h">
+      <Filter>application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -437,11 +440,14 @@
     <ClCompile Include="GLPorj\tech\shadowMeshTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
-    <ClCompile Include="application\SkyBox.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GE\dumpedNormalMeshNode.cpp">
+    <ClCompile Include="GE\bumpNormalMeshNode.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\bumpNormalLightTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\meshbumpNormal.cpp">
+      <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
