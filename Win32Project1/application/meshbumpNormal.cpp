@@ -170,6 +170,7 @@ void meshbumpNormal::update(float ft)
 	static float rty = 0.0;
 	m_pipe.Rotate(0, rty, 0);
 	rty += 0.09f;
+	
 }
 
 void meshbumpNormal::setPosition(float x, float y, float z)
