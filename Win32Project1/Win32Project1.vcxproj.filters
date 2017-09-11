@@ -327,6 +327,12 @@
     <ClInclude Include="application\meshbumpNormal.h">
       <Filter>application</Filter>
     </ClInclude>
+    <ClInclude Include="application\SkyBox.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\skyBoxTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -448,6 +454,12 @@
     </ClCompile>
     <ClCompile Include="application\meshbumpNormal.cpp">
       <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="application\SkyBox.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\skyBoxTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

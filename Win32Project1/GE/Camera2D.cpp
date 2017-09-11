@@ -27,7 +27,7 @@ void Camera2D::init()
 	//m_transition.transpose();
 }
 
-Matrix4f Camera2D::getCameraTranlation()
+const Matrix4f& Camera2D::getCameraTranlation()
 {
 	return m_transition;
 }

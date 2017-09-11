@@ -132,7 +132,7 @@ void Camera3D::InitCameraTrans()
 	m_dirty = true;
 }
 
-Matrix4f Camera3D::getCameraTranlation()
+const Matrix4f& Camera3D::getCameraTranlation()
 {
 	if (m_dirty)
 	{

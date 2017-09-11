@@ -19,28 +19,29 @@ void MeshNode::draw()
 {
 
 	glEnableVertexAttribArray(positionLoc);
-	glEnableVertexAttribArray(texCoordLoc);
-	glEnableVertexAttribArray(normalLoc);
+	//glEnableVertexAttribArray(texCoordLoc);
+	//glEnableVertexAttribArray(normalLoc);
 	glEnable(GL_TEXTURE_2D);
 
 	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		m_Textures[itr->MaterialIndex-1]->bind();		
+		if (m_Textures.size() >= itr->MaterialIndex && itr->MaterialIndex > 0)
+			m_Textures[itr->MaterialIndex-1]->bind();
 		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
 		const unsigned int VertexSize = sizeof(Vertex);
 		glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, pos));
-		glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
-		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
+		//glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
+		//glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
 		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);				
 	}
 	glDisableVertexAttribArray(positionLoc);
-	glDisableVertexAttribArray(texCoordLoc);
-	glDisableVertexAttribArray(normalLoc);
+	//glDisableVertexAttribArray(texCoordLoc);
+	//glDisableVertexAttribArray(normalLoc);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

@@ -11,7 +11,7 @@ public:
 	~Camera2D();
 	
 
-	Matrix4f getCameraTranlation();
+	const Matrix4f& getCameraTranlation();
 
 protected:
 	void init();

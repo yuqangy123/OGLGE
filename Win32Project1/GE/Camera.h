@@ -5,7 +5,7 @@
 class Camera : public Node
 {
 public:
-	virtual Matrix4f getCameraTranlation() {return Matrix4f();};
+	virtual const Matrix4f& getCameraTranlation() { return Matrix4f(); };
 	inline bool dirty() { return m_dirty; };
 	inline void dirty(bool dir) { m_dirty = dir; };
 

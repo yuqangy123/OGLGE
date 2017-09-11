@@ -38,9 +38,9 @@ public:
 
 	const Matrix4f* GetTrans();
 	const Matrix4f* GetWorldTrans();
-	Vector3 getWorldPos() {
-		return m_worldPos;
-	}
+	Vector3 getWorldPos() { return m_worldPos; }
+	const Matrix4f* getVPTrans();
+
 private:
 	void InitScaleTrans(Matrix4f& mat);
 	void InitRotateTrans(Matrix4f& mat);

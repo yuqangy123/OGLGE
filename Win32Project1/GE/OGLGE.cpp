@@ -8,6 +8,9 @@
 #include "meshShadowMap.h"
 #include "meshShadow.h"
 #include "meshbumpNormal.h"
+#include "Skybox.h"
+
+static CScene* st_scene = nullptr;
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -97,9 +100,44 @@ void OGLGE::init(int argc, char** argv)
 	m_director->init();
 }
 
+void testBumpNormalMesh()
+{
+	meshObject* m = new meshObject();
+	m->loadMesh("content/box.obj");
+	m->setPosition(0, 0, -3);
+	//scene->addNode(m);
+
+	meshbumpNormal* bumpNormal = new meshbumpNormal();
+	bumpNormal->setPosition(0, 0, -1);
+	bumpNormal->loadMesh("content/box.obj", "content/normal_map.jpg");
+	st_scene->addNode(bumpNormal);
+
+	DefaultCamera->setEyePosition(2.5, 1.5, 0);
+	DefaultCamera->setTargetPosition(Vector3(0, -1, -4));
+	DefaultCamera->setFreeCamera(true);
+}
+
+void testSkybox()
+{
+	SkyBox* box = new SkyBox();
+
+	std::vector<std::string> imgs;
+	imgs.push_back("content/sp3right.jpg");
+	imgs.push_back("content/sp3left.jpg");
+	imgs.push_back("content/sp3top.jpg");
+	imgs.push_back("content/sp3bot.jpg");
+	imgs.push_back("content/sp3front.jpg");
+	imgs.push_back("content/sp3back.jpg");
+	box->loadMesh(imgs);
+	
+
+	st_scene->addNode(box);
+
+	DefaultCamera->setFreeCamera(true);
+}
 void OGLGE::test()
 {
-	auto scene = getRunScene();
+	st_scene = getRunScene();
 
 	
 
@@ -141,21 +179,8 @@ void OGLGE::test()
 
 	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1); texture1->setScale(0.5);
 
-	{
-		meshObject* m = new meshObject(); 
-		m->loadMesh("content/box.obj"); 
-		m->setPosition(0, 0, -3); 
-		//scene->addNode(m);
-
-		meshbumpNormal* bumpNormal = new meshbumpNormal();
-		bumpNormal->setPosition(0, 0, -1);
-		bumpNormal->loadMesh("content/box.obj", "content/normal_map.jpg");
-		scene->addNode(bumpNormal);
-
-		DefaultCamera->setEyePosition(2.5, 1.5, 0);
-		DefaultCamera->setTargetPosition(Vector3(0, -1, -4));
-		DefaultCamera->setFreeCamera(true);
-	}
+	//testBumpNormalMesh();
+	testSkybox();
 }
 
 void OGLGE::start()

@@ -34,7 +34,7 @@ public:
 	const Vector3& getTargetPosition() { return m_target; }
 	const Vector3& getEyePosition() { return m_eye; }
 
-	Matrix4f getCameraTranlation();
+	const Matrix4f& getCameraTranlation();
 
 	void setFreeCamera(bool b);
 

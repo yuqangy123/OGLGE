@@ -87,3 +87,8 @@ const Matrix4f* Pipeline::GetWorldTrans()
 {
 	return &m_worldtrans;
 }
+
+const Matrix4f* Pipeline::getVPTrans()
+{
+	return &m_camera->getCameraTranlation();
+}

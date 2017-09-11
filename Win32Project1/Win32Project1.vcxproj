@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -98,7 +98,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,6 +160,7 @@
     <ClInclude Include="application\meshObject.h" />
     <ClInclude Include="application\meshShadow.h" />
     <ClInclude Include="application\meshShadowMap.h" />
+    <ClInclude Include="application\SkyBox.h" />
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
     <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h" />
     <ClInclude Include="GLPorj\tech\shadowMeshTechnique.h" />
+    <ClInclude Include="GLPorj\tech\skyBoxTechnique.h" />
     <ClInclude Include="GLPorj\tech\techDefine.h" />
     <ClInclude Include="GLPorj\tech\texture2dTechnique.h" />
     <ClInclude Include="GLPorj\Texture2DRender.h" />
@@ -251,6 +253,7 @@
     <ClCompile Include="application\meshObject.cpp" />
     <ClCompile Include="application\meshShadow.cpp" />
     <ClCompile Include="application\meshShadowMap.cpp" />
+    <ClCompile Include="application\SkyBox.cpp" />
     <ClCompile Include="application\Texture2D.cpp" />
     <ClCompile Include="application\triangleVertebralLight.cpp" />
     <ClCompile Include="application\triangleVertebralTexture.cpp" />
@@ -280,6 +283,7 @@
     <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\shadowMeshTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\skyBoxTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\texture2dTechnique.cpp" />
     <ClCompile Include="GLPorj\Texture2DRender.cpp" />
     <ClCompile Include="programUniforms\programUniforms.cpp" />
