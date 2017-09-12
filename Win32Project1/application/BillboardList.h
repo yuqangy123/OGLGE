@@ -30,5 +30,4 @@ protected:
 	int m_texture;
 	Pipeline m_pipe;
 	GLuint VBO;
-	GLuint IBO;
 };

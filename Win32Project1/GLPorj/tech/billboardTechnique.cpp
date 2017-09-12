@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "skyBoxTechnique.h"
+#include "billboardTechnique.h"
 
 
-skyBoxTechnique::skyBoxTechnique()
+billboardTechnique::billboardTechnique()
 {
 	positionLoc = -1;
 }
 
 
-skyBoxTechnique::~skyBoxTechnique()
+billboardTechnique::~billboardTechnique()
 {
 }
 
-void skyBoxTechnique::init()
+void billboardTechnique::init()
 {
 	technique::init();
 

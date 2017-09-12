@@ -333,6 +333,12 @@
     <ClInclude Include="GLPorj\tech\skyBoxTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="application\BillboardList.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\billboardTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -459,6 +465,12 @@
       <Filter>application</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\tech\skyBoxTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\BillboardList.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\billboardTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>
