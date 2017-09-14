@@ -3,7 +3,7 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
-#include "tech\skyBoxTechnique.h"
+#include "tech\billboardTechnique.h"
 #include "Node.h"
 #include "Pipeline.h"
 
@@ -26,7 +26,7 @@ protected:
 	void init();
 
 protected:
-	skyBoxTechnique* m_tech = nullptr;
+	billboardTechnique* m_tech = nullptr;
 	int m_texture;
 	Pipeline m_pipe;
 	GLuint VBO;

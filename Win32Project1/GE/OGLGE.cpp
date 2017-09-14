@@ -9,6 +9,7 @@
 #include "meshShadow.h"
 #include "meshbumpNormal.h"
 #include "Skybox.h"
+#include "BillboardList.h"
 
 static CScene* st_scene = nullptr;
 
@@ -50,6 +51,7 @@ void OGLGE::mouseMove(int x, int y)
 
 void OGLGE::initGLContext(int argc, char** argv)
 {
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowSize(m_winRt.width, m_winRt.height);
@@ -68,6 +70,15 @@ void OGLGE::initGLContext(int argc, char** argv)
 		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
 		return;
 	}
+
+	const GLubyte * name = glGetString(GL_VENDOR);
+	const GLubyte * biaoshifu = glGetString(GL_RENDERER);
+	const GLubyte * OpenGLVersion = glGetString(GL_VERSION);
+	const GLubyte * gluVersion = gluGetString(GLU_VERSION);
+	printf("OpenGL实现厂商的名字：%s\n", name);
+	printf("渲染器标识符：%s\n", biaoshifu);
+	printf("OOpenGL实现的版本号：%s\n", OpenGLVersion);
+	printf("OGLU工具库版本：%s\n", gluVersion);
 
 	//set viewport
 	glViewport(0, 0, m_winRt.width, m_winRt.height);
@@ -133,8 +144,19 @@ void testSkybox()
 
 	st_scene->addNode(box);
 
+	DefaultCamera->setEyePosition(0, 0, 0);
+	DefaultCamera->setTargetPosition(Vector3(0, -1, 0));
 	DefaultCamera->setFreeCamera(true);
 }
+
+void testBillboardList()
+{
+	BillboardList* billboard = new BillboardList();
+
+	st_scene->addNode(billboard);
+	DefaultCamera->setFreeCamera(true);
+}
+
 void OGLGE::test()
 {
 	st_scene = getRunScene();
@@ -180,8 +202,12 @@ void OGLGE::test()
 	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1); texture1->setScale(0.5);
 
 	//testBumpNormalMesh();
-	testSkybox();
+
+	//testSkybox();
+
+	testBillboardList();
 }
+
 
 void OGLGE::start()
 {

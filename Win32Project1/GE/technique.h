@@ -12,7 +12,7 @@ public:
 	~technique();
 
 	virtual void init();
-	bool addShader(const char* vshFile, const char* fshFile);
+	bool addShader(const char* vshFile = nullptr, const char* fshFile = nullptr, const char* gshFile = nullptr);
 	void enable();
 
 	const uniformUnit* getUniforms(const char* name);
@@ -26,6 +26,7 @@ protected:
 	GLuint m_shaderProg = 0;
 	GLuint m_vshShader = 0;
 	GLuint m_fshShader = 0;
+	GLuint m_gshShader = 0;
 	std::map<std::string, uniformUnit> m_userUniforms;
 
 };

@@ -11,6 +11,7 @@ technique::~technique()
 {
 	clearShader(m_vshShader);
 	clearShader(m_fshShader);
+	clearShader(m_gshShader);
 
 	glDeleteProgram(m_shaderProg);
 }
@@ -25,21 +26,36 @@ void technique::init()
 	}
 }
 
-bool technique::addShader(const char* vshFile, const char* fshFile)
+bool technique::addShader(const char* vshFile, const char* fshFile, const char* gshFile)
 {
-	if (nullptr == vshFile || nullptr == fshFile || 0 == m_shaderProg)
+	if (0 == m_shaderProg)
 		return false;
 
-	std::string strVsh;
-	FileUnits::Instance()->getFileData(vshFile, strVsh);
-	m_vshShader = loadShader(GL_VERTEX_SHADER, strVsh.c_str());
+	if (nullptr != vshFile)
+	{
+		std::string str;
+		FileUnits::Instance()->getFileData(vshFile, str);
+		m_vshShader = loadShader(GL_VERTEX_SHADER, str.c_str());
+		glAttachShader(m_shaderProg, m_vshShader);
+	}
 
-	std::string strFsh;
-	FileUnits::Instance()->getFileData(fshFile, strFsh);
-	m_fshShader = loadShader(GL_FRAGMENT_SHADER, strFsh.c_str());
-
-	glAttachShader(m_shaderProg, m_vshShader);
-	glAttachShader(m_shaderProg, m_fshShader);
+	if (nullptr != fshFile)
+	{
+		std::string str;
+		FileUnits::Instance()->getFileData(fshFile, str);
+		m_fshShader = loadShader(GL_FRAGMENT_SHADER, str.c_str());
+		glAttachShader(m_shaderProg, m_fshShader);
+	}
+	
+	if (nullptr != gshFile)
+	{
+		std::string str;
+		FileUnits::Instance()->getFileData(gshFile, str);
+		m_gshShader = loadShader(GL_GEOMETRY_SHADER, str.c_str());
+		glAttachShader(m_shaderProg, m_gshShader);
+	}
+	
+	
 
 	return linkShader();
 }
@@ -58,7 +74,7 @@ bool technique::linkShader()
 		{
 			char* infoLog = new char[sizeof(char) * infoLen];
 			glGetProgramInfoLog(m_shaderProg, infoLen, NULL, infoLog);
-			printf("cocos2d: ERROR: Failed to link program:\r\n%s", infoLog);
+			printf("ERROR: Failed to link program:\r\n%s", infoLog);
 			assert(0);
 			delete infoLog;
 		}
