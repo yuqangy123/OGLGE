@@ -339,6 +339,15 @@
     <ClInclude Include="GLPorj\tech\billboardTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="application\Test.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\testTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\skinMeshNode.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -472,6 +481,15 @@
     </ClCompile>
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="application\Test.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\testTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\skinMeshNode.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

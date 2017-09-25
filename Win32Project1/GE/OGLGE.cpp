@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "OGLGE.h"
 
+#include "Test.h"
 #include "Texture2D.h"
 #include "triangleVertebralTexture.h"
 #include "triangleVertebralLight.h"
@@ -149,6 +150,11 @@ void testSkybox()
 	DefaultCamera->setFreeCamera(true);
 }
 
+void testTest()
+{
+	Test* t = new Test();
+	st_scene->addNode(t);
+}
 void testBillboardList()
 {
 	BillboardList* billboard = new BillboardList();
@@ -180,7 +186,7 @@ void OGLGE::test()
 	scene->addNode(shadowMapA);
 	*/
 
-	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); scene->addNode(m);
+	meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); st_scene->addNode(m);
 	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); scene->addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
@@ -197,15 +203,17 @@ void OGLGE::test()
 	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 	//DefaultCamera->setFreeCamera(true);
 
-	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); scene->addNode(texture2); texture2->setPosition(m_winRt.width / 2.0, 50);
+	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); st_scene->addNode(texture2); texture2->setPosition(m_winRt.width / 2.0, 50);
 
-	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); scene->addNode(texture1); texture1->setScale(0.5);
+	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); st_scene->addNode(texture1); texture1->setScale(0.5);
 
 	//testBumpNormalMesh();
 
 	//testSkybox();
 
-	testBillboardList();
+	//testBillboardList();
+
+	//testTest();
 }
 
 

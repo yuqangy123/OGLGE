@@ -39,8 +39,8 @@ void BillboardList::init()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
-	glSelectBuffer();
-	glPushMatrix();
+	//glSelectBuffer();
+	//glPushMatrix();
 }
 
 void BillboardList::update(float ft)
