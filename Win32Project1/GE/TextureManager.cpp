@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TextureManager.h"
 #include "TextureJpegLoader.h"
+#include "TextureTgaLoader.h"
 
 static unsigned int st_texIdSerial = 1;
 
@@ -18,16 +19,7 @@ TextureManager::~TextureManager()
 
 unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
 {
-	unsigned int texID = st_texIdSerial;
-
-	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
-	++st_texIdSerial;
-
-	if (m_texList.find(texID) != m_texList.end())
-	{
-		printf("texture %d already exist\r\n", texID);
-		return 0;
-	}
+	unsigned int texID = makeNewTexId();
 
 	img_data jpgData;
 	if (!TextureJpegLoader::Instance()->getJpgDataEx(filename, jpgData))
@@ -49,16 +41,7 @@ unsigned int  TextureManager::loadTextureJpeg(const char* filename, GLenum image
 
 unsigned int  TextureManager::loadTextureBmp(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
 {
-	unsigned int texID = st_texIdSerial;
-
-	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
-	++st_texIdSerial;
-
-	if (m_texList.find(texID) != m_texList.end())
-	{
-		printf("texture %d already exist\r\n", texID);
-		return 0;
-	}
+	unsigned int texID = makeNewTexId();
 
 	img_data jpgData;
 	if (!TextureJpegLoader::Instance()->getBmpData(filename, jpgData))
@@ -77,13 +60,30 @@ unsigned int  TextureManager::loadTextureBmp(const char* filename, GLenum image_
 	return texID;
 }
 
+unsigned int TextureManager::loadTextureTga(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
+{
+	unsigned int texID = makeNewTexId();
+
+	img_tga_data imgData;
+	if (!TextureTgaLoader::Instance()->getTgaData(filename, imgData))
+	{
+		printf("load jpeg texture failed:\r\n%s\r\n", filename);
+		return 0;
+	}
+	GLuint textureId = 0;
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	glTexImage2D(GL_TEXTURE_2D, level, inernal_format, imgData.width, imgData.height, border,
+		image_format, GL_UNSIGNED_BYTE, imgData.imageData);
+
+	m_texList[texID] = TextureData(textureId, imgData.width, imgData.height, image_format, imageExt::JPEG);
+	return texID;
+}
 
 unsigned int TextureManager::loadTextureCube(std::vector<std::string>& imgs, GLenum image_format, GLenum inernal_format, GLint level, GLint border)
 {
-	unsigned int texID = st_texIdSerial;
-
-	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
-	++st_texIdSerial;
+	unsigned int texID = makeNewTexId();
 
 	GLuint type[6];
 	type[0] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
@@ -153,4 +153,21 @@ bool TextureManager::bindTexture(unsigned int texID, int target)
 		return true;
 	}
 	return false;
+}
+
+unsigned int TextureManager::makeNewTexId()
+{
+	unsigned int makeNewTexId();
+	unsigned int texID = st_texIdSerial;
+
+	if (st_texIdSerial == unsigned int(-1)) st_texIdSerial = 1;
+	++st_texIdSerial;
+
+	if (m_texList.find(texID) != m_texList.end())
+	{
+		printf("texture %d already exist\r\n", texID);
+		return 0;
+	}
+
+	return texID;
 }
