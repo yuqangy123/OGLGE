@@ -13,7 +13,7 @@ public:
 	void setPosition(float x, float y);
 	void setScale(float s);
 
-	void update(float ft);
+	void update(float  ft);
 	void draw();
 
 protected:

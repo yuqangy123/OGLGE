@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "OGLGE.h"
+#include "ogldev_util.h"
 
 #include "Test.h"
 #include "Texture2D.h"
@@ -32,7 +33,9 @@ void OGLGE::update(float ft)
 
 void OGLGE::draw()
 {
-	OGLGE::update(0.0f);
+	static unsigned long st_startTime = GetCurrentTimeMillis();
+	float RunningTime = (float)(GetCurrentTimeMillis() - st_startTime) / 1000.0f;
+	OGLGE::update(RunningTime);
 	OGLGE::Instance()->m_director->draw();
 }
 

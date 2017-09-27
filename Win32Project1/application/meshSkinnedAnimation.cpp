@@ -55,6 +55,7 @@ void meshSkinnedAnimation::draw()
 void meshSkinnedAnimation::update(float ft)
 {
 	m_WVPMt4 = *m_pipe.GetTrans();
+	m_mesh->update(ft);
 }
 
 void meshSkinnedAnimation::setPosition(float x, float y, float z)
@@ -85,6 +86,8 @@ bool meshSkinnedAnimation::loadMesh(const char* filename, const Vector3& pos, co
 	m_mesh->texCoordLoc = m_tech->texCoordLoc;
 	m_mesh->weightsLoc = m_tech->weightsLoc;
 	m_mesh->boneIDsLoc = m_tech->boneIDsLoc;
+
+	m_mesh->playAnimation("", 0.0);
 }
 
 void meshSkinnedAnimation::keyInput(unsigned char param, int x, int y)

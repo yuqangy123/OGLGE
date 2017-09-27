@@ -354,6 +354,15 @@
     <ClInclude Include="GLPorj\tech\skinnedMeshTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="texture\TextureTgaLoader.h">
+      <Filter>texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\ogldev_util.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\ogldev_types.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -502,6 +511,12 @@
     </ClCompile>
     <ClCompile Include="GLPorj\tech\skinnedMeshTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\TextureTgaLoader.cpp">
+      <Filter>texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\ogldev_util.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

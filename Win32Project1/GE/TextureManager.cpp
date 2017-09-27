@@ -70,6 +70,28 @@ unsigned int TextureManager::loadTextureTga(const char* filename, GLenum image_f
 		printf("load jpeg texture failed:\r\n%s\r\n", filename);
 		return 0;
 	}
+
+	if (imgData.imageType == GL_RGB)
+	{
+		int buffLen = imgData.dataLen + imgData.dataLen / 3;
+		GLubyte* buff = new GLubyte[buffLen];
+
+		//convert to RGBA8888
+		unsigned char* tdata = buff;
+		GLubyte* pixels = imgData.imageData;
+		for (int n = 0; n < imgData.dataLen - 2; n += 3)
+		{
+			*tdata++ = *(pixels + n + 0);
+			*tdata++ = *(pixels + n + 1);
+			*tdata++ = *(pixels + n + 2);
+			*tdata++ = 0xFF;
+		}
+		delete pixels;
+		imgData.imageData = buff;
+		imgData.dataLen = buffLen;
+		imgData.imageType = GL_RGBA;
+	}
+
 	GLuint textureId = 0;
 	glGenTextures(1, &textureId);
 	glBindTexture(GL_TEXTURE_2D, textureId);

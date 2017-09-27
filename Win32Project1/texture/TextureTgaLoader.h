@@ -5,6 +5,7 @@
 typedef struct _img_tga_data
 {
 	GLubyte*    imageData;				//memory need be safe release for yourself
+	unsigned int  dataLen;
 	GLuint        width;
 	GLuint        height;
 	GLuint        bpp;                //Image color depth in bits per pixel

@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
+#include "Importer.hpp"
 
 class MeshNode
 {
@@ -74,4 +75,6 @@ protected:
 	int normalLoc;
 
 	bool m_loaded = false;
+
+	Assimp::Importer m_importer;
 };

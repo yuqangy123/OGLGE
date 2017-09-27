@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "skinMeshNode.h"
 #include "anim.h"
-#include "Importer.hpp"
 #include "postprocess.h"
 #include "TextureManager.h"
 
@@ -71,16 +70,14 @@ bool skinMeshNode::loadMesh(const char* filename)
 
 	bool ret = false;
 
-	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
-	m_aiScene = pScene;
-	if (pScene)
+	m_aiScene = m_importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+	if (m_aiScene)
 	{
-		ret = initFromScene(pScene, filename);
+		ret = initFromScene(m_aiScene, filename);
 	}
 	else
 	{
-		printf("error parsing %s : %s\r\n", filename, importer.GetErrorString());
+		printf("error parsing %s : %s\r\n", filename, m_importer.GetErrorString());
 		assert(0);
 	}
 
@@ -232,7 +229,7 @@ void skinMeshNode::Texture::load()
 	}	
 	else if (std::string::npos != path.rfind(".tga"))
 	{
-		id = TextureMgr->loadTextureBmp(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
+		id = TextureMgr->loadTextureTga(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
 	}
 	else
 	{
@@ -304,7 +301,7 @@ void skinMeshNode::MeshEntry::Init(unsigned int index, std::vector<skinMeshNode:
 	NumVertex = Vertices.size();
 }
 
-void skinMeshNode::BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Transforms)
+void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Transforms)
 {
 	aiAnimation* aianim = m_aiScene->mAnimations[0];
 	double durTime = aianim->mDuration / (aianim->mTicksPerSecond == 0 ? 25.f : aianim->mTicksPerSecond);
@@ -321,7 +318,7 @@ void skinMeshNode::BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Tra
 	}
 }
 
-void CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, const aiNodeAnim* pNodeAnim)
+void CalcInterpolatedScaling(aiVector3D& Out, double AnimationTime, const aiNodeAnim* pNodeAnim)
 {
 	int startn = 0;
 	int endn = 0;
@@ -344,12 +341,12 @@ void CalcInterpolatedScaling(aiVector3D& Out, float AnimationTime, const aiNodeA
 }
 
 
-unsigned int FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+unsigned int FindRotation(double AnimationTime, const aiNodeAnim* pNodeAnim)
 {
 	assert(pNodeAnim->mNumRotationKeys > 0);
 
 	for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys - 1; i++) {
-		if (AnimationTime < (float)pNodeAnim->mRotationKeys[i + 1].mTime) {
+		if (AnimationTime < pNodeAnim->mRotationKeys[i + 1].mTime) {
 			return i;
 		}
 	}
@@ -411,7 +408,7 @@ void CalcInterpolatedPosition(aiVector3D& Out, float AnimationTime, const aiNode
 	Out = Start + Factor * Delta;
 }
 
-void skinMeshNode::ReadNodeHeirarchy(float timeTicks, aiNode* nd, Matrix4f& parentTransform)
+void skinMeshNode::ReadNodeHeirarchy(long long timeTicks, aiNode* nd, Matrix4f& parentTransform)
 {
 	std::string ndName(nd->mName.C_Str());
 	unsigned int bIndex = m_bonesMapping[ndName];
@@ -467,7 +464,7 @@ void skinMeshNode::ReadNodeHeirarchy(float timeTicks, aiNode* nd, Matrix4f& pare
 	}
 }
 
-void skinMeshNode::playAnimation(const char* anim, float time)
+void skinMeshNode::playAnimation(const char* anim, long long  time)
 {
 	m_playAnimName.assign(anim);
 	m_animTime = time;
@@ -478,7 +475,7 @@ void skinMeshNode::update(float ft)
 {
 	if (m_playing)
 	{
-		BoneTransform(ft - m_animTime, m_bonesTransforms);
+		BoneTransform(ft, m_bonesTransforms);
 	}
 	
 }

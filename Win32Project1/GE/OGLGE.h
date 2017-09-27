@@ -40,7 +40,6 @@ protected:
 	void initGLContext(int argc, char** argv);
 
 protected:
-
 	CDirector* m_director;
 	Rect m_winRt;
 };

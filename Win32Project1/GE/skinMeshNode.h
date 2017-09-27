@@ -4,6 +4,7 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
+#include "Importer.hpp"
 
 class skinMeshNode
 {
@@ -81,7 +82,7 @@ public:
 
 	void draw();
 
-	void playAnimation(const char* anim, float time);
+	void playAnimation(const char* anim, long long time);
 
 	//获取骨骼的转换矩阵
 	const std::vector<Matrix4f>& getBonesTransformMt4();
@@ -90,9 +91,9 @@ protected:
 	bool initFromScene(const aiScene* scene, const char* filename);
 	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
 	bool InitMaterials(const aiScene* pScene, const char* filename);
-	void BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Transforms);
+	void BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Transforms);
 	void loadBone(const aiMesh* pMesh, std::vector<skinMeshNode::Vertex>& vertexs);
-	void ReadNodeHeirarchy(float timeTicks, aiNode* nd, Matrix4f& parentTransform);
+	void ReadNodeHeirarchy(long long timeTicks, aiNode* nd, Matrix4f& parentTransform);
 
 public:
 	Vector3 position;
@@ -114,6 +115,7 @@ protected:
 	bool m_loaded = false;
 
 	const aiScene* m_aiScene;
+	Assimp::Importer m_importer;
 
 	float m_animTime = 0.0f;
 

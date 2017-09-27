@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"
+#include "Importer.hpp"
 
 class bumpNormalMeshNode
 {
@@ -84,6 +85,7 @@ protected:
 	int s_normalTextureLoc;
 
 	Texture* m_pNormalMapTex = nullptr;
+	Assimp::Importer m_importer;
 
 	bool m_loaded = false;
 };

@@ -50,7 +50,17 @@ bool TextureTgaLoader::getTgaData(const char* filename, img_tga_data& tgaData)
 {
 	if (filename == NULL)
 		return false;
-
+	/*
+	0 - 文件中没有图像数据
+		1 - 未压缩的，颜色表图像
+		2 - 未压缩的，rgb 图像
+		3 - 未压缩的，黑白图像
+		9 - runlength 编码的颜色表图像
+		10 - runlength 编码的 rgb 图像
+		11 - 压缩的，黑白图像
+		32 - 使用 huffman, delta 和 runlength 编码的颜色表图像
+		33 - 使用 huffman, delta 和 runlength 编码的颜色映射图像，4
+	*/
 	Header uTGAcompare = { 0,0,2,0,0,0,0,0 };        //2为非压缩RGB格式        3  -  未压缩的，黑白图像
 	Header cTGAcompare = { 0,0,10,0,0,0,0,0 };        //10为压缩RGB格式
 
@@ -81,7 +91,7 @@ bool TextureTgaLoader::getTgaData(const char* filename, img_tga_data& tgaData)
 		return false;
 	}
 
-
+	uTGAcompare.cmapBits = header.head.cmapBits;
 	if (memcmp(&uTGAcompare, &header.head, sizeof(header.head)) == 0) {            //未压缩TGA
 		tgaData.bCompressed = false;
 		if (!loadUncompressedTGA(&tgaData, file)) {
@@ -112,6 +122,7 @@ bool TextureTgaLoader::loadUncompressedTGA(img_tga_data* texture, FILE* file)
 	GLuint bytePerPixel = texture->bpp / 8;
 	GLuint imgSize = texture->width*texture->height*bytePerPixel;                //图像总字节数
 	texture->imageData = new GLubyte[imgSize];
+	texture->dataLen = imgSize;
 
 	if (fread(texture->imageData, 1, imgSize, file) != imgSize)
 	{
@@ -140,6 +151,7 @@ bool TextureTgaLoader::loadCompressedTGA(img_tga_data* texture, FILE* file)
 	GLuint bytePerPixel = texture->bpp / 8;
 	GLuint imgSize = texture->width*texture->height*bytePerPixel;
 	texture->imageData = new GLubyte[imgSize];
+	texture->dataLen = imgSize;
 
 	GLuint pixelcount = texture->width * texture->height;
 	GLuint currentPixel = 0;        //当前正在读取的像素

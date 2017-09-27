@@ -67,15 +67,14 @@ bool bumpNormalMeshNode::loadMesh(const char* filename, const char* normalMapFil
 
 	bool ret = false;
 
-	Assimp::Importer importer;
-	const aiScene* pScene = importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	const aiScene* pScene = m_importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	if (pScene)
 	{
 		ret = initFromScene(pScene, filename);
 	}
 	else
 	{
-		printf("error parsing %s : %s\r\n", filename, importer.GetErrorString());
+		printf("error parsing %s : %s\r\n", filename, m_importer.GetErrorString());
 		assert(0);
 	}
 

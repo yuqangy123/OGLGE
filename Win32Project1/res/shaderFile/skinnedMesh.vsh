@@ -1,3 +1,4 @@
+#version 330
 
 const int MAX_BONES = 100;
 
