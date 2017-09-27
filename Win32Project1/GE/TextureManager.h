@@ -32,11 +32,16 @@ public:
 	
 	unsigned int loadTextureJpeg(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
 	unsigned int loadTextureBmp(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
+	unsigned int loadTextureTga(const char* filename, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
 	unsigned int loadTextureCube(std::vector<std::string>& imgs, GLenum image_format, GLenum inernal_format, GLint level, GLint border);
 	
 	const TextureData& getTexture(unsigned int texID);
 	void unloadTexture(unsigned int texID);
 	bool bindTexture(unsigned int texID, int target = GL_TEXTURE_2D);
+
+protected:
+	unsigned int makeNewTexId();
+
 
 protected:
 	std::map<unsigned int, TextureData>	m_texList;
