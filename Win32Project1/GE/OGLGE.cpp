@@ -11,6 +11,7 @@
 #include "meshbumpNormal.h"
 #include "Skybox.h"
 #include "BillboardList.h"
+#include "meshSkinnedAnimation.h"
 
 static CScene* st_scene = nullptr;
 
@@ -128,7 +129,6 @@ void testBumpNormalMesh()
 	DefaultCamera->setTargetPosition(Vector3(0, -1, -4));
 	DefaultCamera->setFreeCamera(true);
 }
-
 void testSkybox()
 {
 	SkyBox* box = new SkyBox();
@@ -149,7 +149,6 @@ void testSkybox()
 	DefaultCamera->setTargetPosition(Vector3(0, -1, 0));
 	DefaultCamera->setFreeCamera(true);
 }
-
 void testTest()
 {
 	Test* t = new Test();
@@ -161,6 +160,12 @@ void testBillboardList()
 
 	st_scene->addNode(billboard);
 	DefaultCamera->setFreeCamera(true);
+}
+void testSkinnedAnimation()
+{
+	meshSkinnedAnimation* test = new meshSkinnedAnimation();
+	test->loadMesh("content/boblampclean.md5mesh", Vector3(0, 0, -10), Vector3(1.0, 1.0, 1.0));
+	st_scene->addNode(test);
 }
 
 void OGLGE::test()
@@ -186,7 +191,7 @@ void OGLGE::test()
 	scene->addNode(shadowMapA);
 	*/
 
-	meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); st_scene->addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); st_scene->addNode(m);
 	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); scene->addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
@@ -214,6 +219,8 @@ void OGLGE::test()
 	//testBillboardList();
 
 	//testTest();
+
+	testSkinnedAnimation();
 }
 
 

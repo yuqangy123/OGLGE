@@ -348,6 +348,12 @@
     <ClInclude Include="GE\skinMeshNode.h">
       <Filter>GE</Filter>
     </ClInclude>
+    <ClInclude Include="application\meshSkinnedAnimation.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\skinnedMeshTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -490,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="GE\skinMeshNode.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="application\meshSkinnedAnimation.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\skinnedMeshTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

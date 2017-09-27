@@ -22,6 +22,11 @@ int main(int argc, char** argv)
 	OGLGE::Instance()->init(argc, argv);
 	OGLGE::Instance()->test();
 	OGLGE::Instance()->start();
+
+
+
+
+
 	return 0;
 
 	int nSelect = 0;

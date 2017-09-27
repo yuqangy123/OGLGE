@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "scene.h"
 #include "GL\glew.h"
 #include "Vector2.h"

@@ -43,32 +43,13 @@ void meshSkinnedAnimation::draw()
 
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_WVPMt4.m);
+	glUniformMatrix4fv(m_tech->getUniformLocation("WVPMatrix"), 1, GL_TRUE, (const float*)m_WVPMt4.m);
 
 	const std::vector<Matrix4f>& bonesTransforms = m_mesh->getBonesTransformMt4();
 	for (int i = 0; i < bonesTransforms.size(); ++i)
 		m_tech->setUniformBonesMat4(i, bonesTransforms[i]);
 	
-
-	glEnableVertexAttribArray(m_tech->positionLoc);
-	glEnableVertexAttribArray(m_tech->texCoordLoc);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, 24, 0);
-	glVertexAttribPointer(m_tech->texCoordLoc, 3, GL_FLOAT, GL_FALSE, 24, (GLvoid*)12);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_tech->shadowMap);
-	glUniform1i(m_tech->getUniformLocation("s_texture"), 0);// Set the sampler texture unit to 0
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-	glDisableVertexAttribArray(m_tech->positionLoc);
-	glDisableVertexAttribArray(m_tech->texCoordLoc);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	m_mesh->draw();
 }
 
 void meshSkinnedAnimation::update(float ft)
@@ -104,7 +85,6 @@ bool meshSkinnedAnimation::loadMesh(const char* filename, const Vector3& pos, co
 	m_mesh->texCoordLoc = m_tech->texCoordLoc;
 	m_mesh->weightsLoc = m_tech->weightsLoc;
 	m_mesh->boneIDsLoc = m_tech->boneIDsLoc;
-	m_mesh->bonesTransformMt4Loc = m_tech->bonesTransformMt4Loc;
 }
 
 void meshSkinnedAnimation::keyInput(unsigned char param, int x, int y)
@@ -112,12 +92,8 @@ void meshSkinnedAnimation::keyInput(unsigned char param, int x, int y)
 	float factor = 0.5f;
 	if (param == 'p')
 	{
-		auto epos = m_tech->getLightPosition();
-		m_tech->setLightPosition(epos.x, epos.y, epos.z - 5);
 	}
 	if (param == 'o')
 	{
-		auto epos = m_tech->getLightPosition();
-		m_tech->setLightPosition(epos.x, epos.y, epos.z + 5);
 	}
 }

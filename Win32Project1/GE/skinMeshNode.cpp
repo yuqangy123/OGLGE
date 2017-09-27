@@ -51,8 +51,9 @@ void skinMeshNode::draw()
 		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);				
 	}
 	glDisableVertexAttribArray(positionLoc);
-	//glDisableVertexAttribArray(texCoordLoc);
-	//glDisableVertexAttribArray(normalLoc);
+	glDisableVertexAttribArray(texCoordLoc);
+	glDisableVertexAttribArray(weightsLoc);
+	glDisableVertexAttribArray(boneIDsLoc);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -153,12 +154,12 @@ void skinMeshNode::loadBone(const aiMesh* pMesh, std::vector<skinMeshNode::Verte
 		{
 			aiBone* bone = pMesh->mBones[i];
 			int boneIndex = 0;
-			std::string boneName(bone->mName.C_Str);
+			std::string boneName(bone->mName.C_Str());
 			if (m_bonesMapping.find(boneName) == m_bonesMapping.end())
 			{
 				BoneInfo b;
 				b.name = boneName;
-				m_bones[m_bones.size()] = b;
+				m_bones.push_back(b);
 				m_bonesMapping[boneName] = m_bones.size() - 1;
 			}
 			boneIndex = m_bonesMapping[boneName];
@@ -229,6 +230,10 @@ void skinMeshNode::Texture::load()
 	{
 		id = TextureMgr->loadTextureJpeg(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
 	}	
+	else if (std::string::npos != path.rfind(".tga"))
+	{
+		id = TextureMgr->loadTextureBmp(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
+	}
 	else
 	{
 		printf("cant find support texture load lib\r\n");
@@ -312,7 +317,7 @@ void skinMeshNode::BoneTransform(float TimeInSeconds, std::vector<Matrix4f>& Tra
 	
 	for (int i = 0; i < m_bones.size(); ++i)
 	{
-		Transforms.push_back(m_bones[i].finalTransformationMat4);
+		Transforms[i] = m_bones[i].finalTransformationMat4;
 	}
 }
 
