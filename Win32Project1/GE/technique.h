@@ -17,6 +17,7 @@ public:
 
 	const uniformUnit* getUniforms(const char* name);
 	GLint getUniformLocation(const char* name);
+	GLint getUniformLocationEx(const char* name);
 
 protected:
 	bool linkShader();

@@ -31,12 +31,13 @@ void skinMeshNode::draw()
 	glEnableVertexAttribArray(boneIDsLoc);
 	glEnable(GL_TEXTURE_2D);
 
+
 	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		if (m_Textures.size() >= itr->MaterialIndex && itr->MaterialIndex > 0)
-			m_Textures[itr->MaterialIndex-1]->bind();
+		if (m_Textures.size() > itr->MaterialIndex && itr->MaterialIndex >= 0)
+			m_Textures[itr->MaterialIndex]->bind();
 		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
 		const unsigned int VertexSize = sizeof(Vertex);
@@ -304,12 +305,13 @@ void skinMeshNode::MeshEntry::Init(unsigned int index, std::vector<skinMeshNode:
 void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Transforms)
 {
 	aiAnimation* aianim = m_aiScene->mAnimations[0];
-	double durTime = aianim->mDuration / (aianim->mTicksPerSecond == 0 ? 25.f : aianim->mTicksPerSecond);
-	float timeTicks = fmod(TimeInSeconds, (float)durTime);
+	double durTime = aianim->mTicksPerSecond == 0 ? 25.f : aianim->mTicksPerSecond;
+	double ticksTime = TimeInSeconds * durTime;
+	float timeTicks = fmod(ticksTime, (float)aianim->mDuration);
 
 	Matrix4f transformMat4;
 	transformMat4.identity();
-	ReadNodeHeirarchy(TimeInSeconds, m_aiScene->mRootNode, transformMat4);
+	ReadNodeHeirarchy(timeTicks, m_aiScene->mRootNode, transformMat4);
 
 	
 	for (int i = 0; i < m_bones.size(); ++i)
@@ -320,13 +322,18 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 
 void CalcInterpolatedScaling(aiVector3D& Out, double AnimationTime, const aiNodeAnim* pNodeAnim)
 {
+	if (pNodeAnim->mNumScalingKeys == 1)
+	{
+		Out = pNodeAnim->mScalingKeys[0].mValue;
+		return;
+	}
 	int startn = 0;
 	int endn = 0;
 	float endTime = 0.f;
 	for (int j = 0; j < pNodeAnim->mNumScalingKeys; ++j)
 	{
 		aiVectorKey& key = pNodeAnim->mScalingKeys[j];
-		if (key.mTime > AnimationTime)
+		if (key.mTime >= AnimationTime)
 		{
 			endn = j;
 			break;
@@ -346,7 +353,7 @@ unsigned int FindRotation(double AnimationTime, const aiNodeAnim* pNodeAnim)
 	assert(pNodeAnim->mNumRotationKeys > 0);
 
 	for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys - 1; i++) {
-		if (AnimationTime < pNodeAnim->mRotationKeys[i + 1].mTime) {
+		if (AnimationTime <= pNodeAnim->mRotationKeys[i + 1].mTime) {
 			return i;
 		}
 	}
@@ -380,7 +387,7 @@ void CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNo
 unsigned int FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
 {
 	for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys - 1; i++) {
-		if (AnimationTime < (float)pNodeAnim->mPositionKeys[i + 1].mTime) {
+		if (AnimationTime <= (float)pNodeAnim->mPositionKeys[i + 1].mTime) {
 			return i;
 		}
 	}
@@ -458,7 +465,7 @@ void skinMeshNode::ReadNodeHeirarchy(long long timeTicks, aiNode* nd, Matrix4f& 
 
 	m_bones[bIndex].finalTransformationMat4 = nodeTransformMt4;
 
-	for (int i = 0; nd->mNumChildren; ++i)
+	for (int i = 0; i<nd->mNumChildren; ++i)
 	{
 		ReadNodeHeirarchy(timeTicks, nd->mChildren[i], nodeTransformMt4);
 	}

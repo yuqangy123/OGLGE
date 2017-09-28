@@ -337,28 +337,28 @@ void Camera3D::keyInput(unsigned char param, int x, int y)
 		setEyePosition(m_eye.x + m_uvn.m[2][0] * factor, m_eye.y + m_uvn.m[2][1] * factor, m_eye.z + m_uvn.m[2][2] * factor);
 		auto eyePos = getEyePosition();
 		auto target = getTargetPosition();
-		printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
+		//printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
 	}
 	if (param == 'w')
 	{
 		setEyePosition(m_eye.x - m_uvn.m[2][0] * factor, m_eye.y - m_uvn.m[2][1] * factor, m_eye.z - m_uvn.m[2][2] * factor);
 		auto eyePos = getEyePosition();
 		auto target = getTargetPosition();
-		printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
+		//printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
 	}
 	if (param == 'a')
 	{
 		setEyePosition(m_eye.x - m_uvn.m[0][0] * factor, m_eye.y - m_uvn.m[0][1] * factor, m_eye.z - m_uvn.m[0][2] * factor);
 		auto eyePos = getEyePosition();
 		auto target = getTargetPosition();
-		printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
+		//printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
 	}
 	if (param == 'd')
 	{		
 		setEyePosition(m_eye.x + m_uvn.m[0][0] * factor, m_eye.y + m_uvn.m[0][1] * factor, m_eye.z + m_uvn.m[0][2] * factor);
 		auto eyePos = getEyePosition();
 		auto target = getTargetPosition();
-		printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
+		//printf("%f,%f,%f***%f,%f,%f\r\n", eyePos.x, eyePos.y, eyePos.z, target.x, target.y, target.z);
 	}
 };
 void Camera3D::mouseInput(int button, int state, int x, int y)

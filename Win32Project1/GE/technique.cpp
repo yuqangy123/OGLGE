@@ -151,3 +151,14 @@ GLint technique::getUniformLocation(const char* name)
 	return -1;
 }
 
+GLint technique::getUniformLocationEx(const char* name)
+{
+	auto unifLocal = glGetUniformLocation(m_shaderProg, name);
+
+	GLenum __gl_error_code = glGetError();
+	if (__gl_error_code != GL_NO_ERROR)
+		printf("error: 0x%x  uniformName: %s", (int)__gl_error_code, name);
+
+	return unifLocal;
+}
+
