@@ -27,8 +27,9 @@ void skinnedMeshTechnique::init()
 	char Name[128];
 	for (unsigned int i = 0; i < MAX_BONES; i++) {
 		sprintf_s(Name, sizeof(Name), "bonesTransformMt4[%d]", i);
-		m_bonesMat4Loc[i] = getUniformLocation(Name);
+		m_bonesMat4Loc[i] = getUniformLocationEx(Name);
 	}
+
 }
 
 void skinnedMeshTechnique::setUniformBonesMat4(unsigned int n, const Matrix4f& mt4)

@@ -21,7 +21,7 @@ meshSkinnedAnimation::~meshSkinnedAnimation()
 void meshSkinnedAnimation::init()
 {
 	DefaultCamera->setFreeCamera(true);
-	//DefaultCamera->setEyePosition(-50, 40, -50);
+	DefaultCamera->setEyePosition(0, 0, 20);
 	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 
 	m_tech = new skinnedMeshTechnique();
@@ -30,8 +30,7 @@ void meshSkinnedAnimation::init()
 	m_WVPMt4.identity();
 
 	m_pipe.setCamera(DefaultCamera);
-	//m_pipe.Rotate(-45, 0, 0);
-
+	m_pipe.Scale(0.13, 0.13, 0.13);
 	
 }
 
