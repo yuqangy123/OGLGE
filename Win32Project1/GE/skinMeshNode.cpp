@@ -309,10 +309,12 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 	double ticksTime = TimeInSeconds * durTime;
 	float timeTicks = fmod(ticksTime, (float)aianim->mDuration);
 
+	aiMatrix4x4_Matrix4f(m_aiScene->mRootNode->mTransformation, m_rootNodeMat4);
+	m_rootNodeMat4.transpose();
+
 	Matrix4f transformMat4;
 	transformMat4.identity();
 	ReadNodeHeirarchy(timeTicks, m_aiScene->mRootNode, transformMat4);
-
 	
 	for (int i = 0; i < m_bones.size(); ++i)
 	{
@@ -442,7 +444,7 @@ void skinMeshNode::ReadNodeHeirarchy(long long timeTicks, aiNode* nd, Matrix4f& 
 		CalcInterpolatedScaling(salValue, timeTicks, nodeAnim);
 		Matrix4f salMt4;
 		salMt4.InitScaleTransform(salValue.x, salValue.y, salValue.z);
-
+		
 		// Interpolate rotation and generate rotation transformation matrix
 		aiQuaternion RotationQ;
 		CalcInterpolatedRotation(RotationQ, timeTicks, nodeAnim);
@@ -463,7 +465,8 @@ void skinMeshNode::ReadNodeHeirarchy(long long timeTicks, aiNode* nd, Matrix4f& 
 	}
 	nodeTransformMt4 = parentTransform*nodeTransformMt4;
 
-	m_bones[bIndex].finalTransformationMat4 = nodeTransformMt4;
+	//¼ÆËã³ö¹Ç÷ÀµÄ×îÖÕ×ª»»¾ØÕó = root½ÓµãÄæ¾ØÕó*nodeTransformMt4*boneÆ«ÒÆ¾ØÕó
+	m_bones[bIndex].finalTransformationMat4 = m_rootNodeMat4*nodeTransformMt4*m_bones[bIndex].boneOffsetMat4;
 
 	for (int i = 0; i<nd->mNumChildren; ++i)
 	{

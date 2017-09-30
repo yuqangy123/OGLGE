@@ -121,5 +121,7 @@ protected:
 
 	std::string m_playAnimName;
 
+	Matrix4f m_rootNodeMat4;
+
 	bool m_playing = false;
 };
