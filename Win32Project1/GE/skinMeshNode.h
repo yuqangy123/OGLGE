@@ -50,11 +50,6 @@ public:
 
 	};
 	struct MeshEntry {
-		MeshEntry();
-		~MeshEntry();
-		void Init(unsigned int index, std::vector<Vertex>& Vertices, std::vector<unsigned int>& Indices);
-		GLuint VB;
-		GLuint IB;
 		unsigned int BaseVertex;
 		unsigned int BaseIndex;
 		unsigned int NumVertex;

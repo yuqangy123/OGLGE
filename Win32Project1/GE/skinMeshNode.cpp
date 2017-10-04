@@ -143,7 +143,6 @@ bool skinMeshNode::initFromScene(const aiScene* scene, const char* filename)
 			m_Entries[n].NumVertex = m->mNumVertices;
 			m_Entries[n].BaseIndex = baseIndex;
 			m_Entries[n].BaseVertex = baseVertex;
-			//m_Entries[n].Init(Index, vertices, indices);
 			baseVertex += m_Entries[n].NumVertex;
 			baseIndex += m_Entries[n].NumIndices;
 		}
@@ -166,6 +165,7 @@ bool skinMeshNode::initFromScene(const aiScene* scene, const char* filename)
 			return false;
 
 		//按 存放数组的结构体 存放顶点数据
+		//所有待渲染对象的每种类型数据存储在连续的内存块中，渲染的时候指定数据的内存偏移值
 		glBindBuffer(GL_ARRAY_BUFFER, m_buffers[POSITION_VB]);
 		glBufferData(GL_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(positionArray), &positionArray[0], GL_STATIC_DRAW);
 		glEnableVertexAttribArray(positionLoc);
@@ -191,8 +191,6 @@ bool skinMeshNode::initFromScene(const aiScene* scene, const char* filename)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_buffers[INDEX_IB]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(indexArray), &indexArray[0], GL_STATIC_DRAW);
 
-
-		
 	} while (false);
 	return true;
 }
@@ -224,11 +222,6 @@ void skinMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh,
 		indexArray.push_back(face.mIndices[1]);
 		indexArray.push_back(face.mIndices[2]);
 	}
-	
-	
-
-	
-	
 }
 
 void skinMeshNode::loadBone(int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& vertexBonesArray)
@@ -303,8 +296,6 @@ skinMeshNode::Texture::Texture(aiTextureType tp, const std::string& path_)
 
 void skinMeshNode::Texture::load()
 {
-
-	
 	if (std::string::npos != path.rfind(".bmp"))
 	{
 		id = TextureMgr->loadTextureBmp(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
@@ -338,55 +329,6 @@ void skinMeshNode::Texture::bind(GLenum TextureUnit)
 	TextureMgr->bindTexture(id);
 }
 
-skinMeshNode::MeshEntry::MeshEntry()
-{
-	VB = 0;
-	IB = 0;
-	BaseIndex = 0;
-	BaseVertex = 0;
-	NumIndices = 0;
-	MaterialIndex = 0;
-}
-
-skinMeshNode::MeshEntry::~MeshEntry()
-{
-	/*
-	if (VB != 0)
-	{
-		glDeleteBuffers(1, &VB);
-	}
-	if (IB != 0)
-	{
-		glDeleteBuffers(1, &IB);
-	}
-	*/
-}
-
-
-void skinMeshNode::MeshEntry::Init(unsigned int index, std::vector<skinMeshNode::Vertex>& Vertices, std::vector<unsigned int>& Indices)
-{
-	glGenBuffers(1, &VB);
-	glBindBuffer(GL_ARRAY_BUFFER, VB);
-	std::vector<skinMeshNode::Vertex>::iterator verItr = Vertices.begin();
-	size_t verSize = sizeof(skinMeshNode::Vertex)*Vertices.size();
-	void* verPtr = &(*verItr);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(Verticess), Verticess, GL_STATIC_DRAW);
-	glBufferData(GL_ARRAY_BUFFER, verSize, verPtr, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
-	glGenBuffers(1, &IB);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IB);
-	std::vector<unsigned int>::iterator indItr = Indices.begin();
-	size_t indSize = sizeof(unsigned int)*Indices.size();
-	void* indPtr = &(*indItr);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indSize, indPtr, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	NumIndices = Indices.size();
-	NumVertex = Vertices.size();
-}
-
 void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Transforms)
 {
 	aiAnimation* aianim = m_aiScene->mAnimations[0];
@@ -395,8 +337,8 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 	float timeTicks = fmod(ticksTime, (float)aianim->mDuration);
 
 	aiMatrix4x4_Matrix4f(m_aiScene->mRootNode->mTransformation, m_rootNodeMat4);
-	m_rootNodeMat4.identity();
-	//m_rootNodeMat4.Inverse();
+	//m_rootNodeMat4.identity();
+	m_rootNodeMat4.Inverse();
 
 	Matrix4f transformMat4;
 	transformMat4.identity();
@@ -461,7 +403,6 @@ unsigned int FindRotation(double AnimationTime, const aiNodeAnim* pNodeAnim)
 	}
 
 	assert(0);
-
 	return 0;
 }
 
@@ -495,7 +436,6 @@ unsigned int FindPosition(double AnimationTime, const aiNodeAnim* pNodeAnim)
 	}
 
 	assert(0);
-
 	return 0;
 }
 void CalcInterpolatedPosition(aiVector3D& Out, double AnimationTime, const aiNodeAnim* pNodeAnim)
@@ -570,6 +510,7 @@ void skinMeshNode::ReadNodeHeirarchy(double timeTicks, aiNode* nd, Matrix4f& par
 		unsigned int bIndex = m_bonesMapping[ndName];		
 
 		//计算出骨骼的最终转换矩阵 = root接点逆矩阵*nodeTransformMt4*bone偏移矩阵
+		//m_bones[bIndex].finalTransformationMat4 = m_rootNodeMat4*nodeTransformMt4*m_bones[bIndex].boneOffsetMat4;
 		m_bones[bIndex].finalTransformationMat4 = nodeTransformMt4*m_bones[bIndex].boneOffsetMat4;
 	}	
 
