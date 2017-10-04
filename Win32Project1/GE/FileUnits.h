@@ -4,6 +4,8 @@
 #include <string>
 #include "Singleton.h"
 
+#define FileUnitInstance FileUnits::InstanceEx()
+
 class FileUnits  : public CSingleton<FileUnits>
 {
 public:
@@ -15,6 +17,8 @@ public:
 	void getAbsoluteFilePath(const char* filepath, std::string& res);
 
 	void getFileData(const char* file, std::string& res);
+
+	bool writeData(const char* absoluteFile, const char* mode, const char* data, unsigned int dataLen);
 
 protected:
 	std::string m_workDir;

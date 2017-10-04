@@ -78,15 +78,41 @@ unsigned int TextureManager::loadTextureTga(const char* filename, GLenum image_f
 
 		//convert to RGBA8888
 		unsigned char* tdata = buff;
-		GLubyte* pixels = imgData.imageData;
+		GLubyte* pixels = imgData.imageData + imgData.dataLen - 3;
 		for (int n = 0; n < imgData.dataLen - 2; n += 3)
 		{
 			*tdata++ = *(pixels + n + 0);
 			*tdata++ = *(pixels + n + 1);
 			*tdata++ = *(pixels + n + 2);
 			*tdata++ = 0xFF;
+			pixels -= 6;
 		}
-		delete pixels;
+		delete imgData.imageData;
+
+		for (int row = 0; row < imgData.height; ++row)
+		{
+			for (int col = 0; col < imgData.width/2; ++col)
+			{
+				int base = row*imgData.width;
+				int a = (base + col) * 4;
+				int b = (base + imgData.width - 1 - col) * 4;
+
+				unsigned char tmpa0 = *(buff + a + 0);
+				unsigned char tmpa1 = *(buff + a + 1);
+				unsigned char tmpa2 = *(buff + a + 2);
+				unsigned char tmpa3 = *(buff + a + 3);
+
+				*(buff + a + 0) = *(buff + b + 0);
+				*(buff + a + 1) = *(buff + b + 1);
+				*(buff + a + 2) = *(buff + b + 2);
+				*(buff + a + 3) = *(buff + b + 3);
+
+				*(buff + b + 0) = tmpa0;
+				*(buff + b + 1) = tmpa1;
+				*(buff + b + 2) = tmpa2;
+				*(buff + b + 3) = tmpa3;
+			}
+		}
 		imgData.imageData = buff;
 		imgData.dataLen = buffLen;
 		imgData.imageType = GL_RGBA;

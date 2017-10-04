@@ -79,6 +79,15 @@ public:
 		m[3][3] = 1.0;
 	}
 
+	inline void zero()
+	{
+		for (int x = 0; x < 4; ++x)
+			for (int y = 0; y < 4; ++y)
+			{
+				m[x][y] = 0.f;
+			}
+	}
+
 	void InitScaleTransform(float ScaleX, float ScaleY, float ScaleZ)
 	{
 		m[0][0] = ScaleX; m[0][1] = 0.0f;   m[0][2] = 0.0f;   m[0][3] = 0.0f;
@@ -95,6 +104,7 @@ public:
 		m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
 	}
 
+	//×ªÖÃ
 	inline void transpose()
 	{
 		float tmp = 0.0f;
@@ -111,6 +121,9 @@ public:
 
 	bool decompose(Vector3* scale, Quaternion* rotation, Vector3* translation) const;
 	float determinant() const;
+
+	//¾ØÕóµÄÄæ
+	void Inverse();
 
 	bool getRotation(Quaternion* rotation) const
 	{

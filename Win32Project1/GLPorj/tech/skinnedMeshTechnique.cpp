@@ -21,8 +21,10 @@ void skinnedMeshTechnique::init()
 
 	positionLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_POSITION_NAME);
 	texCoordLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_TEXCOORD_NAME);
-	weightsLoc = glGetAttribLocation(m_shaderProg, "weights");
+	normalLoc = glGetAttribLocation(m_shaderProg, ATTRI_A_NORMAL_NAME);
 	boneIDsLoc = glGetAttribLocation(m_shaderProg, "boneIDs");
+	weightsLoc = glGetAttribLocation(m_shaderProg, "weights");
+	
 	
 	char Name[128];
 	for (unsigned int i = 0; i < MAX_BONES; i++) {

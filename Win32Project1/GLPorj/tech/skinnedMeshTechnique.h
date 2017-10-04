@@ -22,6 +22,7 @@ public:
 public:
 	int positionLoc = 0;
 	int texCoordLoc = 0;
+	int normalLoc = 0;
 	int weightsLoc = 0;
 	int boneIDsLoc = 0;
 	GLuint m_bonesMat4Loc[MAX_BONES];

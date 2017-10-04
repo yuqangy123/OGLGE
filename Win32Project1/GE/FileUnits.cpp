@@ -73,3 +73,20 @@ void FileUnits::getFileData(const char* file, std::string& res)
 	fp = nullptr;
 	delete buf;
 }
+
+bool FileUnits::writeData(const char* absoluteFile, const char* mode, const char* data, unsigned int dataLen)
+{
+	FILE* fp = nullptr;
+	fp = fopen(absoluteFile, mode);
+	if (nullptr == fp)
+	{
+		printf("writeData failed, file:%s\r\n", absoluteFile);
+		return false;
+	}
+
+	fwrite(data, 1, dataLen, fp);
+
+	fflush(fp);
+
+	fclose(fp);
+}

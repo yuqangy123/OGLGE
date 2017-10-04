@@ -45,6 +45,7 @@ void OgldevFileError(const char* pFileName, uint line, const char* pFileError);
 #define ZERO_MEM(a) memset(a, 0, sizeof(a))
 #define ZERO_MEM_VAR(var) memset(&var, 0, sizeof(var))
 #define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
+#define VECTOR_MEMORY_SIZE(a) sizeof(a[0])*a.size()
 
 #ifdef WIN32
 #define SNPRINTF _snprintf_s

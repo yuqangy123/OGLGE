@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "OGLGE.h"
-#include "ogldev_util.h"
+
 
 #include "Test.h"
 #include "Texture2D.h"
@@ -31,15 +31,13 @@ void OGLGE::update(float ft)
 	OGLGE::Instance()->m_director->update(ft);
 }
 
-static unsigned long st_startTime = GetCurrentTimeMillis();
-static unsigned long st_lastTime = GetCurrentTimeMillis();
+static double st_startTime = (double)GetCurrentTimeMillis();
+static double st_lastTime = (double)GetCurrentTimeMillis();
 void OGLGE::draw()
 {
-	unsigned long currTime = GetCurrentTimeMillis();
-	unsigned long fps = currTime - st_lastTime;
-	printf("fps=%d\r\n", 60000/(1>fps ? 1 : fps));
-	st_lastTime = currTime;
-	float RunningTime = (float)(st_lastTime - st_startTime) / 1000.0f;
+	double currTime = (double)GetCurrentTimeMillis();
+	
+	float RunningTime = (float)(currTime - st_startTime) / 1000.0f;
 	OGLGE::update(RunningTime);
 	OGLGE::Instance()->m_director->draw();
 }

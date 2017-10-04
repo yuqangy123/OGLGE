@@ -27,7 +27,7 @@ public:
 	{
 		Texture(aiTextureType tp, const std::string& path_);
 		void load();
-		void bind(GLenum TextureUnit = GL_TEXTURE0);
+		void bind();
 
 		int id;
 		aiTextureType type;
@@ -89,17 +89,10 @@ public:
 
 protected:
 	bool initFromScene(const aiScene* scene, const char* filename);
-	
-	void InitMesh(unsigned int Index, const aiMesh* paiMesh,
-		std::vector<GLuint>& indexArray, std::vector<Vector3f>& positionArray,
-		std::vector<Vector3f>& texcoordArray, std::vector<Vector3f>& normalArray,
-		std::vector<VertexBoneData>& vertexBonesArray);
-
+	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
 	bool InitMaterials(const aiScene* pScene, const char* filename);
 	void BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Transforms);
-	
-	void loadBone(int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& vertexBonesArray);
-
+	void loadBone(const aiMesh* pMesh, std::vector<skinMeshNode::Vertex>& vertexs);
 	void ReadNodeHeirarchy(double timeTicks, aiNode* nd, Matrix4f& parentTransform);
 
 public:
@@ -107,10 +100,8 @@ public:
 	Vector3 scale;
 	int positionLoc = 0;
 	int texCoordLoc = 0;
-	int normalLoc = 0;
-	int boneIDsLoc = 0;
 	int weightsLoc = 0;
-	
+	int boneIDsLoc = 0;
 
 	std::vector<Matrix4f> m_bonesTransforms;
 
@@ -120,17 +111,6 @@ protected:
 	std::vector<BoneInfo> m_bones;//保存所有骨骼信息
 	std::map<std::string, unsigned int> m_bonesMapping;
 	
-	GLuint m_VAO = 0;
-	enum
-	{
-		INDEX_IB=0,
-		POSITION_VB,
-		TEXCOORD_VB,
-		NORMAL_VB,
-		BONES_VB,
-		NUM_BS
-	};
-	GLuint m_buffers[NUM_BS];
 	
 	bool m_loaded = false;
 

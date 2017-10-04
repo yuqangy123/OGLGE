@@ -1,11 +1,8 @@
 #include "stdafx.h"
-#include "ogldev_util.h"
 #include "skinMeshNode.h"
 #include "anim.h"
 #include "postprocess.h"
 #include "TextureManager.h"
-#include "FileUnits.h"
-
 
 #define aiMatrix4x4_Matrix4f(xx4, x4)\
 {\
@@ -24,9 +21,10 @@ skinMeshNode::~skinMeshNode()
 {
 
 }
-/*
-void skinMeshNode::olddraw()
+
+void skinMeshNode::draw()
 {
+
 	glEnableVertexAttribArray(positionLoc);
 	glEnableVertexAttribArray(texCoordLoc);
 	glEnableVertexAttribArray(weightsLoc);
@@ -59,28 +57,10 @@ void skinMeshNode::olddraw()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	
 }
-*/
 
-void skinMeshNode::draw()
-{
-	glBindVertexArray(m_VAO);
 
-	glEnable(GL_TEXTURE_2D);
-	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
-	{
-		if (m_Textures.size() > itr->MaterialIndex && itr->MaterialIndex >= 0)
-			m_Textures[itr->MaterialIndex]->bind(GL_TEXTURE0);
-		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
-
-		glDrawElementsBaseVertex(GL_TRIANGLES,
-			itr->NumIndices,
-			GL_UNSIGNED_INT,
-			(void*)(sizeof(uint) * itr->BaseIndex),
-			itr->BaseVertex);
-	}
-	glBindVertexArray(0);
-}
 bool skinMeshNode::loadMesh(const char* filename)
 {
 	if (m_loaded)
@@ -88,11 +68,6 @@ bool skinMeshNode::loadMesh(const char* filename)
 	m_loaded = true;
 
 	clear();
-
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
-
-	glGenBuffers(ARRAY_SIZE_IN_ELEMENTS(m_buffers), m_buffers);
 
 	bool ret = false;
 
@@ -107,101 +82,34 @@ bool skinMeshNode::loadMesh(const char* filename)
 		assert(0);
 	}
 
-	glBindVertexArray(0);
-
 	return ret;
 	
 }
 
 void skinMeshNode::clear()
 {
-	if (m_VAO > 0)
-	{
-		glDeleteVertexArrays(1, &m_VAO);
-		m_VAO = 0;
-	}
+
 }
 
 bool skinMeshNode::initFromScene(const aiScene* scene, const char* filename)
 {
-	do
+	m_Entries.resize(scene->mNumMeshes);
+	for (int n = 0; n < m_Entries.size(); ++n)
 	{
-		m_Entries.resize(scene->mNumMeshes);
+		const aiMesh* m = scene->mMeshes[n];
+		InitMesh(n, m);
+	}
+	
 
-		std::vector<uint> indexArray;
-		std::vector<Vector3f> positionArray;
-		std::vector<Vector3f> texcoordArray;
-		std::vector<Vector3f> normalArray;
-		std::vector<VertexBoneData> vertexBonesArray;
-
-		int baseVertex = 0, baseIndex = 0;
-		for (int n = 0; n < m_Entries.size(); ++n)
-		{
-			const aiMesh* m = scene->mMeshes[n];
-			m_Entries[n].MaterialIndex = m->mMaterialIndex;
-			m_Entries[n].NumIndices = m->mNumFaces * 3;
-			m_Entries[n].NumVertex = m->mNumVertices;
-			m_Entries[n].BaseIndex = baseIndex;
-			m_Entries[n].BaseVertex = baseVertex;
-			//m_Entries[n].Init(Index, vertices, indices);
-			baseVertex += m_Entries[n].NumVertex;
-			baseIndex += m_Entries[n].NumIndices;
-		}
-		indexArray.reserve(baseIndex);
-		positionArray.reserve(baseVertex);
-		texcoordArray.reserve(baseVertex);
-		normalArray.reserve(baseVertex);
-		vertexBonesArray.resize(baseVertex);
-
-		for (int n = 0; n < m_Entries.size(); ++n)
-		{
-			const aiMesh* m = scene->mMeshes[n];
-			InitMesh(n, m, indexArray, positionArray, texcoordArray, normalArray, vertexBonesArray);
-		}
-
-		m_bonesTransforms.resize(m_bones.size());
-		//get finalTransformationMat4
-
-		if (!InitMaterials(scene, filename))
-			return false;
-
-		//按 存放数组的结构体 存放顶点数据
-		glBindBuffer(GL_ARRAY_BUFFER, m_buffers[POSITION_VB]);
-		glBufferData(GL_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(positionArray), &positionArray[0], GL_STATIC_DRAW);
-		glEnableVertexAttribArray(positionLoc);
-		glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		
-		glBindBuffer(GL_ARRAY_BUFFER, m_buffers[TEXCOORD_VB]);
-		glBufferData(GL_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(texcoordArray), &texcoordArray[0], GL_STATIC_DRAW);
-		glEnableVertexAttribArray(texCoordLoc);
-		glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_buffers[NORMAL_VB]);
-		glBufferData(GL_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(normalArray), &normalArray[0], GL_STATIC_DRAW);
-		glEnableVertexAttribArray(normalLoc);
-		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_buffers[BONES_VB]);
-		glBufferData(GL_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(vertexBonesArray), &vertexBonesArray[0], GL_STATIC_DRAW);
-		glEnableVertexAttribArray(boneIDsLoc);
-		glVertexAttribIPointer(boneIDsLoc, NUM_BONES_PER_VEREX, GL_UNSIGNED_INT, sizeof(VertexBoneData), (GLvoid*)offsetof(VertexBoneData, IDs));
-		glEnableVertexAttribArray(weightsLoc);
-		glVertexAttribPointer(weightsLoc, NUM_BONES_PER_VEREX, GL_FLOAT, GL_FALSE, sizeof(VertexBoneData), (GLvoid*)offsetof(VertexBoneData, Weights));
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_buffers[INDEX_IB]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, VECTOR_MEMORY_SIZE(indexArray), &indexArray[0], GL_STATIC_DRAW);
-
-
-		
-	} while (false);
-	return true;
+	return InitMaterials(scene, filename);
 }
 
-void skinMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh,
-	std::vector<GLuint>& indexArray, std::vector<Vector3f>& positionArray, 
-	std::vector<Vector3f>& texcoordArray, std::vector<Vector3f>& normalArray,
-	std::vector<VertexBoneData>& vertexBonesArray)
+void skinMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
+	
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+
 	const aiVector3D zero(0.0f, 0.0f, 0.0f);
 	for (int n = 0; n < paiMesh->mNumVertices; ++n)
 	{
@@ -209,29 +117,34 @@ void skinMeshNode::InitMesh(unsigned int Index, const aiMesh* paiMesh,
 		const aiVector3D& normal = paiMesh->HasNormals() ? paiMesh->mNormals[n] : zero;
 		aiVector3D texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
 		
-		positionArray.push_back(Vector3f(pos.x, pos.y, pos.z));
-		normalArray.push_back(Vector3f(normal.x, normal.y, normal.z));
-		texcoordArray.push_back(Vector3f(texCoords.x, texCoords.y, texCoords.z));
+		vertices.push_back(Vertex(Vector3f(pos.x, pos.y, pos.z), Vector3f(texCoords.x, texCoords.y, texCoords.z), Vector3f(normal.x, normal.y, normal.z)));
 	}
-
-	loadBone(Index, paiMesh, vertexBonesArray);
 
 	for (int n = 0; n < paiMesh->mNumFaces; ++n)
 	{
 		const aiFace& face = paiMesh->mFaces[n];
 		assert(face.mNumIndices == 3);
-		indexArray.push_back(face.mIndices[0]);
-		indexArray.push_back(face.mIndices[1]);
-		indexArray.push_back(face.mIndices[2]);
+		indices.push_back(face.mIndices[0]);
+		indices.push_back(face.mIndices[1]);
+		indices.push_back(face.mIndices[2]);
 	}
 	
-	
+	loadBone(paiMesh, vertices);
 
 	
-	
+	m_Entries[Index].MaterialIndex = paiMesh->mMaterialIndex;
+	m_Entries[Index].Init(Index, vertices, indices);
+	int baseVertex = 0, baseIndex = 0;
+	for (int i = 0; i < Index; ++i)
+	{
+		baseVertex += m_Entries[i].NumVertex;
+		baseIndex += m_Entries[i].NumIndices;
+	}
+	m_Entries[Index].BaseIndex = baseIndex;
+	m_Entries[Index].BaseVertex = baseVertex;
 }
 
-void skinMeshNode::loadBone(int MeshIndex, const aiMesh* pMesh, std::vector<VertexBoneData>& vertexBonesArray)
+void skinMeshNode::loadBone(const aiMesh* pMesh, std::vector<skinMeshNode::Vertex>& vertexs)
 {
 	if (pMesh->HasBones())
 	{
@@ -252,24 +165,27 @@ void skinMeshNode::loadBone(int MeshIndex, const aiMesh* pMesh, std::vector<Vert
 
 			for (int j = 0; j < bone->mNumWeights; ++j)
 			{
-				unsigned int vertexId = bone->mWeights[j].mVertexId + m_Entries[MeshIndex].BaseVertex;
+				unsigned int vertexId = bone->mWeights[j].mVertexId;
 				float weight = bone->mWeights[j].mWeight;
-				if (vertexId > vertexBonesArray.size())
+				if (vertexId > vertexs.size())
 				{
 					printf("mesh bone vertexId is greater than vertexs size");
 					assert(0);
 				}
 				for (int k = 0; k < NUM_BONES_PER_VEREX; ++k)
 				{
-					if (vertexBonesArray[vertexId].Weights[k] == 0.000f)
+					if (vertexs[vertexId].vertexBone.Weights[k] == 0.000f)
 					{
-						vertexBonesArray[vertexId].IDs[k] = boneIndex;
-						vertexBonesArray[vertexId].Weights[k] = weight;
+						vertexs[vertexId].vertexBone.IDs[k] = boneIndex;
+						vertexs[vertexId].vertexBone.Weights[k] = weight;
 						break;
 					}
 				}				
 			}
 		}
+
+		m_bonesTransforms.resize(m_bones.size());
+		//get finalTransformationMat4
 	}
 }
 
@@ -331,10 +247,10 @@ void skinMeshNode::Texture::load()
 
 }
 
-void skinMeshNode::Texture::bind(GLenum TextureUnit)
+void skinMeshNode::Texture::bind()
 {
 	// Set the filtering mode
-	glActiveTexture(TextureUnit);
+	glActiveTexture(GL_TEXTURE0);
 	TextureMgr->bindTexture(id);
 }
 
@@ -396,7 +312,6 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 
 	aiMatrix4x4_Matrix4f(m_aiScene->mRootNode->mTransformation, m_rootNodeMat4);
 	m_rootNodeMat4.identity();
-	//m_rootNodeMat4.Inverse();
 
 	Matrix4f transformMat4;
 	transformMat4.identity();
@@ -406,20 +321,6 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 	{
 		Transforms[i] = m_bones[i].finalTransformationMat4;
 	}
-	/*
-	for (int i = 0; i < m_bones.size(); ++i)
-	{
-		const Matrix4f& mt4=m_bones[i].finalTransformationMat4;
-		char logBuf[512] = { 0 };
-		sprintf(logBuf, "i=%d, %f,%f,%f,%f\r\n%f,%f,%f,%f\r\n%f,%f,%f,%f\r\n%f,%f,%f,%f\r\n\r\n", i,
-			mt4.m[0][0], mt4.m[0][1], mt4.m[0][2], mt4.m[0][3],
-			mt4.m[1][0], mt4.m[1][1], mt4.m[1][2], mt4.m[1][3], 
-			mt4.m[2][0], mt4.m[2][1], mt4.m[2][2], mt4.m[2][3], 
-			mt4.m[3][0], mt4.m[3][1], mt4.m[3][2], mt4.m[3][3]);
-		FileUnitInstance.writeData("C:/Users/Administrator/Desktop/new 1.txt", "a", logBuf, strlen(logBuf));
-	}
-	int ntest = 0;
-	*/
 }
 
 void CalcInterpolatedScaling(aiVector3D& Out, double AnimationTime, const aiNodeAnim* pNodeAnim)
@@ -520,7 +421,7 @@ void CalcInterpolatedPosition(aiVector3D& Out, double AnimationTime, const aiNod
 void skinMeshNode::ReadNodeHeirarchy(double timeTicks, aiNode* nd, Matrix4f& parentTransform)
 {
 	std::string ndName(nd->mName.C_Str());
-	
+	unsigned int bIndex = m_bonesMapping[ndName];
 	Matrix4f nodeTransformMt4;
 	aiMatrix4x4_Matrix4f(nd->mTransformation, nodeTransformMt4);
 
@@ -565,13 +466,8 @@ void skinMeshNode::ReadNodeHeirarchy(double timeTicks, aiNode* nd, Matrix4f& par
 	}
 	nodeTransformMt4 = parentTransform*nodeTransformMt4;
 
-	if (m_bonesMapping.find(ndName) != m_bonesMapping.end())
-	{
-		unsigned int bIndex = m_bonesMapping[ndName];		
-
-		//计算出骨骼的最终转换矩阵 = root接点逆矩阵*nodeTransformMt4*bone偏移矩阵
-		m_bones[bIndex].finalTransformationMat4 = nodeTransformMt4*m_bones[bIndex].boneOffsetMat4;
-	}	
+	//计算出骨骼的最终转换矩阵 = root接点逆矩阵*nodeTransformMt4*bone偏移矩阵
+	m_bones[bIndex].finalTransformationMat4 = m_rootNodeMat4*nodeTransformMt4*m_bones[bIndex].boneOffsetMat4;
 
 	for (int i = 0; i<nd->mNumChildren; ++i)
 	{
