@@ -4,10 +4,10 @@
 #include "Vector3.h"
 #include "Rect.h"
 #include "Quaternion.h"
+#include "InPutInterface.h"
 
 
-
-class Camera3D : public Camera
+class Camera3D : public Camera , public InPutInterface
 {
 public:
 	Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up);
@@ -25,7 +25,7 @@ public:
 	void pitch(float angle);
 	void yaw(float angle);
 	*/
-
+	
 	void setEyePosition(const Vector3& ps);
 	void setEyePosition(const float& x, const float& y, const float& z);
 	void setTargetPosition(const Vector3& ps);

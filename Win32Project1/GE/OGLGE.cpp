@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "OGLGE.h"
+#include "InPutControl.h"
+#include "SceneManager.h"
 
 
 #include "Test.h"
@@ -14,7 +16,7 @@
 #include "BillboardList.h"
 #include "meshSkinnedAnimation.h"
 
-static CScene* st_scene = nullptr;
+
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -44,12 +46,12 @@ void OGLGE::draw()
 
 void OGLGE::keyInput(unsigned char param, int x, int y)
 {
-	OGLGE::Instance()->m_director->keyInput(param, x, y);
+	InPutControlIns.keyInput(param, x, y);
 }
 
 void OGLGE::mouseInput(int button, int state, int x, int y)
 {
-	OGLGE::Instance()->m_director->mouseInput(button, state, x, y);
+	InPutControlIns.mouseInput(button, state, x, y);
 }
 
 void OGLGE::mouseMove(int x, int y)
@@ -129,7 +131,7 @@ void testBumpNormalMesh()
 	meshbumpNormal* bumpNormal = new meshbumpNormal();
 	bumpNormal->setPosition(0, 0, -1);
 	bumpNormal->loadMesh("content/box.obj", "content/normal_map.jpg");
-	st_scene->addNode(bumpNormal);
+	SceneIns.addNode(bumpNormal);
 
 	DefaultCamera->setEyePosition(2.5, 1.5, 0);
 	DefaultCamera->setTargetPosition(Vector3(0, -1, -4));
@@ -149,7 +151,7 @@ void testSkybox()
 	box->loadMesh(imgs);
 	
 
-	st_scene->addNode(box);
+	SceneIns.addNode(box);
 
 	DefaultCamera->setEyePosition(0, 0, 0);
 	DefaultCamera->setTargetPosition(Vector3(0, -1, 0));
@@ -158,26 +160,24 @@ void testSkybox()
 void testTest()
 {
 	Test* t = new Test();
-	st_scene->addNode(t);
+	SceneIns.addNode(t);
 }
 void testBillboardList()
 {
 	BillboardList* billboard = new BillboardList();
 
-	st_scene->addNode(billboard);
+	SceneIns.addNode(billboard);
 	DefaultCamera->setFreeCamera(true);
 }
 void testSkinnedAnimation()
 {
 	meshSkinnedAnimation* test = new meshSkinnedAnimation();
 	test->loadMesh("content/boblampclean.md5mesh", Vector3(0, 0, -10), Vector3(1.0, 1.0, 1.0));
-	st_scene->addNode(test);
+	SceneIns.addNode(test);
 }
 
 void OGLGE::test()
 {
-	st_scene = getRunScene();
-
 	
 
 	//JikeTest * jk = new JikeTest(); scene->addNode(jk);

@@ -10,7 +10,6 @@ public:
 	Camera2D(const Vector2& viewOriginalPos, float w, float h);
 	~Camera2D();
 	
-
 	const Matrix4f& getCameraTranlation();
 
 protected:

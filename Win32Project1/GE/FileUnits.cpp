@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "FileUnits.h"
-#include "OGLGE.h"
+#include <windows.h> 
+
 
 #define MAX_PATH 512
 

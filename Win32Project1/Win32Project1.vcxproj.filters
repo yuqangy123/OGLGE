@@ -55,6 +55,9 @@
     <Filter Include="Include\libraries\assimp\Compiler">
       <UniqueIdentifier>{35a912af-4889-40f6-a7ce-1284c22d2ee7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GE\scene">
+      <UniqueIdentifier>{70d9e1e3-f743-48d4-8d21-e7ee8a6ac669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -87,9 +90,6 @@
     <ClInclude Include="GE\Pipeline.h">
       <Filter>GE</Filter>
     </ClInclude>
-    <ClInclude Include="GE\common.h">
-      <Filter>GE</Filter>
-    </ClInclude>
     <ClInclude Include="GLPorj\tech\lightTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
@@ -110,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="GE\math\Vector3.h">
       <Filter>GE\math</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\Scene.h">
-      <Filter>GLPorj</Filter>
     </ClInclude>
     <ClInclude Include="GE\technique.h">
       <Filter>GE</Filter>
@@ -363,6 +360,24 @@
     <ClInclude Include="GE\ogldev_types.h">
       <Filter>GE</Filter>
     </ClInclude>
+    <ClInclude Include="GE\scene\Scene.h">
+      <Filter>GE\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\scene\SceneNode.h">
+      <Filter>GE\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\common.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\scene\InPutControl.h">
+      <Filter>GE\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\scene\SceneManager.h">
+      <Filter>GE\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\scene\InPutInterface.h">
+      <Filter>GE\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -412,9 +427,6 @@
     </ClCompile>
     <ClCompile Include="GE\math\Vector3.cpp">
       <Filter>GE\math</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\Scene.cpp">
-      <Filter>GLPorj</Filter>
     </ClCompile>
     <ClCompile Include="GE\technique.cpp">
       <Filter>GE</Filter>
@@ -517,6 +529,18 @@
     </ClCompile>
     <ClCompile Include="GE\ogldev_util.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\scene\Scene.cpp">
+      <Filter>GE\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\scene\SceneNode.cpp">
+      <Filter>GE\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\scene\InPutControl.cpp">
+      <Filter>GE\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\scene\SceneManager.cpp">
+      <Filter>GE\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

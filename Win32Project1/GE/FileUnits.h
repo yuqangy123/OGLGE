@@ -4,7 +4,7 @@
 #include <string>
 #include "Singleton.h"
 
-#define FileUnitInstance FileUnits::InstanceEx()
+#define FileUnitIns FileUnits::InstanceEx()
 
 class FileUnits  : public CSingleton<FileUnits>
 {

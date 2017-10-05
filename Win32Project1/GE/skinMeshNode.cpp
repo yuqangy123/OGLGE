@@ -358,7 +358,7 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 			mt4.m[1][0], mt4.m[1][1], mt4.m[1][2], mt4.m[1][3], 
 			mt4.m[2][0], mt4.m[2][1], mt4.m[2][2], mt4.m[2][3], 
 			mt4.m[3][0], mt4.m[3][1], mt4.m[3][2], mt4.m[3][3]);
-		FileUnitInstance.writeData("C:/Users/Administrator/Desktop/new 1.txt", "a", logBuf, strlen(logBuf));
+		FileUnitIns.writeData("C:/Users/Administrator/Desktop/new 1.txt", "a", logBuf, strlen(logBuf));
 	}
 	int ntest = 0;
 	*/

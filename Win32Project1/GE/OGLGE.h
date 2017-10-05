@@ -25,7 +25,6 @@ public:
 
 	//get windows size
 	Rect getWindowsRect() { return m_winRt; }
-	CScene* getRunScene() { return m_director->getRunScene(); }
 	CDirector* getDirector() { return m_director; }
 
 

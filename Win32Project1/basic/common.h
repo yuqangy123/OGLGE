@@ -10,3 +10,10 @@
 
 #define MATH_TOLERANCE              2e-37f
 #define MATH_EPSILON                0.000001f
+
+#define DO do{
+#define WHILE }while(false);
+#define IF_BREAK(ass) if(ass)break;
+
+
+

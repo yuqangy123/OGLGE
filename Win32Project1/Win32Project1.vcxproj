@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -98,7 +98,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,11 +167,11 @@
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
+    <ClInclude Include="basic\common.h" />
     <ClInclude Include="basic\Singleton.h" />
     <ClInclude Include="GE\Camera.h" />
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
-    <ClInclude Include="GE\common.h" />
     <ClInclude Include="GE\bumpNormalMeshNode.h" />
     <ClInclude Include="GE\FileUnits.h" />
     <ClInclude Include="GE\MeshNode.h" />
@@ -185,13 +185,17 @@
     <ClInclude Include="GE\ogldev_util.h" />
     <ClInclude Include="GE\OGLGE.h" />
     <ClInclude Include="GE\Pipeline.h" />
+    <ClInclude Include="GE\scene\InPutControl.h" />
+    <ClInclude Include="GE\scene\InPutInterface.h" />
+    <ClInclude Include="GE\scene\Scene.h" />
+    <ClInclude Include="GE\scene\SceneManager.h" />
+    <ClInclude Include="GE\scene\SceneNode.h" />
     <ClInclude Include="GE\shaders.h" />
     <ClInclude Include="GE\skinMeshNode.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
-    <ClInclude Include="GLPorj\Scene.h" />
     <ClInclude Include="GLPorj\tech\billboardTechnique.h" />
     <ClInclude Include="GLPorj\tech\bumpNormalLightTechnique.h" />
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
@@ -286,13 +290,16 @@
     <ClCompile Include="GE\ogldev_util.cpp" />
     <ClCompile Include="GE\OGLGE.cpp" />
     <ClCompile Include="GE\Pipeline.cpp" />
+    <ClCompile Include="GE\scene\InPutControl.cpp" />
+    <ClCompile Include="GE\scene\Scene.cpp" />
+    <ClCompile Include="GE\scene\SceneManager.cpp" />
+    <ClCompile Include="GE\scene\SceneNode.cpp" />
     <ClCompile Include="GE\shaders.cpp" />
     <ClCompile Include="GE\skinMeshNode.cpp" />
     <ClCompile Include="GE\technique.cpp" />
     <ClCompile Include="GE\TextureManager.cpp" />
     <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
-    <ClCompile Include="GLPorj\Scene.cpp" />
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\bumpNormalLightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
