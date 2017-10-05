@@ -31,4 +31,4 @@ void main()
 	texCoord0 = a_texCoord.xy;
 
 	normal0 = vec4(a_normal, 1.0).xyz;
-}  
+}

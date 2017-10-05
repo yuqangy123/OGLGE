@@ -16,6 +16,7 @@ Camera3D::Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up)
 	m_dirty = true;
 
 	m_freeCamera = false;
+
 }
 
 Camera3D::Camera3D()
@@ -23,6 +24,7 @@ Camera3D::Camera3D()
 	m_dirty = true;
 
 	m_freeCamera = false;
+
 }
 
 Camera3D::~Camera3D()
@@ -315,20 +317,40 @@ void Camera3D::InitPerspectiveProj()
 
 void Camera3D::setFreeCamera(bool b)
 {
-	if (m_freeCamera != b && b)
+	if (b)
 	{
+		m_pMouseMoveFunc = static_cast<mousemoveFunc>(&Camera3D::mousemove_free);
+		auto winsz = OGLGE::Instance()->getWindowsRect();
+		m_mouseMovelastX = winsz.width / 2.0;
+		m_mouseMovelastY = winsz.height / 2.0;
+	}
+	else
+	{
+		m_pMouseMoveFunc = nullptr;
+		m_mouseCenter = false;
+	}
+	m_freeCamera = b;
+}
+
+void Camera3D::setMouseCenterAlways(bool b)
+{
+	m_mouseCenter = b;
+	if (b)
+	{
+		m_pMouseMoveFunc = static_cast<mousemoveFunc>(&Camera3D::mousemove_free_mousecenter);
 		auto winsz = OGLGE::Instance()->getWindowsRect();
 		m_mouseMovelastX = winsz.width / 2.0;
 		m_mouseMovelastY = winsz.height / 2.0;
 		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
-	}	
-	m_freeCamera = b;
+	}
+	else
+	{
+		m_pMouseMoveFunc = static_cast<mousemoveFunc>(&Camera3D::mousemove_free);
+	}
 }
 
 void Camera3D::keyInput(unsigned char param, int x, int y) 
 {
-	
-
 	if (!m_freeCamera)
 		return;
 	float factor = 0.5f;
@@ -363,21 +385,48 @@ void Camera3D::keyInput(unsigned char param, int x, int y)
 };
 void Camera3D::mouseInput(int button, int state, int x, int y)
 {
-	if (!m_freeCamera)
-		return;
-	
+	if (nullptr != m_pMouseMoveFunc)
+		(this->*m_pMouseMoveFunc)(button, state, x, y);
+}
+void Camera3D::mousemove_free(int button, int state, int x, int y)
+{
 	float rx = 0.0, ry = 0.0;
 	bool bchange = false;
 	float sp = 20.0;
 	if (abs(y - m_mouseMovelastY) > 2)
 	{
-		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 		ry = (m_mouseMovelastY - y) / sp;
 		bchange = true;
 	}
 	if (abs(x - m_mouseMovelastX) > 2)
 	{
-		glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		rx = (m_mouseMovelastX - x) / sp;
+		bchange = true;
+	};
+	if (bchange)
+	{
+		rotate(rx, ry);
+		m_mouseMovelastX = x;
+		m_mouseMovelastY = y;
+	}
+}
+
+void Camera3D::mousemove_free_mousecenter(int button, int state, int x, int y)
+{
+	float rx = 0.0, ry = 0.0;
+	bool bchange = false;
+	float sp = 20.0;
+	if (abs(y - m_mouseMovelastY) > 2)
+	{
+		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
+		ry = (m_mouseMovelastY - y) / sp;
+		bchange = true;
+	}
+	if (abs(x - m_mouseMovelastX) > 2)
+	{
+		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 		rx = (m_mouseMovelastX - x) / sp;
 		bchange = true;
 	};
@@ -385,11 +434,9 @@ void Camera3D::mouseInput(int button, int state, int x, int y)
 	{
 		rotate(rx, ry);
 		auto winsz = OGLGE::Instance()->getWindowsRect();
-		glutWarpPointer(winsz.width / 2.0, winsz.height / 2.0);
+		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 	}
-	
 }
-
 /*
 //相机自旋转即绕u,v,n轴旋转，uvn坐标系*旋转矩阵
 void Camera3D::pitch(float angle) 

@@ -21,6 +21,7 @@ meshSkinnedAnimation::~meshSkinnedAnimation()
 void meshSkinnedAnimation::init()
 {
 	DefaultCamera->setFreeCamera(true);
+	DefaultCamera->setMouseCenterAlways(false);
 	DefaultCamera->setEyePosition(0, 5, 10);
 	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 

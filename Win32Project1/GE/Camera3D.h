@@ -37,6 +37,7 @@ public:
 	const Matrix4f& getCameraTranlation();
 
 	void setFreeCamera(bool b);
+	void setMouseCenterAlways(bool b);
 
 protected:
 	void InitCameraTrans();
@@ -51,6 +52,8 @@ protected:
 
 	void keyInput(unsigned char param, int x, int y);
 	void mouseInput(int button, int state, int x, int y);
+	void mousemove_free(int button, int state, int x, int y);
+	void mousemove_free_mousecenter(int button, int state, int x, int y);
 
 protected:
 	Vector3 	m_eye;
@@ -76,11 +79,13 @@ protected:
 	
 	Matrix4f	m_cameraMat;
 
-	bool		m_freeCamera;
+	bool		m_freeCamera = false;
+	bool		m_mouseCenter = false;
+
 	float m_mouseMovelastX;
 	float m_mouseMovelastY;
 	
-	
+	mousemoveFunc m_pMouseMoveFunc = nullptr;
 	//Quaternion m_rotation;
 };
 
