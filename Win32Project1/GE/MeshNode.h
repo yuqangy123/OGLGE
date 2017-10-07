@@ -74,7 +74,7 @@ protected:
 	int texCoordLoc;
 	int normalLoc;
 
-	bool m_loaded = false;
+	bool m_loaded;
 
 	Assimp::Importer m_importer;
 };

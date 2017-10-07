@@ -4,6 +4,9 @@
 
 lightTechnique::lightTechnique()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
+	normalLoc = 0;
 }
 
 

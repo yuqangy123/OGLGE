@@ -18,5 +18,5 @@ public:
 
 protected:
 	std::vector<SceneNode*> m_nodes;
-	SceneNode* m_default_scenenode=nullptr;
+	SceneNode* m_default_scenenode;
 };

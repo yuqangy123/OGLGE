@@ -20,6 +20,8 @@ meshbumpNormal::~meshbumpNormal()
 
 void meshbumpNormal::init()
 {
+	switchNormal = 0.0f;
+
 	//init shader tech
 	m_tech = new bumpNormalLightTechnique();
 	m_tech->init();

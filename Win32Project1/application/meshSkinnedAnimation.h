@@ -39,7 +39,7 @@ protected:
 	skinnedMeshTechnique* m_tech;
 	Pipeline m_pipe;
 	Matrix4f m_MVPMt4;
-	skinMeshNode* m_mesh=nullptr;
+	skinMeshNode* m_mesh;
 
 	Vector4 m_world_point;
 };

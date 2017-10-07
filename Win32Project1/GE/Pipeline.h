@@ -52,8 +52,8 @@ private:
 	Vector3 m_rotation;
 	Vector3 m_worldPos;
 
-	Camera* m_camera=nullptr;
-	bool		m_dirty = false;
+	Camera* m_camera;
+	bool		m_dirty;
 	Matrix4f m_transformation;
 	Matrix4f m_worldtrans;
 

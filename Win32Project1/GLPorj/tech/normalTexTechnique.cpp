@@ -4,6 +4,8 @@
 
 normalTexTechnique::normalTexTechnique()
 {
+	 positionLoc = 0;
+	texCoordLoc = 0;
 }
 
 

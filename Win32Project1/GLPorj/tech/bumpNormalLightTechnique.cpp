@@ -4,6 +4,11 @@
 
 bumpNormalLightTechnique::bumpNormalLightTechnique()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
+	normalLoc = 0;
+	tangentLoc = 0;
+	bitangentLoc = 0;
 }
 
 

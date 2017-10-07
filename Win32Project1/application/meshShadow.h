@@ -31,10 +31,10 @@ protected:
 	void updateLightDirection();
 
 protected:
-	MeshNode* m_mesh = nullptr;
-	MeshNode* m_terrainQuadMesh = nullptr;
-	shadowMapMeshTechnique* m_shadowMapTech=nullptr;
-	shadowMeshTechnique* m_tech = nullptr;
+	MeshNode* m_mesh;
+	MeshNode* m_terrainQuadMesh;
+	shadowMapMeshTechnique* m_shadowMapTech;
+	shadowMeshTechnique* m_tech;
 	
 	std::vector<MeshNode*> m_meshs;
 

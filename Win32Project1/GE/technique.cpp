@@ -4,6 +4,10 @@
 
 technique::technique()
 {
+	m_shaderProg = 0;
+	m_vshShader = 0;
+	m_fshShader = 0;
+	m_gshShader = 0;
 }
 
 

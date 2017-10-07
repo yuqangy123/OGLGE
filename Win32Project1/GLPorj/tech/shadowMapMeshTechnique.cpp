@@ -4,6 +4,10 @@
 
 shadowMapMeshTechnique::shadowMapMeshTechnique()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
+	fbo = 0;
+	shadowMap = 0;
 }
 
 

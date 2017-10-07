@@ -25,10 +25,10 @@ protected:
 	void initUniforms();
 
 protected:
-	GLuint m_shaderProg = 0;
-	GLuint m_vshShader = 0;
-	GLuint m_fshShader = 0;
-	GLuint m_gshShader = 0;
+	GLuint m_shaderProg;
+	GLuint m_vshShader;
+	GLuint m_fshShader;
+	GLuint m_gshShader;
 	std::map<std::string, uniformUnit> m_userUniforms;
 
 };

@@ -3,6 +3,8 @@
 
 Node::Node()
 {
+	m_scaleX = 1.0f;
+	m_scaleY = 1.0f;
 }
 
 

@@ -45,5 +45,5 @@ protected:
 	GLuint IBO;
 	unsigned int m_tex;
 	unsigned int m_normalTex;
-	float switchNormal = 0.0f;
+	float switchNormal;
 };

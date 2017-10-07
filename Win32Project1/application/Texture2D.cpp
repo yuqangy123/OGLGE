@@ -47,6 +47,7 @@ void Texture2D::draw()
 
 void Texture2D::init()
 {
+	m_renderdata = nullptr;
 	//Texture2DRender::Instance();
 
 	m_pipe.setCamera(DefaultCamera2D);

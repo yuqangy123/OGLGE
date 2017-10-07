@@ -12,6 +12,7 @@ Texture2DRender::Texture2DRender()
 {
 	m_vbo[0] = 0;
 	m_vbo[1] = 0;
+	m_tech = nullptr;
 
 	init();
 }

@@ -6,6 +6,7 @@
 
 MeshNode::MeshNode()
 {
+	m_loaded = false;
 }
 
 
@@ -18,8 +19,8 @@ void MeshNode::draw()
 {
 
 	glEnableVertexAttribArray(positionLoc);
-	//glEnableVertexAttribArray(texCoordLoc);
-	//glEnableVertexAttribArray(normalLoc);
+	glEnableVertexAttribArray(texCoordLoc);
+	glEnableVertexAttribArray(normalLoc);
 	glEnable(GL_TEXTURE_2D);
 
 	for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
@@ -32,8 +33,8 @@ void MeshNode::draw()
 
 		const unsigned int VertexSize = sizeof(Vertex);
 		glVertexAttribPointer(positionLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, pos));
-		//glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
-		//glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
+		glVertexAttribPointer(texCoordLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, uv));
+		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
 		glDrawElements(GL_TRIANGLES, itr->NumIndices, GL_UNSIGNED_INT, 0);				

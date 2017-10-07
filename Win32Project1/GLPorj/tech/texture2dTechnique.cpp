@@ -4,6 +4,8 @@
 
 texture2dTechnique::texture2dTechnique()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
 }
 
 

@@ -23,7 +23,7 @@ protected:
 	void CreateVertexBuffer();
 
 protected:
-	testTechnique* m_tech = nullptr;
+	testTechnique* m_tech;
 
 	GLuint VBO;
 	GLuint IBO;

@@ -14,7 +14,8 @@ Pipeline::Pipeline()
 	m_rotation = Vector3(0.0f, 0.0f, 0.0f);
 	m_worldPos = Vector3(0.0f, 0.0f, 0.0f);
 
-
+	m_camera=nullptr;
+	m_dirty = false;
 }
 
 

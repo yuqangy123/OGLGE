@@ -15,9 +15,9 @@ public:
 	void init();
 
 public:
-	int positionLoc = 0;
-	int texCoordLoc = 0;
-	int normalLoc = 0;
+	int positionLoc;
+	int texCoordLoc;
+	int normalLoc;
 	
 };
 

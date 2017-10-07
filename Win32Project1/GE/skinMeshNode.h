@@ -100,11 +100,11 @@ protected:
 public:
 	Vector3 position;
 	Vector3 scale;
-	int positionLoc = 0;
-	int texCoordLoc = 0;
-	int normalLoc = 0;
-	int boneIDsLoc = 0;
-	int weightsLoc = 0;
+	int positionLoc;
+	int texCoordLoc;
+	int normalLoc;
+	int boneIDsLoc;
+	int weightsLoc;
 	
 
 	std::vector<Matrix4f> m_bonesTransforms;
@@ -115,7 +115,7 @@ protected:
 	std::vector<BoneInfo> m_bones;//保存所有骨骼信息
 	std::map<std::string, unsigned int> m_bonesMapping;
 	
-	GLuint m_VAO = 0;
+	GLuint m_VAO;
 	enum
 	{
 		INDEX_IB=0,
@@ -127,16 +127,16 @@ protected:
 	};
 	GLuint m_buffers[NUM_BS];
 	
-	bool m_loaded = false;
+	bool m_loaded;
 
 	const aiScene* m_aiScene;
 	Assimp::Importer m_importer;
 
-	float m_animTime = 0.0f;
+	float m_animTime;
 
 	std::string m_playAnimName;
 
 	Matrix4f m_rootNodeMat4;
 
-	bool m_playing = false;
+	bool m_playing;
 };

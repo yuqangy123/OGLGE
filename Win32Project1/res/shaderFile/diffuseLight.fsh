@@ -1,4 +1,3 @@
-precision mediump float;
 
 varying vec2 	v_texCoord;
 varying	vec3	w_normal;
@@ -21,7 +20,7 @@ void main()
 	vec3 diffuseColor = vec3(0.0, 0.0, 0.0);
 	vec3 normal = normalize(w_normal);
 	float diffuseFactor = dot(normal, -gDiffuseLight.direction);
-	if(diffuseFactor > 0)
+	if(diffuseFactor > 0.0)
 	{
 		diffuseColor = gDiffuseLight.color * gDiffuseLight.diffuseIntensity * diffuseFactor;
 	}

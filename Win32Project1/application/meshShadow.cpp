@@ -19,6 +19,11 @@ meshShadow::~meshShadow()
 
 void meshShadow::init()
 {
+	m_mesh = nullptr;
+	m_terrainQuadMesh = nullptr;
+	m_shadowMapTech=nullptr;
+	m_tech = nullptr;
+	
 	DefaultCamera->setFreeCamera(true);
 	
 	m_shadowMapTech = new shadowMapMeshTechnique();

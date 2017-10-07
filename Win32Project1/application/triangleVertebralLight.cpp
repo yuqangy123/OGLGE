@@ -296,6 +296,11 @@ void triangleVertebralLight::createVBOIBO_ambientLight()
 
 void triangleVertebralLight::init()
 {
+	m_tech = nullptr;
+	m_Vertices = nullptr;
+	m_Indices = nullptr;;
+
+
 	m_lightType = lightType::dotDiffuseLight;
 	m_tech = new lightTechnique();
 	m_tech->init(m_lightType);

@@ -28,15 +28,15 @@ protected:
 	void initFBO();
 
 public:
-	int positionLoc = 0;
-	int texCoordLoc = 0;
+	int positionLoc ;
+	int texCoordLoc ;
 	
-	GLuint fbo = 0;
-	GLuint shadowMap = 0;
+	GLuint fbo ;
+	GLuint shadowMap ;
 
 protected:
 	Pipeline m_pipe;
-	Camera3D* m_pLightSpot = nullptr;
+	Camera3D* m_pLightSpot;
 	Matrix4f m_lightMVPMt4;
 };
 

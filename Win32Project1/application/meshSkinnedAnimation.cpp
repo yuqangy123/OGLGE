@@ -62,9 +62,7 @@ void meshSkinnedAnimation::draw()
 	glPointSize(5);
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 0.0, 1.0);
-
 	glVertex3f(m_world_point.x, m_world_point.y, m_world_point.z);
-
 	glEnd();
 	glPointSize(1);
 }

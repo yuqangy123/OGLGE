@@ -44,6 +44,6 @@ protected:
 	GLuint m_vbo[2];
 	Pipeline	m_pipe;
 	GLuint m_lastTexturesID;
-	texture2dTechnique* m_tech = nullptr;
+	texture2dTechnique* m_tech;
 };
 

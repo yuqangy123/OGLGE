@@ -16,7 +16,10 @@ Camera3D::Camera3D(const Vector3& pos, const Vector3& target, const Vector3& up)
 	m_dirty = true;
 
 	m_freeCamera = false;
-
+	m_mouseCenter = false;
+	m_pMouseMoveFunc = nullptr;
+	m_angleH =0.f;;
+	m_angleV =0.f;;
 }
 
 Camera3D::Camera3D()
@@ -24,6 +27,10 @@ Camera3D::Camera3D()
 	m_dirty = true;
 
 	m_freeCamera = false;
+	m_mouseCenter = false;
+	m_pMouseMoveFunc = nullptr;
+	m_angleH =0.f;;
+	m_angleV =0.f;;
 
 }
 

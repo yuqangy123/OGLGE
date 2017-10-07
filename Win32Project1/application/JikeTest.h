@@ -29,7 +29,7 @@ protected:
 	void CreateVertexBuffer();
 
 protected:
-	normalTexTechnique* m_tech = nullptr;
+	normalTexTechnique* m_tech;
 
 	GLuint VBO;
 	GLuint IBO;

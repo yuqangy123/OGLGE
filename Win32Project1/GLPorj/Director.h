@@ -21,8 +21,8 @@ public:
 	Camera2D* get2DCamera() { return m_Camera2D; };
 
 protected:
-	Camera3D* m_Camera3D = nullptr;
-	Camera2D* m_Camera2D = nullptr;
+	Camera3D* m_Camera3D;
+	Camera2D* m_Camera2D;
 	
 };
 

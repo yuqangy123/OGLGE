@@ -34,14 +34,14 @@ protected:
 	void updateLightUniform();
 
 protected:
-	lightTechnique* m_tech = nullptr;
+	lightTechnique* m_tech;
 	lightType m_lightType;
 
 	GLuint VBO;
 	GLuint IBO;
 
-	Vector3 *m_Vertices = nullptr;
-	unsigned int *m_Indices = nullptr;
+	Vector3 *m_Vertices;
+	unsigned int *m_Indices;
 
 	GLuint m_exturesID;
 

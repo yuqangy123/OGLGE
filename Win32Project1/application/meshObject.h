@@ -7,8 +7,9 @@
 #include "Node.h"
 #include "Pipeline.h"
 #include "MeshNode.h"
+#include "InPutInterface.h"
 
-class meshObject :public Node
+class meshObject :public Node, public InPutInterface
 {
 public:
 	meshObject();
@@ -23,6 +24,8 @@ public:
 	void update(float ft);
 	void draw();
 
+	void keyInput(unsigned char param, int x, int y);
+	void mouseInput(int button, int state, int x, int y);
 	
 protected:
 	void init();
@@ -37,4 +40,6 @@ protected:
 	float m_diffuseIntensity;
 
 	MeshNode*	m_mesh;
+
+	Vector4 m_world_point;
 };

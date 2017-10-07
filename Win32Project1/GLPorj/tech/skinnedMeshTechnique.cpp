@@ -4,6 +4,11 @@
 
 skinnedMeshTechnique::skinnedMeshTechnique()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
+	normalLoc = 0;
+	weightsLoc = 0;
+	boneIDsLoc = 0;
 }
 
 

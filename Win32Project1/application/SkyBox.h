@@ -27,8 +27,8 @@ protected:
 	void init();
 
 protected:
-	skyBoxTechnique* m_tech = nullptr;
-	MeshNode* m_mesh = nullptr;
+	skyBoxTechnique* m_tech;
+	MeshNode* m_mesh;
 	int m_texture;
 	Pipeline m_pipe;
 };

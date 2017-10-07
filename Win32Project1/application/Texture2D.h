@@ -24,6 +24,6 @@ protected:
 
 	std::string m_resourceFile;
 	unsigned int m_texturesID;
-	V3F_T2F* m_renderdata = nullptr;
+	V3F_T2F* m_renderdata;
 };
 

@@ -17,6 +17,15 @@ x4.m[3][0] = xx4.d1; x4.m[3][1] = xx4.d2; x4.m[3][2] = xx4.d3; x4.m[3][3] = xx4.
 
 skinMeshNode::skinMeshNode()
 {
+	positionLoc = 0;
+	texCoordLoc = 0;
+	normalLoc = 0;
+	boneIDsLoc = 0;
+	weightsLoc = 0;
+	 m_playing = false;
+	 m_animTime = 0.0f;
+	 m_loaded = false;
+	 m_VAO = 0;
 }
 
 

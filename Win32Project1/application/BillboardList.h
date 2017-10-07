@@ -26,7 +26,7 @@ protected:
 	void init();
 
 protected:
-	billboardTechnique* m_tech = nullptr;
+	billboardTechnique* m_tech;
 	int m_texture;
 	Pipeline m_pipe;
 	GLuint VBO;

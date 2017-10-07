@@ -13,7 +13,7 @@ public:
 	typedef void (Camera::*mousemoveFunc)(int button, int state, int x, int y);
 
 protected:
-	bool		m_dirty=false;
+	bool		m_dirty;
 
 };
 

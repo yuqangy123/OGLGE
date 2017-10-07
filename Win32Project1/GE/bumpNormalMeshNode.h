@@ -84,8 +84,8 @@ protected:
 	int s_textureLoc;
 	int s_normalTextureLoc;
 
-	Texture* m_pNormalMapTex = nullptr;
+	Texture* m_pNormalMapTex;
 	Assimp::Importer m_importer;
 
-	bool m_loaded = false;
+	bool m_loaded;
 };

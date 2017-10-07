@@ -65,8 +65,8 @@ protected:
 	Mat3 		m_uvn;
 	Mat3 		m_stand_uvn;
 	Quaternion	m_quat;
-	float		m_angleH = 0;
-	float		m_angleV = 0;
+	float		m_angleH ;
+	float		m_angleV ;
 	Matrix4f	m_translateMat;
 	Matrix4f	m_transWorldposMat;
 
@@ -82,13 +82,13 @@ protected:
 	
 	Matrix4f	m_cameraMat;
 
-	bool		m_freeCamera = false;
-	bool		m_mouseCenter = false;
+	bool		m_freeCamera;
+	bool		m_mouseCenter;
 
 	float m_mouseMovelastX;
 	float m_mouseMovelastY;
 	
-	mousemoveFunc m_pMouseMoveFunc = nullptr;
+	mousemoveFunc m_pMouseMoveFunc;
 	//Quaternion m_rotation;
 };
 

@@ -7,6 +7,8 @@
 
 bumpNormalMeshNode::bumpNormalMeshNode()
 {
+	m_pNormalMapTex = nullptr;
+	m_loaded = false;
 }
 
 

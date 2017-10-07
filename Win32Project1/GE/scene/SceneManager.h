@@ -22,6 +22,6 @@ protected:
 	void init();
 
 protected:
-	Scene* m_scene = nullptr;
+	Scene* m_scene;
 };
 

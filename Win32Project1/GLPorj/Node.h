@@ -21,7 +21,7 @@ protected:
 	Vector3 m_position;
 	Mat4 m_transform;
 	Quaternion m_rotation;
-	float m_scaleX = 1.0f;
-	float m_scaleY = 1.0f;
+	float m_scaleX;
+	float m_scaleY;
 };
 

@@ -1,0 +1,11 @@
+注意传入shader里面的矩阵的行列式，代码：
+glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_MVPMt4.m);
+GL_TRUE参数。
+外部程序软处理的时候，注意MVPMatrix的行列式，是否需要转置一下。
+
+
+
+
+
+
+在NDC坐标系中，近裁剪面的z值为-1，远裁剪面的z值为1

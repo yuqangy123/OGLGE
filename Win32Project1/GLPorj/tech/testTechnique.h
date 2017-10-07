@@ -15,6 +15,6 @@ public:
 	void init();
 
 public:
-	int positionLoc = 0;
+	int positionLoc;
 };
 

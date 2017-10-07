@@ -5,6 +5,7 @@
 
 SceneNode::SceneNode()
 {
+	m_nodeName[0] = 0;
 }
 
 
