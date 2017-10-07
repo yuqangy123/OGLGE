@@ -16,6 +16,7 @@ meshObject::meshObject()
 meshObject::~meshObject()
 {
 	InPutControlIns.removeListenNode(this);
+
 }
 
 void meshObject::init()
