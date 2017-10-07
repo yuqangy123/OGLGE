@@ -111,6 +111,7 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		float a = (zfar + znear) / (zfar - znear);
 		float b = (2 * zfar*znear) / ((zfar - znear)*-znear);
 
+		//求ndc坐标（z值是相反值）
 		float ndc_x = ((float)x / winsz.width)*2.0f - 1.0f;
 		float ndc_y = 1.0f - (2.0f*(float)y)/winsz.height;
 		float ndc_z = -1.f;
@@ -135,31 +136,32 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		//m_world_point = vpMt4*clip_point;
 		printf("clip_point:%f,%f,%f,%f\r\n", clip_point.x, clip_point.y, clip_point.z, clip_point.w);
 
+		//转换到裁剪坐标系
 		clip_point = mvpMt4*moudel_point;
+
 		mvpMt4.Inverse();
 		Vector4 inverseWorldPoint = mvpMt4*clip_point;
 		printf("inverseWorldPoint:%f,%f,%f,%f\r\n", inverseWorldPoint.x, inverseWorldPoint.y, inverseWorldPoint.z, inverseWorldPoint.w);
 
 
-		//测试getCameraTranlation
-		//clip_point = Vector4(m_world_point.x, m_world_point.y, m_world_point.z, 1.0);
-		//clip_point = Vector4(0, 0, 0, 1.0);
 		Matrix4f cameraTransMt4 = DefaultCamera->getCameraTranlation();
 		Matrix4f cameraPerspectiveMt4 = DefaultCamera->getPerspectiveMt4();
 		cameraTransMt4.transpose();
 		cameraTransMt4.Inverse();
 
+		//到ndc空间
 		clip_point.x /= clip_point.w;
 		clip_point.y /= clip_point.w;
 		clip_point.z /= clip_point.w;
 		clip_point.w = 1.0f;
-		clip_point = ndc_screen_point;
+		clip_point = ndc_screen_point;//这里改为测试屏幕点击位置的ndc坐标
 		Vector4 clip_2_world_pos = cameraTransMt4*clip_point;
 		clip_2_world_pos.x /= clip_2_world_pos.w;
 		clip_2_world_pos.y /= clip_2_world_pos.w;
 		clip_2_world_pos.z /= clip_2_world_pos.w;
 		clip_2_world_pos.w = 1.0f;
 
+		//模型转换矩阵
 		Matrix4f pipeModelTransMt4 = *m_pipe.GetWorldTrans();
 		pipeModelTransMt4.transpose();
 		pipeModelTransMt4.Inverse();
@@ -174,8 +176,6 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		clip_point.y /= clip_point.w;
 		clip_point.z /= clip_point.w;
 		clip_point.w = 1.0f;
-
-
 
 
 		int n = 0;

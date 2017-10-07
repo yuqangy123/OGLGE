@@ -58,13 +58,6 @@ void meshSkinnedAnimation::draw()
 	
 	m_mesh->draw();
 
-	m_tech->disable();
-	glPointSize(5);
-	glBegin(GL_POINTS);
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex3f(m_world_point.x, m_world_point.y, m_world_point.z);
-	glEnd();
-	glPointSize(1);
 }
 
 void meshSkinnedAnimation::update(float ft)
@@ -119,30 +112,4 @@ void meshSkinnedAnimation::keyInput(unsigned char param, int x, int y)
 
 void meshSkinnedAnimation::mouseInput(int button, int state, int x, int y)
 {
-	if (button == 0 && state == 0)
-	{
-		const Rect& winsz = OGLGE::Instance()->getWindowsRect();
-		float ndc_x = ((float)x / winsz.width)*2.0f - 1.0f;
-		float ndc_y = 1.0f - (2.0f*(float)y)/winsz.height;
-		//float screen_z = 0.f;
-		float znear = 0.1f; 
-		float zfar = 100.f;
-		float a = (zfar + znear) / (zfar - znear);
-		float b = (2 * zfar*znear) / ((zfar - znear)*-znear);
-		float ndc_z = 1.0f;
-		Vector4 clip_point(ndc_x, ndc_y, ndc_z, 1.0f);
-		
-		//Matrix4f vpMt4 = DefaultCamera->getCameraTranlation();
-		Matrix4f vpMt4 = *m_pipe.GetTrans();
-		//vpMt4.Inverse();
-		clip_point = Vector4(4.45001888, 7.61728191, 46.0383530, 1.0);
-		m_world_point = vpMt4*clip_point;
-		m_world_point.x /= m_world_point.w;
-		m_world_point.y /= m_world_point.w;
-		m_world_point.z /= m_world_point.w;
-		vpMt4.Inverse();
-		//m_world_point = vpMt4*clip_point;
-		printf("%f,%f,%f,%f\r\n", m_world_point.x, m_world_point.y, m_world_point.z, m_world_point.w);
-		int n = 0;
-	}
 }

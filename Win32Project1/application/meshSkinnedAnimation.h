@@ -40,6 +40,4 @@ protected:
 	Pipeline m_pipe;
 	Matrix4f m_MVPMt4;
 	skinMeshNode* m_mesh;
-
-	Vector4 m_world_point;
 };
