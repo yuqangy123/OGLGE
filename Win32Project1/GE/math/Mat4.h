@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector3.h"
+#include "Vector4.h"
 #include "common.h"
 
 
@@ -64,6 +65,17 @@ public:
 		}
 
 		return Ret;
+	}
+
+	inline Vector4 operator*(const Vector4& Right)
+	{
+		Vector4 ret(
+			Right.x*m[0][0] + Right.y*m[1][0] + Right.z*m[2][0] + Right.w*m[3][0],
+			Right.x*m[0][1] + Right.y*m[1][1] + Right.z*m[2][1] + Right.w*m[3][1],
+			Right.x*m[0][2] + Right.y*m[1][2] + Right.z*m[2][2] + Right.w*m[3][2],
+			Right.x*m[0][3] + Right.y*m[1][3] + Right.z*m[2][3] + Right.w*m[3][3]
+			);
+		return ret;
 	}
 
 	inline void identity()

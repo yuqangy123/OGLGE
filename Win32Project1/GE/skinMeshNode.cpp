@@ -337,8 +337,8 @@ void skinMeshNode::BoneTransform(double TimeInSeconds, std::vector<Matrix4f>& Tr
 	float timeTicks = fmod(ticksTime, (float)aianim->mDuration);
 
 	aiMatrix4x4_Matrix4f(m_aiScene->mRootNode->mTransformation, m_rootNodeMat4);
-	//m_rootNodeMat4.identity();
-	m_rootNodeMat4.Inverse();
+	m_rootNodeMat4.identity();
+	//m_rootNodeMat4.Inverse();
 
 	Matrix4f transformMat4;
 	transformMat4.identity();

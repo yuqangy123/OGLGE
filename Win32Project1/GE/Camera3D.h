@@ -39,6 +39,9 @@ public:
 	void setFreeCamera(bool b);
 	void setMouseCenterAlways(bool b);
 
+	//获得投影矩阵
+	Matrix4f getPerspectiveMt4() { return m_perspectiveMat; }
+
 protected:
 	void InitCameraTrans();
 	void InitPerspectiveProj();

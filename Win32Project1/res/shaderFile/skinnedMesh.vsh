@@ -10,7 +10,7 @@ layout(location=4) in vec4	weights;
 
 
 
-uniform  mat4  WVPMatrix;
+uniform  mat4  MVPMatrix;
 uniform  mat4  bonesTransformMt4[MAX_BONES];
 
 
@@ -26,7 +26,7 @@ void main()
 	
 	vec4 position = vec4(a_position, 1.0);
 	position = boneTransform * position;
-	gl_Position = WVPMatrix * position;
+	gl_Position = MVPMatrix * position;
 	
 	texCoord0 = a_texCoord.xy;
 

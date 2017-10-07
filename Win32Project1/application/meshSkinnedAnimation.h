@@ -8,8 +8,9 @@
 #include "Pipeline.h"
 #include "skinMeshNode.h"
 #include "Camera3D.h"
+#include "InPutInterface.h"
 
-class meshSkinnedAnimation :public Node
+class meshSkinnedAnimation :public Node , public InPutInterface
 {
 public:
 	meshSkinnedAnimation();
@@ -28,6 +29,7 @@ public:
 	void draw();
 
 	void keyInput(unsigned char param, int x, int y);
+	void mouseInput(int button, int state, int x, int y);
 
 protected:
 	void init();
@@ -36,7 +38,8 @@ protected:
 protected:
 	skinnedMeshTechnique* m_tech;
 	Pipeline m_pipe;
-	Matrix4f m_WVPMt4;
+	Matrix4f m_MVPMt4;
 	skinMeshNode* m_mesh=nullptr;
 
+	Vector4 m_world_point;
 };

@@ -437,6 +437,9 @@ void Camera3D::mousemove_free_mousecenter(int button, int state, int x, int y)
 		if (m_mouseCenter) glutWarpPointer(m_mouseMovelastX, m_mouseMovelastY);
 	}
 }
+
+ 
+
 /*
 //相机自旋转即绕u,v,n轴旋转，uvn坐标系*旋转矩阵
 void Camera3D::pitch(float angle) 

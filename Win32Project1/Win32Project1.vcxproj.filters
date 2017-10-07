@@ -378,6 +378,9 @@
     <ClInclude Include="GE\scene\InPutInterface.h">
       <Filter>GE\scene</Filter>
     </ClInclude>
+    <ClInclude Include="GE\math\Vector4.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -541,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="GE\scene\SceneManager.cpp">
       <Filter>GE\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Vector4.cpp">
+      <Filter>GE\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

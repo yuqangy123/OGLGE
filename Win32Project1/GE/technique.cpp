@@ -133,6 +133,10 @@ void technique::enable()
 	if (0 != m_shaderProg)
 		glUseProgram(m_shaderProg);
 }
+void technique::disable()
+{
+	glUseProgram(0);
+}
 
 const uniformUnit* technique::getUniforms(const char* name)
 {
