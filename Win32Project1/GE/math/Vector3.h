@@ -89,7 +89,7 @@ class Vector3f
 {
 public:
 	float x, y, z;
-	Vector3f() {}
+	Vector3f() {x=0.f;y=0.f;z=0.f;}
 	Vector3f(float _x, float _y, float _z)
 	{
 		x = _x;

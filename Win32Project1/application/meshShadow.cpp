@@ -37,7 +37,7 @@ void meshShadow::init()
 	m_pipe.setCamera(DefaultCamera);
 
 	//terrain box mesh
-	m_terrainQuadMesh = new MeshNode();
+	m_terrainQuadMesh = new ModelMesh();
 	m_terrainQuadMesh->loadMesh("content/box.obj");
 	m_terrainQuadMesh->setAttriPositionLoc(m_tech->positionLoc);
 	m_terrainQuadMesh->setAttriTexCoordLoc(m_tech->texCoordLoc);
@@ -111,7 +111,7 @@ void meshShadow::setLightPosition(float x, float y, float z)
 bool meshShadow::loadMesh(const char* filename, const Vector3& pos, const Vector3& sal)
 {
 	if (m_mesh == nullptr)
-		m_mesh = new MeshNode();
+		m_mesh = new ModelMesh();
 
 	if (m_mesh->isLoaded() || !m_mesh->loadMesh(filename))
 		return false;

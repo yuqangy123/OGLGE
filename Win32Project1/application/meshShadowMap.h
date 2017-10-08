@@ -6,7 +6,7 @@
 #include "tech\shadowMapMeshTechnique.h"
 #include "Node.h"
 #include "Pipeline.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 #include "Camera3D.h"
 
 class meshShadowMap :public Node
@@ -37,7 +37,7 @@ protected:
 
 protected:
 	shadowMapMeshTechnique* m_tech;
-	std::vector<MeshNode*> m_meshs;
+	std::vector<ModelMesh*> m_meshs;
 	Pipeline m_pipe;
 	Matrix4f m_MVPMt4;
 	GLuint VBO;

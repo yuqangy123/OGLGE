@@ -1,7 +1,7 @@
 #pragma once
 #include "technique.h"
 #include "techDefine.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 #include "Pipeline.h"
 #include "Camera3D.h"
 #include <vector>
@@ -21,7 +21,7 @@ public:
 	const Vector3& getTargetPosition() { return m_pLightSpot->getTargetPosition(); };
 	const Matrix4f* getLightTrans() { return m_pipe.GetTrans(); }
 
-	void renderFrameBuffer(std::vector<MeshNode*>&);
+	void renderFrameBuffer(std::vector<ModelMesh*>&);
 
 
 protected:

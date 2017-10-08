@@ -7,7 +7,7 @@
 #include "tech\shadowMeshTechnique.h"
 #include "Node.h"
 #include "Pipeline.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 #include "Camera3D.h"
 
 class meshShadow :public Node
@@ -31,12 +31,12 @@ protected:
 	void updateLightDirection();
 
 protected:
-	MeshNode* m_mesh;
-	MeshNode* m_terrainQuadMesh;
+	ModelMesh* m_mesh;
+	ModelMesh* m_terrainQuadMesh;
 	shadowMapMeshTechnique* m_shadowMapTech;
 	shadowMeshTechnique* m_tech;
 	
-	std::vector<MeshNode*> m_meshs;
+	std::vector<ModelMesh*> m_meshs;
 
 	Pipeline m_pipe;
 

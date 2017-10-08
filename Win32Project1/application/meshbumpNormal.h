@@ -6,7 +6,7 @@
 #include "tech\bumpNormalLightTechnique.h"
 #include "bumpNormalMeshNode.h"
 #include "Pipeline.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 
 class meshbumpNormal :public Node
 {

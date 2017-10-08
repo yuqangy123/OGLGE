@@ -4,9 +4,8 @@
 #include "GL\glew.h"
 #include "Vector2.h"
 #include "tech\lightTechnique.h"
-#include "Node.h"
 #include "Pipeline.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 #include "InPutInterface.h"
 
 class meshObject :public Node, public InPutInterface
@@ -27,8 +26,11 @@ public:
 	void keyInput(unsigned char param, int x, int y);
 	void mouseInput(int button, int state, int x, int y);
 	
+	void setDrawFramebox(bool bl){ m_draw_framebox=bl;}
+
 protected:
 	void init();
+
 
 protected:
 	lightTechnique* m_tech;
@@ -39,7 +41,9 @@ protected:
 	Vector3 m_diffuseDirection;
 	float m_diffuseIntensity;
 
-	MeshNode*	m_mesh;
+	ModelMesh*	m_mesh;
 
 	Vector4 m_world_point;
+
+	bool m_draw_framebox;
 };

@@ -23,7 +23,7 @@ void SkyBox::init()
 	m_tech = new skyBoxTechnique();
 	m_tech->init();
 	
-	m_mesh = new MeshNode();
+	m_mesh = new ModelMesh();
 	m_mesh->loadMesh("content/sphere.obj");
 	m_mesh->setAttriPositionLoc(m_tech->positionLoc);
 

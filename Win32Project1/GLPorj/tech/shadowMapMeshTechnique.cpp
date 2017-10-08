@@ -79,7 +79,7 @@ void shadowMapMeshTechnique::initFBO()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void shadowMapMeshTechnique::renderFrameBuffer(std::vector<MeshNode*>& meshs)
+void shadowMapMeshTechnique::renderFrameBuffer(std::vector<ModelMesh*>& meshs)
 {
 	enable();
 
@@ -90,7 +90,7 @@ void shadowMapMeshTechnique::renderFrameBuffer(std::vector<MeshNode*>& meshs)
 	glBindTexture(GL_TEXTURE_2D, shadowMap);
 	for (auto itr = meshs.begin(); itr != meshs.end(); ++itr)
 	{
-		MeshNode* m = (*itr);
+		ModelMesh* m = (*itr);
 		m_pipe.WorldPos(m->position.x, m->position.y, m->position.z);
 		m_pipe.Scale(m->scale.x, m->scale.y, m->scale.z);
 		glUniformMatrix4fv(getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_pipe.GetTrans()->m);

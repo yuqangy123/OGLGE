@@ -21,7 +21,8 @@ meshObject::~meshObject()
 
 void meshObject::init()
 {
-	
+	m_draw_framebox = false;
+
 	m_tech = new lightTechnique();
 	m_tech->init(lightType::diffuseLight);
 	m_tech->enable();
@@ -30,6 +31,7 @@ void meshObject::init()
 
 	m_pipe.setCamera(DefaultCamera);
 	DefaultCamera->setFreeCamera(true);
+	DefaultCamera->setMouseCenterAlways(true);
 
 	InPutControlIns.addListenNode(this);
 
@@ -39,7 +41,7 @@ void meshObject::init()
 	m_diffuseDirection.normalize();
 	m_diffuseIntensity = 1.0f;
 
-	m_mesh = new MeshNode();
+	m_mesh = new ModelMesh();
 	m_mesh->setAttriPositionLoc(m_tech->positionLoc);
 	m_mesh->setAttriTexCoordLoc(m_tech->texCoordLoc);
 	m_mesh->setAttriNormalLoc(m_tech->normalLoc);
@@ -67,6 +69,8 @@ void meshObject::draw()
 	glVertex3f(m_world_point.x, m_world_point.y, 0);
 	glEnd();
 	glPointSize(1);
+	
+	//if(m_draw_framebox)
 
 }
 
@@ -87,7 +91,11 @@ void meshObject::setScale(float s)
 
 bool meshObject::loadMesh(const char* filename)
 {
-	return m_mesh->loadMesh(filename);
+	bool res = m_mesh->loadMesh(filename);
+
+	m_mesh->setDrawBoundbox(true);
+
+	return res;
 }
 
 
@@ -183,3 +191,5 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		printf("\r\n\r\n");
 	}
 }
+
+

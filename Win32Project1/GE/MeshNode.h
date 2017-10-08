@@ -1,80 +1,34 @@
 #pragma once
-#include <vector>
-#include "scene.h"
-#include "GL\glew.h"
-#include "Vector2.h"
-#include "Importer.hpp"
+#include "Vector3.h"
+
 
 class MeshNode
 {
 public:
-	MeshNode();
-	~MeshNode();
+	typedef struct boundBoxData_{
+		Vector3f left_top_front;
+		Vector3f right_top_front;
+		Vector3f right_bottom_front;
+		Vector3f left_bottom_front;
+		Vector3f left_top_back;
+		Vector3f right_top_back;
+		Vector3f right_bottom_back;
+		Vector3f left_bottom_back;
 
-	bool loadMesh(const char* filename);
-
-	bool isLoaded(){ return m_loaded; }
-
-	void clear();
-
-	void draw();
-
-	void setAttriPositionLoc(int loc) { positionLoc = loc; };
-	void setAttriTexCoordLoc(int loc) { texCoordLoc = loc; };
-	void setAttriNormalLoc(int loc) { normalLoc = loc; };
-
-protected:
-	bool initFromScene(const aiScene* scene, const char* filename);
-	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
-	bool InitMaterials(const aiScene* pScene, const char* filename);
-
-public:
-	struct Texture
-	{
-		Texture(aiTextureType tp, const std::string& path_);
-		void load();
-		void bind();
-
-		int id;
-		aiTextureType type;
-		std::string path;
-	};
-	struct Vertex
-	{
-		Vertex(const Vector3f& pos_, const Vector3f& uv_, const Vector3f& normal_)
+		void init(float maxx, float minx, float maxy, float miny, float maxz, float minz)
 		{
-			pos = pos_;
-			uv = uv_;
-			normal = normal_;
+			left_top_front = Vector3f(minx, maxy,maxz);
+			right_top_front = Vector3f(maxx, maxy,maxz);
+			right_bottom_front = Vector3f(maxx, miny, maxz);
+			left_bottom_front = Vector3f(minx,miny,maxz);
+			left_top_back = Vector3f(minx, maxy, minz);
+			right_top_back = Vector3f(maxx, maxy, minz);
+			right_bottom_back = Vector3f (maxx, miny, minz);
+			left_bottom_back = Vector3f (minx, miny, minz);
+		}
+		boundBoxData_()
+		{
 		}
 		
-		Vector3f pos;
-		Vector3f uv;
-		Vector3f normal;
-	};
-	struct MeshEntry {
-		MeshEntry();
-		~MeshEntry();
-		void Init(std::vector<Vertex>& Vertices, std::vector<unsigned int>& Indices);
-		GLuint VB;
-		GLuint IB;
-		unsigned int NumIndices;
-		unsigned int MaterialIndex;
-	};
-
-public:
-	Vector3 position;
-	Vector3 scale;
-
-protected:
-	std::vector<MeshEntry> m_Entries;
-	std::vector<Texture*> m_Textures;
-	
-	int positionLoc;
-	int texCoordLoc;
-	int normalLoc;
-
-	bool m_loaded;
-
-	Assimp::Importer m_importer;
+	}boundBoxData;
 };

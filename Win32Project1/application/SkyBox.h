@@ -6,7 +6,7 @@
 #include "tech\skyBoxTechnique.h"
 #include "Node.h"
 #include "Pipeline.h"
-#include "MeshNode.h"
+#include "ModelMesh.h"
 
 class SkyBox :public Node
 {
@@ -28,7 +28,7 @@ protected:
 
 protected:
 	skyBoxTechnique* m_tech;
-	MeshNode* m_mesh;
+	ModelMesh* m_mesh;
 	int m_texture;
 	Pipeline m_pipe;
 };

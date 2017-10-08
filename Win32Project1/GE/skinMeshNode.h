@@ -1,4 +1,5 @@
 #pragma once
+#include "MeshNode.h"
 #include <vector>
 #include <map>
 #include "scene.h"
@@ -6,7 +7,7 @@
 #include "Vector2.h"
 #include "Importer.hpp"
 
-class skinMeshNode
+class skinMeshNode : public MeshNode
 {
 public:
 #define NUM_BONES_PER_VEREX 4

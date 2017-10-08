@@ -122,7 +122,7 @@ void meshShadowMap::Rotate(float x, float y, float z)
 
 bool meshShadowMap::loadMesh(const char* filename, const Vector3& pos, const Vector3& sal)
 {
-	auto m = new MeshNode();
+	auto m = new ModelMesh();
 	if (!m->loadMesh(filename))
 		return false;
 
