@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector3.h"
-
+#include "AABBBox.h"
 
 class MeshNode
 {
@@ -14,6 +14,8 @@ public:
 		Vector3f right_top_back;
 		Vector3f right_bottom_back;
 		Vector3f left_bottom_back;
+		AABBBox m_boundBox;
+
 
 		void init(float maxx, float minx, float maxy, float miny, float maxz, float minz)
 		{
@@ -25,6 +27,9 @@ public:
 			right_top_back = Vector3f(maxx, maxy, minz);
 			right_bottom_back = Vector3f (maxx, miny, minz);
 			left_bottom_back = Vector3f (minx, miny, minz);
+
+			m_boundBox.max = Vector3f(maxx, maxy, maxz);
+			m_boundBox.min = Vector3f(minx, miny, minz);
 		}
 		boundBoxData_()
 		{

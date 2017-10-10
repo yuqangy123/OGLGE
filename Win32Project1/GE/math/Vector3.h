@@ -11,7 +11,7 @@ struct Vector3
 	Vector3();
 	~Vector3();
 	Vector3(float x, float y, float z);
-	inline Vector3 operator-(Vector3& Right)const;
+	inline Vector3 operator-(Vector3& Right)const
 	{
 		Vector3 ret;
 		ret.x = (this->x - Right.x);

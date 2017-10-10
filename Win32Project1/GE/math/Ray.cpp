@@ -35,6 +35,7 @@ bool Ray::intersectPlane(const Plane& plane, Vector3f& hitPosition)
 	return  t > dotPN / dotDN;
 }
 
+//射线穿过轴对称包围盒，进入点的t(t1)值，在正对射线的三个候选面的交叉点里最大。离开点的t(t2)值，在其他背对射线的面里，t值最小。t1永远小于t2，交叉点才算在包围盒的六面体上
 bool Ray::intersectAABBBox(const AABBBox& box, Vector3f& hitPosition)
 {
 	if (abs(dir.x) < FLT_EPSILON)
@@ -53,7 +54,61 @@ bool Ray::intersectAABBBox(const AABBBox& box, Vector3f& hitPosition)
 			return false;
 	}
 
-
-	float t1 = 0.0f, t2 = FLT_MAX;
 	//t = (P0 - O)·N / D·N(其中D·N ≠0)
+	float t1 = 0.0f, t2 = FLT_MAX;
+	float maxt, mint;
+
+	//calculate x axis value
+	if (original.x > box.min.x)
+	{
+		mint = (box.min.x - original.x) / dir.x;
+		maxt = (box.max.x - original.x) / dir.x;
+	}
+	else
+	{
+		mint = (box.max.x - original.x) / dir.x;
+		maxt = (box.min.x - original.x) / dir.x;
+	}
+	if (mint > t1)t1 = mint;
+	if (maxt < t2)t2 = maxt;
+	if (t1 > t2)
+		return false;
+
+	//calculate y axis value
+	if (original.y > box.min.y)
+	{
+		mint = (box.min.y - original.y) / dir.y;
+		maxt = (box.max.y - original.y) / dir.y;
+	}
+	else
+	{
+		mint = (box.max.y - original.y) / dir.y;
+		maxt = (box.min.y - original.y) / dir.y;
+	}
+	if (mint > t1)t1 = mint;
+	if (maxt < t2)t2 = maxt;
+	if (t1 > t2)
+		return false;
+
+	//calculate z axis value
+	if (original.z > box.min.z)
+	{
+		mint = (box.min.z - original.z) / dir.z;
+		maxt = (box.max.z - original.z) / dir.z;
+	}
+	else
+	{
+		mint = (box.max.z - original.z) / dir.z;
+		maxt = (box.min.z - original.z) / dir.z;
+	}
+	if (mint > t1)t1 = mint;
+	if (maxt < t2)t2 = maxt;
+	if (t1 > t2)
+		return false;
+
+	//ensure t
+	hitPosition.x = original.x + t*dir.x;
+	hitPosition.y = original.y + t*dir.y;
+	hitPosition.z = original.z + t*dir.z;
+	return true;
 }

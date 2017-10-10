@@ -84,5 +84,5 @@ protected:
 	Assimp::Importer m_importer;
 
 	bool m_draw_framebox;
-	boundBoxData* m_boundboxData;
+	boundBoxData m_boundboxData;
 };

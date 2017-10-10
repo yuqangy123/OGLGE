@@ -4,6 +4,7 @@
 #include "postprocess.h"
 #include "TextureManager.h"
 #include <math.h>
+#include <cfloat>
 
 ModelMesh::ModelMesh()
 {
@@ -98,9 +99,9 @@ bool ModelMesh::initFromScene(const aiScene* scene, const char* filename)
 
 void ModelMesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
-	
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	float maxz = FLT_MIN, minz = FLT_MAX, maxy = FLT_MIN, miny = FLT_MAX, maxx = FLT_MIN, minx = FLT_MAX;
 
 	const aiVector3D zero(0.0f, 0.0f, 0.0f);
 	for (int n = 0; n < paiMesh->mNumVertices; ++n)
@@ -110,7 +111,15 @@ void ModelMesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		aiVector3D texCoords = paiMesh->HasTextureCoords(0) ? paiMesh->mTextureCoords[0][n] : zero;
 
 		vertices.push_back(Vertex(Vector3f(pos.x, pos.y, pos.z), Vector3f(texCoords.x, texCoords.y, texCoords.z), Vector3f(normal.x, normal.y, normal.z)));
+
+		if (pos.x>maxx)maxx = pos.x;
+		if (pos.x<minx)minx = pos.x;
+		if (pos.y>maxy)maxy = pos.y;
+		if (pos.y<miny)miny = pos.y;
+		if (pos.z>maxz)maxz = pos.z;
+		if (pos.z<minz)minz = pos.z;
 	}
+	m_boundboxData.init(maxx, minx, maxy, miny, maxz, minz);
 
 	for (int n = 0; n < paiMesh->mNumFaces; ++n)
 	{
@@ -242,86 +251,66 @@ void ModelMesh::setDrawBoundbox(bool bl)
 	if(bl == m_draw_framebox)
 		return;
 	m_draw_framebox = bl;
+	GLenum drawPel = GL_LINES;
+
 	if (!bl)
 	{
-		delete m_boundboxData;
-		m_boundboxData  = nullptr;
+		for (auto itr = m_Entries.begin(); itr != m_Entries.end(); ++itr)
+		{
+			if (itr->drawPel == drawPel)
+			{
+				glDeleteBuffers(1, &itr->VB);
+				glDeleteBuffers(1, &itr->IB);
+				m_Entries.erase(itr);
+				break;
+			}
+		}
 		return ;
 	}
 
-	const aiScene* pScene = m_importer.ReadFile(m_meshFileName.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
-	if (pScene)
-	{
-		float maxz=-99999.f, minz=99999.f, maxy=-99999.f, miny=99999.f, maxx=-99999.f, minx=99999.f;
-		for (int n = 0; n < pScene->mNumMeshes; ++n)
-		{
-			const aiMesh* m = pScene->mMeshes[n];
-			const aiVector3D zero(0.0f, 0.0f, 0.0f);
-			for (int n = 0; n < m->mNumVertices; ++n)
-			{
-				const aiVector3D& pos = m->mVertices[n];
-				if(pos.x>maxx)maxx=pos.x;
-				if(pos.x<minx)minx=pos.x;
-				if(pos.y>maxy)maxy=pos.y;
-				if(pos.y<miny)miny=pos.y;
-				if(pos.z>maxz)maxz=pos.z;
-				if(pos.z<minz)minz=pos.z;
-			}
-		}
-		if (nullptr == m_boundboxData)m_boundboxData = new boundBoxData();
-		m_boundboxData->init(maxx, minx, maxy, miny, maxz, minz);
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
 
+	vertices.push_back(Vertex(m_boundboxData.left_top_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.right_top_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.right_bottom_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.left_bottom_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.left_top_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.right_top_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.right_bottom_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	vertices.push_back(Vertex(m_boundboxData.left_bottom_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
 
-		std::vector<Vertex> vertices;
-		std::vector<unsigned int> indices;
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(1);
+	indices.push_back(2);
+	indices.push_back(2);
+	indices.push_back(3);
+	indices.push_back(3);
+	indices.push_back(0);
 
-		vertices.push_back(Vertex(m_boundboxData->left_top_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->right_top_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->right_bottom_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->left_bottom_front, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->left_top_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->right_top_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->right_bottom_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
-		vertices.push_back(Vertex(m_boundboxData->left_bottom_back, Vector3f(0.5f,0.5f,0.5f), Vector3f()));
+	indices.push_back(4);
+	indices.push_back(5);
+	indices.push_back(5);
+	indices.push_back(6);
+	indices.push_back(6);
+	indices.push_back(7);
+	indices.push_back(7);
+	indices.push_back(4);
 
-		indices.push_back(0);
-		indices.push_back(1);
-		indices.push_back(1);
-		indices.push_back(2);
-		indices.push_back(2);
-		indices.push_back(3);
-		indices.push_back(3);
-		indices.push_back(0);
+	indices.push_back(0);
+	indices.push_back(4);
+	indices.push_back(1);
+	indices.push_back(5);
+	indices.push_back(3);
+	indices.push_back(7);
+	indices.push_back(2);
+	indices.push_back(6);
 
-		indices.push_back(4);
-		indices.push_back(5);
-		indices.push_back(5);
-		indices.push_back(6);
-		indices.push_back(6);
-		indices.push_back(7);
-		indices.push_back(7);
-		indices.push_back(4);
+	MeshEntry entry;
+	entry.MaterialIndex = 1;
+	entry.Init(vertices, indices, drawPel);
 
-		indices.push_back(0);
-		indices.push_back(4);
-		indices.push_back(1);
-		indices.push_back(5);
-		indices.push_back(3);
-		indices.push_back(7);
-		indices.push_back(2);
-		indices.push_back(6);
-
-		MeshEntry entry;
-		entry.MaterialIndex = 1;
-		entry.Init(vertices, indices, GL_LINES);
-
-		m_Entries.push_back(entry);
-
-	}
-	else
-	{
-		printf("setDrawFramebox error parsing %s : %s\r\n", m_meshFileName.c_str(), m_importer.GetErrorString());
-		assert(0);
-	}
+	m_Entries.push_back(entry);
 }
 
