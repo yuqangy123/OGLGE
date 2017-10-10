@@ -15,6 +15,7 @@ Ray::Ray(const Vector3f& originalPosition, const Vector3f& direction)
 {
 	original = originalPosition;
 	dir = direction;
+	dir.normalize();
 	t = FLT_MAX;
 }
 
@@ -56,57 +57,37 @@ bool Ray::intersectAABBBox(const AABBBox& box, Vector3f& hitPosition)
 
 	//t = (P0 - O)¡¤N / D¡¤N(ÆäÖÐD¡¤N ¡Ù0)
 	float t1 = 0.0f, t2 = FLT_MAX;
-	float maxt, mint;
+	float maxt, mint, tmp;
 
 	//calculate x axis value
-	if (original.x > box.min.x)
-	{
-		mint = (box.min.x - original.x) / dir.x;
-		maxt = (box.max.x - original.x) / dir.x;
-	}
-	else
-	{
-		mint = (box.max.x - original.x) / dir.x;
-		maxt = (box.min.x - original.x) / dir.x;
-	}
+	mint = (box.min.x - original.x) / dir.x;
+	maxt = (box.max.x - original.x) / dir.x;
+	if (maxt<mint){ tmp = maxt; maxt = mint; mint = tmp; }
 	if (mint > t1)t1 = mint;
 	if (maxt < t2)t2 = maxt;
 	if (t1 > t2)
 		return false;
 
 	//calculate y axis value
-	if (original.y > box.min.y)
-	{
-		mint = (box.min.y - original.y) / dir.y;
-		maxt = (box.max.y - original.y) / dir.y;
-	}
-	else
-	{
-		mint = (box.max.y - original.y) / dir.y;
-		maxt = (box.min.y - original.y) / dir.y;
-	}
+	mint = (box.min.y - original.y) / dir.y;
+	maxt = (box.max.y - original.y) / dir.y;
+	if (maxt<mint){ tmp = maxt; maxt = mint; mint = tmp; }
 	if (mint > t1)t1 = mint;
 	if (maxt < t2)t2 = maxt;
 	if (t1 > t2)
 		return false;
 
 	//calculate z axis value
-	if (original.z > box.min.z)
-	{
-		mint = (box.min.z - original.z) / dir.z;
-		maxt = (box.max.z - original.z) / dir.z;
-	}
-	else
-	{
-		mint = (box.max.z - original.z) / dir.z;
-		maxt = (box.min.z - original.z) / dir.z;
-	}
+	mint = (box.min.z - original.z) / dir.z;
+	maxt = (box.max.z - original.z) / dir.z;
+	if (maxt<mint){ tmp = maxt; maxt = mint; mint = tmp; }
 	if (mint > t1)t1 = mint;
 	if (maxt < t2)t2 = maxt;
 	if (t1 > t2)
 		return false;
 
 	//ensure t
+	t = t1;
 	hitPosition.x = original.x + t*dir.x;
 	hitPosition.y = original.y + t*dir.y;
 	hitPosition.z = original.z + t*dir.z;

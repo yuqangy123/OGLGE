@@ -1,6 +1,7 @@
 #pragma once
 #include "Mat3.h"
 
+
 #define Vector3f Vector3
 struct Vector3
 {

@@ -9,8 +9,7 @@
 ModelMesh::ModelMesh()
 {
 	m_loaded = false;
-	m_draw_framebox = false;
-	m_boundboxData = nullptr;
+	m_draw_framebox_switch = false;
 }
 
 
@@ -248,9 +247,9 @@ void ModelMesh::MeshEntry::Init(std::vector<ModelMesh::Vertex>& Vertices, std::v
 
 void ModelMesh::setDrawBoundbox(bool bl)
 {
-	if(bl == m_draw_framebox)
+	if (bl == m_draw_framebox_switch)
 		return;
-	m_draw_framebox = bl;
+	m_draw_framebox_switch = bl;
 	GLenum drawPel = GL_LINES;
 
 	if (!bl)
@@ -314,3 +313,7 @@ void ModelMesh::setDrawBoundbox(bool bl)
 	m_Entries.push_back(entry);
 }
 
+void ModelMesh::getAABBBox(AABBBox& box)
+{
+	box = m_boundboxData.boundBox;
+}

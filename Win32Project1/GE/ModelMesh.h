@@ -5,6 +5,7 @@
 #include "GL\glew.h"
 #include "Vector2.h"
 #include "Importer.hpp"
+#include "Ray.h"
 
 class ModelMesh : public MeshNode
 {
@@ -25,6 +26,7 @@ public:
 	void setAttriNormalLoc(int loc) { normalLoc = loc; };
 
 	void setDrawBoundbox(bool bl);
+	void getAABBBox(AABBBox& box);
 
 protected:
 	bool initFromScene(const aiScene* scene, const char* filename);
@@ -83,6 +85,6 @@ protected:
 
 	Assimp::Importer m_importer;
 
-	bool m_draw_framebox;
+	bool m_draw_framebox_switch;
 	boundBoxData m_boundboxData;
 };

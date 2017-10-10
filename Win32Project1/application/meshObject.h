@@ -44,6 +44,8 @@ protected:
 	ModelMesh*	m_mesh;
 
 	Vector4 m_world_point;
+	Vector4 m_line_a_pos;
+	Vector4 m_line_b_pos;
 
 	bool m_draw_framebox;
 };
