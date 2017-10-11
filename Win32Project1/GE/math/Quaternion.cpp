@@ -23,7 +23,7 @@ Quaternion::Quaternion(float* array)
     set(array);
 }
 
-Quaternion::Quaternion(const Mat4& m)
+Quaternion::Quaternion(const Matrix4f& m)
 {
     set(m);
 }

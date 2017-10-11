@@ -103,7 +103,7 @@ public:
      *
      * @param m The matrix.
      */
-    Quaternion(const Mat4& m);
+    Quaternion(const Matrix4f& m);
 
     /**
      * Constructs a quaternion equal to the rotation from the specified axis and angle.

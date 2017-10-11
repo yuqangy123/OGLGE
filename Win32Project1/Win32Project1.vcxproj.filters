@@ -381,6 +381,12 @@
     <ClInclude Include="GE\math\Vector4.h">
       <Filter>GE\math</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\ModelMesh.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -548,6 +554,9 @@
     <ClCompile Include="GE\math\Vector4.cpp">
       <Filter>GE\math</Filter>
     </ClCompile>
+    <ClCompile Include="GE\ModelMesh.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Include\libraries\assimp\color4.inl">
@@ -571,5 +580,10 @@
     <None Include="Include\libraries\assimp\aivector2.inl">
       <Filter>Include\libraries\assimp</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Win32Project1.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -17,3 +17,8 @@
 
 
 
+#define VTC3_REF_VTC4(vtc4) Vector3f(vtc4.x, vtc4.y, vtc4.z)
+#define VTC4_TO_VTC3(vtc4, vtc3) {vtc3.x=vtc4.x;vtc3.y=vtc4.y;vtc3.z=vtc4.z;}
+
+#define VTC4_REF_VTC3(vtc3) Vector4f(vtc3.x, vtc3.y, vtc3.z)
+#define VTC3_TO_VTC4(vtc3, vtc4) {vtc4.x=vtc3.x;vtc4.y=vtc3.y;vtc4.z=vtc3.z;vtc4.w=1.0f;}

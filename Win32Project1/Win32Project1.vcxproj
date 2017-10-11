@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,15 +90,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft Visual Studio 11.0\VC\atlmfc\include;C:\Program Files\Microsoft Visual Studio 11.0\VC\include;$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories);C:\Program Files\Microsoft Visual Studio 11.0\VC\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -175,6 +175,7 @@
     <ClInclude Include="GE\bumpNormalMeshNode.h" />
     <ClInclude Include="GE\FileUnits.h" />
     <ClInclude Include="GE\math\Vector4.h" />
+    <ClInclude Include="GE\ModelMesh.h" />
     <ClInclude Include="GE\MeshNode.h" />
     <ClInclude Include="GE\math\Mat3.h" />
     <ClInclude Include="GE\math\Mat4.h" />
@@ -257,6 +258,7 @@
     <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h" />
     <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="texture\TextureJpegLoader.h" />
@@ -282,6 +284,7 @@
     <ClCompile Include="GE\bumpNormalMeshNode.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
     <ClCompile Include="GE\math\Vector4.cpp" />
+    <ClCompile Include="GE\ModelMesh.cpp" />
     <ClCompile Include="GE\MeshNode.cpp" />
     <ClCompile Include="GE\math\Mat3.cpp" />
     <ClCompile Include="GE\math\Mat4.cpp" />
@@ -332,6 +335,9 @@
     <None Include="Include\libraries\assimp\matrix4x4.inl" />
     <None Include="Include\libraries\assimp\aivector2.inl" />
     <None Include="Include\libraries\assimp\aivector3.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

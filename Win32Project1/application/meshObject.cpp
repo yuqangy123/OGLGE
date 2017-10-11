@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "OGLGE.h"
 #include "InPutControl.h"
+#include "common.h"
 
 meshObject::meshObject()
 {
@@ -31,7 +32,7 @@ void meshObject::init()
 
 	m_pipe.setCamera(DefaultCamera);
 	DefaultCamera->setFreeCamera(true);
-	DefaultCamera->setMouseCenterAlways(true);
+	//DefaultCamera->setMouseCenterAlways(true);
 
 	InPutControlIns.addListenNode(this);
 
@@ -70,7 +71,12 @@ void meshObject::draw()
 	glEnd();
 	glPointSize(1);
 	
-	//if(m_draw_framebox)
+	glLineWidth(1);
+	glBegin(GL_LINES);
+	glColor3f(0.0, 1.0, 0);
+	glVertex2f(m_line_a_pos.x, m_line_a_pos.y);
+	glVertex2f(m_line_b_pos.x, m_line_b_pos.y);
+	glEnd();
 
 }
 
@@ -138,9 +144,7 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		Vector4 clip_point;
 		Vector4 moudel_point = Vector4(100, 0, 0, 1.0);
 		clip_point = mvpMt4*moudel_point;
-		clip_point.x /= clip_point.w;
-		clip_point.y /= clip_point.w;
-		clip_point.z /= clip_point.w;
+		clip_point.normalizieW();
 		
 		//m_world_point = vpMt4*clip_point;
 		printf("clip_point:%f,%f,%f,%f\r\n", clip_point.x, clip_point.y, clip_point.z, clip_point.w);
@@ -159,10 +163,7 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		cameraTransMt4.Inverse();
 
 		//到ndc空间
-		clip_point.x /= clip_point.w;
-		clip_point.y /= clip_point.w;
-		clip_point.z /= clip_point.w;
-		clip_point.w = 1.0f;
+		clip_point.normalizieW();
 		clip_point = ndc_screen_point;//这里改为测试屏幕点击位置的ndc坐标
 		Vector4 clip_2_world_pos = cameraTransMt4*clip_point;
 		clip_2_world_pos.x /= clip_2_world_pos.w;
@@ -170,10 +171,7 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		clip_2_world_pos.z /= clip_2_world_pos.w;
 		clip_2_world_pos.w = 1.0f;
 
-		//模型转换矩阵
-		Matrix4f pipeModelTransMt4 = *m_pipe.GetWorldTrans();
-		pipeModelTransMt4.transpose();
-		pipeModelTransMt4.Inverse();
+		
 
 		//clip_2_world_pos = pipeModelTransMt4*clip_2_world_pos;
 		printf("clip_2_world_pos:%f,%f,%f,%f\r\n", clip_2_world_pos.x, clip_2_world_pos.y, clip_2_world_pos.z, clip_2_world_pos.w);
@@ -181,12 +179,55 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		cameraTransMt4 = DefaultCamera->getCameraTranlation();
 		cameraTransMt4.transpose();
 		clip_point = cameraTransMt4*clip_2_world_pos;
-		clip_point.x /= clip_point.w;
-		clip_point.y /= clip_point.w;
-		clip_point.z /= clip_point.w;
-		clip_point.w = 1.0f;
+		clip_point.normalizieW();
 
+		//模型世界转换矩阵
+		Matrix4f worldMt4 = *m_pipe.GetWorldTrans();
+		worldMt4.transpose();
 
+		AABBBox meshBox;
+		m_mesh->getAABBBox(meshBox);
+		Vector4f maxPos;
+		Vector4f minPos;
+
+		VTC3_TO_VTC4(meshBox.max, maxPos);
+		VTC3_TO_VTC4(meshBox.min, minPos);
+
+		maxPos = worldMt4*maxPos;
+		maxPos.normalizieW();
+		minPos = worldMt4*minPos;
+		minPos.normalizieW();
+
+		VTC4_TO_VTC3(maxPos, meshBox.max);
+		VTC4_TO_VTC3(minPos, meshBox.min);
+
+		Vector4f dir = clip_2_world_pos;
+		dir = dir - VTC4_REF_VTC3(DefaultCamera->getEyePosition());
+		Vector3 eyePos = DefaultCamera->getEyePosition();
+		Ray ray(eyePos, VTC3_REF_VTC4(dir));
+		Vector3f hitPosition;
+		bool res = ray.intersectAABBBox(meshBox, hitPosition);
+
+		cameraTransMt4 = DefaultCamera->getCameraTranlation();
+		cameraTransMt4.transpose();
+		Vector4f hitPositionv4;
+		VTC3_TO_VTC4(hitPosition, hitPositionv4);
+		hitPositionv4 = cameraTransMt4*hitPositionv4;
+		hitPositionv4.normalizieW();
+
+		m_world_point.x = hitPositionv4.x;
+		m_world_point.y = hitPositionv4.y;
+
+		
+		VTC3_TO_VTC4(eyePos, m_line_a_pos);
+		m_line_b_pos = clip_2_world_pos;
+		cameraTransMt4 = DefaultCamera->getCameraTranlation();
+		cameraTransMt4.transpose();
+		m_line_a_pos = cameraTransMt4*m_line_a_pos;
+		m_line_a_pos.normalizieW();
+		m_line_b_pos = cameraTransMt4*m_line_b_pos;
+		m_line_b_pos.normalizieW();
+		
 		int n = 0;
 		printf("\r\n\r\n");
 	}

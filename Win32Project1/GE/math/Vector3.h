@@ -1,6 +1,8 @@
 #pragma once
 #include "Mat3.h"
 
+
+#define Vector3f Vector3
 struct Vector3
 {
 	float x;
@@ -10,7 +12,7 @@ struct Vector3
 	Vector3();
 	~Vector3();
 	Vector3(float x, float y, float z);
-	inline Vector3 operator-(const Vector3& Right)
+	inline Vector3 operator-(Vector3& Right)const
 	{
 		Vector3 ret;
 		ret.x = (this->x - Right.x);
@@ -84,16 +86,3 @@ struct Vector3
 
 };
 
-
-class Vector3f
-{
-public:
-	float x, y, z;
-	Vector3f() {x=0.f;y=0.f;z=0.f;}
-	Vector3f(float _x, float _y, float _z)
-	{
-		x = _x;
-		y = _y;
-		z = _z;
-	}
-};
