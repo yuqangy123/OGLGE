@@ -11,11 +11,21 @@ public:
 
 	void setCamera(Camera* p) { m_camera = p; }
 
+	void Scale(Vector3f s)
+	{
+		m_scale = s;
+	}
+
 	void Scale(float ScaleX, float ScaleY, float ScaleZ)
 	{
 		m_scale.x = ScaleX;
 		m_scale.y = ScaleY;
 		m_scale.z = ScaleZ;
+	}
+
+	void WorldPos(Vector3f pos)
+	{
+		m_worldPos = pos;
 	}
 
 	void WorldPos(float x, float y, float z)

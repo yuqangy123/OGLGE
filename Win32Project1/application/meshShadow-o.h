@@ -31,6 +31,8 @@ protected:
 	void updateLightDirection();
 
 protected:
+	ModelMesh* m_mesh;
+	ModelMesh* m_terrainQuadMesh;
 	shadowMapMeshTechnique* m_shadowMapTech;
 	shadowMeshTechnique* m_tech;
 	

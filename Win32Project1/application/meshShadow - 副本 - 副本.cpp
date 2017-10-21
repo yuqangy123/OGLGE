@@ -34,7 +34,15 @@ void meshShadow::init()
 	
 	m_pipe.setCamera(DefaultCamera);
 
-	
+	/*
+	//terrain box mesh
+	m_terrainQuadMesh = new ModelMesh();
+	m_terrainQuadMesh->loadMesh("content/box.obj");
+	m_terrainQuadMesh->setAttriPositionLoc(m_tech->positionLoc);
+	m_terrainQuadMesh->setAttriTexCoordLoc(m_tech->texCoordLoc);
+	m_terrainQuadMesh->setAttriNormalLoc(m_tech->normalLoc);
+	*/
+
 	m_ambientLightColor.set(0.5f, 0.5f, 0.5f);
 	m_ambientLightIntensity = 0.5f;
 	m_diffuseDirection.set(0.0f, -1.0f, 0.0f);
@@ -63,14 +71,10 @@ void meshShadow::draw()
 	glUniform1i(m_tech->getUniformLocation("s_showmapTexture"), 1);
 	glUniformMatrix4fv(m_tech->getUniformLocation("lightMVPMatrix"), 1, GL_TRUE, (const float*)m_shadowMapTech->getLightTrans()->m);
 	
-	for (auto& itr : m_meshs) 
-	{
+	for (auto& itr : m_meshs) {
+		
 		m_pipe.WorldPos(itr->position.x, itr->position.y, itr->position.z);
 		m_pipe.Scale(itr->scale.x, itr->scale.y, itr->scale.z);
-
-		itr->setAttriPositionLoc(m_tech->positionLoc);
-		itr->setAttriTexCoordLoc(m_tech->texCoordLoc);
-		itr->setAttriNormalLoc(m_tech->normalLoc);		
 
 		glUniformMatrix4fv(m_tech->getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_pipe.GetTrans()->m);
 		glUniformMatrix4fv(m_tech->getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)m_pipe.GetWorldTrans()->m);
@@ -108,7 +112,11 @@ bool meshShadow::loadMesh(const char* filename, const Vector3& pos, const Vector
 	mesh->loadMesh(filename);
 	mesh->position = pos;
 	mesh->scale = sal;
-	
+
+	mesh->setAttriPositionLoc(m_tech->positionLoc);
+	mesh->setAttriTexCoordLoc(m_tech->texCoordLoc);
+	mesh->setAttriNormalLoc(m_tech->normalLoc);
+
 	m_meshs.push_back(mesh);
 
 	return true;

@@ -2,9 +2,10 @@ precision mediump float;
 
 attribute vec3 	a_position;  
 attribute vec3 	a_texCoord;
+attribute vec3	a_normal;
 uniform mat4 	MVPMatrix;
 
-attribute vec3	normal;
+
 uniform mat4	WorldMatrix;
 uniform mat4	lightMVPMatrix;
 
@@ -20,5 +21,5 @@ void main()
 	
 	v_texCoord = a_texCoord.xy; 
 
-	w_normal = (WorldMatrix * vec4(normal, 0.0)).xyz;
+	w_normal = (WorldMatrix * vec4(a_normal, 0.0)).xyz;
 }

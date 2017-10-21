@@ -15,6 +15,7 @@
 #include "Skybox.h"
 #include "BillboardList.h"
 #include "meshSkinnedAnimation.h"
+#include "GBuffer.h"
 
 
 
@@ -176,6 +177,12 @@ void testSkinnedAnimation()
 	SceneIns.addNode(test);
 }
 
+void testGBuffer()
+{
+	GBuffer* gbuff = new GBuffer();
+	SceneIns.addNode(gbuff);
+}
+
 void OGLGE::test()
 {
 	
@@ -194,19 +201,20 @@ void OGLGE::test()
 	shadowMapA->setLightTargetPosition(0, 0, -50);
 	shadowMapA->setPosition(0, 0, -70);
 	shadowMapA->setScale(15);
-	scene->addNode(shadowMapA);
+	SceneIns.addNode(shadowMapA);
 	*/
 
-	meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
 	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); SceneIns.addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
 	/*
 	meshShadow* shadowm = new meshShadow();
-	shadowm->loadMesh("content/jeep.obj", Vector3(0, 0, -30), Vector3(0.05, 0.05, 0.05));
-	shadowm->setLightPosition(-50, 40, -50);
-	shadowm->setTargetPosition(0, 0, -50);
-	scene->addNode(shadowm);
+	shadowm->loadMesh("content/jeep.obj", Vector3(30, -30, -30), Vector3(0.05, 0.05, 0.05));
+	shadowm->loadMesh("content/hheli.obj", Vector3(30, -30, -00), Vector3(0.1, 0.1, 0.1));
+	shadowm->setLightPosition(-50, 40, -30);
+	shadowm->setTargetPosition(30, -30, -30);
+	SceneIns.addNode(shadowm);
 	*/
 	
 	//DefaultCamera->setEyePosition(0, 0, 0);
@@ -227,6 +235,8 @@ void OGLGE::test()
 	//testTest();
 
 	//testSkinnedAnimation();
+
+	testGBuffer();
 }
 
 

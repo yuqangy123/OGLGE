@@ -90,6 +90,33 @@ bool technique::linkShader()
 	return true;
 }
 
+std::string technique::getLastError()
+{
+	std::string err;
+	//need linkProgram front init attri and Uniforms
+	glLinkProgram(m_shaderProg);
+	GLint status = GL_TRUE;
+	glGetProgramiv(m_shaderProg, GL_LINK_STATUS, &status);
+	if (status == GL_FALSE)
+	{
+		GLint infoLen = 0;
+		glGetProgramiv(m_shaderProg, GL_INFO_LOG_LENGTH, &infoLen);
+		if (infoLen > 1)
+		{
+			char* infoLog = new char[sizeof(char)* infoLen];
+			glGetProgramInfoLog(m_shaderProg, infoLen, NULL, infoLog);
+			printf("ERROR: Failed to link program:\r\n%s", infoLog);
+			assert(0);
+			delete infoLog;
+		}
+		glDeleteProgram(m_shaderProg);
+		return false;
+	}
+	initUniforms();
+
+	return "";
+}
+
 void technique::initUniforms()
 {
 	// Query and store uniforms from the program.

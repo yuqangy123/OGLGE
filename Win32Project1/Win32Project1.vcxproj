@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,14 +90,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files\Microsoft Visual Studio 11.0\VC\atlmfc\include;C:\Program Files\Microsoft Visual Studio 11.0\VC\include;$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories);C:\Program Files\Microsoft Visual Studio 11.0\VC\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\BillboardList.h" />
+    <ClInclude Include="application\GBuffer.h" />
     <ClInclude Include="application\JikeTest.h" />
     <ClInclude Include="application\meshbumpNormal.h" />
     <ClInclude Include="application\meshObject.h" />
@@ -174,8 +175,10 @@
     <ClInclude Include="GE\Camera2D.h" />
     <ClInclude Include="GE\bumpNormalMeshNode.h" />
     <ClInclude Include="GE\FileUnits.h" />
+    <ClInclude Include="GE\math\AABBBox.h" />
+    <ClInclude Include="GE\math\Plane.h" />
+    <ClInclude Include="GE\math\Ray.h" />
     <ClInclude Include="GE\math\Vector4.h" />
-    <ClInclude Include="GE\ModelMesh.h" />
     <ClInclude Include="GE\MeshNode.h" />
     <ClInclude Include="GE\math\Mat3.h" />
     <ClInclude Include="GE\math\Mat4.h" />
@@ -183,6 +186,7 @@
     <ClInclude Include="GE\math\Rect.h" />
     <ClInclude Include="GE\math\Vector2.h" />
     <ClInclude Include="GE\math\Vector3.h" />
+    <ClInclude Include="GE\ModelMesh.h" />
     <ClInclude Include="GE\ogldev_types.h" />
     <ClInclude Include="GE\ogldev_util.h" />
     <ClInclude Include="GE\OGLGE.h" />
@@ -200,6 +204,8 @@
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\tech\billboardTechnique.h" />
     <ClInclude Include="GLPorj\tech\bumpNormalLightTechnique.h" />
+    <ClInclude Include="GLPorj\tech\GBufferDiffuselightTechnique.h" />
+    <ClInclude Include="GLPorj\tech\geometryTechnique.h" />
     <ClInclude Include="GLPorj\tech\lightTechnique.h" />
     <ClInclude Include="GLPorj\tech\normalTexTechnique.h" />
     <ClInclude Include="GLPorj\tech\shadowMapMeshTechnique.h" />
@@ -258,7 +264,6 @@
     <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h" />
     <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="texture\TextureJpegLoader.h" />
@@ -266,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\BillboardList.cpp" />
+    <ClCompile Include="application\GBuffer.cpp" />
     <ClCompile Include="application\JikeTest.cpp" />
     <ClCompile Include="application\meshbumpNormal.cpp" />
     <ClCompile Include="application\meshObject.cpp" />
@@ -283,8 +289,10 @@
     <ClCompile Include="GE\Camera2D.cpp" />
     <ClCompile Include="GE\bumpNormalMeshNode.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
+    <ClCompile Include="GE\math\AABBBox.cpp" />
+    <ClCompile Include="GE\math\Plane.cpp" />
+    <ClCompile Include="GE\math\Ray.cpp" />
     <ClCompile Include="GE\math\Vector4.cpp" />
-    <ClCompile Include="GE\ModelMesh.cpp" />
     <ClCompile Include="GE\MeshNode.cpp" />
     <ClCompile Include="GE\math\Mat3.cpp" />
     <ClCompile Include="GE\math\Mat4.cpp" />
@@ -292,6 +300,7 @@
     <ClCompile Include="GE\math\Rect.cpp" />
     <ClCompile Include="GE\math\Vector2.cpp" />
     <ClCompile Include="GE\math\Vector3.cpp" />
+    <ClCompile Include="GE\ModelMesh.cpp" />
     <ClCompile Include="GE\ogldev_util.cpp" />
     <ClCompile Include="GE\OGLGE.cpp" />
     <ClCompile Include="GE\Pipeline.cpp" />
@@ -307,6 +316,8 @@
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\bumpNormalLightTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\GBufferDiffuselightTechnique.cpp" />
+    <ClCompile Include="GLPorj\tech\geometryTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\normalTexTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\shadowMapMeshTechnique.cpp" />
@@ -335,9 +346,6 @@
     <None Include="Include\libraries\assimp\matrix4x4.inl" />
     <None Include="Include\libraries\assimp\aivector2.inl" />
     <None Include="Include\libraries\assimp\aivector3.inl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

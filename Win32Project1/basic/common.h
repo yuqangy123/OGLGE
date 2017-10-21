@@ -1,6 +1,7 @@
 #pragma once
 #include "assert.h"
 
+
 /**Util macro for conversion from degrees to radians.*/
 #define MATH_DEG_TO_RAD(x)          ((x) * 0.0174532925f)
 /**Util macro for conversion from radians to degrees.*/

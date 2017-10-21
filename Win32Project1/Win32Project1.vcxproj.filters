@@ -381,11 +381,26 @@
     <ClInclude Include="GE\math\Vector4.h">
       <Filter>GE\math</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="GE\math\Ray.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Plane.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\AABBBox.h">
+      <Filter>GE\math</Filter>
     </ClInclude>
     <ClInclude Include="GE\ModelMesh.h">
       <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="application\GBuffer.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\geometryTechnique.h">
+      <Filter>GLPorj\tech</Filter>
+    </ClInclude>
+    <ClInclude Include="GLPorj\tech\GBufferDiffuselightTechnique.h">
+      <Filter>GLPorj\tech</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -554,8 +569,26 @@
     <ClCompile Include="GE\math\Vector4.cpp">
       <Filter>GE\math</Filter>
     </ClCompile>
+    <ClCompile Include="GE\math\Plane.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Ray.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\AABBBox.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
     <ClCompile Include="GE\ModelMesh.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="application\GBuffer.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\geometryTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="GLPorj\tech\GBufferDiffuselightTechnique.cpp">
+      <Filter>GLPorj\tech</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -580,10 +613,5 @@
     <None Include="Include\libraries\assimp\aivector2.inl">
       <Filter>Include\libraries\assimp</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Win32Project1.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

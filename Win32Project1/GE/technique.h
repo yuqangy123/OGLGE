@@ -20,6 +20,8 @@ public:
 	GLint getUniformLocation(const char* name);
 	GLint getUniformLocationEx(const char* name);
 
+	std::string getLastError();
+
 protected:
 	bool linkShader();
 	void initUniforms();
