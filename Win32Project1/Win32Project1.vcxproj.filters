@@ -78,9 +78,6 @@
     <ClInclude Include="GLPorj\Node.h">
       <Filter>GLPorj</Filter>
     </ClInclude>
-    <ClInclude Include="GE\OGLGE.h">
-      <Filter>GE</Filter>
-    </ClInclude>
     <ClInclude Include="GLPorj\Texture2DRender.h">
       <Filter>GLPorj</Filter>
     </ClInclude>
@@ -402,6 +399,15 @@
     <ClInclude Include="GLPorj\tech\GBufferDiffuselightTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
+    <ClInclude Include="GE\OGLGE.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\xFreeTypeLib.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\xFreeTypeFont.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -418,9 +424,6 @@
     </ClCompile>
     <ClCompile Include="GLPorj\Node.cpp">
       <Filter>GLPorj</Filter>
-    </ClCompile>
-    <ClCompile Include="GE\OGLGE.cpp">
-      <Filter>GE</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\Texture2DRender.cpp">
       <Filter>GLPorj</Filter>
@@ -589,6 +592,15 @@
     </ClCompile>
     <ClCompile Include="GLPorj\tech\GBufferDiffuselightTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\OGLGE.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\xFreeTypeLib.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\xFreeTypeFont.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

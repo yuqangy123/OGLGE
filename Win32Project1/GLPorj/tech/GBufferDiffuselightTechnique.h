@@ -14,5 +14,7 @@ public:
 
 public:
 	int positionLoc;
+	int normalLoc;
+	int texCoordLoc;
 };
 

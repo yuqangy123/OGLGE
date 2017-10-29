@@ -16,7 +16,7 @@
 #include "BillboardList.h"
 #include "meshSkinnedAnimation.h"
 #include "GBuffer.h"
-
+#include "xFreeTypeFont.h"
 
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
@@ -29,10 +29,7 @@ OGLGE::~OGLGE()
 {
 }
 
-void OGLGE::update(float ft)
-{
-	OGLGE::Instance()->m_director->update(ft);
-}
+
 
 static double st_startTime = (double)GetCurrentTimeMillis();
 static double st_lastTime = (double)GetCurrentTimeMillis();
@@ -125,7 +122,7 @@ void OGLGE::init(int argc, char** argv)
 void testBumpNormalMesh()
 {
 	meshObject* m = new meshObject();
-	m->loadMesh("content/box.obj");
+	m->loadMesh("box.obj", "content");
 	m->setPosition(0, 0, -3);
 	//scene->addNode(m);
 
@@ -183,6 +180,14 @@ void testGBuffer()
 	SceneIns.addNode(gbuff);
 }
 
+void testXFreeType()
+{
+	xFreeTypeFont* font = new xFreeTypeFont();
+	font->setString(L"舍得离开房间为了开发就完了开发就fps:1234567894112345678YUJK<JKLsdfgklmwsf;90", 500, 100);
+	font->setPosition(100, 100);
+	SceneIns.addNode(font);
+}
+
 void OGLGE::test()
 {
 	
@@ -205,6 +210,12 @@ void OGLGE::test()
 	*/
 
 	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("sponza.obj", "content/crytek_sponza"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
+
+
+	
+	
+	
 	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); SceneIns.addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
@@ -224,7 +235,7 @@ void OGLGE::test()
 
 	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); st_scene->addNode(texture2); texture2->setPosition(m_winRt.width / 2.0, 50);
 
-	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); SceneIns.addNode(texture1); texture1->setScale(0.5);
+	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); SceneIns.addNode(texture1); texture1->setScale(0.1);
 
 	//testBumpNormalMesh();
 
@@ -236,11 +247,19 @@ void OGLGE::test()
 
 	//testSkinnedAnimation();
 
-	testGBuffer();
+	//testGBuffer();
+
+	testXFreeType();
 }
 
 
 void OGLGE::start()
 {
 	glutMainLoop();
+}
+
+void OGLGE::update(float ft)
+{
+	OGLGE::Instance()->m_director->update(ft);
+	
 }

@@ -167,11 +167,12 @@ void Texture2DRender::render(GLuint texturesID, V3F_T2F* vts, unsigned int size,
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo[0]);
 	glBufferData(GL_ARRAY_BUFFER, kQuadSize * size, vts, GL_DYNAMIC_DRAW);
 
+	glEnableVertexAttribArray(m_tech->positionLoc);
+	glEnableVertexAttribArray(m_tech->texCoordLoc);
 	glVertexAttribPointer(m_tech->positionLoc, 3, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*)offsetof(V3F_T2F, vertices));
 	glVertexAttribPointer(m_tech->texCoordLoc, 2, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*)offsetof(V3F_T2F, texCoords));
 
-	glEnableVertexAttribArray(m_tech->positionLoc);
-	glEnableVertexAttribArray(m_tech->texCoordLoc);
+	
 
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_vbo[1]);

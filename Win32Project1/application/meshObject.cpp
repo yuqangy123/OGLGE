@@ -32,7 +32,7 @@ void meshObject::init()
 
 	m_pipe.setCamera(DefaultCamera);
 	DefaultCamera->setFreeCamera(true);
-	//DefaultCamera->setMouseCenterAlways(true);
+	DefaultCamera->setMouseCenterAlways(true);
 
 	InPutControlIns.addListenNode(this);
 
@@ -62,6 +62,8 @@ void meshObject::draw()
 	glUniform1f(m_tech->getUniformLocation("gDiffuseLight.diffuseIntensity"), m_diffuseIntensity);
 
 	m_mesh->draw();
+
+	return;
 
 	m_tech->disable();
 	glPointSize(5);
@@ -95,13 +97,17 @@ void meshObject::setScale(float s)
 	m_pipe.Scale(s, s, s);
 }
 
-bool meshObject::loadMesh(const char* filename)
+bool meshObject::loadMesh(const char* filename, const char* filepath)
 {
-	bool res = m_mesh->loadMesh(filename);
-
-	m_mesh->setDrawBoundbox(true);
+	bool res = m_mesh->loadMesh(filename, filepath);
 
 	return res;
+}
+
+void meshObject::setDrawBoundbox(bool visible)
+{
+	if (m_mesh)
+		m_mesh->setDrawBoundbox(visible);
 }
 
 
@@ -118,6 +124,7 @@ void meshObject::keyInput(unsigned char param, int x, int y)
 
 void meshObject::mouseInput(int button, int state, int x, int y)
 {
+	return;
 	if (button == 0 && state == 0)
 	{
 		const Rect& winsz = OGLGE::Instance()->getWindowsRect();
@@ -206,6 +213,10 @@ void meshObject::mouseInput(int button, int state, int x, int y)
 		Vector3 eyePos = DefaultCamera->getEyePosition();
 		Ray ray(eyePos, VTC3_REF_VTC4(dir));
 		Vector3f hitPosition;
+
+		ray.original = Vector3f(0, 10, 0);
+		ray.dir = Vector3f(0, 0, -1);
+		hitPosition = Vector3f(0, 10, 0);
 		bool res = ray.intersectAABBBox(meshBox, hitPosition);
 
 		cameraTransMt4 = DefaultCamera->getCameraTranlation();

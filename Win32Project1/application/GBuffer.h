@@ -28,7 +28,8 @@ protected:
 
 	void geometryPass();
 	void drawGBufferTex();
-	void drawPointLights();
+	void drawNormalPointLights();
+	void drawGBufferPointLights();
 
 protected:
 	enum G_TEXTURE_TYPE

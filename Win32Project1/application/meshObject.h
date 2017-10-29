@@ -14,7 +14,9 @@ public:
 	meshObject();
 	~meshObject();
 
-	bool loadMesh(const char* filename);
+	bool loadMesh(const char* filename, const char* filepath);
+
+	void setDrawBoundbox(bool visible);
 
 	void setPosition(float x, float y, float z);
 

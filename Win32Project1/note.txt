@@ -19,6 +19,13 @@ http://blog.csdn.net/i_dovelemon/article/details/38332499
 
 
 
+延迟渲染：
+
+
+
+
+
+
 线性变换：
 1.直线还是直线
 2.线段之间的比例不变

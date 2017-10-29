@@ -5,7 +5,6 @@
 #include "Singleton.h"
 
 #define FileUnitIns FileUnits::InstanceEx()
-
 class FileUnits  : public CSingleton<FileUnits>
 {
 public:

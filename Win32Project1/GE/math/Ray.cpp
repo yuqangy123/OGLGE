@@ -39,17 +39,17 @@ bool Ray::intersectPlane(const Plane& plane, Vector3f& hitPosition)
 //射线穿过轴对称包围盒，进入点的t(t1)值，在正对射线的三个候选面的交叉点里最大。离开点的t(t2)值，在其他背对射线的面里，t值最小。t1永远小于t2，交叉点才算在包围盒的六面体上
 bool Ray::intersectAABBBox(const AABBBox& box, Vector3f& hitPosition)
 {
-	if (abs(dir.x) < FLT_EPSILON)
+	if (fabs(dir.x) < FLT_EPSILON)
 	{
 		if (original.x > box.max.x || original.x < box.min.x)
 			return false;
 	}
-	if (abs(dir.y) < FLT_EPSILON)
+	if (fabs(dir.y) < FLT_EPSILON)
 	{
 		if (original.y > box.max.y || original.y < box.min.y)
 			return false;
 	}
-	if (abs(dir.z) < FLT_EPSILON)
+	if (fabs(dir.z) < FLT_EPSILON)
 	{
 		if (original.z > box.max.z || original.z < box.min.z)
 			return false;

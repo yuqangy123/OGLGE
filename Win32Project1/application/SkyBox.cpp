@@ -24,7 +24,7 @@ void SkyBox::init()
 	m_tech->init();
 	
 	m_mesh = new ModelMesh();
-	m_mesh->loadMesh("content/sphere.obj");
+	m_mesh->loadMesh("sphere.obj", "content");
 	m_mesh->setAttriPositionLoc(m_tech->positionLoc);
 
 	m_pipe.setCamera(DefaultCamera);

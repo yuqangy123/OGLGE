@@ -15,7 +15,7 @@ public:
 	meshShadowMap();
 	~meshShadowMap();
 
-	bool loadMesh(const char* filename, const Vector3& pos, const Vector3& sal);
+	bool loadMesh(const char* filename, const char* filepath, const Vector3& pos, const Vector3& sal);
 
 	void setLightTargetPosition(float x, float y, float z);
 	void setLightPosition(float x, float y, float z);

@@ -6,6 +6,7 @@
 #include <math.h>
 #include <cfloat>
 
+
 ModelMesh::ModelMesh()
 {
 	m_loaded = false;
@@ -29,8 +30,8 @@ void ModelMesh::draw()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, itr->VB);
 		
-		if (m_Textures.size() >= itr->MaterialIndex && itr->MaterialIndex > 0)
-			m_Textures[itr->MaterialIndex-1]->bind();
+		if (m_Textures.size() >= itr->MaterialIndex && itr->MaterialIndex > 0 && m_Textures[itr->MaterialIndex] != nullptr)
+			m_Textures[itr->MaterialIndex]->bind();
 		//glUniform1i(m_tech->getUniformLocation("s_texture"), 0);
 
 		const unsigned int VertexSize = sizeof(Vertex);
@@ -50,7 +51,7 @@ void ModelMesh::draw()
 }
 
 
-bool ModelMesh::loadMesh(const char* filename)
+bool ModelMesh::loadMesh(const char* filename, const char* path)
 {
 	if (m_loaded)
 		return false;
@@ -58,20 +59,23 @@ bool ModelMesh::loadMesh(const char* filename)
 	m_loaded = true;
 	
 	m_meshFileName.assign(filename);
+	m_meshFilePath.assign(path);
 
 	clear();
 
 	bool ret = false;
-
 	
-	const aiScene* pScene = m_importer.ReadFile(filename, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
+	char file[MAX_PATH] = {};
+	sprintf(file, "%s/%s", m_meshFilePath.c_str(), m_meshFileName.c_str());
+	
+	const aiScene* pScene = m_importer.ReadFile(file, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs);
 	if (pScene)
 	{
-		ret = initFromScene(pScene, filename);
+		ret = initFromScene(pScene, file);
 	}
 	else
 	{
-		printf("error parsing %s : %s\r\n", filename, m_importer.GetErrorString());
+		printf("error parsing %s : %s\r\n", file, m_importer.GetErrorString());
 		assert(0);
 	}
 
@@ -84,7 +88,7 @@ void ModelMesh::clear()
 
 }
 
-bool ModelMesh::initFromScene(const aiScene* scene, const char* filename)
+bool ModelMesh::initFromScene(const aiScene* scene, const char* file)
 {
 	m_Entries.resize(scene->mNumMeshes);
 	for (int n = 0; n < m_Entries.size(); ++n)
@@ -93,15 +97,17 @@ bool ModelMesh::initFromScene(const aiScene* scene, const char* filename)
 		InitMesh(n, m);
 	}
 
-	return InitMaterials(scene, filename);
+	return InitMaterials(scene);
 }
 
 void ModelMesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
+	//printf("load mesh : %s\r\n", paiMesh->mName.C_Str());
+
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	float maxz = FLT_MIN, minz = FLT_MAX, maxy = FLT_MIN, miny = FLT_MAX, maxx = FLT_MIN, minx = FLT_MAX;
-
+	
 	const aiVector3D zero(0.0f, 0.0f, 0.0f);
 	for (int n = 0; n < paiMesh->mNumVertices; ++n)
 	{
@@ -128,31 +134,32 @@ void ModelMesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		indices.push_back(face.mIndices[1]);
 		indices.push_back(face.mIndices[2]);
 	}
-	
-
 
 	m_Entries[Index].MaterialIndex = paiMesh->mMaterialIndex;
-	m_Entries[Index].Init(vertices, indices, GL_TRIANGLES);
+	m_Entries[Index].Init(vertices, indices, GL_TRIANGLES);	
 
-	
+	printf("m_Entries.Index=%d, MaterialIndex=%d\r\n", Index, paiMesh->mMaterialIndex);
 }
 
-bool ModelMesh::InitMaterials(const aiScene* pScene, const char* filename)
+bool ModelMesh::InitMaterials(const aiScene* pScene)
 {
 	if (!pScene->HasMaterials())
 		return true;
+	m_Textures.resize(pScene->mNumMaterials);
 
 	for (int n = 0; n < pScene->mNumMaterials; ++n)
 	{
+		m_Textures[n] = nullptr;
 		aiMaterial* material = pScene->mMaterials[n];
 		aiString path;
 		if (aiReturn_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &path))
 		{
 			char texName[256] = { 0 };
-			sprintf(texName, "content/%s", path.data);
+			sprintf(texName, "%s/%s", m_meshFilePath.c_str(), path.data);
+			printf("load material : %s(%d)\r\n", texName, n);
 			auto tex = new Texture(aiTextureType_DIFFUSE, texName);
 			tex->load();
-			m_Textures.push_back(tex);
+			m_Textures[n] = (tex);
 		}
 	}
 
@@ -167,8 +174,6 @@ ModelMesh::Texture::Texture(aiTextureType tp, const std::string& path_)
 
 void ModelMesh::Texture::load()
 {
-
-	
 	if (std::string::npos != path.rfind(".bmp"))
 	{
 		id = TextureMgr->loadTextureBmp(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
@@ -177,9 +182,13 @@ void ModelMesh::Texture::load()
 	{
 		id = TextureMgr->loadTextureJpeg(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
 	}	
+	else if (std::string::npos != path.rfind(".tga"))
+	{
+		id = TextureMgr->loadTextureTga(path.c_str(), GL_RGBA, GL_RGBA, 0, 0);
+	}
 	else
 	{
-		printf("cant find support texture load lib\r\n");
+		printf("error : cant find support texture load lib !\r\n");
 		assert(0);
 	}
 

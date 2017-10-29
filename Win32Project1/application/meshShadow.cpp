@@ -102,10 +102,10 @@ void meshShadow::setLightPosition(float x, float y, float z)
 	updateLightDirection();
 }
 
-bool meshShadow::loadMesh(const char* filename, const Vector3& pos, const Vector3& sal)
+bool meshShadow::loadMesh(const char* filename, const char* filepath, const Vector3& pos, const Vector3& sal)
 {
 	ModelMesh* mesh = new ModelMesh();
-	mesh->loadMesh(filename);
+	mesh->loadMesh(filename, filepath);
 	mesh->position = pos;
 	mesh->scale = sal;
 	

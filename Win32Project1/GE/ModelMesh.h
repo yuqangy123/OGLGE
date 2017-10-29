@@ -13,7 +13,7 @@ public:
 	ModelMesh();
 	~ModelMesh();
 
-	bool loadMesh(const char* filename);
+	bool loadMesh(const char* filename, const char* path);
 
 	bool isLoaded(){ return m_loaded; }
 
@@ -29,9 +29,9 @@ public:
 	void getAABBBox(AABBBox& box);
 
 protected:
-	bool initFromScene(const aiScene* scene, const char* filename);
+	bool initFromScene(const aiScene* scene, const char* file);
 	void InitMesh(unsigned int Index, const aiMesh* paiMesh);
-	bool InitMaterials(const aiScene* pScene, const char* filename);
+	bool InitMaterials(const aiScene* pScene);
 
 public:
 	struct Texture
@@ -76,6 +76,7 @@ protected:
 	std::vector<MeshEntry> m_Entries;
 	std::vector<Texture*> m_Textures;
 	std::string m_meshFileName;
+	std::string m_meshFilePath;
 	
 	int positionLoc;
 	int texCoordLoc;

@@ -18,7 +18,7 @@ void GBuffer::init()
 	m_winRt = OGLGE::InstanceEx().getWindowsRect();
 
 	m_mesh = new ModelMesh();
-	m_mesh->loadMesh("content/box.obj"); 
+	m_mesh->loadMesh("box.obj", "content"); 
 	m_mesh->position = Vector3f(0, 0, -10);
 	m_mesh->scale = Vector3f(1.5, 1.5, 1.5);
 
@@ -91,7 +91,7 @@ void GBuffer::initFBO()
 void GBuffer::initDiffuseLightInfo()
 {
 	{
-		m_deffuseLightInfo.ambientColor.set(1.0f, 1.0f, 1.0f);
+		m_deffuseLightInfo.ambientColor.set(0.0f, 1.0f, .0f);
 		m_deffuseLightInfo.ambientIntensity = 0.5f;
 		m_deffuseLightInfo.diffuseIntensity = 0.5f;
 		m_deffuseLightInfo.direction.set(1.0f, 0.f, 0.f);
@@ -121,7 +121,7 @@ void GBuffer::initDiffuseLightInfo()
 	}
 	
 	{
-		m_deffuseLightInfo2.ambientColor.set(1.0f, 1.0f, 1.0f);
+		m_deffuseLightInfo2.ambientColor.set(.0f, .0f, 1.0f);
 		m_deffuseLightInfo2.ambientIntensity = 0.5f;
 		m_deffuseLightInfo2.diffuseIntensity = 0.5f;
 		m_deffuseLightInfo2.direction.set(-1.0f, 0.f, 0.f);
@@ -158,9 +158,8 @@ void GBuffer::geometryPass()
 	bool depthTest = glIsEnabled(GL_DEPTH_TEST);
 	bool blend = glIsEnabled(GL_BLEND);
 
-	//glDepthMask(GL_TRUE);
+	glDepthMask(GL_TRUE);
 	
-
 	glUniformMatrix4fv(m_geometryTech.getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_genmetryPipe.GetTrans()->m);
 	glUniformMatrix4fv(m_geometryTech.getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)m_genmetryPipe.GetWorldTrans()->m);
 
@@ -169,7 +168,7 @@ void GBuffer::geometryPass()
 
 	m_mesh->draw();
 
-	//glDepthMask(GL_FALSE);
+	glDepthMask(GL_FALSE);
 }
 
 void GBuffer::drawGBufferTex()
@@ -196,8 +195,45 @@ void GBuffer::drawGBufferTex()
 
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 }
+void GBuffer::drawNormalPointLights()
+{
+	glDepthMask(GL_FALSE);
 
-void GBuffer::drawPointLights()
+	glEnable(GL_BLEND);	
+	glBlendEquation(GL_FUNC_ADD);
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	//glDepthMask(GL_TRUE);
+
+	m_diffuselightTech.enable();
+
+	m_mesh->setAttriPositionLoc(m_diffuselightTech.positionLoc);
+	m_mesh->setAttriTexCoordLoc(m_diffuselightTech.texCoordLoc);
+	m_mesh->setAttriNormalLoc(m_diffuselightTech.normalLoc);
+
+	glUniformMatrix4fv(m_diffuselightTech.getUniformLocation("MVPMatrix"), 1, GL_TRUE, (const float*)m_genmetryPipe.GetTrans()->m);
+	glUniformMatrix4fv(m_diffuselightTech.getUniformLocation("WorldMatrix"), 1, GL_TRUE, (const float*)m_genmetryPipe.GetWorldTrans()->m);
+
+	glUniform3f(m_diffuselightTech.getUniformLocation("gDiffuseLight.color"), m_deffuseLightInfo.ambientColor.x, m_deffuseLightInfo.ambientColor.y, m_deffuseLightInfo.ambientColor.z);
+	glUniform1f(m_diffuselightTech.getUniformLocation("gDiffuseLight.ambientIntensity"), m_deffuseLightInfo.ambientIntensity);
+	glUniform1f(m_diffuselightTech.getUniformLocation("gDiffuseLight.diffuseIntensity"), m_deffuseLightInfo.diffuseIntensity);
+	glUniform3f(m_diffuselightTech.getUniformLocation("gDiffuseLight.direction"), m_deffuseLightInfo.direction.x, m_deffuseLightInfo.direction.y, m_deffuseLightInfo.direction.z);
+
+	m_mesh->draw();
+
+	//draw elements again
+	glUniform3f(m_diffuselightTech.getUniformLocation("gDiffuseLight.color"), m_deffuseLightInfo2.ambientColor.x, m_deffuseLightInfo2.ambientColor.y, m_deffuseLightInfo2.ambientColor.z);
+	glUniform1f(m_diffuselightTech.getUniformLocation("gDiffuseLight.ambientIntensity"), m_deffuseLightInfo2.ambientIntensity);
+	glUniform1f(m_diffuselightTech.getUniformLocation("gDiffuseLight.diffuseIntensity"), m_deffuseLightInfo2.diffuseIntensity);
+	glUniform3f(m_diffuselightTech.getUniformLocation("gDiffuseLight.direction"), m_deffuseLightInfo2.direction.x, m_deffuseLightInfo2.direction.y, m_deffuseLightInfo2.direction.z);
+
+	m_mesh->draw();
+
+	glDisable(GL_BLEND);
+
+	
+}
+void GBuffer::drawGBufferPointLights()
 {
 	glEnable(GL_BLEND);
 	glBlendEquation(GL_FUNC_ADD);
@@ -263,7 +299,6 @@ void GBuffer::drawPointLights()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
 	glDisable(GL_BLEND);
 }
 
@@ -271,10 +306,11 @@ void GBuffer::draw()
 {
 	geometryPass();
 
-	//drawGBufferTex();
+	drawGBufferTex();
 
-	drawPointLights();
+	drawGBufferPointLights();
 	
+	//drawNormalPointLights();
 }
 
 

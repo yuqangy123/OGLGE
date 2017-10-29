@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -90,15 +90,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)Include/libraries/freetype;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)Lib;$(ProjectDir)Lib\freetype;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;glew32.lib;assimp.lib;freeglut.lib;libjpeg.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -200,6 +200,8 @@
     <ClInclude Include="GE\skinMeshNode.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
+    <ClInclude Include="GE\xFreeTypeFont.h" />
+    <ClInclude Include="GE\xFreeTypeLib.h" />
     <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\tech\billboardTechnique.h" />
@@ -312,6 +314,8 @@
     <ClCompile Include="GE\skinMeshNode.cpp" />
     <ClCompile Include="GE\technique.cpp" />
     <ClCompile Include="GE\TextureManager.cpp" />
+    <ClCompile Include="GE\xFreeTypeFont.cpp" />
+    <ClCompile Include="GE\xFreeTypeLib.cpp" />
     <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp" />

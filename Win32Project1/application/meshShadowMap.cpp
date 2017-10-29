@@ -120,10 +120,10 @@ void meshShadowMap::Rotate(float x, float y, float z)
 	m_pipe.Rotate(x, y, z);
 }
 
-bool meshShadowMap::loadMesh(const char* filename, const Vector3& pos, const Vector3& sal)
+bool meshShadowMap::loadMesh(const char* filename, const char* filepath, const Vector3& pos, const Vector3& sal)
 {
 	auto m = new ModelMesh();
-	if (!m->loadMesh(filename))
+	if (!m->loadMesh(filename, filepath))
 		return false;
 
 	m->position = pos;
