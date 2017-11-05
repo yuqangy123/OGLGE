@@ -5,23 +5,23 @@
 #include <vector>
 
 #define SceneManagerIns SceneManager::InstanceEx()
-#define SceneIns (*SceneManagerIns.getScene())
+#define DefaultSceneIns (*SceneManagerIns.getRenderScene())
 class SceneManager : public CSingleton<SceneManager>
 {
 public:
 	SceneManager();
 	~SceneManager();
 
-	Scene* getScene() { return m_scene; };
+	Scene* getRenderScene() { return m_renderScene; };
 
-	void update(float ft) { m_scene->update(ft); };
+	void update(float ft) { m_renderScene->update(ft); };
 
-	void draw() { m_scene->draw(); }
+	void draw() { m_renderScene->draw(); }
 
 protected:
 	void init();
 
 protected:
-	Scene* m_scene;
+	Scene* m_renderScene;
 };
 

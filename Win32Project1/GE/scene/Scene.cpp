@@ -20,7 +20,7 @@ void Scene::init()
 	addNode(m_default_scenenode);
 }
 
-void Scene::addNode(SceneNode* nd)
+void Scene::addNode(SceneNode* nd, int updateLevel)
 {
 	if (nullptr != nd)
 	{
@@ -28,7 +28,7 @@ void Scene::addNode(SceneNode* nd)
 	}
 }
 
-void Scene::addNode(Node* nd)
+void Scene::addNode(Node* nd, int updateLevel)
 {
 	if (nullptr != nd)
 	{

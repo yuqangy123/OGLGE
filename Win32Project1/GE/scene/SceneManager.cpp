@@ -15,7 +15,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::init()
 {
-	m_scene = new Scene();
+	m_renderScene = new Scene();
 }
 
 

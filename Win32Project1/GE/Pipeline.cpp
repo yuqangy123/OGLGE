@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Pipeline.h"
 #include <math.h>
-#include "common.h"
+#include "base.h"
 #include "OGLGE.h"
 
 #define M_PI 3.14159265

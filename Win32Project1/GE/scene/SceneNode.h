@@ -1,8 +1,11 @@
 #pragma once
 #include "Node.h"
-#include <vector>
+#include "base.h"
+#include "struct/vtrMap.h"
 
 #define SCENENODE_NAME_LENGTH 32
+
+USING_NS_STRUCT;
 
 class SceneNode : public Node
 {
@@ -22,6 +25,8 @@ public:
 
 protected:
 	std::vector<Node*> m_nodes;
+	vtrMap<Node*> m_nodeses;
+
 	char m_nodeName[SCENENODE_NAME_LENGTH];
 };
 

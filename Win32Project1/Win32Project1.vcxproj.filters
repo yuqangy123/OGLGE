@@ -58,6 +58,9 @@
     <Filter Include="GE\scene">
       <UniqueIdentifier>{70d9e1e3-f743-48d4-8d21-e7ee8a6ac669}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GE\struct">
+      <UniqueIdentifier>{23a31112-3c1d-4eb6-9261-a7516709dcee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -363,9 +366,6 @@
     <ClInclude Include="GE\scene\SceneNode.h">
       <Filter>GE\scene</Filter>
     </ClInclude>
-    <ClInclude Include="basic\common.h">
-      <Filter>basic</Filter>
-    </ClInclude>
     <ClInclude Include="GE\scene\InPutControl.h">
       <Filter>GE\scene</Filter>
     </ClInclude>
@@ -402,11 +402,20 @@
     <ClInclude Include="GE\OGLGE.h">
       <Filter>application</Filter>
     </ClInclude>
-    <ClInclude Include="GE\xFreeTypeLib.h">
-      <Filter>GE</Filter>
-    </ClInclude>
     <ClInclude Include="GE\xFreeTypeFont.h">
       <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\FTFontManager.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\statisticalNode.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="basic\base.h">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\struct\vtrMap.h">
+      <Filter>GE\struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -596,10 +605,13 @@
     <ClCompile Include="GE\OGLGE.cpp">
       <Filter>application</Filter>
     </ClCompile>
-    <ClCompile Include="GE\xFreeTypeLib.cpp">
+    <ClCompile Include="GE\xFreeTypeFont.cpp">
       <Filter>GE</Filter>
     </ClCompile>
-    <ClCompile Include="GE\xFreeTypeFont.cpp">
+    <ClCompile Include="GE\FTFontManager.cpp">
+      <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\statisticalNode.cpp">
       <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include "Vector4.h"
 #include "quaternion.h"
 #include<math.h>
-#include "common.h"
+#include "base.h"
 
 Vector4::Vector4()
 {

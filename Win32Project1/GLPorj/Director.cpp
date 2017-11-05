@@ -5,17 +5,17 @@
 #include "SceneNode.h"
 #include "InPutControl.h"
 
-CDirector::CDirector()
+Director::Director()
 {
 }
 
 
-CDirector::~CDirector()
+Director::~Director()
 {
 
 }
 
-void CDirector::init()
+void Director::init()
 {
 	SceneManagerIns;
 	InPutControlIns;
@@ -29,24 +29,33 @@ void CDirector::init()
 	
 	m_Camera2D = new Camera2D(Vector2(0.0, 0.0), winrt.width, winrt.height);
 
-	SceneIns.addNode(m_Camera3D);
-	SceneIns.addNode(m_Camera2D);
+	DefaultSceneIns.addNode(m_Camera3D);
+	DefaultSceneIns.addNode(m_Camera2D);
+
+	
+	DefaultSceneIns.addNode(&statsNodeInstance);
+	displayStats(true);
 }
 
-void CDirector::update(float ft)
+void Director::update(float ft)
 {
 	SceneManagerIns.update(ft);
 }
 
-void CDirector::draw()
+void Director::draw()
 {
 	// Clear the color buffer
-	glClearColor(0.0f, 0.3f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	SceneManagerIns.draw();
 
 	glutSwapBuffers();
+}
+
+void Director::displayStats(bool b)
+{
+	statsNodeInstance.displayStats(b);
 }
 
 

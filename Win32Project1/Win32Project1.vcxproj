@@ -168,7 +168,7 @@
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
-    <ClInclude Include="basic\common.h" />
+    <ClInclude Include="basic\base.h" />
     <ClInclude Include="basic\Singleton.h" />
     <ClInclude Include="GE\Camera.h" />
     <ClInclude Include="GE\Camera3D.h" />
@@ -198,10 +198,12 @@
     <ClInclude Include="GE\scene\SceneNode.h" />
     <ClInclude Include="GE\shaders.h" />
     <ClInclude Include="GE\skinMeshNode.h" />
+    <ClInclude Include="GE\statisticalNode.h" />
+    <ClInclude Include="GE\struct\vtrMap.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GE\xFreeTypeFont.h" />
-    <ClInclude Include="GE\xFreeTypeLib.h" />
+    <ClInclude Include="GE\FTFontManager.h" />
     <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\tech\billboardTechnique.h" />
@@ -312,10 +314,11 @@
     <ClCompile Include="GE\scene\SceneNode.cpp" />
     <ClCompile Include="GE\shaders.cpp" />
     <ClCompile Include="GE\skinMeshNode.cpp" />
+    <ClCompile Include="GE\statisticalNode.cpp" />
     <ClCompile Include="GE\technique.cpp" />
     <ClCompile Include="GE\TextureManager.cpp" />
     <ClCompile Include="GE\xFreeTypeFont.cpp" />
-    <ClCompile Include="GE\xFreeTypeLib.cpp" />
+    <ClCompile Include="GE\FTFontManager.cpp" />
     <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp" />

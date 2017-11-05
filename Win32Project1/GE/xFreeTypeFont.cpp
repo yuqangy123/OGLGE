@@ -2,6 +2,8 @@
 #include "xFreeTypeFont.h"
 #include "OGLGE.h"
 
+using namespace uiSystem;
+
 xFreeTypeFont::xFreeTypeFont()
 {
 	m_initGL = false;
@@ -11,6 +13,12 @@ xFreeTypeFont::xFreeTypeFont()
 xFreeTypeFont::~xFreeTypeFont()
 {
 
+}
+
+xFreeTypeFont* xFreeTypeFont::create()
+{
+	xFreeTypeFont* ins = new xFreeTypeFont();
+	return ins;
 }
 
 void xFreeTypeFont::setString(const wchar_t* str, int width, int height)
@@ -134,7 +142,7 @@ void xFreeTypeFont::draw_string(int x, int y, int font, wchar_t *string)
 		GLuint glt;
 		float crd[4];
 
-		if (!CFontManagerIns.getCharInfo(font, *string, &cw, &ct, &bx, &by, &av, &glt, crd))
+		if (!FTFontManagerIns.getCharInfo(font, *string, &cw, &ct, &bx, &by, &av, &glt, crd))
 		{
 			string++;
 			continue;
@@ -272,12 +280,12 @@ void xFreeTypeFont::display()
 
 void xFreeTypeFont::draw()
 {
-
+	if (!m_initGL)return;
 	display();
 
 	return;
 
-	if (!m_initGL)return;
+	
 
 	m_tech.enable();
 

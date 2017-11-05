@@ -5,13 +5,19 @@
 #include "tech/texture2dTechnique.h"
 #include "pipeLine.h"
 #include "FTFontManager.h"
+#include "base.h"
 
+#define newFreeFont uiSystem::xFreeTypeFont::create()
+
+NS_UISYSTEM_BEGIN
 
 class xFreeTypeFont : public Node
 {
 public:
 	xFreeTypeFont();
 	~xFreeTypeFont();
+
+	static xFreeTypeFont* create();
 
 	void setString(const wchar_t* str, int width=0, int height=0);
 	void setPosition(float x, float y);
@@ -35,3 +41,5 @@ protected:
 	int char_font;
 	bool m_initGL;
 };
+
+NS_UISYSTEM_END

@@ -115,7 +115,7 @@ void OGLGE::init(int argc, char** argv)
 
 	initGLContext(argc, argv);
 
-	m_director = new CDirector();
+	m_director = new Director();
 	m_director->init();
 }
 
@@ -129,7 +129,7 @@ void testBumpNormalMesh()
 	meshbumpNormal* bumpNormal = new meshbumpNormal();
 	bumpNormal->setPosition(0, 0, -1);
 	bumpNormal->loadMesh("content/box.obj", "content/normal_map.jpg");
-	SceneIns.addNode(bumpNormal);
+	DefaultSceneIns.addNode(bumpNormal);
 
 	DefaultCamera->setEyePosition(2.5, 1.5, 0);
 	DefaultCamera->setTargetPosition(Vector3(0, -1, -4));
@@ -149,7 +149,7 @@ void testSkybox()
 	box->loadMesh(imgs);
 	
 
-	SceneIns.addNode(box);
+	DefaultSceneIns.addNode(box);
 
 	DefaultCamera->setEyePosition(0, 0, 0);
 	DefaultCamera->setTargetPosition(Vector3(0, -1, 0));
@@ -158,34 +158,34 @@ void testSkybox()
 void testTest()
 {
 	Test* t = new Test();
-	SceneIns.addNode(t);
+	DefaultSceneIns.addNode(t);
 }
 void testBillboardList()
 {
 	BillboardList* billboard = new BillboardList();
 
-	SceneIns.addNode(billboard);
+	DefaultSceneIns.addNode(billboard);
 	DefaultCamera->setFreeCamera(true);
 }
 void testSkinnedAnimation()
 {
 	meshSkinnedAnimation* test = new meshSkinnedAnimation();
 	test->loadMesh("content/boblampclean.md5mesh", Vector3(0, 0, -10), Vector3(1.0, 1.0, 1.0));
-	SceneIns.addNode(test);
+	DefaultSceneIns.addNode(test);
 }
 
 void testGBuffer()
 {
 	GBuffer* gbuff = new GBuffer();
-	SceneIns.addNode(gbuff);
+	DefaultSceneIns.addNode(gbuff);
 }
 
 void testXFreeType()
 {
-	xFreeTypeFont* font = new xFreeTypeFont();
+	uiSystem::xFreeTypeFont* font = newFreeFont;
 	font->setString(L"舍得离开房间为了开发就完了开发就fps:1234567894112345678YUJK<JKLsdfgklmwsf;90", 500, 100);
 	font->setPosition(100, 100);
-	SceneIns.addNode(font);
+	DefaultSceneIns.addNode(font);
 }
 
 void OGLGE::test()
@@ -206,17 +206,17 @@ void OGLGE::test()
 	shadowMapA->setLightTargetPosition(0, 0, -50);
 	shadowMapA->setPosition(0, 0, -70);
 	shadowMapA->setScale(15);
-	SceneIns.addNode(shadowMapA);
+	DefaultSceneIns.addNode(shadowMapA);
 	*/
 
-	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
-	//meshObject* m = new meshObject(); m->loadMesh("sponza.obj", "content/crytek_sponza"); m->setPosition(0, 0, -50); m->setScale(0.05); SceneIns.addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
+	//meshObject* m = new meshObject(); m->loadMesh("sponza.obj", "content/crytek_sponza"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
 
 
 	
 	
 	
-	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); SceneIns.addNode(m2);
+	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); DefaultSceneIns.addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
 	/*
@@ -225,7 +225,7 @@ void OGLGE::test()
 	shadowm->loadMesh("content/hheli.obj", Vector3(30, -30, -00), Vector3(0.1, 0.1, 0.1));
 	shadowm->setLightPosition(-50, 40, -30);
 	shadowm->setTargetPosition(30, -30, -30);
-	SceneIns.addNode(shadowm);
+	DefaultSceneIns.addNode(shadowm);
 	*/
 	
 	//DefaultCamera->setEyePosition(0, 0, 0);
@@ -235,7 +235,7 @@ void OGLGE::test()
 
 	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); st_scene->addNode(texture2); texture2->setPosition(m_winRt.width / 2.0, 50);
 
-	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); SceneIns.addNode(texture1); texture1->setScale(0.1);
+	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); DefaultSceneIns.addNode(texture1); texture1->setScale(0.1);
 
 	//testBumpNormalMesh();
 
@@ -249,7 +249,7 @@ void OGLGE::test()
 
 	//testGBuffer();
 
-	testXFreeType();
+	//testXFreeType();
 }
 
 

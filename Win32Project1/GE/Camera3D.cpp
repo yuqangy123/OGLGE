@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Camera3D.h"
-#include "common.h"
+#include "base.h"
 #include <math.h>
 #include "OGLGE.h"
 

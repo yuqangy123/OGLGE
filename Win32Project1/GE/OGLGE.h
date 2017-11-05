@@ -25,7 +25,7 @@ public:
 
 	//get windows size
 	Rect getWindowsRect() { return m_winRt; }
-	CDirector* getDirector() { return m_director; }
+	Director* getDirector() { return m_director; }
 
 
 	static void update(float ft);
@@ -39,7 +39,7 @@ protected:
 	void initGLContext(int argc, char** argv);
 
 protected:
-	CDirector* m_director;
+	Director* m_director;
 	Rect m_winRt;
 };
 

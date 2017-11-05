@@ -6,7 +6,7 @@
 #include "TextureManager.h"
 #include "OGLGE.h"
 #include "InPutControl.h"
-#include "common.h"
+#include "base.h"
 
 meshObject::meshObject()
 {

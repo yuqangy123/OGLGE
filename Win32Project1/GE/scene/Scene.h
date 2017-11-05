@@ -9,8 +9,8 @@ public:
 	~Scene();
 
 	void init();
-	void addNode(SceneNode* nd);
-	void addNode(Node* nd);
+	void addNode(SceneNode* nd, int updateLevel = 0);
+	void addNode(Node* nd, int updateLevel=0);
 	void delNode(Node* nd);
 	void update(float ft);
 	void draw();
