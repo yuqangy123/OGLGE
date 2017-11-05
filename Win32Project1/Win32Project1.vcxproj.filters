@@ -414,7 +414,7 @@
     <ClInclude Include="basic\base.h">
       <Filter>basic</Filter>
     </ClInclude>
-    <ClInclude Include="GE\struct\vtrMap.h">
+    <ClInclude Include="GE\struct\hashtable.h">
       <Filter>GE\struct</Filter>
     </ClInclude>
   </ItemGroup>

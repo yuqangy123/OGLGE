@@ -199,7 +199,7 @@
     <ClInclude Include="GE\shaders.h" />
     <ClInclude Include="GE\skinMeshNode.h" />
     <ClInclude Include="GE\statisticalNode.h" />
-    <ClInclude Include="GE\struct\vtrMap.h" />
+    <ClInclude Include="GE\struct\hashtable.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GE\xFreeTypeFont.h" />
