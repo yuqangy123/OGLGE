@@ -33,3 +33,8 @@
 #define NS_STRUCT_BEGIN                     namespace OGLGEStruct {
 #define NS_STRUCT_END                       }
 #define USING_NS_STRUCT                     using namespace OGLGEStruct
+
+
+
+//define basic typedef
+#define uint	unsigned int

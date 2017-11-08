@@ -1,7 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "base.h"
-#include "struct/vtrMap.h"
+#include "struct/hashtable.h"
 
 #define SCENENODE_NAME_LENGTH 32
 
@@ -25,7 +25,7 @@ public:
 
 protected:
 	std::vector<Node*> m_nodes;
-	vtrMap<Node*> m_nodeses;
+	hashtable<Node*> m_nodeses;
 
 	char m_nodeName[SCENENODE_NAME_LENGTH];
 };

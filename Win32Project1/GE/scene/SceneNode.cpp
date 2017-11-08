@@ -43,7 +43,7 @@ void SceneNode::addNode(Node* nd)
 	}
 	
 	m_nodes.push_back(nd);
-	m_nodeses.push(nd);
+	m_nodeses.push((unsigned int)nd, (unsigned int)nd);
 }
 
 bool SceneNode::delNode(Node* nd)
