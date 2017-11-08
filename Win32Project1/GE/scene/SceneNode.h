@@ -24,7 +24,6 @@ public:
 	void draw();
 
 protected:
-	//std::vector<Node*> m_nodes;
 	hashtable<Node*> m_nodes;
 
 	char m_nodeName[SCENENODE_NAME_LENGTH];

@@ -11,6 +11,7 @@ template<class T>
 class hashtable
 {
 public:
+	class iterator;
 	hashtable<T>()
 	{
 		m_nodeNum = 0;
@@ -56,7 +57,7 @@ public:
 		return m_nodeNum;
 	}
 	
-	iterator& begin()
+	iterator begin()
 	{
 		iterator itr;
 		itr.clear();
@@ -75,7 +76,7 @@ public:
 		return itr;
 	}
 	
-	iterator& end()
+	iterator end()
 	{
 		iterator itr;
 		itr.clear();
@@ -116,6 +117,8 @@ public:
 		}
 		return object;
 	}
+
+
 	
 	class iterator
 	{
@@ -216,6 +219,11 @@ public:
 				}
 			}
 			return T();
+		}
+
+		T operator ->()
+		{
+			return &operator*();
 		}
 		
 	protected:

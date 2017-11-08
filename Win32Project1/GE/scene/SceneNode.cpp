@@ -47,7 +47,7 @@ void SceneNode::addNode(Node* nd, uint prior)
 
 bool SceneNode::delNode(Node* nd)
 {
-	for (auto itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
+	for (hashtable<Node*>::iterator itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
 	{
 		if (*itr == nd)
 		{
@@ -60,16 +60,16 @@ bool SceneNode::delNode(Node* nd)
 
 void SceneNode::update(float ft)
 {
-	for (int n = 0; n < m_nodes.size(); ++n)
+	for (hashtable<Node*>::iterator itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
 	{
-		m_nodes[n]->update(ft);
+		itr->update(ft);
 	}
 }
 
 void SceneNode::draw()
 {
-	for (int n = 0; n < m_nodes.size(); ++n)
+	for (hashtable<Node*>::iterator itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
 	{
-		m_nodes[n]->draw();
+		itr->draw();
 	}
 }
