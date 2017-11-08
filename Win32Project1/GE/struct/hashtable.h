@@ -21,7 +21,7 @@ public:
 
 	}
 
-	void push(unsigned int index, const T& data)
+	void push(const T& data, unsigned int index=0)
 	{
 		/*
 		use Fibonacci arithmetic
@@ -51,7 +51,7 @@ public:
 		}
 	}
 	
-	void size()
+	uint size()
 	{
 		return m_nodeNum;
 	}
@@ -60,7 +60,7 @@ public:
 	{
 		iterator itr;
 		itr.clear();
-		itr.table = table;
+		itr.table = &table;
 		uint vsize = m_table.size();
 		for(int n=0; vsize>n;++n)
 		{
@@ -74,11 +74,12 @@ public:
 		
 		return itr;
 	}
+	
 	iterator& end()
 	{
 		iterator itr;
 		itr.clear();
-		itr.table = table;
+		itr.table = &table;
 		uint vsize = m_table.size();
 		for(int n=vsize-1; n>=0;--n)
 		{
@@ -93,12 +94,39 @@ public:
 		return itr;
 	}
 	
+	iterator erase(iterator& object)
+	{
+		if (!object.valid() || object.table != m_table)
+			return object;
+
+		auto lstItr = m_table[object.tblIndex].begin();
+		int n = 1;
+		while (lstItr != m_table[object.tblIndex].end())
+		{
+			if (n == object.lstIndex)
+			{
+				m_table.erase(lstItr);
+
+				iterator itr = object;
+				if (m_table[object.tblIndex].size() == 0)
+					++itr;
+				return itr;
+			}
+			++lstItr;
+		}
+		return object;
+	}
 	
 	class iterator
 	{
 	friend(hashtable);
 	public:
-		iterator(std::vector<std::list<T>>& tbl, uint tableIndex=0, uint listIndex=0)
+		iterator()
+		{
+			table = nullptr;
+			tblIndex = lstIndex = 0;
+		}
+		iterator(std::vector<std::list<T>>* tbl, uint tableIndex=0, uint listIndex=0)
 		{
 			table = tbl;
 			tblIndex = tableIndex;
@@ -114,16 +142,19 @@ public:
 		
 		iterator& operator ++()
 		{
-			if(lstIndex < table[tblIndex].size())
+			if (!valid())
+				return *this;
+
+			if(lstIndex < *table[tblIndex].size())
 			{
 				++lstIndex;
 			}
 			else
 			{
 				uint oldTbl = tblIndex;
-				for(uint tbl = tblIndex+1; tbl <= table.size(); ++tbl)
+				for(uint tbl = tblIndex+1; tbl <= table->size(); ++tbl)
 				{
-					if (table[tbl-1].size() > 0)
+					if (*table[tbl-1].size() > 0)
 					{
 						tblIndex = tbl;
 						lstIndex = 1;
@@ -140,43 +171,66 @@ public:
 		
 		iterator& operator --()
 		{
-			if(tblIndex == 0 && lstIndex == 0)
+			if (!valid())
+				return *this;
+
+			if (lstIndex > 1)
+			{
+				--lstIndex;
+			}
 			else
 			{
-				if (lstIndex > 1)
+				uint oldTbl = tblIndex;
+				for (uint tbl = tblIndex-1; tbl > 0; --tbl)
 				{
-					--lstIndex;
-				}
-				else
-				{
-					uint oldTbl = tblIndex;
-					for(uint tbl = tblIndex-1; tbl > 0; ++tbl)
+					if (*table[tbl - 1].size() > 0)
 					{
-						if (table[tbl-1].size() > 0)
-						{
-							tblIndex = tbl;
-							lstIndex = table[tbl].size();
-							break;
-						}
+						tblIndex = tbl;
+						lstIndex = *table[tbl].size();
+						break;
 					}
-					if(oldTbl == tblIndex)
-					{
-						tblIndex = lstIndex = 0;
-					}	
+				}
+				if (oldTbl == tblIndex)
+				{
+					tblIndex = lstIndex = 0;
 				}
 			}
 			return *this;
 		}
+		T operator *()
+		{
+			if (!valid())
+				return T();
+
+			if (tblIndex != 0 && lstIndex != 0)
+			{
+				std::list<T>::iterator listItr = *table[tblIndex].begin();
+				uint n = 1;
+				while (listItr != *table[tblIndex].end())
+				{
+					if (n == lstIndex)
+					{
+						return *listItr;
+					}
+					++listItr;
+				}
+			}
+			return T();
+		}
 		
 	protected:
-		clear()
+		void clear()
 		{
 			tblIndex = 0;
 			lstIndex = 0;
 		}
+		bool valid()
+		{
+			return !(table == nullptr || tblIndex == 0 || lstIndex == 0);
+		}
 		
 	protected:
-		 std::vector<std::list<T>>& table;
+		std::vector<std::list<T>>* table;
 		uint tblIndex;
 		uint lstIndex;
 	}

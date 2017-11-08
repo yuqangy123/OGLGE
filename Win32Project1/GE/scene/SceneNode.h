@@ -15,7 +15,7 @@ public:
 
 	bool init(const char* sceneNodeName = nullptr);
 
-	void addNode(Node* nd);
+	void addNode(Node* nd, uint prior=0);
 
 	bool delNode(Node* nd);
 	
@@ -24,8 +24,8 @@ public:
 	void draw();
 
 protected:
-	std::vector<Node*> m_nodes;
-	hashtable<Node*> m_nodeses;
+	//std::vector<Node*> m_nodes;
+	hashtable<Node*> m_nodes;
 
 	char m_nodeName[SCENENODE_NAME_LENGTH];
 };

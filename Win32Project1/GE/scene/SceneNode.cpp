@@ -34,7 +34,7 @@ bool SceneNode::init(const char* sceneNodeName)
 	return true;
 }
 
-void SceneNode::addNode(Node* nd)
+void SceneNode::addNode(Node* nd, uint prior)
 {
 	if (nullptr == nd)
 	{
@@ -42,8 +42,7 @@ void SceneNode::addNode(Node* nd)
 		return;
 	}
 	
-	m_nodes.push_back(nd);
-	m_nodeses.push((unsigned int)nd, (unsigned int)nd);
+	m_nodes.push(nd, prior);
 }
 
 bool SceneNode::delNode(Node* nd)
