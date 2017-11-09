@@ -1,19 +1,17 @@
 #pragma once
 #include "base.h"
-#include <vector>
-#include <map>
 #include <list>
 
 
 NS_STRUCT_BEGIN
 
 template<class T>
-class hashtable
+class llist
 {
 public:
 	class iterator
 	{
-	friend hashtable;
+	friend llist;
 	public:
 		iterator()
 		{
@@ -136,12 +134,12 @@ public:
 	};
 
 	//default table size is 1024
-	hashtable<T>() : m_nodeNum(0)
+	llist<T>() : m_nodeNum(1024)
 	{
-		m_table.resize(1024);
+		m_table.resize(m_nodeNum);
 	}
 
-	~hashtable<T>()
+	~llist<T>()
 	{
 
 	}
@@ -245,7 +243,7 @@ public:
 
 
 protected:
-	std::vector<std::list<T>> m_table;
+	std::list<std::list<T>> m_list;
 	uint m_nodeNum;
 };
 NS_STRUCT_END

@@ -29,6 +29,7 @@
 #include <string.h>
 #include <assert.h>
 #include "ogldev_types.h"
+#include "base.h"
 
 using namespace std;
 

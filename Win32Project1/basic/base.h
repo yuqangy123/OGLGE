@@ -35,4 +35,6 @@
 #define USING_NS_STRUCT                     using namespace OGLGEStruct
 
 
-#define uint unsigned int
+typedef unsigned int uint;
+typedef unsigned short ushort;
+typedef unsigned char uchar;

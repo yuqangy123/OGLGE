@@ -60,6 +60,7 @@ bool SceneNode::delNode(Node* nd)
 
 void SceneNode::update(float ft)
 {
+	int n = 0;
 	for (auto itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
 	{
 		(*itr)->update(ft);

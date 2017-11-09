@@ -46,3 +46,4 @@ void statisticalNode::displayStats(bool b)
 		}
 	}
 }
+

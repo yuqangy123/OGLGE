@@ -20,6 +20,7 @@ public:
 	void updateDrawnBatches(unsigned int cnt);
 	void updateDrawnVertices(unsigned int cnt);
 
+
 protected:
 	void init();
 	
