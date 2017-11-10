@@ -9,6 +9,12 @@ template<class T>
 class llist
 {
 public:
+	typedef struct Node
+	{
+		uint prior;
+		std::list<T> list;
+		Node() :prior(0){};
+	};
 	class iterator
 	{
 	friend llist;
@@ -134,9 +140,9 @@ public:
 	};
 
 	//default table size is 1024
-	llist<T>() : m_nodeNum(1024)
+	llist<T>() : m_nodeNum(0)
 	{
-		m_table.resize(m_nodeNum);
+		m_list.resize(8);
 	}
 
 	~llist<T>()
@@ -144,19 +150,38 @@ public:
 
 	}
 
-	void push(const T& data, unsigned int index = 0)
+	void push(const T& data, uint index = 0)
 	{
-		/*
-		use Fibonacci arithmetic
-		index = (value * 2654435769) >> 28
-		16 bit, mult 40503
-		32 bit，2654435769
-		64 bit，11400714819323198485
-		*/
-		//default 32bit
-		//http://blog.csdn.net/jesseshen/article/details/6662617
-		index = (index * 2654435769) >> 28;
-		m_table[index].push_back(data);
+		do{
+			if (m_list.size() == 0 || index > m_list.back().prior)
+			{
+				Node nd;
+				nd.prior = index;
+				nd.list.push_back(data);
+				m_list.push_back(nd);
+				break;
+			}
+
+			uint index = 0;
+			for (auto itr = m_list.begin(); itr != m_list.end(); ++itr)
+			{
+				if (index > itr->prior)
+				{
+					Node nd;
+					nd.prior = index;
+					nd.list.push_back(data);
+					m_list.insert(itr + index, 1, nd);
+					break;
+				}
+				if (itr->prior == index)
+				{
+					itr->list.push_back(data);
+					++m_nodeNum;
+					break;
+				}
+				++index;
+			}
+		}while (false);
 		++m_nodeNum;
 	}
 
@@ -198,7 +223,7 @@ public:
 
 		return itr;
 	}
-	//優化，这里的查询速度可以优化
+	
 	iterator end()
 	{
 		iterator itr;
@@ -243,7 +268,7 @@ public:
 
 
 protected:
-	std::list<std::list<T>> m_list;
+	std::list<Node> m_list;
 	uint m_nodeNum;
 };
 NS_STRUCT_END
