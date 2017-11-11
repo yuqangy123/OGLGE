@@ -9,87 +9,297 @@ template<class T>
 class llist
 {
 public:
+	typedef struct atom
+	{
+		T value;
+		atom* prev;
+		atom* next;
+
+		atom():prev(nullptr), next(nullptr) {};
+		atom(const atom& other) {
+			this->value = other.value;
+			this->prev = other.prev;
+			this->next = other.next;
+		}
+		void link(atom* back) {
+			if (back) {
+				this->next = back;
+				back->prev = this;
+			}
+		}
+		
+	};
+
+	class miniList
+	{
+	public :
+		class iterator
+		{
+		friend miniList;
+		public:
+			iterator() :node(nullptr){}
+			iterator(const iterator& other)
+			{
+				node = other.node;
+			}
+			iterator operator ++()
+			{
+				do
+				{
+					if (!valid())break;
+
+					if (node->next)
+					{
+						node = node->next;
+					}
+				} while (false);
+				return *this;
+			}
+			iterator& operator --()
+			{
+				do
+				{
+					if (!valid())break;
+
+					if (listNode->prev)
+					{
+						listNode = listNode->prev;
+					}
+					else
+					{
+						if (tableNode->prev)
+						{
+							tableNode = tableNode->prev;
+							listNode = tableNode->list->end;
+						}
+					}
+				} while (false);
+				return *this;
+			}
+			T operator *()
+			{
+				if (!valid())
+					return T();
+
+				return listNode->value;
+			}
+			T* operator ->()
+			{
+				if (!valid())
+					return nullptr;
+
+				return &listNode->value;
+			}
+			bool operator !=(const iterator& other)const
+			{
+				return (!valid() || !other.valid() || listNode != other.listNode || tableNode != other.tableNode);
+			}
+
+		protected:
+			void clear()
+			{
+				inListAtom = nullptr;
+				outListAtom = nullptr;
+			}
+			bool valid()const
+			{
+				return !(node == nullptr);
+			}
+
+		protected:
+			atom* node;
+		};
+
+		miniList() :beginNode(nullptr), endNode(nullptr), iterator(nullptr), nodeNum(0) {};
+		T front() {
+			if (nodeNum == 0)
+			{
+				return T();
+			}
+			return begin->value;
+		}
+		T back() {
+			if (nodeNum == 0)
+			{
+				return T();
+			}
+			return end->value;
+		}
+		void push_back(const T& value) {
+			if (nodeNum == 0)
+			{
+				begin = new atom();
+				end = new atom();
+				begin->value = end->value = value;
+			}
+			else
+			{
+				atom* nd = new atom();
+				nd->value = value;
+
+				if (nodeNum == 1){
+					begin->link(nd);
+				}
+				else{
+					end->link(nd);
+				}
+				end = nd;
+			}
+			++nodeNum;
+		}
+		void push_front(const T& value) {
+			if (nodeNum == 0)
+			{
+				begin = new atom();
+				end = new atom();
+				begin->value = end->value = value;
+			}
+			else
+			{
+				atom* nd = new atom();
+				nd->value = value;
+
+				if (nodeNum == 1) {
+					nd->link(end);
+				}
+				else {
+					nd->link(begin);
+				}
+				begin = nd;
+			}
+			++nodeNum;
+		}
+		void pop_back() {
+			if (nodeNum > 0) {
+				if (nodeNum == 1) {
+					delete begin;
+					delete end;
+					begin = end = nullptr;
+				}
+				else if (nodeNum == 2) {
+					end = end->prev;
+					delete end->next;
+					end->next = nullptr;
+					begin->next = nullptr;
+				}
+				else
+				{
+					end = end->prev;
+					delete end->next;
+					end->next = nullptr;
+				}
+				--nodeNum;
+			}
+		}
+		void pop_front() {
+			if (nodeNum > 0) {
+				if (nodeNum == 1) {
+					delete begin;
+					delete end;
+					begin = end = nullptr;
+				}
+				else if (nodeNum == 2) {
+					begin = begin->next;
+					delete begin->prev;
+					begin->prev = nullptr;
+					end->prev = nullptr;
+				}
+				else
+				{
+					begin = begin->next;
+					delete begin->prev;
+					begin->prev = nullptr;
+				}
+				--nodeNum;
+			}
+		}
+		void begin() { iterator = begin; };
+		bool end() { return nullptr == iterator || iterator == end; }
+		void operator ++() {
+			if (iterator && iterator->next) {
+				iterator = iterator->next;
+			}
+		}
+		T operator ->() {
+			if (iterator) {
+				return iterator->value;
+			}
+			return T();
+		}
+		unsigned int size() { return nodeNum; }
+
+
+	protected:
+		atom* begin;
+		atom* end;
+		unsigned int nodeNum;
+	};
+
 	typedef struct Node
 	{
 		uint prior;
-		std::list<T> list;
-		Node() :prior(0){};
+		miniList list;
+		Node* prev;
+		Node* next;
+
+		Node() :prior(0), prev(nullptr), next(nullptr){};
+		link(Node* back) {
+			this->next = back;
+			back->prev = this;
+		}
 	};
 	class iterator
 	{
 	friend llist;
+	friend miniList;
 	public:
-		iterator()
-		{
-			table = nullptr;
-			tblIndex = lstIndex = 0;
-		}
-		iterator(std::vector<std::list<T>>* tbl, uint tableIndex = 0, uint listIndex = 0)
-		{
-			table = tbl;
-			tblIndex = tableIndex;
-			lstIndex = listIndex;
-		}
+		iterator():listNode(nullptr), tableNode(nullptr) {}
+		
 		iterator(const iterator& other)
 		{
-			table = other.table;
-			tblIndex = other.tblIndex;
-			lstIndex = other.lstIndex;
+			listNode = other.listNode;
+			tableNode = other.tableNode;
 		}
-		iterator& operator ++()
+		iterator operator ++()
 		{
-			if (!valid())
-				return *this;
+			do
+			{
+				if (!valid())break;
 
-			if(lstIndex < (*table)[tblIndex-1].size())
-			{
-				++lstIndex;
-			}
-			else
-			{
-				uint oldTbl = tblIndex;
-				for(uint tbl = tblIndex+1; tbl <= table->size(); ++tbl)
+				if (listNode->next)
 				{
-					if ((*table)[tbl-1].size() > 0)
+					listNode = listNode->next;
+				}
+				else
+				{
+					if (tableNode->next)
 					{
-						tblIndex = tbl;
-						lstIndex = 1;
-						break;
+						tableNode = tableNode->next;
+						listNode = tableNode->list->begin;
 					}
 				}
-				if(oldTbl == tblIndex)
-				{
-					tblIndex = lstIndex = 0;
-				}
-			}
+			} while (false);
 			return *this;
 		}
 		iterator& operator --()
 		{
-			if (!valid())
-				return *this;
+			do
+			{
+				if (!valid())break;
 
-			if (lstIndex > 1)
-			{
-				--lstIndex;
-			}
-			else
-			{
-				uint oldTbl = tblIndex;
-				for (uint tbl = tblIndex-1; tbl > 0; --tbl)
+				if (listNode->prev)
 				{
-					if (*table[tbl - 1].size() > 0)
+					listNode = listNode->prev;
+				}
+				else
+				{
+					if (tableNode->prev)
 					{
-						tblIndex = tbl;
-						lstIndex = (*table)[tbl].size();
-						break;
+						tableNode = tableNode->prev;
+						listNode = tableNode->list->end;
 					}
 				}
-				if (oldTbl == tblIndex)
-				{
-					tblIndex = lstIndex = 0;
-				}
-			}
+			} while (false);
 			return *this;
 		}
 		T operator *()
@@ -97,52 +307,39 @@ public:
 			if (!valid())
 				return T();
 
-			if (tblIndex != 0 && lstIndex != 0)
-			{
-				std::list<T>::iterator listItr = (*table)[tblIndex-1].begin();
-				uint n = 1;
-				while (listItr != (*table)[tblIndex-1].end())
-				{
-					if (n == lstIndex)
-					{
-						return *listItr;
-					}
-					++n;
-					++listItr;
-				}
-			}
-			return T();
+			return listNode->value;
 		}
 		T* operator ->()
 		{
-			return &(operator*());
+			if (!valid())
+				return nullptr;
+
+			return &listNode->value;
 		}
 		bool operator !=(const iterator& other)const
 		{
-			return (table != other.table || !valid() || !other.valid() || tblIndex != other.tblIndex || lstIndex != other.lstIndex);
+			return (!valid() || !other.valid() || listNode != other.listNode || tableNode != other.tableNode);
 		}
 		
 	protected:
 		void clear()
 		{
-			tblIndex = 0;
-			lstIndex = 0;
+			inListAtom = nullptr;
+			outListAtom = nullptr;
 		}
 		bool valid()const
 		{
-			return !(table == nullptr || tblIndex == 0 || lstIndex == 0);
+			return !(listNode == nullptr || tableNode == nullptr);
 		}
 		
 	protected:
-		std::vector<std::list<T>>* table;
-		uint tblIndex;
-		uint lstIndex;
+		atom* listNode;
+		Node* tableNode;
 	};
 
 	//default table size is 1024
 	llist<T>() : m_nodeNum(0)
 	{
-		m_list.resize(8);
 	}
 
 	~llist<T>()
@@ -150,13 +347,13 @@ public:
 
 	}
 
-	void push(const T& data, uint index = 0)
+	void push(const T& data, unsigned int prior = 0)
 	{
 		do{
-			if (m_list.size() == 0 || index > m_list.back().prior)
+			if (m_list.size() == 0 || prior > m_list.back().prior)
 			{
 				Node nd;
-				nd.prior = index;
+				nd.prior = prior;
 				nd.list.push_back(data);
 				m_list.push_back(nd);
 				break;
@@ -165,18 +362,17 @@ public:
 			uint index = 0;
 			for (auto itr = m_list.begin(); itr != m_list.end(); ++itr)
 			{
-				if (index > itr->prior)
+				if (prior > itr->prior)
 				{
 					Node nd;
-					nd.prior = index;
+					nd.prior = prior;
 					nd.list.push_back(data);
 					m_list.insert(itr + index, 1, nd);
 					break;
 				}
-				if (itr->prior == index)
+				if (itr->prior == prior)
 				{
 					itr->list.push_back(data);
-					++m_nodeNum;
 					break;
 				}
 				++index;
@@ -185,18 +381,59 @@ public:
 		++m_nodeNum;
 	}
 
-	void remove(unsigned int index, const T& data)
+	void remove(const T& data, unsigned int prior)
 	{
-		index = (index * 2654435769) >> 28;
-		for (auto itr = m_table[index].begin(); itr != m_table[index].end(); ++itr)
-		{
-			if (*itr == data)
+		bool bBreak = false;
+		do {
+			if (m_list.front().prior == prior)
 			{
-				m_table[index].remove(itr);
-				--m_nodeNum;
-				break;
+				std::list<T>& lst = m_list.front().list;
+				if (auto itr = lst.begin(); itr != lst.end(); ++itr)
+				{
+					if (*itr == data)
+					{
+						lst.erase(itr);
+						bBreak = true;
+						break;
+					}
+				}
 			}
-		}
+			if (bBreak)break;
+
+			if (m_list.back().prior == prior)
+			{
+				std::list<T>& lst = m_list.back().list;
+				if (auto itr = lst.begin(); itr != lst.end(); ++itr)
+				{
+					if (*itr == data)
+					{
+						lst.erase(itr);
+						bBreak = true;
+						break;
+					}
+				}
+			}
+			if (bBreak)break;
+
+			for (auto itr = m_list.begin(); itr != m_list.end(); ++itr)
+			{
+				if (prior == itr->prior)
+				{
+					std::list<T>& lst = itr->list;
+					for (auto itr2 = lst.begin(); itr2 != lst.end(); ++itr2)
+					{
+						if (data == *itr2)
+						{
+							lst.erase(itr2);
+							bBreak = true;
+							break;
+						}
+					}
+					break;
+				}
+			}
+		} while (false);
+		if(bBreak)--m_nodeNum;
 	}
 
 	uint size()
@@ -268,7 +505,7 @@ public:
 
 
 protected:
-	std::list<Node> m_list;
+	miniList<Node> m_list;
 	uint m_nodeNum;
 };
 NS_STRUCT_END
