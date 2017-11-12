@@ -6,259 +6,41 @@
 NS_STRUCT_BEGIN
 
 template<class T>
-class llist
+struct atom
 {
-public:
-	typedef struct atom
-	{
-		T value;
-		atom* prev;
-		atom* next;
+	T value;
+	atom* prev;
+	atom* next;
 
-		atom():prev(nullptr), next(nullptr) {};
-		atom(const atom& other) {
-			this->value = other.value;
-			this->prev = other.prev;
-			this->next = other.next;
-		}
-		void link(atom* back) {
-			if (back) {
-				this->next = back;
-				back->prev = this;
-			}
-		}
-		
-	};
-
-	class miniList
-	{
-	public :
-		class iterator
-		{
-		friend miniList;
-		public:
-			iterator() :node(nullptr){}
-			iterator(const iterator& other)
-			{
-				node = other.node;
-			}
-			iterator operator ++()
-			{
-				do
-				{
-					if (!valid())break;
-
-					if (node->next)
-					{
-						node = node->next;
-					}
-				} while (false);
-				return *this;
-			}
-			iterator& operator --()
-			{
-				do
-				{
-					if (!valid())break;
-
-					if (listNode->prev)
-					{
-						listNode = listNode->prev;
-					}
-					else
-					{
-						if (tableNode->prev)
-						{
-							tableNode = tableNode->prev;
-							listNode = tableNode->list->end;
-						}
-					}
-				} while (false);
-				return *this;
-			}
-			T operator *()
-			{
-				if (!valid())
-					return T();
-
-				return listNode->value;
-			}
-			T* operator ->()
-			{
-				if (!valid())
-					return nullptr;
-
-				return &listNode->value;
-			}
-			bool operator !=(const iterator& other)const
-			{
-				return (!valid() || !other.valid() || listNode != other.listNode || tableNode != other.tableNode);
-			}
-
-		protected:
-			void clear()
-			{
-				inListAtom = nullptr;
-				outListAtom = nullptr;
-			}
-			bool valid()const
-			{
-				return !(node == nullptr);
-			}
-
-		protected:
-			atom* node;
-		};
-
-		miniList() :beginNode(nullptr), endNode(nullptr), iterator(nullptr), nodeNum(0) {};
-		T front() {
-			if (nodeNum == 0)
-			{
-				return T();
-			}
-			return begin->value;
-		}
-		T back() {
-			if (nodeNum == 0)
-			{
-				return T();
-			}
-			return end->value;
-		}
-		void push_back(const T& value) {
-			if (nodeNum == 0)
-			{
-				begin = new atom();
-				end = new atom();
-				begin->value = end->value = value;
-			}
-			else
-			{
-				atom* nd = new atom();
-				nd->value = value;
-
-				if (nodeNum == 1){
-					begin->link(nd);
-				}
-				else{
-					end->link(nd);
-				}
-				end = nd;
-			}
-			++nodeNum;
-		}
-		void push_front(const T& value) {
-			if (nodeNum == 0)
-			{
-				begin = new atom();
-				end = new atom();
-				begin->value = end->value = value;
-			}
-			else
-			{
-				atom* nd = new atom();
-				nd->value = value;
-
-				if (nodeNum == 1) {
-					nd->link(end);
-				}
-				else {
-					nd->link(begin);
-				}
-				begin = nd;
-			}
-			++nodeNum;
-		}
-		void pop_back() {
-			if (nodeNum > 0) {
-				if (nodeNum == 1) {
-					delete begin;
-					delete end;
-					begin = end = nullptr;
-				}
-				else if (nodeNum == 2) {
-					end = end->prev;
-					delete end->next;
-					end->next = nullptr;
-					begin->next = nullptr;
-				}
-				else
-				{
-					end = end->prev;
-					delete end->next;
-					end->next = nullptr;
-				}
-				--nodeNum;
-			}
-		}
-		void pop_front() {
-			if (nodeNum > 0) {
-				if (nodeNum == 1) {
-					delete begin;
-					delete end;
-					begin = end = nullptr;
-				}
-				else if (nodeNum == 2) {
-					begin = begin->next;
-					delete begin->prev;
-					begin->prev = nullptr;
-					end->prev = nullptr;
-				}
-				else
-				{
-					begin = begin->next;
-					delete begin->prev;
-					begin->prev = nullptr;
-				}
-				--nodeNum;
-			}
-		}
-		void begin() { iterator = begin; };
-		bool end() { return nullptr == iterator || iterator == end; }
-		void operator ++() {
-			if (iterator && iterator->next) {
-				iterator = iterator->next;
-			}
-		}
-		T operator ->() {
-			if (iterator) {
-				return iterator->value;
-			}
-			return T();
-		}
-		unsigned int size() { return nodeNum; }
-
-
-	protected:
-		atom* begin;
-		atom* end;
-		unsigned int nodeNum;
-	};
-
-	typedef struct Node
-	{
-		uint prior;
-		miniList list;
-		Node* prev;
-		Node* next;
-
-		Node() :prior(0), prev(nullptr), next(nullptr){};
-		link(Node* back) {
+	atom() :prev(nullptr), next(nullptr) {};
+	atom(const atom<T>& other) {
+		this->value = other.value;
+		this->prev = other.prev;
+		this->next = other.next;
+	}
+	void link(atom<T>* back) {
+		if (back) {
 			this->next = back;
 			back->prev = this;
 		}
-	};
+	}
+};
+
+template<class T>
+class miniList
+{
+public:
 	class iterator
 	{
-	friend llist;
-	friend miniList;
+		friend miniList;
 	public:
-		iterator():listNode(nullptr), tableNode(nullptr) {}
-		
+		iterator() :node(nullptr) {}
 		iterator(const iterator& other)
 		{
-			listNode = other.listNode;
-			tableNode = other.tableNode;
+			node = other.node;
+		}
+		iterator(atom<T>* nd) {
+			node = nd;
 		}
 		iterator operator ++()
 		{
@@ -266,17 +48,9 @@ public:
 			{
 				if (!valid())break;
 
-				if (listNode->next)
+				if (node->next)
 				{
-					listNode = listNode->next;
-				}
-				else
-				{
-					if (tableNode->next)
-					{
-						tableNode = tableNode->next;
-						listNode = tableNode->list->begin;
-					}
+					node = node->next;
 				}
 			} while (false);
 			return *this;
@@ -287,54 +61,262 @@ public:
 			{
 				if (!valid())break;
 
-				if (listNode->prev)
+				if (node->prev)
 				{
-					listNode = listNode->prev;
-				}
-				else
-				{
-					if (tableNode->prev)
-					{
-						tableNode = tableNode->prev;
-						listNode = tableNode->list->end;
-					}
+					node = node->prev;
 				}
 			} while (false);
 			return *this;
 		}
-		T operator *()
+		T operator*()
 		{
 			if (!valid())
 				return T();
 
-			return listNode->value;
+			return node->value;
 		}
-		T* operator ->()
+		T* operator->()
 		{
 			if (!valid())
 				return nullptr;
 
-			return &listNode->value;
+			return &(node->value);
 		}
 		bool operator !=(const iterator& other)const
 		{
-			return (!valid() || !other.valid() || listNode != other.listNode || tableNode != other.tableNode);
+			return (!valid() || !other.valid() || node != other.node);
 		}
-		
+		iterator operator +(int value)
+		{
+			iterator addItr = *this;
+			for (int n = 0; n < value; ++n)
+			{
+				if (addItr.node->next && addItr.node->next->next)
+					addItr.node = addItr.node->next;
+				else
+					break;
+			}
+			return addItr;
+		}
+		atom<T>* getAtom() { return node; }
+		bool valid()const
+		{
+			return (node != nullptr);
+		}
+
 	protected:
 		void clear()
 		{
-			inListAtom = nullptr;
-			outListAtom = nullptr;
+			node = nullptr;
 		}
-		bool valid()const
+		
+
+	protected:
+		atom<T>* node;
+	};
+
+	miniList()
+	{
+		init();
+	}
+	T front()
+	{
+		if (nodeNum == 0)
 		{
-			return !(listNode == nullptr || tableNode == nullptr);
+			return T();
+		}
+		return beginAtom->next->value;
+	}
+	T back()
+	{
+		if (nodeNum == 0)
+		{
+			return T();
+		}
+		return endAtom->prev->value;
+	}
+	void push_back(const T& value)
+	{
+		iterator endItr(endAtom);
+		--endItr;
+		insert(endItr, value);
+	}
+	void push_front(const T& value)
+	{
+		iterator beginItr(beginAtom);
+		insert(beginItr, value);
+	}
+	void pop_back()
+	{
+		if (nodeNum > 0)
+		{
+			erase(iterator(endAtom->prev));
+		}
+	}
+	void pop_front()
+	{
+		if (nodeNum > 0)
+		{
+			erase(iterator(beginAtom->next));
+		}
+	}
+	unsigned int size()
+	{
+		return nodeNum;
+	}
+
+	iterator begin()
+	{
+		if (nodeNum > 0)
+			return iterator(beginAtom->next);
+		return iterator();
+	};
+	iterator end()
+	{
+		if (nodeNum > 0)
+			return iterator(endAtom->prev);
+		return iterator();
+	}
+	void insert(iterator& itr, const T& value)
+	{
+		atom<T>* newNode = new atom<T>();
+		newNode->value = value;
+
+		atom<T>* preNextItr = itr.node->next;
+		itr.node->link(newNode);
+		newNode->link(preNextItr);
+
+		++nodeNum;
+	}
+	void erase(iterator& itr)
+	{
+		if (itr.node->prev)
+			itr.node->prev->next = itr.node->next;
+		if (itr.node->next)
+			itr.node->next->prev = itr.node->prev;
+
+		delete itr.node;
+		itr.node = nullptr;
+		--nodeNum;
+	}
+
+protected:
+	void init()
+	{
+		beginAtom = new atom<T>();
+		endAtom = new atom<T>();
+		beginAtom->link(endAtom);
+		nodeNum = 0;
+	}
+
+protected:
+	atom<T>* beginAtom;
+	atom<T>* endAtom;
+	unsigned int nodeNum;
+};
+
+template<class T>
+class llist
+{
+public:
+	typedef struct Node_
+	{
+		uint prior;
+		miniList<T> list;
+		Node_* prev;
+		Node_* next;
+
+		Node_() :prior(0), prev(nullptr), next(nullptr){};
+		void link(Node_* back) {
+			this->next = back;
+			if (back) back->prev = this;
+		}
+	}Node;
+
+	class iterator
+	{
+	friend llist;
+	public:
+		iterator()
+		{
+		}		
+		iterator(const iterator& other)
+		{
+			tableIterator = other.tableIterator;
+			valueIterator = other.valueIterator;
+		}
+		iterator(const iterator& tableItr, const iterator& valueItr)
+		{
+			tableIterator = tableItr;
+			valueIterator = valueItr;
+		}
+		iterator operator ++()
+		{
+			auto addItr = valueIterator;
+			++addItr;
+			if (addItr != valueIterator && addItr.getAtom()->next)
+			{
+				valueIterator = addItr;
+			}
+			else
+			{
+				auto addTableItr = tableIterator;
+				++addTableItr;
+				if (addTableItr != tableIterator)
+				{
+					tableIterator = addTableItr;
+					valueIterator = tableIterator->list.begin();
+				}
+			}
+			return *this;
+		}
+		iterator& operator --()
+		{
+			auto subItr = valueIterator;
+			--subItr;
+			if (subItr.getAtom()->prev)
+			{
+				valueIterator = subItr;
+			}
+			else
+			{
+				auto subTableItr = tableIterator;
+				--subTableItr;
+				if (subTableItr != tableIterator)
+				{
+					tableIterator = subTableItr;
+					valueIterator = tableIterator->list.end();
+				}
+			}
+			return *this;
+		}
+		T operator *()
+		{
+			return valueIterator.operator*();
+		}
+		T* operator ->()
+		{
+			return valueIterator.operator->();
+		}
+		bool operator !=(const iterator& other)const
+		{
+			return (!valid() || !other.valid() || tableIterator != other.tableIterator || valueIterator != other.valueIterator);
 		}
 		
 	protected:
-		atom* listNode;
-		Node* tableNode;
+		bool valid()const
+		{
+			return (tableIterator.valid() && valueIterator.valid());
+		}
+		
+	protected:
+		/*
+		因为list本身就是模板，在其模板参数未确定之前，也就是Property<N,V> 的具体类型没有确定之前，引用其class内部定义的type，这个type也是未知的，加上typename就是告诉编译器先不管具体类型，等模板实例化的时候再确定吧
+		*/
+		typedef typename miniList<Node>::iterator miniListIterator;
+		typedef typename miniList<T>::iterator TIterator;
+		miniListIterator	tableIterator;
+		TIterator		valueIterator;
 	};
 
 	//default table size is 1024
@@ -347,7 +329,7 @@ public:
 
 	}
 
-	void push(const T& data, unsigned int prior = 0)
+	void add(const T& data, unsigned int prior = 0)
 	{
 		do{
 			if (m_list.size() == 0 || prior > m_list.back().prior)
@@ -367,7 +349,7 @@ public:
 					Node nd;
 					nd.prior = prior;
 					nd.list.push_back(data);
-					m_list.insert(itr + index, 1, nd);
+					m_list.insert(m_list.begin() + index, nd);
 					break;
 				}
 				if (itr->prior == prior)
@@ -385,36 +367,7 @@ public:
 	{
 		bool bBreak = false;
 		do {
-			if (m_list.front().prior == prior)
-			{
-				std::list<T>& lst = m_list.front().list;
-				if (auto itr = lst.begin(); itr != lst.end(); ++itr)
-				{
-					if (*itr == data)
-					{
-						lst.erase(itr);
-						bBreak = true;
-						break;
-					}
-				}
-			}
-			if (bBreak)break;
-
-			if (m_list.back().prior == prior)
-			{
-				std::list<T>& lst = m_list.back().list;
-				if (auto itr = lst.begin(); itr != lst.end(); ++itr)
-				{
-					if (*itr == data)
-					{
-						lst.erase(itr);
-						bBreak = true;
-						break;
-					}
-				}
-			}
-			if (bBreak)break;
-
+			//optimize find arith
 			for (auto itr = m_list.begin(); itr != m_list.end(); ++itr)
 			{
 				if (prior == itr->prior)
@@ -422,7 +375,7 @@ public:
 					std::list<T>& lst = itr->list;
 					for (auto itr2 = lst.begin(); itr2 != lst.end(); ++itr2)
 					{
-						if (data == *itr2)
+						if (itr2->value == data)
 						{
 							lst.erase(itr2);
 							bBreak = true;
@@ -431,9 +384,15 @@ public:
 					}
 					break;
 				}
+				if (bBreak)break;
 			}
 		} while (false);
 		if(bBreak)--m_nodeNum;
+	}
+
+	void erase(iterator& itr)
+	{
+		itr.tableIterator->list.erase(itr.valueIterator);
 	}
 
 	uint size()
@@ -444,63 +403,25 @@ public:
 	iterator begin()
 	{
 		iterator itr;
-		itr.clear();
-		itr.table = &m_table;
-
-		uint vsize = m_table.size();
-		for (int n = 0; vsize>n; ++n)
+		if (m_nodeNum > 0)
 		{
-			if (m_table[n].size() > 0)
-			{
-				itr.tblIndex = n + 1;
-				itr.lstIndex = 1;
-				break;
-			}
-		}
-
+			itr.tableIterator = m_list.begin();
+			itr.valueIterator = itr.tableIterator->list.begin();
+		}		
 		return itr;
 	}
 	
 	iterator end()
 	{
 		iterator itr;
-		itr.clear();
-		itr.table = &m_table;
-		uint vsize = m_table.size();
-		for (int n = vsize - 1; n >= 0; --n)
+		if (m_nodeNum > 0)
 		{
-			if (m_table[n].size() > 0)
-			{
-				itr.tblIndex = n + 1;
-				itr.lstIndex = m_table[n].size();
-				break;
-			}
-		}
+			auto endItr = m_list.end();
 
+			itr.tableIterator = endItr;
+			itr.valueIterator = (--endItr)->list.end();
+		}
 		return itr;
-	}
-
-	iterator erase(iterator& object)
-	{
-		if (!object.valid() || object.table != &m_table)
-			return object;
-
-		auto lstItr = m_table[object.tblIndex].begin();
-		int n = 1;
-		while (lstItr != m_table[object.tblIndex].end())
-		{
-			if (n == object.lstIndex)
-			{
-				m_table[object.tblIndex].erase(lstItr);
-
-				iterator itr = object;
-				if (m_table[object.tblIndex].size() == 0)
-					++itr;
-				return itr;
-			}
-			++lstItr;
-		}
-		return object;
 	}
 
 
