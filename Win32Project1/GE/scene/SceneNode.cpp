@@ -42,7 +42,7 @@ void SceneNode::addNode(Node* nd, uint prior)
 		return;
 	}
 	
-	m_nodes.push(nd, prior);
+	m_nodes.add(nd, prior);
 }
 
 bool SceneNode::delNode(Node* nd)
@@ -69,7 +69,7 @@ void SceneNode::update(float ft)
 
 void SceneNode::draw()
 {
-	for (hashtable<Node*>::iterator itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
+	for (auto itr = m_nodes.begin(); itr != m_nodes.end(); ++itr)
 	{
 		(*itr)->draw();
 	}

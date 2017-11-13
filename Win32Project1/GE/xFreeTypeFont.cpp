@@ -76,7 +76,7 @@ void xFreeTypeFont::setString(const wchar_t* str, int width, int height)
 
 void xFreeTypeFont::setPosition(float x, float y)
 {
-	m_pipe.WorldPos(x, y, 0);
+	m_position = Vector3(x, y, 0);
 }
 
 void xFreeTypeFont::setScale(float s)
@@ -259,10 +259,10 @@ void xFreeTypeFont::display()
 	glEnable(GL_TEXTURE_2D);
 	glColor4f(1.0, 1.0, 1.0, 0.5);
 
-	draw_string(10, 30, char_font, (wchar_t*)m_str.c_str());
+	draw_string(m_position.x, m_position.y, char_font, (wchar_t*)m_str.c_str());
 
 	//draw_page_texture(10, 350, 0);    //background
-	draw_page_texture(10, 350, 1);    //page1 texture
+	//draw_page_texture(10, 350, 1);    //page1 texture
 
 	//draw_page_texture(276, 350, 0);    //background
 	//draw_page_texture(276, 350, 2);    //page2 texture

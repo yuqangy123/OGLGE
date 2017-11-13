@@ -31,10 +31,14 @@ void statisticalNode::displayStats(bool b)
 		if (b)
 		{
 			m_drawBatchesLabel = newFreeFont;
+			m_drawBatchesLabel->setString(L"draw batch:0");
+			m_drawBatchesLabel->setPosition(0, 100);
 			m_drawVerticesLabel = newFreeFont;
+			m_drawVerticesLabel->setString(L"draw vertices:0");
+			m_drawVerticesLabel->setPosition(0, 30);
 
-			DefaultSceneIns.addNode(m_drawBatchesLabel);
-			DefaultSceneIns.addNode(m_drawVerticesLabel);
+			DefaultSceneIns.addNode(m_drawBatchesLabel, -1);
+			//DefaultSceneIns.addNode(m_drawVerticesLabel, -1);
 		}
 		else
 		{
