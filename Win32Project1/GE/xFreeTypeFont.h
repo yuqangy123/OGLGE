@@ -25,6 +25,8 @@ public:
 
 	void update(float ft);
 	void draw();
+	void init();
+
 
 protected:
 	void draw_string(int x, int y, int font, wchar_t *string);
@@ -40,6 +42,7 @@ protected:
 	GLuint m_IBO;
 	int char_font;
 	bool m_initGL;
+	uint m_front_size;
 };
 
 NS_UISYSTEM_END
