@@ -1,7 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "base.h"
-#include "struct/hashtable.h"
+#include "struct/llist.h"
 
 #define SCENENODE_NAME_LENGTH 32
 
@@ -24,7 +24,7 @@ public:
 	void draw();
 
 protected:
-	hashtable<Node*> m_nodes;
+	llist<Node*> m_nodes;
 
 	char m_nodeName[SCENENODE_NAME_LENGTH];
 };
