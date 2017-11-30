@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include <math.h>
 #include <cfloat>
+#include "Director.h"
 
 
 ModelMesh::ModelMesh()
@@ -40,7 +41,8 @@ void ModelMesh::draw()
 		glVertexAttribPointer(normalLoc, 3, GL_FLOAT, GL_FALSE, VertexSize, (GLvoid*)offsetof(Vertex, normal));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, itr->IB);
-		glDrawElements(itr->drawPel, itr->NumIndices, GL_UNSIGNED_INT, 0);			
+		glDrawElements(itr->drawPel, itr->NumIndices, GL_UNSIGNED_INT, 0);
+		ADD_DRAW_BATCHES_VERTICES_COUNT(1, itr->NumIndices);
 	}
 	glDisableVertexAttribArray(positionLoc);
 	glDisableVertexAttribArray(texCoordLoc);

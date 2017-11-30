@@ -209,7 +209,7 @@ void OGLGE::test()
 	DefaultSceneIns.addNode(shadowMapA);
 	*/
 
-	//meshObject* m = new meshObject(); m->loadMesh("content/jeep.obj"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
+	meshObject* m = new meshObject(); m->loadMesh("jeep.obj", "content"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
 	//meshObject* m = new meshObject(); m->loadMesh("sponza.obj", "content/crytek_sponza"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
 
 

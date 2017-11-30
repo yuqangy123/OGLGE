@@ -19,6 +19,7 @@ void Director::init()
 {
 	SceneManagerIns;
 	InPutControlIns;
+	statsNodeIns;
 
 	auto winrt = OGLGE::Instance()->getWindowsRect();
 
@@ -33,12 +34,12 @@ void Director::init()
 	DefaultSceneIns.addNode(m_Camera2D);
 
 	
-	DefaultSceneIns.addNode(&statsNodeInstance);
 	displayStats(true);
 }
 
 void Director::update(float ft)
 {
+	statsNodeIns.clear();
 	SceneManagerIns.update(ft);
 }
 
@@ -48,14 +49,16 @@ void Director::draw()
 	glClearColor(0.0f, 0.f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	
 	SceneManagerIns.draw();
+	statsNodeIns.draw();
 
 	glutSwapBuffers();
 }
 
 void Director::displayStats(bool b)
 {
-	statsNodeInstance.displayStats(b);
+	statsNodeIns.displayStats(b);
 }
 
 

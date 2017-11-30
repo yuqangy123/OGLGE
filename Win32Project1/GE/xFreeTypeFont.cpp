@@ -9,6 +9,7 @@ xFreeTypeFont::xFreeTypeFont()
 	m_initGL = false;
 	m_VBO = 0;
 	m_IBO = 0;
+	m_front_size = 0;
 }
 xFreeTypeFont::~xFreeTypeFont()
 {
@@ -26,31 +27,34 @@ void xFreeTypeFont::setString(const wchar_t* str, int width, int height)
 	m_str = str;
 	m_rect.width = width;
 	m_rect.height = height;
+}
 
+void xFreeTypeFont::init()
+{
 	if (!m_initGL)
 	{
 		/*
 		m_StringTex = xFreeTypeLibIns.getStringTexture(str, width, height);
-		
-		
+
+
 
 		glGenBuffers(1, &m_VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		auto winRt = OGLGE::Instance()->getWindowsRect();
 		int x = -winRt.width / 2.0;
 		int y = -winRt.height / 2.0;
-		GLfloat vVertices[] = { 
-			x, y + m_StringTex.h, 0,
-			0.0f,  0.0f,              // TexCoord 0 
-			x, y, 0,
-			0.0f,  1.0f,              // TexCoord 1
-			x + m_StringTex.w, y, 0,
-			1.0f,  1.0f,              // TexCoord 2
-			x + m_StringTex.w, y + m_StringTex.h, 0,
-			1.0f,  0.0f               // TexCoord 3
+		GLfloat vVertices[] = {
+		x, y + m_StringTex.h, 0,
+		0.0f,  0.0f,              // TexCoord 0
+		x, y, 0,
+		0.0f,  1.0f,              // TexCoord 1
+		x + m_StringTex.w, y, 0,
+		1.0f,  1.0f,              // TexCoord 2
+		x + m_StringTex.w, y + m_StringTex.h, 0,
+		1.0f,  0.0f               // TexCoord 3
 		};
 		GLuint floatsz = sizeof(GLfloat);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_DYNAMIC_DRAW);		
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
@@ -58,25 +62,29 @@ void xFreeTypeFont::setString(const wchar_t* str, int width, int height)
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 		GLushort _indices[6] = { 0, 1, 2, 0, 2, 3 };
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_indices[0]) * 6, _indices, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);		
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-		
+
 		*/
+		m_front_size = 32;//default front size
+
 		glGenBuffers(1, &m_VBO);
 		glGenBuffers(1, &m_IBO);
+
 		m_tech.init();
 
 		m_pipe.setCamera(DefaultCamera2D);
-		m_initGL = true;
 
 		FTFontManagerIns.initialize();
-		char_font = FTFontManagerIns.createFont("res/jlx.ttf", 0, 32, false, false, true);
+		char_font = FTFontManagerIns.createFont("res/jlx.ttf", 0, m_front_size, false, false, true);
+
+		m_initGL = true;
 	}
 }
 
 void xFreeTypeFont::setPosition(float x, float y)
 {
-	m_pipe.WorldPos(x, y, 0);
+	m_position = Vector3(x, y, 0);
 }
 
 void xFreeTypeFont::setScale(float s)
@@ -157,7 +165,9 @@ void xFreeTypeFont::draw_string(int x, int y, int font, wchar_t *string)
 		
 
 		int px = dx + bx;
-		int py = dy - by;
+		//int py = dy - by;
+		int py = dy - m_front_size;
+		
 
 		//update vbo data
 		GLfloat vVertices[] = {
@@ -249,6 +259,8 @@ void xFreeTypeFont::draw_page_texture(int x, int y, GLuint glt)
 }
 
 
+
+
 void xFreeTypeFont::display()
 {
 	glEnable(GL_BLEND);
@@ -259,10 +271,10 @@ void xFreeTypeFont::display()
 	glEnable(GL_TEXTURE_2D);
 	glColor4f(1.0, 1.0, 1.0, 0.5);
 
-	draw_string(10, 30, char_font, (wchar_t*)m_str.c_str());
+	draw_string(m_position.x, m_position.y, char_font, (wchar_t*)m_str.c_str());
 
 	//draw_page_texture(10, 350, 0);    //background
-	draw_page_texture(10, 350, 1);    //page1 texture
+	//draw_page_texture(10, 350, 1);    //page1 texture
 
 	//draw_page_texture(276, 350, 0);    //background
 	//draw_page_texture(276, 350, 2);    //page2 texture

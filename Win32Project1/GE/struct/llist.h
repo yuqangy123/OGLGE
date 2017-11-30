@@ -86,6 +86,10 @@ public:
 		{
 			return (!valid() || !other.valid() || node != other.node);
 		}
+		bool operator ==(const iterator& other)const
+		{
+			return !operator !=(other);
+		}
 		iterator operator +(int value)
 		{
 			iterator addItr = *this;
@@ -93,6 +97,18 @@ public:
 			{
 				if (addItr.node->next && addItr.node->next->next)
 					addItr.node = addItr.node->next;
+				else
+					break;
+			}
+			return addItr;
+		}
+		iterator operator -(int value)
+		{
+			iterator addItr = *this;
+			for (int n = 0; n < value; ++n)
+			{
+				if (addItr.node->prev && addItr.node->prev->prev)
+					addItr.node = addItr.node->prev;
 				else
 					break;
 			}
@@ -165,6 +181,7 @@ public:
 		return nodeNum;
 	}
 
+	//begin和end要主要，begin是第一个有效元素，end是end标识元素
 	iterator begin()
 	{
 		if (nodeNum > 0)
@@ -173,9 +190,7 @@ public:
 	};
 	iterator end()
 	{
-		if (nodeNum > 0)
-			return iterator(endAtom->prev);
-		return iterator();
+		return iterator(endAtom);
 	}
 	void insert(iterator& itr, const T& value)
 	{
@@ -219,6 +234,8 @@ template<class T>
 class llist
 {
 public:
+	friend miniList<T>;
+
 	typedef struct Node_
 	{
 		uint prior;
@@ -232,6 +249,12 @@ public:
 			if (back) back->prev = this;
 		}
 	}Node;
+
+	/*
+	因为list本身就是模板，在其模板参数未确定之前，也就是Property<N,V> 的具体类型没有确定之前，引用其class内部定义的type，这个type也是未知的，加上typename就是告诉编译器先不管具体类型，等模板实例化的时候再确定吧
+	*/
+	typedef typename miniList<Node>::iterator NodeIterator;
+	typedef typename miniList<T>::iterator TIterator;
 
 	class iterator
 	{
@@ -261,12 +284,20 @@ public:
 			else
 			{
 				auto addTableItr = tableIterator;
-				++addTableItr;
-				if (addTableItr != tableIterator)
+				auto lastItr = (tableIterator + 1);
+				do
 				{
-					tableIterator = addTableItr;
-					valueIterator = tableIterator->list.begin();
-				}
+					++addTableItr;
+					if (addTableItr->list.size() > 0 || addTableItr == lastItr)
+					{
+						break;
+					}
+					lastItr = addTableItr;
+				} while (true);
+
+				if (addTableItr != lastItr) valueIterator = addTableItr->list.begin();
+				tableIterator = addTableItr;
+				
 			}
 			return *this;
 		}
@@ -274,18 +305,32 @@ public:
 		{
 			auto subItr = valueIterator;
 			--subItr;
-			if (subItr.getAtom()->prev)
+			if (subItr != valueIterator && subItr.getAtom()->prev)
 			{
 				valueIterator = subItr;
 			}
 			else
 			{
 				auto subTableItr = tableIterator;
-				--subTableItr;
-				if (subTableItr != tableIterator)
+				auto lastItr = (tableIterator-1);
+				do
 				{
+					--subTableItr;
+					if (subTableItr->list.size() > 0 || subTableItr == lastItr)
+					{
+						break;
+					}
+					lastItr = subTableItr;
+				} while (true);
+
+				if (subTableItr != lastItr)
+				{
+					valueIterator = --(subTableItr->list.end());
 					tableIterator = subTableItr;
-					valueIterator = tableIterator->list.end();
+				}
+				else
+				{
+					tableIterator = ++subTableItr;
 				}
 			}
 			return *this;
@@ -309,13 +354,8 @@ public:
 			return (tableIterator.valid() && valueIterator.valid());
 		}
 		
-	protected:
-		/*
-		因为list本身就是模板，在其模板参数未确定之前，也就是Property<N,V> 的具体类型没有确定之前，引用其class内部定义的type，这个type也是未知的，加上typename就是告诉编译器先不管具体类型，等模板实例化的时候再确定吧
-		*/
-		typedef typename miniList<Node>::iterator miniListIterator;
-		typedef typename miniList<T>::iterator TIterator;
-		miniListIterator	tableIterator;
+	protected:		
+		NodeIterator	tableIterator;
 		TIterator		valueIterator;
 	};
 
@@ -416,10 +456,9 @@ public:
 		iterator itr;
 		if (m_nodeNum > 0)
 		{
-			auto endItr = m_list.end();
-
-			itr.tableIterator = endItr;
-			itr.valueIterator = (--endItr)->list.end();
+			itr.tableIterator = m_list.end();
+			itr.valueIterator = (itr.tableIterator-1)->list.end();
+			--itr.valueIterator;
 		}
 		return itr;
 	}
