@@ -64,6 +64,14 @@ struct Vector3
 		result.add(v);
 		return result;
 	}
+	inline const bool operator!=(const Vector3& v) const
+	{
+		return (v.x != x || v.y != y || v.z != z);
+	}
+	inline const bool operator==(const Vector3& v) const
+	{
+		return !(v.x != x || v.y != y || v.z != z);
+	}
 
 	inline void add(const Vector3& v)
 	{

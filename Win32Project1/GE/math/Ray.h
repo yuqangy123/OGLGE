@@ -14,7 +14,8 @@ public:
 	Ray(const Vector3f& originalPosition, const Vector3f& direction);
 	bool intersectPlane(const Plane& plane, Vector3f& hitPosition);
 	bool intersectAABBBox(const AABBBox& box, Vector3f& hitPosition);
-	
+	bool intersectPoint(Vector3f point);
+
 public:
 	Vector3f original;
 	Vector3f dir;

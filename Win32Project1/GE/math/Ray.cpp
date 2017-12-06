@@ -93,3 +93,11 @@ bool Ray::intersectAABBBox(const AABBBox& box, Vector3f& hitPosition)
 	hitPosition.z = original.z + t*dir.z;
 	return true;
 }
+
+bool Ray::intersectPoint(Vector3f point)
+{
+	Vector3f pdir = point - original;
+	pdir.normalize();
+
+	return pdir == dir;
+}
