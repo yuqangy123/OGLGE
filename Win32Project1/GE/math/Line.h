@@ -7,12 +7,15 @@ class Line
 public:
 	Line();
 	Line(const Vector3f& p1, const Vector3f& p2);
-	bool intersectLine(const Line& plane);
 
+	//coplaner test
+	bool coplane(const Line& plane);
+	bool intersectLine(const Line& line);
 
 public:
 	Vector3f p1;
 	Vector3f p2;
+	Vector3f dir;
 };
 
 

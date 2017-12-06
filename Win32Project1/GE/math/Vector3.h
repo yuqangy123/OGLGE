@@ -64,6 +64,12 @@ struct Vector3
 		result.add(v);
 		return result;
 	}
+	inline const Vector3 operator-(const Vector3& v) const
+	{
+		Vector3 result(*this);
+		result.sub(v);
+		return result;
+	}
 	inline const bool operator!=(const Vector3& v) const
 	{
 		return (v.x != x || v.y != y || v.z != z);
@@ -78,6 +84,13 @@ struct Vector3
 		x += v.x;
 		y += v.y;
 		z += v.z;
+	}
+
+	inline void sub(const Vector3& v)
+	{
+		x -= v.x;
+		y -= v.y;
+		z -= v.z;
 	}
 	inline void set(float fx, float fy, float fz)
 	{
