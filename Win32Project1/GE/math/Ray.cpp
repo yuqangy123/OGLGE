@@ -24,6 +24,15 @@ Ray::Ray(const Vector3f& originalPosition, const Vector3f& direction)
 = > (O - P0)，N + D，N，t = 0
 = > t = (P0 - O)，N / D，N(D，N 』0)
 */
+/*
+line :
+x=x1+(x2-x1)t	= x1+it
+y=y1+(y2-y1)t	= y1+jt
+z=z1+(z2-z1)t	= z1+kt
+t = -(Ax1+By1+Cz1+D)/(Ai+Bj+Ck)
+t < 0 : out
+Ai+Bj+Ck == 0 : parallel
+*/
 bool Ray::intersectPlane(const Plane& plane, Vector3f& hitPosition)
 {
 	float dotDN = Vector3f::dot(dir, plane.normal);

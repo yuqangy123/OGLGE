@@ -61,6 +61,9 @@
     <Filter Include="GE\struct">
       <UniqueIdentifier>{23a31112-3c1d-4eb6-9261-a7516709dcee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GE\renderer">
+      <UniqueIdentifier>{cf5538ac-4fa6-44cf-8ddc-b485bf25727c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -417,6 +420,21 @@
     <ClInclude Include="GE\struct\hashtable.h">
       <Filter>GE\struct</Filter>
     </ClInclude>
+    <ClInclude Include="GE\struct\llist.h">
+      <Filter>GE\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Line.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\math\Triangle.h">
+      <Filter>GE\math</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\renderer\common.h">
+      <Filter>GE\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\renderer\BspTree.h">
+      <Filter>GE\renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -613,6 +631,15 @@
     </ClCompile>
     <ClCompile Include="GE\statisticalNode.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Line.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\math\Triangle.cpp">
+      <Filter>GE\math</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\renderer\BspTree.cpp">
+      <Filter>GE\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
