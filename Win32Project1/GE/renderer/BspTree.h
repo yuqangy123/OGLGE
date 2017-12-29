@@ -4,53 +4,59 @@
 #include <vector>
 #include "renderer\common.h"
 
-template<class T>
+
 class bspPolygon
 {
 public:
-	bspPolygon() {};
-	bspPolygon(const T& pp1, const T& pp2, const T& pp3) { p1 = pp1; p2 = pp2; p3 = pp3; };
-	virtual bool classifyPoint(Vector3 point)=0;
-	virtual bool classifyPoly(bspPolygon* poly)=0;
-	virtual void init()=0;
+	const static int COINCIDING	= 0;
+	const static int BEHIND		= -1;
+	const static int INFRONT	= 1;
+	const static int SPANNING	= 2;
 
 public:
-	T p1;
-	T p2;
-	T p3;
+	bspPolygon() {};
+	bspPolygon(const Vector3& pp1, const Vector3& pp2, const Vector3& pp3, void* userdata=nullptr);
+	bool classifyPoint(Vector3 point);
+	bool classifyPoly(const bspPolygon& poly);
+	static bool isContexPolygons(const std::vector<bspPolygon*>& polygons);
+
+public:
+	Vector3 p1;
+	Vector3 p2;
+	Vector3 p3;
 
 	Vector3f normal;
 	float distance;
+
+	void* userData;
 };
 
-template<class T>
  struct bspNode
 {
-	bspNode() :isLeaf(false), left(nullptr), right(nullptr), divider(nullptr){};
+	bspNode() :isLeaf(false), front(nullptr), behind(nullptr){};
 
 	bool isLeaf;
-	bspNode* left;
-	bspNode* right;
+	bspNode* front;
+	bspNode* behind;
 
-	bspPolygon<T>* divider;
-	std::vector<bspPolygon<T>*> polygons;
+	std::vector<bspPolygon*> dividers;
+	std::vector<bspPolygon*> spans;
+	std::vector<bspPolygon*> polygons;//还有一种方式就是叶结点保存绘制多边形
 };
 
-template<class VectexT>
 class BspTree
 {
 public:
 	BspTree();
-	bool generateTree(const std::vector<bspPolygon<VectexT>*>& polygons);
-	
-
-
-protected:
-	bspPolygon<VectexT>* choiceBestDividePolygon(const std::vector<bspPolygon<VectexT>*>& polygons);
-	bool isConvexSet(const std::vector<bspPolygon<VectexT>*>& polygons);
+	void generateTree(const std::vector<bspPolygon*>& polygons, bspNode* nd = nullptr);
 	
 
 protected:
-	bspNode<VectexT>* rootNode = nullptr;
+	bspPolygon* choiceBestDividePolygon(const std::vector<bspPolygon*>& polygons);
+	bool isConvexSet(const std::vector<bspPolygon*>& polygons);
+	
+
+protected:
+	bspNode* m_rootNode = nullptr;
 
 };
