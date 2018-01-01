@@ -43,6 +43,18 @@ bool bspPolygon::classifyPoly(const bspPolygon& poly)
 	return (s1 == s2 && s2 == s3) ? s1 : bspPolygon::SPANNING;
 }
 
+//交点p, 线段起点a1,a2, 方向d，p1p2，平面法线n，点p3
+//method1：可得p=a1+td, (p1-p)*(p2-p)=normal，p带入，求t
+//method2：求(a2-a1)与n的点积和(p3-a1)与a1点积的比，乘以d，求p
+bool bspPolygon::intersectLine(const LineSegment& line, Vector3& interPoint)
+{
+	float dotp = Vector3::dot(line.dir, normal);
+	float norp = Vector3::dot((p1 - line.p1), normal);
+	float rp = norp / dotp;
+	Vector3 interP = line.p1 + line.dir*rp;
+
+}
+
 //所有的单个面都在其它面之前或重合
 bool bspPolygon::isContexPolygons(const std::vector<bspPolygon*>& polygons)
 {
@@ -98,8 +110,8 @@ void BspTree::generateTree(const std::vector<bspPolygon*>& polygons, bspNode* nd
 			}
 		}
 	}
-
-
+	generateTree(behindPolygons, nd->behind);
+	generateTree(frontPolygons, nd->front);
 }
 
 bspPolygon* BspTree::choiceBestDividePolygon(const std::vector<bspPolygon*>& polygons)

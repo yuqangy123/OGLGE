@@ -224,7 +224,7 @@ ModelMesh::MeshEntry::MeshEntry()
 
 ModelMesh::MeshEntry::~MeshEntry()
 {
-	/*
+	
 	if (VB != 0)
 	{
 		glDeleteBuffers(1, &VB);
@@ -233,7 +233,6 @@ ModelMesh::MeshEntry::~MeshEntry()
 	{
 		glDeleteBuffers(1, &IB);
 	}
-	*/
 }
 
 

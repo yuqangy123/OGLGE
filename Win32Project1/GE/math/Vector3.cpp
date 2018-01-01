@@ -38,6 +38,7 @@ float Vector3::mag()
 
 void Vector3::cross(const Vector3& a, const Vector3& b, Vector3& res)
 {
+	//叉乘不满足交换律，结果方向相反
 	//const float _x = y * v.z - z * v.y;
 	res.x = a.y * b.z - a.z * b.y;
 	//const float _y = z * v.x - x * v.z;

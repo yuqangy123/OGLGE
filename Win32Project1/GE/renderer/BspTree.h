@@ -3,6 +3,7 @@
 #include "Triangle.h"
 #include <vector>
 #include "renderer\common.h"
+#include "Line.h"
 
 
 class bspPolygon
@@ -18,6 +19,7 @@ public:
 	bspPolygon(const Vector3& pp1, const Vector3& pp2, const Vector3& pp3, void* userdata=nullptr);
 	bool classifyPoint(Vector3 point);
 	bool classifyPoly(const bspPolygon& poly);
+	bool intersectLine(const LineSegment& line, Vector3& interPoint);
 	static bool isContexPolygons(const std::vector<bspPolygon*>& polygons);
 
 public:
