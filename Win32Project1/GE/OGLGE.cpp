@@ -209,14 +209,43 @@ void OGLGE::test()
 	DefaultSceneIns.addNode(shadowMapA);
 	*/
 
-	meshObject* m = new meshObject(); m->loadMesh("jeep.obj", "content"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
-	//meshObject* m = new meshObject(); m->loadMesh("sponza.obj", "content/crytek_sponza"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
-
+	//meshObject* m = new meshObject(); m->loadMesh("jeep.obj", "content"); m->setPosition(0, 0, -50); m->setScale(0.05); DefaultSceneIns.addNode(m);
 
 	
 	
+
+
+
+	//Ray ray(Vector3f(1,1,1), Vector3f(1,1,1));
+	//bool b = ray.intersectPoint(Vector3f(5, 5, 5));
+	//b = true;
 	
-	//meshObject* m2 = new meshObject(); m2->loadMesh("content/hheli.obj"); m2->setPosition(0, 0, -90); m2->setScale(0.2); DefaultSceneIns.addNode(m2);
+
+	/*
+	//test panel normal direct
+	Vector3 a(0.3, 0.3, 1);
+	Vector3 b(0, 0.5, -1.5);
+	Vector3 c(0.5, 0, -1);
+	
+	Vector3 cro1;
+	Vector3::cross(c-a, b-a, cro1);
+	int nnn = 0;
+	Vector3::cross(b - a, c - a, cro1);
+
+	Vector3 cro2;
+	Vector3::cross(c - b, a - b, cro2);
+	Vector3::cross(a - b, c - b, cro2);
+
+	Vector3 cro3;
+	Vector3::cross(b - c, a - c, cro3);
+	Vector3::cross(a - c, b - c, cro3);
+	*/
+	meshObject* m = new meshObject();
+	m->loadMesh("sponza.obj", "content/crytek_sponza");
+	m->setPosition(0, 10, -50); m->setScale(0.05);
+	DefaultSceneIns.addNode(m);
+
+	//meshObject* m2 = new meshObject(); m2->loadMesh("hheli.obj", "content"); m2->setPosition(0, 0, -90); m2->setScale(0.2); DefaultSceneIns.addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
 	
 	/*
@@ -260,6 +289,7 @@ void OGLGE::start()
 
 void OGLGE::update(float ft)
 {
+
 	OGLGE::Instance()->m_director->update(ft);
 	
 }

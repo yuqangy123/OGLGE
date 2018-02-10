@@ -20,12 +20,20 @@ struct Vector3
 		ret.z = (this->z - Right.z);
 		return ret;
 	}
-	inline Vector3 operator+(const Vector3& Right)
+	inline Vector3 operator+(const Vector3& Right)const
 	{
 		Vector3 ret;
 		ret.x = (this->x + Right.x);
 		ret.y = (this->y + Right.y);
 		ret.z = (this->z + Right.z);
+		return ret;
+	}
+	inline Vector3 operator*(const float& mult) const
+	{
+		Vector3 ret;
+		ret.x = (this->x*mult);
+		ret.y = (this->y*mult);
+		ret.z = (this->z*mult);
 		return ret;
 	}
 	inline Vector3& operator+=(const Vector3& Right)

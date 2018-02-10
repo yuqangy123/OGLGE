@@ -176,8 +176,10 @@
     <ClInclude Include="GE\bumpNormalMeshNode.h" />
     <ClInclude Include="GE\FileUnits.h" />
     <ClInclude Include="GE\math\AABBBox.h" />
+    <ClInclude Include="GE\math\Line.h" />
     <ClInclude Include="GE\math\Plane.h" />
     <ClInclude Include="GE\math\Ray.h" />
+    <ClInclude Include="GE\math\Triangle.h" />
     <ClInclude Include="GE\math\Vector4.h" />
     <ClInclude Include="GE\MeshNode.h" />
     <ClInclude Include="GE\math\Mat3.h" />
@@ -191,6 +193,8 @@
     <ClInclude Include="GE\ogldev_util.h" />
     <ClInclude Include="GE\OGLGE.h" />
     <ClInclude Include="GE\Pipeline.h" />
+    <ClInclude Include="GE\renderer\BspTree.h" />
+    <ClInclude Include="GE\renderer\common.h" />
     <ClInclude Include="GE\scene\InPutControl.h" />
     <ClInclude Include="GE\scene\InPutInterface.h" />
     <ClInclude Include="GE\scene\Scene.h" />
@@ -200,6 +204,7 @@
     <ClInclude Include="GE\skinMeshNode.h" />
     <ClInclude Include="GE\statisticalNode.h" />
     <ClInclude Include="GE\struct\hashtable.h" />
+    <ClInclude Include="GE\struct\llist.h" />
     <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GE\xFreeTypeFont.h" />
@@ -294,8 +299,10 @@
     <ClCompile Include="GE\bumpNormalMeshNode.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
     <ClCompile Include="GE\math\AABBBox.cpp" />
+    <ClCompile Include="GE\math\Line.cpp" />
     <ClCompile Include="GE\math\Plane.cpp" />
     <ClCompile Include="GE\math\Ray.cpp" />
+    <ClCompile Include="GE\math\Triangle.cpp" />
     <ClCompile Include="GE\math\Vector4.cpp" />
     <ClCompile Include="GE\MeshNode.cpp" />
     <ClCompile Include="GE\math\Mat3.cpp" />
@@ -308,6 +315,7 @@
     <ClCompile Include="GE\ogldev_util.cpp" />
     <ClCompile Include="GE\OGLGE.cpp" />
     <ClCompile Include="GE\Pipeline.cpp" />
+    <ClCompile Include="GE\renderer\BspTree.cpp" />
     <ClCompile Include="GE\scene\InPutControl.cpp" />
     <ClCompile Include="GE\scene\Scene.cpp" />
     <ClCompile Include="GE\scene\SceneManager.cpp" />

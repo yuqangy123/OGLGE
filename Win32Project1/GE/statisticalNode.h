@@ -21,7 +21,7 @@ public:
 	void updateDrawnBatches(unsigned int cnt);
 	void updateDrawnVertices(unsigned int cnt);
 
-	void clear();
+	void update();
 	void draw();
 
 protected:
@@ -37,5 +37,10 @@ protected:
 	bool m_display;
 	int m_drawBatchesCount;
 	int m_drawVerticesCount;
+
+	LARGE_INTEGER m_perfFreq = { 0 };
+	LARGE_INTEGER m_perNow;
+	LARGE_INTEGER m_perLast;
+	int m_fps = 0;
 };
 

@@ -39,7 +39,7 @@ void Director::init()
 
 void Director::update(float ft)
 {
-	statsNodeIns.clear();
+	statsNodeIns.update();
 	SceneManagerIns.update(ft);
 }
 

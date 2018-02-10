@@ -5,20 +5,23 @@
 
 
 
-Line::Line()
+LineSegment::LineSegment()
 {
 
 }
-Line::Line(const Vector3f& p1, const Vector3f& p2)
+LineSegment::LineSegment(const Vector3f& p1, const Vector3f& p2)
 {
 	this->p1 = p1;
 	this->p2 = p2;
 
-	dir = p2 - p1;
+	Vector3 tmpDir = p2 - p1;
+	dir = tmpDir;
 	dir.normalize();
+
+	t = tmpDir.mag()/dir.mag();
 }
 
-bool Line::coplane(const Line& object)
+bool LineSegment::coplane(const LineSegment& object)
 {
 	Vector3f l2 = object.p2 - p1;
 	Vector3f cro;
@@ -28,7 +31,7 @@ bool Line::coplane(const Line& object)
 	return dt <= FLT_EPSILON;
 }
 
-bool Line::intersectLine(const Line& line)
+bool LineSegment::intersectLine(const LineSegment& line)
 {
 	if (coplane(line))
 		return line.dir != dir;

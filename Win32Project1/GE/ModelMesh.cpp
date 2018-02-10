@@ -20,6 +20,11 @@ ModelMesh::~ModelMesh()
 
 }
 
+void ModelMesh::useBspTree()
+{
+	m_useBspTree = true;
+}
+
 void ModelMesh::draw()
 {
 	glEnableVertexAttribArray(positionLoc);
@@ -219,7 +224,7 @@ ModelMesh::MeshEntry::MeshEntry()
 
 ModelMesh::MeshEntry::~MeshEntry()
 {
-	/*
+	
 	if (VB != 0)
 	{
 		glDeleteBuffers(1, &VB);
@@ -228,16 +233,15 @@ ModelMesh::MeshEntry::~MeshEntry()
 	{
 		glDeleteBuffers(1, &IB);
 	}
-	*/
 }
 
 
-void ModelMesh::MeshEntry::Init(std::vector<ModelMesh::Vertex>& Vertices, std::vector<unsigned int>& Indices, GLenum pel)
+void ModelMesh::MeshEntry::Init(std::vector<Vertex>& Vertices, std::vector<unsigned int>& Indices, GLenum pel)
 {
 	glGenBuffers(1, &VB);
 	glBindBuffer(GL_ARRAY_BUFFER, VB);
-	std::vector<ModelMesh::Vertex>::iterator verItr = Vertices.begin();
-	size_t verSize = sizeof(ModelMesh::Vertex)*Vertices.size();
+	std::vector<Vertex>::iterator verItr = Vertices.begin();
+	size_t verSize = sizeof(Vertex)*Vertices.size();
 	void* verPtr = &(*verItr);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(Verticess), Verticess, GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, verSize, verPtr, GL_STATIC_DRAW);

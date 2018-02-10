@@ -6,12 +6,15 @@
 #include "Vector2.h"
 #include "Importer.hpp"
 #include "Ray.h"
+#include "renderer/common.h"
 
 class ModelMesh : public MeshNode
 {
 public:
 	ModelMesh();
 	~ModelMesh();
+
+	void useBspTree();
 
 	bool loadMesh(const char* filename, const char* path);
 
@@ -44,19 +47,7 @@ public:
 		aiTextureType type;
 		std::string path;
 	};
-	struct Vertex
-	{
-		Vertex(const Vector3f& pos_, const Vector3f& uv_, const Vector3f& normal_)
-		{
-			pos = pos_;
-			uv = uv_;
-			normal = normal_;
-		}
-		
-		Vector3f pos;
-		Vector3f uv;
-		Vector3f normal;
-	};
+	
 	struct MeshEntry {
 		MeshEntry();
 		~MeshEntry();
@@ -88,4 +79,6 @@ protected:
 
 	bool m_draw_framebox_switch;
 	boundBoxData m_boundboxData;
+
+	bool m_useBspTree = false;
 };
