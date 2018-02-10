@@ -263,13 +263,13 @@ void xFreeTypeFont::draw_page_texture(int x, int y, GLuint glt)
 
 void xFreeTypeFont::display()
 {
-	glEnable(GL_BLEND);
-	glBlendEquation(GL_FUNC_ADD);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendEquation(GL_FUNC_ADD);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 	glEnable(GL_TEXTURE_2D);
-	glColor4f(1.0, 1.0, 1.0, 0.5);
+	//glColor4f(1.0, 1.0, 1.0, 1.0);
 
 	draw_string(m_position.x, m_position.y, char_font, (wchar_t*)m_str.c_str());
 
@@ -285,7 +285,8 @@ void xFreeTypeFont::display()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glDisable(GL_BLEND);
+
+	//glDisable(GL_BLEND);
 }
 
 
@@ -298,7 +299,7 @@ void xFreeTypeFont::draw()
 	return;
 
 	
-
+	/*
 	m_tech.enable();
 
 	//»ìºÏ
@@ -335,4 +336,5 @@ void xFreeTypeFont::draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glDisable(GL_BLEND);
+	*/
 }

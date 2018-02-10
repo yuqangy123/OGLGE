@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Scene.h"
+#include "GL/glew.h"
 
 
 Scene::Scene()
@@ -32,7 +33,7 @@ void Scene::addNode(Node* nd, int updateLevel)
 {
 	if (nullptr != nd)
 	{
-		m_default_scenenode->addNode(nd);
+		m_default_scenenode->addNode(nd, updateLevel);
 	}
 }
 
@@ -55,9 +56,15 @@ void Scene::update(float ft)
 
 void Scene::draw()
 {
+	glEnable(GL_BLEND);
+	glBlendEquation(GL_FUNC_ADD);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	for (int n = 0; n < m_nodes.size(); ++n)
 	{
 		m_nodes[n]->draw();
 	}
+
+	glDisable(GL_BLEND);
 }
 

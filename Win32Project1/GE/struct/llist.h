@@ -230,6 +230,10 @@ protected:
 	unsigned int nodeNum;
 };
 
+
+/*
+llist是一个列表，每个node都含有一个minilist
+*/
 template<class T>
 class llist
 {

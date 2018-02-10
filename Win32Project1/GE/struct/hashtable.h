@@ -7,6 +7,9 @@
 
 NS_STRUCT_BEGIN
 
+/*
+一个简单的哈希表
+*/
 template<class T>
 class hashtable
 {
