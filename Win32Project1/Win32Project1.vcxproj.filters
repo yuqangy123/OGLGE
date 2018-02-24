@@ -426,14 +426,14 @@
     <ClInclude Include="GE\renderer\BspTree.h">
       <Filter>GE\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="GE\renderer\shaders.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="GE\renderer\technique.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="GE\Pipeline.h">
       <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\renderer\technique.h">
+      <Filter>GE\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\renderer\shaders.h">
+      <Filter>GE\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -632,14 +632,14 @@
     <ClCompile Include="GE\renderer\BspTree.cpp">
       <Filter>GE\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="GE\renderer\shaders.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="GE\renderer\technique.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="GE\Pipeline.cpp">
       <Filter>GE</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\renderer\technique.cpp">
+      <Filter>GE\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\renderer\shaders.cpp">
+      <Filter>GE\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
