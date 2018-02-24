@@ -3,6 +3,7 @@
 
 
 #define Vector3f Vector3
+#define vtr3 Vector3
 struct Vector3
 {
 	float x;
@@ -12,21 +13,17 @@ struct Vector3
 	Vector3();
 	~Vector3();
 	Vector3(float x, float y, float z);
-	inline Vector3 operator-(Vector3& Right)const
+	inline const Vector3 operator+(const Vector3& v) const
 	{
-		Vector3 ret;
-		ret.x = (this->x - Right.x);
-		ret.y = (this->y - Right.y);
-		ret.z = (this->z - Right.z);
-		return ret;
+		Vector3 result(*this);
+		result.add(v);
+		return result;
 	}
-	inline Vector3 operator+(const Vector3& Right)const
+	inline const Vector3 operator-(const Vector3& v) const
 	{
-		Vector3 ret;
-		ret.x = (this->x + Right.x);
-		ret.y = (this->y + Right.y);
-		ret.z = (this->z + Right.z);
-		return ret;
+		Vector3 result(*this);
+		result.sub(v);
+		return result;
 	}
 	inline Vector3 operator*(const float& mult) const
 	{
@@ -66,18 +63,7 @@ struct Vector3
 
 		return Vector3(xx, yy, zz);
 	}
-	inline const Vector3 operator+(const Vector3& v) const
-	{
-		Vector3 result(*this);
-		result.add(v);
-		return result;
-	}
-	inline const Vector3 operator-(const Vector3& v) const
-	{
-		Vector3 result(*this);
-		result.sub(v);
-		return result;
-	}
+	
 	inline const bool operator!=(const Vector3& v) const
 	{
 		return (v.x != x || v.y != y || v.z != z);

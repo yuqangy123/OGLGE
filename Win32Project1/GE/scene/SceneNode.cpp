@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SceneNode.h"
-
+#include <vector>
 
 
 SceneNode::SceneNode()
@@ -34,13 +34,15 @@ bool SceneNode::init(const char* sceneNodeName)
 	return true;
 }
 
-void SceneNode::addNode(Node* nd, uint prior)
+void SceneNode::addNode(Node* nd, int prior)
 {
 	if (nullptr == nd)
 	{
 		printf("%s sceneNode addNode failed, node is null\r\n", m_nodeName);
 		return;
 	}
+	
+
 	
 	m_nodes.add(nd, prior);
 }

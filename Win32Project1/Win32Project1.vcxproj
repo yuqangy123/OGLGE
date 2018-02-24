@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)Include/libraries/freetype;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)Include/libraries/freetype;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)GE/renderer;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -195,17 +195,17 @@
     <ClInclude Include="GE\Pipeline.h" />
     <ClInclude Include="GE\renderer\BspTree.h" />
     <ClInclude Include="GE\renderer\common.h" />
+    <ClInclude Include="GE\renderer\shaders.h" />
+    <ClInclude Include="GE\renderer\technique.h" />
     <ClInclude Include="GE\scene\InPutControl.h" />
     <ClInclude Include="GE\scene\InPutInterface.h" />
     <ClInclude Include="GE\scene\Scene.h" />
     <ClInclude Include="GE\scene\SceneManager.h" />
     <ClInclude Include="GE\scene\SceneNode.h" />
-    <ClInclude Include="GE\shaders.h" />
     <ClInclude Include="GE\skinMeshNode.h" />
     <ClInclude Include="GE\statisticalNode.h" />
     <ClInclude Include="GE\struct\hashtable.h" />
     <ClInclude Include="GE\struct\llist.h" />
-    <ClInclude Include="GE\technique.h" />
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GE\xFreeTypeFont.h" />
     <ClInclude Include="GE\FTFontManager.h" />
@@ -316,14 +316,14 @@
     <ClCompile Include="GE\OGLGE.cpp" />
     <ClCompile Include="GE\Pipeline.cpp" />
     <ClCompile Include="GE\renderer\BspTree.cpp" />
+    <ClCompile Include="GE\renderer\shaders.cpp" />
+    <ClCompile Include="GE\renderer\technique.cpp" />
     <ClCompile Include="GE\scene\InPutControl.cpp" />
     <ClCompile Include="GE\scene\Scene.cpp" />
     <ClCompile Include="GE\scene\SceneManager.cpp" />
     <ClCompile Include="GE\scene\SceneNode.cpp" />
-    <ClCompile Include="GE\shaders.cpp" />
     <ClCompile Include="GE\skinMeshNode.cpp" />
     <ClCompile Include="GE\statisticalNode.cpp" />
-    <ClCompile Include="GE\technique.cpp" />
     <ClCompile Include="GE\TextureManager.cpp" />
     <ClCompile Include="GE\xFreeTypeFont.cpp" />
     <ClCompile Include="GE\FTFontManager.cpp" />

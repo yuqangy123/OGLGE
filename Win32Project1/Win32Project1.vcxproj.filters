@@ -90,9 +90,6 @@
     <ClInclude Include="GE\FileUnits.h">
       <Filter>GE</Filter>
     </ClInclude>
-    <ClInclude Include="GE\Pipeline.h">
-      <Filter>GE</Filter>
-    </ClInclude>
     <ClInclude Include="GLPorj\tech\lightTechnique.h">
       <Filter>GLPorj\tech</Filter>
     </ClInclude>
@@ -113,12 +110,6 @@
     </ClInclude>
     <ClInclude Include="GE\math\Vector3.h">
       <Filter>GE\math</Filter>
-    </ClInclude>
-    <ClInclude Include="GE\technique.h">
-      <Filter>GE</Filter>
-    </ClInclude>
-    <ClInclude Include="GE\shaders.h">
-      <Filter>GE</Filter>
     </ClInclude>
     <ClInclude Include="GLPorj\Director.h">
       <Filter>GLPorj</Filter>
@@ -435,6 +426,15 @@
     <ClInclude Include="GE\renderer\BspTree.h">
       <Filter>GE\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="GE\renderer\shaders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\renderer\technique.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Pipeline.h">
+      <Filter>GE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -458,9 +458,6 @@
     <ClCompile Include="GE\FileUnits.cpp">
       <Filter>GE</Filter>
     </ClCompile>
-    <ClCompile Include="GE\Pipeline.cpp">
-      <Filter>GE</Filter>
-    </ClCompile>
     <ClCompile Include="GLPorj\tech\lightTechnique.cpp">
       <Filter>GLPorj\tech</Filter>
     </ClCompile>
@@ -481,12 +478,6 @@
     </ClCompile>
     <ClCompile Include="GE\math\Vector3.cpp">
       <Filter>GE\math</Filter>
-    </ClCompile>
-    <ClCompile Include="GE\technique.cpp">
-      <Filter>GE</Filter>
-    </ClCompile>
-    <ClCompile Include="GE\shaders.cpp">
-      <Filter>GE</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\Director.cpp">
       <Filter>GLPorj</Filter>
@@ -640,6 +631,15 @@
     </ClCompile>
     <ClCompile Include="GE\renderer\BspTree.cpp">
       <Filter>GE\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\renderer\shaders.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\renderer\technique.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Pipeline.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

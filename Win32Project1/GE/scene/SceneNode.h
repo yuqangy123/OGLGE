@@ -15,7 +15,7 @@ public:
 
 	bool init(const char* sceneNodeName = nullptr);
 
-	void addNode(Node* nd, uint prior=0);
+	void addNode(Node* nd, int prior=0);
 
 	bool delNode(Node* nd);
 	

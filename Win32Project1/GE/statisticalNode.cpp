@@ -47,7 +47,7 @@ void statisticalNode::displayStats(bool b)
 			m_drawVerticesLabel->init();
 			m_drawVerticesLabel->setPosition(0, 30);
 
-			DefaultSceneIns.addNode(m_drawBatchesLabel, -1);
+			DefaultSceneIns.addNode(m_drawBatchesLabel, 1);
 			//DefaultSceneIns.addNode(m_drawVerticesLabel, -1);
 		}
 		else

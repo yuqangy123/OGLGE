@@ -18,6 +18,7 @@
 #include "GBuffer.h"
 #include "xFreeTypeFont.h"
 
+#include "Line.h"
 
 DECLARE_SINGLETON_MEMBER(OGLGE);
 OGLGE::OGLGE()
@@ -190,8 +191,14 @@ void testXFreeType()
 
 void OGLGE::test()
 {
-	
+	LineSegment line1(Vector3(-2, 10, 0), Vector3(3, 0, 0));
+	LineSegment line2(Vector3(2, 0, 0), Vector3(10, 5, 0));
+	Vector3 interPoint;
+	line1.intersectLine(line2, interPoint);
 
+
+	//bool bfloat = 16777219.0f >= 16777221.0f;
+	
 	//JikeTest * jk = new JikeTest(); scene->addNode(jk);
 
 	//triangleVertebralTexture * jk = new triangleVertebralTexture(); scene->addNode(jk);

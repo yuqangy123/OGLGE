@@ -10,7 +10,12 @@ public:
 
 	//coplaner test
 	bool coplane(const LineSegment& plane);
-	bool intersectLine(const LineSegment& line);
+
+	bool intersectLine(const LineSegment& line, Vector3& interPoint);
+
+	bool intersectPoint(const Vector3& point);
+
+	Vector3 getPointAt(float yt);
 
 public:
 	Vector3f p1;

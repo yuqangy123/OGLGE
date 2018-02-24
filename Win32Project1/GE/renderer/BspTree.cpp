@@ -51,8 +51,10 @@ bool bspPolygon::intersectLine(const LineSegment& line, Vector3& interPoint)
 	float dotp = Vector3::dot(line.dir, normal);
 	float norp = Vector3::dot((p1 - line.p1), normal);
 	float rp = norp / dotp;
-	Vector3 interP = line.p1 + line.dir*rp;
 
+	//line与panel相交的点
+	interPoint = line.p1 + line.dir*rp;
+	return true;
 }
 
 //所有的单个面都在其它面之前或重合
