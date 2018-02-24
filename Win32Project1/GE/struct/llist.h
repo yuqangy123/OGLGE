@@ -186,7 +186,7 @@ public:
 	{
 		if (nodeNum > 0)
 			return iterator(beginAtom->next);
-		return iterator();
+		return end();
 	};
 	iterator end()
 	{
@@ -242,7 +242,7 @@ public:
 
 	typedef struct Node_
 	{
-		uint prior;
+		int prior;
 		miniList<T> list;
 		Node_* prev;
 		Node_* next;
@@ -287,21 +287,8 @@ public:
 			}
 			else
 			{
-				auto addTableItr = tableIterator;
-				auto lastItr = (tableIterator + 1);
-				do
-				{
-					++addTableItr;
-					if (addTableItr->list.size() > 0 || addTableItr == lastItr)
-					{
-						break;
-					}
-					lastItr = addTableItr;
-				} while (true);
-
-				if (addTableItr != lastItr) valueIterator = addTableItr->list.begin();
-				tableIterator = addTableItr;
-				
+				++tableIterator;
+				valueIterator = tableIterator->list.begin();
 			}
 			return *this;
 		}
@@ -315,27 +302,8 @@ public:
 			}
 			else
 			{
-				auto subTableItr = tableIterator;
-				auto lastItr = (tableIterator-1);
-				do
-				{
-					--subTableItr;
-					if (subTableItr->list.size() > 0 || subTableItr == lastItr)
-					{
-						break;
-					}
-					lastItr = subTableItr;
-				} while (true);
-
-				if (subTableItr != lastItr)
-				{
-					valueIterator = --(subTableItr->list.end());
-					tableIterator = subTableItr;
-				}
-				else
-				{
-					tableIterator = ++subTableItr;
-				}
+				--tableIterator;
+				valueIterator = --(tableIterator->list.end());
 			}
 			return *this;
 		}
@@ -373,7 +341,7 @@ public:
 
 	}
 
-	void add(const T& data, unsigned int prior = 0)
+	void add(const T& data, int prior = 0)
 	{
 		do{
 			if (m_list.size() == 0 || prior > m_list.back().prior)
@@ -385,7 +353,7 @@ public:
 				break;
 			}
 
-			uint index = 0;
+			int index = 0;
 			for (auto itr = m_list.begin(); itr != m_list.end(); ++itr)
 			{
 				if (prior > itr->prior)
@@ -461,8 +429,7 @@ public:
 		if (m_nodeNum > 0)
 		{
 			itr.tableIterator = m_list.end();
-			itr.valueIterator = (itr.tableIterator-1)->list.end();
-			--itr.valueIterator;
+			itr.valueIterator = itr.tableIterator->list.end();
 		}
 		return itr;
 	}
