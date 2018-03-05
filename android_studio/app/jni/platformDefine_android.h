@@ -1,0 +1,7 @@
+
+#ifndef __PLATFORM_DEFINE_ANDROID_H__
+#define __PLATFORM_DEFINE_ANDROID_H__
+
+#define OGLGE_DLL
+
+#endif // __PLATFORM_DEFINE_ANDROID_H__

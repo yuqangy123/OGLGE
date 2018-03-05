@@ -2,8 +2,9 @@
 #include "Mat3.h"
 
 
-#define Vector3f Vector3
-#define vtr3 Vector3
+#define Vector3f	Vector3
+#define vtr3		Vector3
+#define Vec3		Vector3
 struct Vector3
 {
 	float x;

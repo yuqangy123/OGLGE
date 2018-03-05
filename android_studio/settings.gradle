@@ -1,0 +1,3 @@
+
+include ':HelloLua'
+project(':HelloLua').projectDir = new File(settingsDir, 'app')
