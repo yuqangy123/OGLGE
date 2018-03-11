@@ -23,7 +23,7 @@
 #endif
 
 // <EGL/egl.h> exists since android 2.3
-//#include <EGL/egl.h>
+#include <EGL/egl.h>
 
 // normal process
 #include <GLES2/gl2.h>
