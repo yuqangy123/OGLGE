@@ -1,0 +1,6 @@
+
+1.使用ndk-build编译库文件
+"E:\android\android-ndk-r9b\ndk-build" -C D:\opengles\opengles\opengles\2.0\OpenGL_ES_Programming_Guide_v1.0.2\myOGL\OGLGE\android_studio\app -j4 NDK_DEBUG=1
+
+
+2.java加载lib库

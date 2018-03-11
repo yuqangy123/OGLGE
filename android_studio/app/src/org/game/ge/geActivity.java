@@ -72,4 +72,16 @@ public class geActivity extends Activity {
 
         return glSurfaceView;
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+            mGLSurfaceView.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGLSurfaceView.onResume();
+    }
 }

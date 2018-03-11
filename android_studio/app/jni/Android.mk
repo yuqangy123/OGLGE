@@ -6,11 +6,17 @@ LOCAL_MODULE := oglge_shared
 
 #use to add __android_log_print
 LOCAL_MODULE_FILENAME := liboglge
+
 LOCAL_C_INCLUDES  += system/core/include/cutils
 LOCAL_SHARED_LIBRARIES := libcutils
 
-LOCAL_LDLIBS := -llog
-
+# to add android gles and other libs
+LOCAL_LDLIBS := -lGLESv1_CM \
+			   -lGLESv2 \
+			   -lEGL \
+			   -llog \
+			   -landroid
+			   
 LOCAL_SRC_FILES := \
 java_activity-android.cpp\
 Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
@@ -26,7 +32,9 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Win32Project1 \
 					$(LOCAL_PATH)/../../../Win32Project1/GE \
 					$(LOCAL_PATH)/../../../Win32Project1/platform \
 					$(LOCAL_PATH)/../../../Win32Project1/external
+
 					
+					   
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END
 

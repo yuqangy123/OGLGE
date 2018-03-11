@@ -31,6 +31,9 @@ public class geGLSurfaceView extends GLSurfaceView {
         this.setEGLContextClientVersion(2);
         this.setFocusableInTouchMode(true);
 
+        //Render the view only when there is a change in the drawing
+        //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
         mgeGLSurfaceView = this;
     }
 

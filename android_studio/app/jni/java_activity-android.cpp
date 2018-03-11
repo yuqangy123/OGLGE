@@ -5,6 +5,8 @@
 #include <jni.h>
 #include <JniHelper.h>
 
+#include <GL-android.h>
+
 #define  LOG_TAG    "main"
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 
@@ -27,6 +29,7 @@ extern "C"
 
 	JNIEXPORT void Java_org_game_ge_geRenderer_nativeInit(JNIEnv*  env, jobject thiz, jint w, jint h)
 	{
+		glEnable(GL_BLEND);
 		LOGD("Java_org_game_ge_geRenderer_nativeInit");
 	}
 	
