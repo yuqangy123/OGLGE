@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "shaders.h"
 
 GLuint loadShader(GLenum type, const char* shaderSrc)

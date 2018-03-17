@@ -31,6 +31,7 @@ public class geGLSurfaceView extends GLSurfaceView {
         this.setEGLContextClientVersion(2);
         this.setFocusableInTouchMode(true);
 
+
         //Render the view only when there is a change in the drawing
         //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
@@ -49,6 +50,14 @@ public class geGLSurfaceView extends GLSurfaceView {
     public void setGeRenderer(final geRenderer renderer) {
         mgeRender = renderer;
         this.setRenderer(mgeRender);
+        /*
+        设置渲染模式。 当renderMode为RENDERMODE_CONTINUOUSLY时，会重复调用渲染器以重新渲染场景。 当renderMode为RENDERMODE_WHEN_DIRTY时，仅在创建曲面时或在调用requestRender时才渲染渲染器。 默认为RENDERMODE_CONTINUOUSLY。
+
+        使用RENDERMODE_WHEN_DIRTY可以通过允许GPU和CPU在视图不需要更新时空闲，从而延长电池寿命和整体系统性能。
+
+        此方法只能在setRenderer（Renderer）之后调用
+        */
+        this.setRenderMode(RENDERMODE_WHEN_DIRTY);
     }
 
 

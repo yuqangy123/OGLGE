@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "TextureManager.h"
 #include "TextureJpegLoader.h"
 #include "TextureTgaLoader.h"

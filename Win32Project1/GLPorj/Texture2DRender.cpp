@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "assert.h"
 #include "Texture2DRender.h"
 #include "FileUnits.h"

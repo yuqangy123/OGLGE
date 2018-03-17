@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 /*
 
 	Copyright 2014 Etay Meiri

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "InPutControl.h"
 
 DECLARE_SINGLETON_MEMBER(InPutControl)

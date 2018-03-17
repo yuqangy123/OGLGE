@@ -20,18 +20,19 @@ LOCAL_LDLIBS := -lGLESv1_CM \
 LOCAL_SRC_FILES := \
 java_activity-android.cpp\
 Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
-JniHelper.cpp \
-../../../Win32Project1/basic/base64.cpp \
-../../../Win32Project1/basic/ccUTF8.cpp \
-../../../Win32Project1/basic/console.cpp \
-../../../Win32Project1/external/ConvertUTF/ConvertUTF.c \
-../../../Win32Project1/external/ConvertUTF/ConvertUTFWrapper.cpp \
+../../../geClass/basic/base64.cpp \
+../../../geClass/basic/ccUTF8.cpp \
+../../../geClass/basic/console.cpp \
+../../../geClass/external/ConvertUTF/ConvertUTF.cpp \
+../../../geClass/external/ConvertUTF/ConvertUTFWrapper.cpp \
+../../../geClass/platform/android/JniHelper.cpp \
 main.cpp
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Win32Project1 \
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../geClass \
 					$(LOCAL_PATH)/../../../Win32Project1/GE \
-					$(LOCAL_PATH)/../../../Win32Project1/platform \
-					$(LOCAL_PATH)/../../../Win32Project1/external
+					$(LOCAL_PATH)/../../../geClass/platform \
+					$(LOCAL_PATH)/../../../geClass/platform/android \
+					$(LOCAL_PATH)/../../../geClass/external
 
 					
 					   

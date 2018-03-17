@@ -1,6 +1,6 @@
 
 
-#include "stdafx.h"
+
 #include "Quaternion.h"
 #include <string.h>
 #include <math.h>

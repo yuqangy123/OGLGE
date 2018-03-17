@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Camera2D.h"
 #include "base.h"
 #include <math.h>

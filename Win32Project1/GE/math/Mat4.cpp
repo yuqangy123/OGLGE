@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Mat4.h"
 #include <math.h>
 #include "Quaternion.h"

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include <math.h>
 #include <string.h>
 #include "TextureJpegLoader.h"

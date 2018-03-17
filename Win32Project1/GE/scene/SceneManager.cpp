@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "SceneManager.h"
 
 DECLARE_SINGLETON_MEMBER(SceneManager)

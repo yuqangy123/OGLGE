@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "BspTree.h"
 
 bspPolygon::bspPolygon(const Vector3& pp1, const Vector3& pp2, const Vector3& pp3, void* userdata)

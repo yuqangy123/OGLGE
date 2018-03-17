@@ -45,6 +45,7 @@
 #if defined(_WIN32) && defined(_WINDOWS)
     #undef  OGLGE_TARGET_PLATFORM
     #define OGLGE_TARGET_PLATFORM         OGLGE_PLATFORM_WIN32
+	
 #endif
 
 // linux

@@ -85,12 +85,12 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)Include/libraries/freetype;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)GE/renderer;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../geClass;$(ProjectDir)../geClass/basic;$(ProjectDir)Include/libraries/cimg;$(ProjectDir)Include/libraries/assimp;$(ProjectDir)Include/libraries/freetype;$(ProjectDir)GLPorj;$(ProjectDir)GE;$(ProjectDir)GE/math;$(ProjectDir)GE/scene;$(ProjectDir)GE/renderer;$(ProjectDir)texture;$(ProjectDir)Include;$(ProjectDir)application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -155,6 +155,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\geClass\basic\base.h" />
+    <ClInclude Include="..\geClass\basic\base64.h" />
+    <ClInclude Include="..\geClass\basic\ccUTF8.h" />
+    <ClInclude Include="..\geClass\basic\console.h" />
+    <ClInclude Include="..\geClass\basic\platformConfig.h" />
+    <ClInclude Include="..\geClass\basic\Singleton.h" />
+    <ClInclude Include="..\geClass\external\ConvertUTF\ConvertUTF.h" />
+    <ClInclude Include="..\geClass\oglgeCommon.h" />
+    <ClInclude Include="..\geClass\platform\platformConfig.h" />
+    <ClInclude Include="..\geClass\platform\windows\platformDefine_windows.h" />
     <ClInclude Include="application\BillboardList.h" />
     <ClInclude Include="application\GBuffer.h" />
     <ClInclude Include="application\JikeTest.h" />
@@ -168,8 +178,6 @@
     <ClInclude Include="application\Texture2D.h" />
     <ClInclude Include="application\triangleVertebralLight.h" />
     <ClInclude Include="application\triangleVertebralTexture.h" />
-    <ClInclude Include="basic\base.h" />
-    <ClInclude Include="basic\Singleton.h" />
     <ClInclude Include="GE\Camera.h" />
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
@@ -279,6 +287,12 @@
     <ClInclude Include="texture\TextureTgaLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\geClass\basic\base64.cpp" />
+    <ClCompile Include="..\geClass\basic\ccUTF8.cpp" />
+    <ClCompile Include="..\geClass\basic\console.cpp" />
+    <ClCompile Include="..\geClass\basic\Singleton.cpp" />
+    <ClCompile Include="..\geClass\external\ConvertUTF\ConvertUTF.cpp" />
+    <ClCompile Include="..\geClass\external\ConvertUTF\ConvertUTFWrapper.cpp" />
     <ClCompile Include="application\BillboardList.cpp" />
     <ClCompile Include="application\GBuffer.cpp" />
     <ClCompile Include="application\JikeTest.cpp" />
@@ -292,7 +306,6 @@
     <ClCompile Include="application\Texture2D.cpp" />
     <ClCompile Include="application\triangleVertebralLight.cpp" />
     <ClCompile Include="application\triangleVertebralTexture.cpp" />
-    <ClCompile Include="basic\Singleton.cpp" />
     <ClCompile Include="GE\Camera.cpp" />
     <ClCompile Include="GE\Camera3D.cpp" />
     <ClCompile Include="GE\Camera2D.cpp" />

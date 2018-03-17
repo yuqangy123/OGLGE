@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "ogldev_util.h"
 #include "skinMeshNode.h"
 #include "anim.h"

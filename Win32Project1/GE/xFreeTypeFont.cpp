@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "xFreeTypeFont.h"
 #include "OGLGE.h"
 

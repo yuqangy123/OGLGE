@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "assert.h"
 #include "triangleVertebralLight.h"
 #include "FileUnits.h"

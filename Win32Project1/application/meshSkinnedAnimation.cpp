@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "meshSkinnedAnimation.h"
 #include "anim.h"
 #include "Importer.hpp"

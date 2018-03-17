@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Mat3.h"
 #include <math.h>
 

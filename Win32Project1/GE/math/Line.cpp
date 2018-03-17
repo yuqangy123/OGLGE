@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Line.h"
 #include <float.h>
 #include <math.h>

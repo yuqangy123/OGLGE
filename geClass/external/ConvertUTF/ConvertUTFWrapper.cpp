@@ -6,6 +6,7 @@
 // License. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
+#include "oglgeCommon.h"
 
 #include "ConvertUTF.h"
 //#include "llvm/Support/SwapByteOrder.h"

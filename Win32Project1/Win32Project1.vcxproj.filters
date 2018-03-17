@@ -16,9 +16,6 @@
     <Filter Include="texture">
       <UniqueIdentifier>{aaa47309-d5e8-4a86-818c-3037ccee66ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="basic">
-      <UniqueIdentifier>{8dafefc1-249c-40d1-b1c1-9be7d742ac49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GLPorj">
       <UniqueIdentifier>{bded26f7-804c-4a6e-9407-f1d21da4bc16}</UniqueIdentifier>
     </Filter>
@@ -64,6 +61,24 @@
     <Filter Include="GE\renderer">
       <UniqueIdentifier>{cf5538ac-4fa6-44cf-8ddc-b485bf25727c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="geClass">
+      <UniqueIdentifier>{f57e3c9a-3cb0-43a1-8b4f-8182801311f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geClass\basic">
+      <UniqueIdentifier>{efd83f8f-26b7-47dd-8b91-3e57570f01b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geClass\external">
+      <UniqueIdentifier>{f3f3d196-f93b-4289-9260-9f587dc89e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geClass\external\ConvertUTF">
+      <UniqueIdentifier>{7b1078f0-2918-4bb3-a84a-aa0637442afd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geClass\platform">
+      <UniqueIdentifier>{2bc843bf-e0b9-4174-98cf-3d2c9c408a47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geClass\platform\windows">
+      <UniqueIdentifier>{3491bd13-ab0d-48a9-b486-4550b6bdbe7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -77,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="programUniforms\programUniforms.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="basic\Singleton.h">
-      <Filter>basic</Filter>
     </ClInclude>
     <ClInclude Include="GLPorj\Node.h">
       <Filter>GLPorj</Filter>
@@ -405,9 +417,6 @@
     <ClInclude Include="GE\statisticalNode.h">
       <Filter>GE</Filter>
     </ClInclude>
-    <ClInclude Include="basic\base.h">
-      <Filter>basic</Filter>
-    </ClInclude>
     <ClInclude Include="GE\struct\hashtable.h">
       <Filter>GE\struct</Filter>
     </ClInclude>
@@ -435,6 +444,36 @@
     <ClInclude Include="GE\renderer\shaders.h">
       <Filter>GE\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\geClass\basic\ccUTF8.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\basic\console.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\basic\platformConfig.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\basic\Singleton.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\basic\base.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\basic\base64.h">
+      <Filter>geClass\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\external\ConvertUTF\ConvertUTF.h">
+      <Filter>geClass\external\ConvertUTF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\oglgeCommon.h">
+      <Filter>geClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\platform\platformConfig.h">
+      <Filter>geClass\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\geClass\platform\windows\platformDefine_windows.h">
+      <Filter>geClass\platform\windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -445,9 +484,6 @@
     </ClCompile>
     <ClCompile Include="programUniforms\programUniforms.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="basic\Singleton.cpp">
-      <Filter>basic</Filter>
     </ClCompile>
     <ClCompile Include="GLPorj\Node.cpp">
       <Filter>GLPorj</Filter>
@@ -640,6 +676,24 @@
     </ClCompile>
     <ClCompile Include="GE\renderer\shaders.cpp">
       <Filter>GE\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\basic\ccUTF8.cpp">
+      <Filter>geClass\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\basic\console.cpp">
+      <Filter>geClass\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\basic\Singleton.cpp">
+      <Filter>geClass\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\basic\base64.cpp">
+      <Filter>geClass\basic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\external\ConvertUTF\ConvertUTFWrapper.cpp">
+      <Filter>geClass\external\ConvertUTF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\geClass\external\ConvertUTF\ConvertUTF.cpp">
+      <Filter>geClass\external\ConvertUTF</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

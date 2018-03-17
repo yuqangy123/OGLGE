@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Pipeline.h"
 #include <math.h>
 #include "base.h"

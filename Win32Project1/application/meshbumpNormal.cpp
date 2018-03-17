@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "meshbumpNormal.h"
 #include "anim.h"
 #include "Importer.hpp"

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "statisticalNode.h"
 #include <windows.h> 
 #include "SceneManager.h"

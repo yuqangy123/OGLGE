@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "assert.h"
 #include "Test.h"
 #include "FileUnits.h"

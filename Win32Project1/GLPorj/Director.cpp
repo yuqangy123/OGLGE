@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Director.h"
 #include "OGLGE.h"
 #include "SceneManager.h"

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "programUniforms.h"
 
 void getProgramUniforms(GLuint programObject, std::vector<uniformInfo>& res)

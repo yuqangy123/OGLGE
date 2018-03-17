@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "ModelMesh.h"
 #include "anim.h"
 #include "postprocess.h"

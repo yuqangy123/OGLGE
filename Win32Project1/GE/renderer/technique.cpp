@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "technique.h"
 #include "FileUnits.h"
 

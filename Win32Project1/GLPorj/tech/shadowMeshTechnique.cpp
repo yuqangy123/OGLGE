@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "shadowMeshTechnique.h"
 #include "OGLGE.h"
 

@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "Texture2D.h"
 #include "TextureManager.h"
 #include "OGLGE.h"

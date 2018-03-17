@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "FTFontManager.h"
 
 #include <windows.h>//AnsiToUnicode

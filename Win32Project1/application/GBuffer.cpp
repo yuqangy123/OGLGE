@@ -1,4 +1,5 @@
-#include "stdafx.h"
+
+
 #include "GBuffer.h"
 #include "OGLGE.h"
 
