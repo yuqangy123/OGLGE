@@ -19,7 +19,7 @@ FILE* __cdecl __iob_func(unsigned i) {
 #endif /* _MSC_VER>=1900 */
 int main(int argc, char** argv)
 {
-	OGLGE::Instance()->init(argc, argv);
+	OGLGE::Instance()->initGLContext(argc, argv);
 	OGLGE::Instance()->test();
 	OGLGE::Instance()->start();
 

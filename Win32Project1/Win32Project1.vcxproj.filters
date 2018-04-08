@@ -43,9 +43,6 @@
     <Filter Include="Include\libraries\cimg">
       <UniqueIdentifier>{94d74500-bfd3-4136-aa4f-fbb61623d975}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Include\libraries\cimg\libjpeg">
-      <UniqueIdentifier>{9da51309-0ec0-4277-a61f-dafabf10a4bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Include\libraries\assimp">
       <UniqueIdentifier>{434cbf5c-09e7-4154-98ba-be61591a9a32}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     </Filter>
     <Filter Include="geClass\platform\windows">
       <UniqueIdentifier>{3491bd13-ab0d-48a9-b486-4550b6bdbe7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\libraries\cimg\libjpeg_win32">
+      <UniqueIdentifier>{9da51309-0ec0-4277-a61f-dafabf10a4bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="GE\math\Vector3.h">
       <Filter>GE\math</Filter>
-    </ClInclude>
-    <ClInclude Include="GLPorj\Director.h">
-      <Filter>GLPorj</Filter>
     </ClInclude>
     <ClInclude Include="GE\Camera2D.h">
       <Filter>GE</Filter>
@@ -179,15 +176,6 @@
     </ClInclude>
     <ClInclude Include="Include\GL\freeglut_std.h">
       <Filter>Include\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h">
-      <Filter>Include\libraries\cimg\libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h">
-      <Filter>Include\libraries\cimg\libjpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jconfig.h">
-      <Filter>Include\libraries\cimg\libjpeg</Filter>
     </ClInclude>
     <ClInclude Include="Include\libraries\cimg\jpeg_buffer.h">
       <Filter>Include\libraries\cimg</Filter>
@@ -474,6 +462,21 @@
     <ClInclude Include="..\geClass\platform\windows\platformDefine_windows.h">
       <Filter>geClass\platform\windows</Filter>
     </ClInclude>
+    <ClInclude Include="GE\OGLGEBase.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="GE\Director.h">
+      <Filter>GE</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jpeglib.h">
+      <Filter>Include\libraries\cimg\libjpeg_win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jconfig.h">
+      <Filter>Include\libraries\cimg\libjpeg_win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jmorecfg.h">
+      <Filter>Include\libraries\cimg\libjpeg_win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -514,9 +517,6 @@
     </ClCompile>
     <ClCompile Include="GE\math\Vector3.cpp">
       <Filter>GE\math</Filter>
-    </ClCompile>
-    <ClCompile Include="GLPorj\Director.cpp">
-      <Filter>GLPorj</Filter>
     </ClCompile>
     <ClCompile Include="GE\Camera2D.cpp">
       <Filter>GE</Filter>
@@ -694,6 +694,12 @@
     </ClCompile>
     <ClCompile Include="..\geClass\external\ConvertUTF\ConvertUTF.cpp">
       <Filter>geClass\external\ConvertUTF</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\OGLGEBase.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="GE\Director.cpp">
+      <Filter>GE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

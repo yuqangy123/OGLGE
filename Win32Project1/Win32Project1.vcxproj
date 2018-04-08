@@ -182,6 +182,7 @@
     <ClInclude Include="GE\Camera3D.h" />
     <ClInclude Include="GE\Camera2D.h" />
     <ClInclude Include="GE\bumpNormalMeshNode.h" />
+    <ClInclude Include="GE\Director.h" />
     <ClInclude Include="GE\FileUnits.h" />
     <ClInclude Include="GE\math\AABBBox.h" />
     <ClInclude Include="GE\math\Line.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="GE\ogldev_types.h" />
     <ClInclude Include="GE\ogldev_util.h" />
     <ClInclude Include="GE\OGLGE.h" />
+    <ClInclude Include="GE\OGLGEBase.h" />
     <ClInclude Include="GE\Pipeline.h" />
     <ClInclude Include="GE\renderer\BspTree.h" />
     <ClInclude Include="GE\renderer\common.h" />
@@ -217,7 +219,6 @@
     <ClInclude Include="GE\TextureManager.h" />
     <ClInclude Include="GE\xFreeTypeFont.h" />
     <ClInclude Include="GE\FTFontManager.h" />
-    <ClInclude Include="GLPorj\Director.h" />
     <ClInclude Include="GLPorj\Node.h" />
     <ClInclude Include="GLPorj\tech\billboardTechnique.h" />
     <ClInclude Include="GLPorj\tech\bumpNormalLightTechnique.h" />
@@ -277,9 +278,9 @@
     <ClInclude Include="Include\libraries\assimp\version.h" />
     <ClInclude Include="Include\libraries\cimg\CImg.h" />
     <ClInclude Include="Include\libraries\cimg\jpeg_buffer.h" />
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jconfig.h" />
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jmorecfg.h" />
-    <ClInclude Include="Include\libraries\cimg\libjpeg\jpeglib.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jconfig.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jmorecfg.h" />
+    <ClInclude Include="Include\libraries\cimg\libjpeg_win32\jpeglib.h" />
     <ClInclude Include="programUniforms\programUniforms.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -310,6 +311,7 @@
     <ClCompile Include="GE\Camera3D.cpp" />
     <ClCompile Include="GE\Camera2D.cpp" />
     <ClCompile Include="GE\bumpNormalMeshNode.cpp" />
+    <ClCompile Include="GE\Director.cpp" />
     <ClCompile Include="GE\FileUnits.cpp" />
     <ClCompile Include="GE\math\AABBBox.cpp" />
     <ClCompile Include="GE\math\Line.cpp" />
@@ -327,6 +329,7 @@
     <ClCompile Include="GE\ModelMesh.cpp" />
     <ClCompile Include="GE\ogldev_util.cpp" />
     <ClCompile Include="GE\OGLGE.cpp" />
+    <ClCompile Include="GE\OGLGEBase.cpp" />
     <ClCompile Include="GE\Pipeline.cpp" />
     <ClCompile Include="GE\renderer\BspTree.cpp" />
     <ClCompile Include="GE\renderer\shaders.cpp" />
@@ -340,7 +343,6 @@
     <ClCompile Include="GE\TextureManager.cpp" />
     <ClCompile Include="GE\xFreeTypeFont.cpp" />
     <ClCompile Include="GE\FTFontManager.cpp" />
-    <ClCompile Include="GLPorj\Director.cpp" />
     <ClCompile Include="GLPorj\Node.cpp" />
     <ClCompile Include="GLPorj\tech\billboardTechnique.cpp" />
     <ClCompile Include="GLPorj\tech\bumpNormalLightTechnique.cpp" />

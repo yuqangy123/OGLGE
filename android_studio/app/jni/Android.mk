@@ -20,12 +20,19 @@ LOCAL_LDLIBS := -lGLESv1_CM \
 LOCAL_SRC_FILES := \
 java_activity-android.cpp\
 Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
-../../../geClass/basic/base64.cpp \
-../../../geClass/basic/ccUTF8.cpp \
-../../../geClass/basic/console.cpp \
+../../../geClass/basic/*.cpp \
 ../../../geClass/external/ConvertUTF/ConvertUTF.cpp \
 ../../../geClass/external/ConvertUTF/ConvertUTFWrapper.cpp \
 ../../../geClass/platform/android/JniHelper.cpp \
+../../../Win32Project1/application/*.cpp \
+../../../Win32Project1/basic/*.cpp \
+../../../Win32Project1/GE/*.cpp \
+../../../Win32Project1/GE/math/*.cpp \
+../../../Win32Project1/GE/renderer/*.cpp \
+../../../Win32Project1/GE/scene/*.cpp \
+../../../Win32Project1/GE/struct/*.cpp \
+../../../Win32Project1/GE/GLPorj/*.cpp \
+
 main.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../geClass \

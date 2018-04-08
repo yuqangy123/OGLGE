@@ -3,30 +3,23 @@
 #include "GL/freeglut.h"
 #include "ogldev_util.h"
 
-#include "Singleton.h"
+#include "OGLGEBase.h"
 #include "Rect.h"
-#include "Director.h"
-#include "Scene.h"
-
-
 
 #define DefaultCamera OGLGE::Instance()->getDirector()->getDefaultCamera()
 #define DefaultCamera2D OGLGE::Instance()->getDirector()->get2DCamera()
 
-class OGLGE:public CSingleton<OGLGE>
+class OGLGE: public CSingleton<OGLGE> , public OGLGEBase
 {
 public:
 	OGLGE();
 	~OGLGE();
 
-	void init(int argc, char** argv);
+	void init(unsigned int w, unsigned int h);
 	void test();
 	void start();
 
-	//get windows size
-	Rect getWindowsRect() { return m_winRt; }
-	Director* getDirector() { return m_director; }
-
+	
 
 	static void update(float ft);
 	static void draw();
@@ -34,12 +27,7 @@ public:
 	static void mouseInput(int button, int state, int x, int y);
 	static void mouseMove(int x, int y);
 	
-
-protected:
 	void initGLContext(int argc, char** argv);
 
-protected:
-	Director* m_director;
-	Rect m_winRt;
 };
 

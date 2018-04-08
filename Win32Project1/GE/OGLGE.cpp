@@ -61,10 +61,11 @@ void OGLGE::mouseMove(int x, int y)
 
 void OGLGE::initGLContext(int argc, char** argv)
 {
-
+	unsigned int w = 720;
+	unsigned int h = 640;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowSize(m_winRt.width, m_winRt.height);
+	glutInitWindowSize(w, h);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("OGLGE");
 
@@ -109,13 +110,14 @@ void OGLGE::initGLContext(int argc, char** argv)
 
 	//开启深度测试，需要初始化一个深度缓冲区
 	glEnable(GL_DEPTH_TEST);
-}
-void OGLGE::init(int argc, char** argv)
-{
-	m_winRt.width = 720.0;
-	m_winRt.height = 640.0;
 
-	initGLContext(argc, argv);
+	init(w, h);
+}
+void OGLGE::init(unsigned int w, unsigned int h)
+{
+	m_winRt.width = w;
+	m_winRt.height = h;
+
 
 	m_director = new Director();
 	m_director->init();
@@ -248,10 +250,13 @@ void OGLGE::test()
 	Vector3::cross(b - c, a - c, cro3);
 	Vector3::cross(a - c, b - c, cro3);
 	*/
+
+	/*
 	meshObject* m = new meshObject();
 	m->loadMesh("sponza.obj", "content/crytek_sponza");
 	m->setPosition(0, 10, -50); m->setScale(0.05);
 	DefaultSceneIns.addNode(m);
+	*/
 
 	//meshObject* m2 = new meshObject(); m2->loadMesh("hheli.obj", "content"); m2->setPosition(0, 0, -90); m2->setScale(0.2); DefaultSceneIns.addNode(m2);
 	//meshObject* m3 = new meshObject(); m3->loadMesh("content/hheli.obj"); m3->setPosition(0, 0, 0); m3->setScale(0.2); scene->addNode(m3);
@@ -270,11 +275,11 @@ void OGLGE::test()
 	//DefaultCamera->setTargetPosition(Vector3(0, 0, -50));
 	//DefaultCamera->setFreeCamera(true);
 
-	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); st_scene->addNode(texture2); texture2->setPosition(m_winRt.width / 2.0, 50);
+	//Texture2D* texture2 = new Texture2D("res/sao.jpg"); DefaultSceneIns.addNode(texture2); texture2->setPosition(m_winRt.width / 4.0, 20);
 
 	//Texture2D* texture1 = new Texture2D("res/guo.jpg"); DefaultSceneIns.addNode(texture1); texture1->setScale(0.1);
 
-	//testBumpNormalMesh();
+	testBumpNormalMesh();
 
 	//testSkybox();
 
